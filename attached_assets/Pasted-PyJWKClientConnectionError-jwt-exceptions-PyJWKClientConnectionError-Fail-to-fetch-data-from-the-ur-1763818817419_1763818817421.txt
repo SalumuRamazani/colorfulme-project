@@ -1,0 +1,74 @@
+PyJWKClientConnectionError
+jwt.exceptions.PyJWKClientConnectionError: Fail to fetch data from the url, err: "HTTP Error 404: Not Found"
+
+Traceback (most recent call last)
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jwt/jwks_client.py", line 56, in fetch_data
+with urllib.request.urlopen(
+     
+File "/nix/store/7d088dip86hlzri9sk0h78b63yfmx0a0-python3-3.11.13/lib/python3.11/urllib/request.py", line 216, in urlopen
+return opener.open(url, data, timeout)
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/nix/store/7d088dip86hlzri9sk0h78b63yfmx0a0-python3-3.11.13/lib/python3.11/urllib/request.py", line 525, in open
+response = meth(req, response)
+           ^^^^^^^^^^^^^^^^^^^
+File "/nix/store/7d088dip86hlzri9sk0h78b63yfmx0a0-python3-3.11.13/lib/python3.11/urllib/request.py", line 634, in http_response
+response = self.parent.error(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/nix/store/7d088dip86hlzri9sk0h78b63yfmx0a0-python3-3.11.13/lib/python3.11/urllib/request.py", line 563, in error
+return self._call_chain(*args)
+       ^^^^^^^^^^^^^^^^^^^^^^^
+File "/nix/store/7d088dip86hlzri9sk0h78b63yfmx0a0-python3-3.11.13/lib/python3.11/urllib/request.py", line 496, in _call_chain
+result = func(*args)
+         ^^^^^^^^^^^
+File "/nix/store/7d088dip86hlzri9sk0h78b63yfmx0a0-python3-3.11.13/lib/python3.11/urllib/request.py", line 643, in http_error_default
+raise HTTPError(req.full_url, code, msg, hdrs, fp)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The above exception was the direct cause of the following exception:
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1536, in __call__
+return self.wsgi_app(environ, start_response)
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/werkzeug/middleware/proxy_fix.py", line 183, in __call__
+return self.app(environ, start_response)
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1514, in wsgi_app
+response = self.handle_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+response = self.full_dispatch_request()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+rv = self.handle_user_exception(e)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+rv = self.dispatch_request()
+     ^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 902, in dispatch_request
+return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask_dance/consumer/oauth2.py", line 319, in authorized
+results = oauth_authorized.send(self, token=token) or []
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/blinker/base.py", line 249, in send
+result = receiver(sender, **kwargs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/replit_auth.py", line 156, in logged_in
+signing_key = jwks_client.get_signing_key_from_jwt(token['id_token'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jwt/jwks_client.py", line 115, in get_signing_key_from_jwt
+return self.get_signing_key(header.get("kid"))
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jwt/jwks_client.py", line 97, in get_signing_key
+signing_keys = self.get_signing_keys()
+               ^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jwt/jwks_client.py", line 84, in get_signing_keys
+jwk_set = self.get_jwk_set(refresh)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jwt/jwks_client.py", line 76, in get_jwk_set
+data = self.fetch_data()
+       ^^^^^^^^^^^^^^^^^
+File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jwt/jwks_client.py", line 61, in fetch_data
+raise PyJWKClientConnectionError(
+^^^^^^^^
+jwt.exceptions.PyJWKClientConnectionError: Fail to fetch data from the url, err: "HTTP Error 404: Not Found"
+The debugger caught an exception in your WSGI application. You can now look at the traceback which led to the error.
+To switch between the interactive traceback and the plaintext one, you can click on the "Traceback" headline. From the text traceback you can also create a paste of it.

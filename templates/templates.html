@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}100+ Professional Receipt Templates - Free Online Receipt Generator{% endblock %}
+{% block description %}Browse 100+ professional receipt templates for retail stores, restaurants, gas stations, pharmacies, and more. Create custom receipts instantly with our free generator.{% endblock %}
+
+{% block meta_tags %}
+<!-- Open Graph Tags -->
+<meta property="og:title" content="100+ Professional Receipt Templates - ReceiptMake">
+<meta property="og:description" content="Browse our collection of 100+ receipt templates including Walmart, Target, McDonald's, Starbucks, Shell, and more. Free to use.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.url }}">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Receipt Templates Collection",
+  "description": "Browse 100+ professional receipt templates for various businesses and industries",
+  "numberOfItems": "{{ templates|length }}",
+  "about": {
+    "@type": "Thing",
+    "name": "Receipt Templates"
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="bg-white border-b-2 border-gray-900 py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Choose From Our Host of Free Receipt Templates
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600">
+                Start with a pre-built template designed for specific industries, or begin with a blank canvas. All templates are fully customizable to match your needs.
+            </p>
+            <div class="mt-6">
+                <span class="inline-block px-4 py-2 bg-blue-100 border-2 border-gray-900 text-sm font-bold text-gray-900">
+                    {{ templates|length }}+ Templates Available
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Templates Section -->
+<section class="bg-gray-50 py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Filters -->
+        <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Filter by Category</label>
+                    <select onchange="window.location.href='?category=' + this.value + '&sort={{ current_sort }}'" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-900">
+                        {% for category in categories %}
+                        <option value="{{ category }}" {% if category == current_category %}selected{% endif %}>{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
+                    <select onchange="window.location.href='?category={{ current_category }}&sort=' + this.value" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-900">
+                        <option value="newest" {% if current_sort == 'newest' %}selected{% endif %}>Newest First</option>
+                        <option value="oldest" {% if current_sort == 'oldest' %}selected{% endif %}>Oldest First</option>
+                        <option value="name-asc" {% if current_sort == 'name-asc' %}selected{% endif %}>Name (A-Z)</option>
+                        <option value="name-desc" {% if current_sort == 'name-desc' %}selected{% endif %}>Name (Z-A)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Responsive Grid: 2 cols mobile, 3 tablet, 4 desktop, 5 large screens -->
+        <div class="flex flex-wrap gap-4"
+             x-data="{ loadingTemplate: null }"
+             x-init="
+                // Reset loading state on back button or visibility change
+                window.addEventListener('popstate', () => { loadingTemplate = null; });
+                document.addEventListener('visibilitychange', () => { if (!document.hidden) loadingTemplate = null; });
+             ">
+            {% for template in templates %}
+            <div class="relative w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.667rem)] lg:w-[calc(25%-0.75rem)] xl:w-[calc(20%-0.8rem)]">
+                <a href="/template/{{ template.slug }}"
+                   @click="if (!$event.ctrlKey && !$event.metaKey && !$event.shiftKey && $event.button === 0) { loadingTemplate = '{{ template.slug }}'; }"
+                   :class="loadingTemplate === '{{ template.slug }}' ? 'opacity-75 pointer-events-none' : ''"
+                   class="group block bg-white border-2 border-gray-900 rounded-xl overflow-hidden shadow-[3px_3px_0_0_#000000] hover:shadow-[1px_1px_0_0_#000000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all h-full">
+                <div data-template-preview-card class="relative aspect-[3/4] bg-gradient-to-b from-neutral-100 to-white overflow-hidden receipt-preview">
+                    <span class="absolute top-3 left-3 z-[2] px-2 py-1 rounded-full border border-gray-300 bg-white/90 backdrop-blur text-[10px] uppercase tracking-[0.12em] font-bold text-gray-600">
+                        Preview
+                    </span>
+
+                    <!-- Actual Receipt Preview Image -->
+                    <picture class="w-full h-full flex items-center justify-center p-3">
+                        <source srcset="/static/images/template-previews/{{ template.id.replace('-receipt', '') | lower }}-preview.webp?v=1" type="image/webp">
+                        <img src="/static/images/template-previews/{{ template.id.replace('-receipt', '') | lower }}-preview.png?v=1" 
+                             alt="{{ template.name }} Receipt" 
+                             width="300" 
+                             height="1107"
+                             loading="lazy"
+                             class="block w-full h-full object-contain object-top transform group-hover:scale-[1.02] transition duration-300"
+                             onerror="this.style.display='none'; this.closest('[data-template-preview-card]').querySelector('[data-template-preview-fallback]').style.display='flex';">
+                    </picture>
+
+                    <!-- Fallback if image not found -->
+                    <div data-template-preview-fallback class="hidden absolute inset-0 items-center justify-center p-5 bg-gradient-to-br from-blue-50 to-indigo-50">
+                        <div class="w-full max-w-[180px] bg-white border-2 border-gray-900 rounded-lg p-4 shadow-[3px_3px_0_0_#000000]">
+                            <div class="text-[10px] text-gray-500 uppercase tracking-[0.12em] font-bold mb-2">Preview Unavailable</div>
+                            <p class="text-sm font-black text-gray-900 leading-tight">{{ template.name }}</p>
+                            <div class="mt-3 h-2 bg-gray-100 rounded"></div>
+                            <div class="mt-2 h-2 bg-gray-100 rounded w-5/6"></div>
+                            <div class="mt-2 h-2 bg-gray-100 rounded w-4/6"></div>
+                        </div>
+                    </div>
+
+                    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/15 to-transparent"></div>
+                </div>
+                    <!-- Template Info -->
+                    <div class="p-4">
+                        <h3 class="font-bold text-gray-900 mb-2 line-clamp-1">
+                            {{ template.name }}
+                        </h3>
+                        <p class="text-sm text-gray-600 line-clamp-2 mb-3">
+                            Professional receipt template for {{ template.category.lower() }}. Fully customizable and ready to use.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-[#2563EB]">
+                                Use Template →
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Loading Overlay -->
+                <div x-show="loadingTemplate === '{{ template.slug }}'" 
+                     x-cloak
+                     class="absolute inset-0 z-10 bg-white/90 backdrop-blur-[1px] rounded-xl flex items-center justify-center">
+                    <div class="text-center">
+                        <svg class="animate-spin h-8 w-8 text-blue-600 mx-auto mb-2" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <p class="text-sm text-blue-600 font-medium">Loading...</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if templates|length == 0 %}
+        <div class="text-center py-16">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
+                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+            </div>
+            <p class="text-gray-500 text-lg">No templates found in this category.</p>
+            <a href="/templates" class="inline-block mt-4 text-primary hover:text-blue-700 font-medium">View all templates</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

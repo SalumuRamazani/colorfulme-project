@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 80">
+  <!-- Heart Icon -->
+  <path d="M25 20c-6 0-11 5-11 11 0 10 11 19 11 19s11-9 11-19c0-6-5-11-11-11z" fill="#2D2D2D"/>
+  <path d="M25 50c-1 0-11-8.5-11-19 0-6.5 5-11 11-11s11 4.5 11 11c0 10.5-10 19-11 19z" fill="#2D2D2D"/>
+  
+  <!-- CVS Text (Bold) -->
+  <g fill="#2D2D2D">
+    <!-- C -->
+    <path d="M75 25c-8.5 0-15.5 7-15.5 15.5S66.5 56 75 56c4.5 0 8.5-2 11.5-5l-3.5-3.5c-2 2-4.5 3-7 3-5.5 0-10-4.5-10-10s4.5-10 10-10c2.5 0 5 1 7 3l3.5-3.5c-3-3-7-5-11.5-5z"/>
+    
+    <!-- V -->
+    <path d="M105 26l-9 30h6l6.5-22 6.5 22h6l-9-30h-7z"/>
+    
+    <!-- S -->
+    <path d="M140 31c-4.5-1.5-6-2.5-6-4.5 0-1.5 1.5-2.5 3.5-2.5 2.5 0 4.5 1 6 2.5l3-3c-2-2.5-5.5-4-9-4-5 0-9 3-9 7.5 0 4.5 3.5 6.5 8 8 4.5 1.5 6 2.5 6 5 0 2-2 3-4.5 3-3 0-5.5-1.5-7.5-3.5l-3 3c2.5 3 6 5 10.5 5 6 0 10-3.5 10-8.5 0-5-3.5-7-8-8z"/>
+  </g>
+  
+  <!-- pharmacy text (lighter) -->
+  <text x="165" y="47" fill="#808080" font-family="Arial, sans-serif" font-size="20" font-weight="300">pharmacy</text>
+  
+  <!-- Registered trademark symbol -->
+  <circle cx="318" cy="30" r="6" fill="none" stroke="#808080" stroke-width="0.8"/>
+  <text x="315" y="33.5" fill="#808080" font-family="Arial, sans-serif" font-size="8" font-weight="bold">®</text>
+</svg>

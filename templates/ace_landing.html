@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}ACE Hardware Receipt Generator - Free Professional Receipts{% endblock %}
+{% block description %}Create professional ACE Hardware receipts for free. Perfect for DIY projects, contractors, home improvement tracking, and expense documentation. Customize items, pricing, and store details instantly.{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.url_root.rstrip('/') }}/ace-receipt">{% endblock %}
+
+{% block meta_tags %}
+<meta property="og:title" content="ACE Hardware Receipt Generator - ReceiptMake">
+<meta property="og:description" content="Create professional ACE Hardware receipts with full customization. Perfect for home improvement, DIY projects, and business expense tracking.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/images/template-previews/ace-preview.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ACE Hardware Receipt Generator",
+  "applicationCategory": "BusinessApplication",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "description": "Free professional ACE Hardware receipt generator. Create professional receipts with items, pricing, tax calculations, and rewards tracking.",
+  "operatingSystem": "Any"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a watermark on the receipts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, Receiptmake does not add watermarks to your receipts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What can I customize on the receipt?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Customize everything: items and prices, store location, transaction details, ACE Rewards information, tax rates, payment methods, and more."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I include ACE Rewards information?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes! Include ACE Rewards membership number and points earned on your receipts."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is this suitable for contractors and businesses?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Absolutely! Perfect for contractors, builders, DIY enthusiasts, and home improvement professionals."}
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+  <section class="px-4 py-12 md:py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4 leading-tight">
+            ACE Hardware Receipts Made Easy
+          </h1>
+          <p class="text-lg text-neutral-600 mb-6">
+            Create professional ACE Hardware receipts instantly. Perfect for home improvement projects, contractor work, DIY tracking, and expense documentation—all completely free.
+          </p>
+          <p class="text-neutral-600 mb-8">
+            Customize items, pricing, store details, and ACE Rewards information. Generate professional receipts in seconds with our simple, intuitive receipt builder.
+          </p>
+          <a href="/generate-ace-receipt" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200">
+            Create ACE Receipt →
+          </a>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden relative border border-neutral-200">
+          <img src="/static/images/template-previews/ace-preview.webp?v=1" alt="ACE Hardware Receipt Preview" class="w-full h-auto">
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%); pointer-events: none; z-index: 100;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-neutral-900 mb-12">Powerful Features</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🛠️</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Full Item Customization</h3>
+          <p class="text-neutral-600 text-sm">Add unlimited items with custom names, quantities, and prices matching your exact purchases.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🏪</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Store Information</h3>
+          <p class="text-neutral-600 text-sm">Customize store location, phone, register number, and associate information.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">💳</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Payment & Tax</h3>
+          <p class="text-neutral-600 text-sm">Support for all payment methods with automatic tax calculation and total computation.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🏆</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">ACE Rewards Program</h3>
+          <p class="text-neutral-600 text-sm">Track membership numbers and points earned on every receipt.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">📄</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Download & Print</h3>
+          <p class="text-neutral-600 text-sm">Save as PDF or print directly from your browser in professional quality.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🎨</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Professional Design</h3>
+          <p class="text-neutral-600 text-sm">Professional design with clean layout and ACE Hardware branding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Perfect For</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🏗️</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Contractors & Builders</h3>
+            <p class="text-neutral-600 text-sm">Track project materials, equipment, and supplies with professional documentation.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🏠</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Home Improvement Projects</h3>
+            <p class="text-neutral-600 text-sm">Document DIY projects, renovations, and home repair purchases.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">💼</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Business Expense Tracking</h3>
+            <p class="text-neutral-600 text-sm">Maintain detailed records of business equipment and supply purchases.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">📋</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Maintenance Records</h3>
+            <p class="text-neutral-600 text-sm">Keep organized records of facility maintenance and repairs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Start Creating ACE Receipts Now</h2>
+      <p class="text-blue-100 mb-8">Free, unlimited, professional receipt generation. No sign-up required.</p>
+      <a href="/generate-ace-receipt" class="inline-block bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 px-8 rounded-lg transition duration-200">
+        Generate Receipt Now →
+      </a>
+    </div>
+  </section>
+</div>
+{% endblock %}

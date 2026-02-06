@@ -1,0 +1,157 @@
+{
+  "name": "Grocery Store Receipt",
+  "description": "Professional grocery store receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "",
+    "headerAlignment": "center",
+    "logoSize": 100,
+    "businessName": "FRESH MART\nGROCERY STORE",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "Store #1247\n1520 MAIN STREET\nANYTOWN, CA 90210\n(555) 123-4567",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "11/14/2024, 2:34:56 PM",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "Cashier: SARAH\nRegister: 04\nTransaction: 7842",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "ORGANIC MILK GAL",
+            "price": 5.99
+          },
+          {
+            "quantity": 2,
+            "name": "BREAD WHOLE WHEAT",
+            "price": 5.98
+          },
+          {
+            "quantity": 1,
+            "name": "EGGS LARGE DOZ",
+            "price": 4.29
+          },
+          {
+            "quantity": 3,
+            "name": "BANANAS LB",
+            "price": 1.77
+          },
+          {
+            "quantity": 1,
+            "name": "CHICKEN BREAST LB",
+            "price": 8.99
+          },
+          {
+            "quantity": 2,
+            "name": "PASTA PENNE 16OZ",
+            "price": 3.98
+          },
+          {
+            "quantity": 1,
+            "name": "TOMATO SAUCE 24OZ",
+            "price": 2.49
+          },
+          {
+            "quantity": 1,
+            "name": "CHEDDAR CHEESE 8OZ",
+            "price": 4.99
+          },
+          {
+            "quantity": 1,
+            "name": "ORANGE JUICE 64OZ",
+            "price": 4.49
+          },
+          {
+            "quantity": 1,
+            "name": "PAPER TOWELS 6PK",
+            "price": 7.99
+          }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "payment",
+      "position": 5,
+      "data": {
+        "taxRate": 7.5,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "Card",
+            "value": "VISA **** 4521"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "SAVINGS THIS TRIP: $4.50\nTOTAL SAVINGS YTD: $127.85",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "Thank you for shopping with us!\nVisit us at www.freshmart.com\nSurvey: www.freshmart.com/survey",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeValue": "1247784211142024",
+        "barcodeSize": 50,
+        "showBarcodeValue": true,
+        "showBarcodeDivider": false,
+        "barcodeDivider": ""
+      }
+    }
+  ]
+}

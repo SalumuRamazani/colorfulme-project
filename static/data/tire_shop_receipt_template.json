@@ -1,0 +1,139 @@
+{
+  "name": "Tire Shop Receipt",
+  "description": "Professional tire shop service receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/tire-shop-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 50,
+    "businessName": "PRO TIRE CENTER",
+    "headerDivider": "===",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "YOUR TIRE PROFESSIONALS\n8745 HIGHWAY 99\nFRESNO, CA 93721\n(559) 445-8100\nWWW.PROTIRECENTER.COM",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 2,
+      "data": {
+        "customFields": [
+          { "label": "INVOICE", "value": "TC-84729", "column": 1 },
+          { "label": "ADVISOR", "value": "TOM W", "column": 1 },
+          { "label": "TECH", "value": "CARLOS M", "column": 2 },
+          { "label": "WORK ORDER", "value": "W-2847", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 3,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "11/13/2025 02:30:00 PM",
+        "dateDivider": "---",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "VEHICLE: 2019 FORD F-150\nVIN: ****9482  LICENSE: 8ABC456\nMILEAGE: 62,145  TIRE SIZE: 275/65R18",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          { "quantity": 4, "name": "MICHELIN DEFENDER LTX 275/65R18", "price": 759.96 },
+          { "quantity": 4, "name": "TIRE MOUNTING & BALANCING", "price": 79.96 },
+          { "quantity": 1, "name": "4-WHEEL ALIGNMENT", "price": 89.99 },
+          { "quantity": 4, "name": "TPMS SENSOR SERVICE", "price": 39.96 },
+          { "quantity": 4, "name": "VALVE STEMS", "price": 15.96 },
+          { "quantity": 1, "name": "TIRE DISPOSAL FEE", "price": 12.00 },
+          { "quantity": 1, "name": "ROAD HAZARD WARRANTY (4 TIRES)", "price": 79.99 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "ALIGNMENT RESULTS\nFRONT: ADJUSTED TO SPEC ✓\nREAR: WITHIN SPEC ✓\nTIRE PRESSURE SET TO 35 PSI",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "payment",
+      "position": 7,
+      "data": {
+        "taxRate": 8.75,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "SUBTOTAL", "value": "1077.82" },
+          { "label": "MILITARY DISCOUNT", "value": "-53.89" },
+          { "label": "TAX", "value": "89.61" },
+          { "label": "TOTAL", "value": "1113.54" },
+          { "label": "MASTERCARD ****7823", "value": "1113.54" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "WARRANTY INFORMATION\nTIRES: 60,000 MILE WARRANTY\nROAD HAZARD: 2 YEAR COVERAGE\nALIGNMENT: 6 MONTHS/6000 MILES",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 9,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 45,
+        "barcodeLength": 75,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "ROTATE TIRES EVERY 5,000 MILES\nFREE ROTATION WITH PURCHASE\n\nTHANK YOU FOR YOUR TRUST!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}

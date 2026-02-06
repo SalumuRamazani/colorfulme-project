@@ -1,0 +1,130 @@
+{
+  "name": "Generic Hotel Receipt",
+  "description": "Professional generic hotel receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/generic-hotel-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 50,
+    "businessName": "THE GRAND HOTEL",
+    "headerDivider": "===",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "LUXURY ACCOMMODATIONS\n789 HOTEL AVENUE\nCITY CENTER, ST 12345\nTEL: (555) 456-7890\nFAX: (555) 456-7891",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 2,
+      "data": {
+        "customFields": [
+          { "label": "FOLIO", "value": "H-284729", "column": 1 },
+          { "label": "CONFIRM", "value": "GH847291", "column": 1 },
+          { "label": "ROOM", "value": "512", "column": 2 },
+          { "label": "TYPE", "value": "DELUXE", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "GUEST NAME: MR. JOHN SMITH\nADDRESS: 123 MAIN ST, HOMETOWN, ST 54321\nPHONE: (555) 111-2222\nEMAIL: GUEST@EMAIL.COM",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "ARRIVAL: 11/11/2025 3:00 PM\nDEPARTURE: 11/13/2025 12:00 PM\nNIGHTS: 2  ADULTS: 2  CHILDREN: 0",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          { "quantity": 2, "name": "ROOM CHARGE - DELUXE KING", "price": 398.00 },
+          { "quantity": 1, "name": "11/11 ROOM SERVICE", "price": 65.00 },
+          { "quantity": 1, "name": "11/12 BREAKFAST BUFFET (2)", "price": 54.00 },
+          { "quantity": 1, "name": "11/12 SPA SERVICES", "price": 150.00 },
+          { "quantity": 1, "name": "11/12 MINIBAR", "price": 28.50 },
+          { "quantity": 1, "name": "11/13 VALET PARKING", "price": 45.00 },
+          { "quantity": 1, "name": "WIFI ACCESS (2 DAYS)", "price": 0.00 },
+          { "quantity": 1, "name": "RESORT FEE (2 NIGHTS)", "price": 70.00 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "LOYALTY PROGRAM: GOLD MEMBER\nPOINTS EARNED: 810\nTOTAL POINTS: 12,450",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "payment",
+      "position": 7,
+      "data": {
+        "taxRate": 14.75,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "ROOM & SERVICES", "value": "810.50" },
+          { "label": "TAXES & FEES", "value": "119.55" },
+          { "label": "TOTAL CHARGES", "value": "930.05" },
+          { "label": "VISA ****8234", "value": "930.05" },
+          { "label": "AUTH CODE", "value": "847291" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 45,
+        "barcodeLength": 75,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "THANK YOU FOR STAYING WITH US\nWE HOPE TO SEE YOU AGAIN SOON\n\nFOR RESERVATIONS: 1-800-GRAND-HOTEL\nWWW.GRANDHOTEL.COM",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}

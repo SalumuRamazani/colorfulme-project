@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Vet Receipt Generator - Free Professional Veterinary Service Documentation{% endblock %}
+{% block description %}Create professional veterinary clinic receipts instantly. Perfect for animal hospitals, pet clinics, and veterinarians. Fully customizable.{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.url_root.rstrip('/') }}/vet-receipt">{% endblock %}
+
+{% block meta_tags %}
+<meta property="og:title" content="Vet Receipt Generator - ReceiptMake">
+<meta property="og:description" content="Create professional veterinary receipts and pet medical service documentation. Perfect for animal hospitals and pet clinics.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/images/template-previews/vet-preview.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Vet Receipt Generator",
+  "applicationCategory": "BusinessApplication",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+  <section class="px-4 py-12 md:py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4 leading-tight">
+            Free Veterinary Receipt Generator
+          </h1>
+          <p class="text-lg text-neutral-600 mb-6">
+            Create professional veterinary service receipts instantly. Perfect for vets, animal hospitals, and pet clinics. Fully customizable with pet details and medical services.
+          </p>
+          <p class="text-neutral-600 mb-8">
+            Generate professional veterinary receipts and medical documentation in seconds. No sign-up required.
+          </p>
+          <div class="flex flex-col md:flex-row gap-3">
+            <a href="/generate-vet-receipt" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200 text-center">
+              Generate Vet Receipt →
+            </a>
+            <a href="/templates" class="inline-block border-2 border-neutral-300 hover:border-neutral-400 text-neutral-700 font-semibold py-3 px-8 rounded-lg transition duration-200 text-center">
+              View All Templates
+            </a>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden relative border border-neutral-200">
+          <picture>
+            <source srcset="/static/images/template-previews/vet-preview.webp?v=6" type="image/webp">
+            <img src="/static/images/template-previews/vet-preview.png?v=6" alt="Veterinary Service Receipt Preview" class="w-full h-auto" width="300" height="1107">
+          </picture>
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%); pointer-events: none; z-index: 100;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-neutral-900 mb-12">Powerful Features</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🐾</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Pet Information</h3>
+          <p class="text-neutral-600 text-sm">Track pet details, species, breed, owner information, and medical history.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">💊</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Medical Services</h3>
+          <p class="text-neutral-600 text-sm">Document vaccinations, treatments, surgeries, and diagnostic services.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">💰</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Medical Billing</h3>
+          <p class="text-neutral-600 text-sm">Itemize service charges, medications, and medical procedures.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">📋</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Medical Records</h3>
+          <p class="text-neutral-600 text-sm">Generate detailed records for pet health documentation and insurance.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🏥</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Clinic Branding</h3>
+          <p class="text-neutral-600 text-sm">Add your veterinary clinic logo, license, and contact information.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">⚡</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Quick Generation</h3>
+          <p class="text-neutral-600 text-sm">Create professional receipts in seconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Perfect For</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🏥</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Veterinary Clinics</h3>
+            <p class="text-neutral-600 text-sm">Professional receipts for pet medical services and treatments.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🐕</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Animal Hospitals</h3>
+            <p class="text-neutral-600 text-sm">Generate detailed medical documentation and billing receipts.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🐱</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Pet Practices</h3>
+            <p class="text-neutral-600 text-sm">Track pet owner information and medical service billing.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">📊</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Medical Records</h3>
+            <p class="text-neutral-600 text-sm">Maintain comprehensive pet health records and service documentation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Create Your Veterinary Receipt Now</h2>
+      <p class="text-blue-100 mb-8">Professional pet care receipts. Free, unlimited, and instantly downloadable.</p>
+      <a href="/generate-vet-receipt" class="inline-block bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 px-8 rounded-lg transition duration-200">
+        Generate Receipt Now →
+      </a>
+    </div>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,126 @@
+{
+  "name": "Target Receipt",
+  "description": "Professional Target store receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/target-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 50,
+    "businessName": "",
+    "headerDivider": "===",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "TARGET\nSTORE #2389 - LOS ANGELES\n7100 SANTA MONICA BLVD\nWEST HOLLYWOOD, CA 90046\n(323) 882-0100",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "11/13/2025 03:47:21 PM",
+        "dateDivider": "---",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 3,
+      "data": {
+        "customFields": [
+          { "label": "REG", "value": "03", "column": 1 },
+          { "label": "TRAN", "value": "1547", "column": 1 },
+          { "label": "CSHR", "value": "SARAH M", "column": 2 },
+          { "label": "STR", "value": "2389", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "TIDE PODS 42CT", "price": 14.99 },
+          { "quantity": 2, "name": "BOUNTY PAPER TOWELS 6PK", "price": 19.98 },
+          { "quantity": 1, "name": "COFFEE MAKER BLACK", "price": 39.99 },
+          { "quantity": 3, "name": "ORGANIC MILK GALLON", "price": 17.97 },
+          { "quantity": 1, "name": "CHEERIOS CEREAL", "price": 3.49 },
+          { "quantity": 2, "name": "DOVE BODY WASH", "price": 11.98 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 5,
+      "data": {
+        "taxRate": 9.5,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "REDCARD SAVINGS", "value": "-5.20" },
+          { "label": "PAYMENT TYPE", "value": "REDCARD ****1234" },
+          { "label": "AMOUNT CHARGED", "value": "113.53" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "YOUR REDCARD SAVINGS 5%\nTODAY'S SAVINGS: $5.20\nYTD SAVINGS: $234.67",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "RETURN POLICY\nMOST UNOPENED ITEMS IN NEW CONDITION\nRETURNED WITHIN 90 DAYS WILL RECEIVE\nA REFUND. SOME ITEMS HAVE A MODIFIED\nRETURN POLICY. VISIT TARGET.COM/RETURNS",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "TELL US ABOUT YOUR VISIT TODAY\nTARGET.COM/SURVEY\nID: 2389-1547-0311-1452\n\nTHANK YOU FOR SHOPPING AT TARGET",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}

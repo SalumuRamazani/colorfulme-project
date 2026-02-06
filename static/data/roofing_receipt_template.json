@@ -1,0 +1,141 @@
+{
+  "name": "Roofing Service Receipt",
+  "description": "Professional roofing service receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/roofing-logo-bw.svg",
+    "headerAlignment": "center",
+    "logoSize": 90,
+    "businessName": "ProRoof Contractor",
+    "headerDivider": "================================================",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "1847 Cedar Ridge Rd, Denver, CO 80202\nPhone: (720) 555-0184\nwww.proroof.com | Licensed & Insured",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "12/31/2025 10:15 AM",
+        "dateDivider": "================================================",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "ROOFING SERVICE RECEIPT\nInvoice #: RF-2025-8847\nContractor: Michael Torres",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "Property Address: 456 Oak Street, Denver, CO\nRoof Type: Asphalt Shingles (25 yr)\nArea: 2,400 sq ft",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 2400,
+            "name": "Asphalt Shingle Installation (per sq ft)",
+            "price": 0.35
+          },
+          {
+            "quantity": 1,
+            "name": "Roof Inspection & Assessment",
+            "price": 0.00
+          },
+          {
+            "quantity": 1,
+            "name": "Old Roof Removal & Disposal",
+            "price": 1200.00
+          },
+          {
+            "quantity": 1,
+            "name": "Wood Repair & Replacement",
+            "price": 450.00
+          },
+          {
+            "quantity": 1,
+            "name": "Flashing & Gutters Installation",
+            "price": 680.00
+          },
+          {
+            "quantity": 1,
+            "name": "Ventilation Improvement",
+            "price": 350.00
+          }
+        ],
+        "itemsDivider": "================================================",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 8.0,
+        "showTaxRate": true,
+        "paymentType": "check",
+        "paymentFields": [
+          {
+            "label": "Materials & Labor",
+            "value": "3,690.00"
+          },
+          {
+            "label": "Tax (8%)",
+            "value": "295.20"
+          },
+          {
+            "label": "TOTAL DUE",
+            "value": "3,985.20"
+          },
+          {
+            "label": "Deposit Paid",
+            "value": "1,000.00"
+          },
+          {
+            "label": "Balance Due",
+            "value": "2,985.20"
+          }
+        ],
+        "paymentDivider": "================================================",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "WARRANTY: 10-Year Material & Labor Warranty\n\nThank you for your business!\nPayment Due: Net 30 days\nMake checks payable to: ProRoof Contractor",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

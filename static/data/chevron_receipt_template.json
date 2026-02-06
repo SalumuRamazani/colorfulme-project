@@ -1,0 +1,144 @@
+{
+  "name": "Chevron Receipt",
+  "description": "Professional Chevron gas station receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "",
+    "headerAlignment": "center",
+    "logoSize": 0,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "CHEVRON WITH TECHRON\u00ae",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "STATION #90299\n505 E. RUSSELL AVE\nWELSH, LA 70591\n(337) 734-4555",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "REGISTER: 1  TRANS: 2747  OP: 91\nYOUR CASHIER: AMANDA",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "REWARDS MEMBER: ***5678",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "UNLEADED REGULAR 87  PUMP #7",
+            "price": 0
+          },
+          {
+            "quantity": 16.8,
+            "name": "  @ $3.19/GAL",
+            "price": 53.59
+          }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "payment",
+      "position": 7,
+      "data": {
+        "taxRate": 0,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "FUEL TOTAL",
+            "value": "53.59"
+          },
+          {
+            "label": "VISA ****4521",
+            "value": "53.59"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "REWARDS POINTS EARNED: 84 PTS\nTOTAL POINTS BALANCE: 456 PTS\n\n100 PTS = 10\u00a2 OFF PER GALLON",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "===",
+        "isBold": true
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 9,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/14/2025\n11:58 AM",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "THANK YOU!\nVISIT CHEVRONTEXACOREWARDS.COM\nTO REDEEM YOUR POINTS",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 11,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

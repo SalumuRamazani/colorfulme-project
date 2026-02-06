@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect x="60" y="40" width="80" height="120" fill="none" stroke="#000" stroke-width="3"/>
+  <rect x="70" y="50" width="20" height="20" fill="#000"/>
+  <rect x="110" y="50" width="20" height="20" fill="#000"/>
+  <rect x="70" y="80" width="20" height="20" fill="#000"/>
+  <rect x="110" y="80" width="20" height="20" fill="#000"/>
+  <rect x="70" y="110" width="20" height="20" fill="#000"/>
+  <rect x="110" y="110" width="20" height="20" fill="#000"/>
+  <rect x="85" y="130" width="30" height="30" fill="#000"/>
+  <text x="100" y="180" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000">HOTEL</text>
+</svg>

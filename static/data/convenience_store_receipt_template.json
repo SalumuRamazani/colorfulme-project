@@ -1,0 +1,131 @@
+{
+  "name": "Convenience Store Receipt",
+  "description": "Professional convenience store receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "",
+    "headerAlignment": "center",
+    "logoSize": 80,
+    "businessName": "QuikStop Market",
+    "headerDivider": "======================",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "2847 Bellona Lane\nSt. Marys, FL 32046\n(631) 555-0102",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "======================"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "12/31/2025 11:42 AM",
+        "dateDivider": "======================",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "Cashier: Morgan | Register: 01",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          {
+            "quantity": 2,
+            "name": "Coffee - Large",
+            "price": 2.99
+          },
+          {
+            "quantity": 1,
+            "name": "Hot Dog + Roller",
+            "price": 2.50
+          },
+          {
+            "quantity": 1,
+            "name": "Red Bull 16oz",
+            "price": 3.29
+          },
+          {
+            "quantity": 1,
+            "name": "Doritos Cool Ranch",
+            "price": 1.89
+          },
+          {
+            "quantity": 1,
+            "name": "Bottled Water 20oz",
+            "price": 1.99
+          },
+          {
+            "quantity": 1,
+            "name": "Lottery Ticket",
+            "price": 1.00
+          }
+        ],
+        "itemsDivider": "======================",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 5,
+      "data": {
+        "taxRate": 7.5,
+        "showTaxRate": true,
+        "paymentType": "cash",
+        "paymentFields": [
+          {
+            "label": "Subtotal",
+            "value": "13.66"
+          },
+          {
+            "label": "Tax",
+            "value": "1.02"
+          },
+          {
+            "label": "TOTAL",
+            "value": "14.68"
+          },
+          {
+            "label": "Cash Tendered",
+            "value": "20.00"
+          },
+          {
+            "label": "Change",
+            "value": "5.32"
+          }
+        ],
+        "paymentDivider": "======================",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "Thank You!\nVisit Us Again!\n\nOpen: 24/7\nLottery • ATM • Gas",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

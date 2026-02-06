@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block title %}AutoZone Receipt Generator - ReceiptMake{% endblock %}
+{% block description %}Create professional AutoZone automotive parts receipts with our free online generator. Perfect for tracking parts purchases, repairs, and maintenance records.{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.url_root.rstrip('/') }}/autozone-receipt">{% endblock %}
+
+{% block meta_tags %}
+<!-- Open Graph Tags -->
+<meta property="og:title" content="AutoZone Receipt Generator - ReceiptMake">
+<meta property="og:description" content="Create professional AutoZone automotive parts receipts with our free online generator. Perfect for tracking parts purchases, repairs, and maintenance records.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/images/template-previews/autozone-preview.webp">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AutoZone Receipt Generator",
+  "applicationCategory": "BusinessApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Free professional AutoZone automotive parts receipt generator. Create professional receipts with parts lists, pricing, and transaction details.",
+  "operatingSystem": "Any"
+}
+</script>
+
+<!-- FAQ Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a watermark on the receipts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, Receiptmake does not add watermarks to your receipts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I customize AutoZone receipt details?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Customize everything including store number, transaction date, parts list with prices, AutoZone Rewards status, payment methods, and totals with tax calculations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What information should I include on an AutoZone receipt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A complete AutoZone receipt should include: store number, transaction ID, parts list with descriptions and prices, tax, total, AutoZone Rewards membership status, payment method, and sales associate information."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this for automotive business records?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, this template is perfect for tracking automotive parts purchases, maintenance records, business expense documentation, and repair shop records."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I download or print the AutoZone receipt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "After creating your receipt, simply click 'Download' to save as PDF or click 'Print' to print directly from your browser. Both produce professional, high-quality results."
+      }
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+  <!-- Hero Section -->
+  <section class="px-4 py-12 md:py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4 leading-tight">
+            Professional AutoZone Receipts
+          </h1>
+          <p class="text-lg text-neutral-600 mb-4">
+            Create professional AutoZone parts receipts instantly. Perfect for tracking automotive purchases, maintenance records, and expense documentation—all for free.
+          </p>
+          <p class="text-neutral-600 mb-8">
+            Ideal for mechanics, auto enthusiasts, DIY mechanics, and business owners. Customize parts lists, prices, store information, and AutoZone Rewards details effortlessly.
+          </p>
+          <a href="/generate-autozone-receipt" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200">
+            Create AutoZone Receipt →
+          </a>
+        </div>
+        
+        <!-- Preview Receipt -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-neutral-200 relative">
+          <img src="/static/images/template-previews/autozone-preview.webp?v=1" alt="AutoZone Receipt Preview" class="w-full h-auto">
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%); pointer-events: none; z-index: 100;"></div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="px-4 py-12 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-neutral-900 mb-12">Why Choose Our AutoZone Receipt Generator?</h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🔧</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Parts List Customization</h3>
+          <p class="text-neutral-600 text-sm">Add multiple automotive parts with accurate pricing, quantities, and descriptions matching AutoZone's format.</p>
+        </div>
+        
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">💰</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Accurate Pricing</h3>
+          <p class="text-neutral-600 text-sm">Automatic tax calculation and total computation for accurate receipt documentation and expense tracking.</p>
+        </div>
+        
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🎫</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Rewards Program</h3>
+          <p class="text-neutral-600 text-sm">Include AutoZone Rewards membership status and SPEED PERKS program information on your receipts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section class="px-4 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Perfect for Automotive Professionals</h2>
+      
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🚗</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Mechanics & Repair Shops</h3>
+            <p class="text-neutral-600 text-sm">Create professional receipts for parts sold to customers and document repair expenses.</p>
+          </div>
+        </div>
+        
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🔩</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">DIY Auto Enthusiasts</h3>
+            <p class="text-neutral-600 text-sm">Track personal automotive projects and maintenance with professional AutoZone receipt documentation.</p>
+          </div>
+        </div>
+        
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">📋</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Business Expense Tracking</h3>
+            <p class="text-neutral-600 text-sm">Maintain complete vehicle maintenance records and business automotive expense documentation.</p>
+          </div>
+        </div>
+        
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🏪</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Fleet Management</h3>
+            <p class="text-neutral-600 text-sm">Document fleet vehicle maintenance and parts purchases with professional receipts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="px-4 py-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to Create Professional AutoZone Receipts?</h2>
+      <p class="text-blue-100 mb-8">Start creating professional automotive parts receipts in seconds. No sign-up required—completely free.</p>
+      <a href="/generate-autozone-receipt" class="inline-block bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 px-8 rounded-lg transition duration-200">
+        Generate AutoZone Receipt Now →
+      </a>
+    </div>
+  </section>
+</div>
+{% endblock %}

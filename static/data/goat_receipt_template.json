@@ -1,0 +1,129 @@
+{
+  "name": "GOAT Receipt",
+  "description": "Professional GOAT sneaker marketplace receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/goat-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "===",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "GOAT\nGREATEST OF ALL TIME\nORDER RECEIPT",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 2,
+      "data": {
+        "customFields": [
+          { "label": "ORDER", "value": "GT-2847291", "column": 1 },
+          { "label": "DATE", "value": "11/13/2025", "column": 1 },
+          { "label": "STATUS", "value": "DELIVERED", "column": 2 },
+          { "label": "ACCOUNT", "value": "USER8472", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "AUTHENTICATION STATUS: ✓ VERIFIED\nSPECIALIST NOTES: EXCELLENT CONDITION\nGOAT CLEAN APPLIED: YES",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "NIKE DUNK LOW 'PANDA'", "price": 165.00 },
+          { "quantity": 1, "name": "SIZE: US 9.5 / EU 43", "price": 0.00 },
+          { "quantity": 1, "name": "CONDITION: NEW", "price": 0.00 },
+          { "quantity": 1, "name": "SKU: DD1391-100", "price": 0.00 },
+          { "quantity": 1, "name": "GOAT CLEAN SERVICE", "price": 5.00 },
+          { "quantity": 1, "name": "SERVICE FEE", "price": 12.38 },
+          { "quantity": 1, "name": "INSTANT SHIPPING", "price": 25.00 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "SELLER: VERIFIED BOUTIQUE\nSHIPPED FROM: LOS ANGELES, CA\nAUTHENTICATED: CULVER CITY, CA",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 9.25,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "SUBTOTAL", "value": "207.38" },
+          { "label": "GOAT CREDIT APPLIED", "value": "-20.00" },
+          { "label": "TAX", "value": "17.33" },
+          { "label": "TOTAL", "value": "204.71" },
+          { "label": "APPLE PAY ****1234", "value": "204.71" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "DELIVERED TO:\nMICHAEL JOHNSON\n456 SUNSET BLVD\nWEST HOLLYWOOD, CA 90069\n\nFEDEX TRACKING: 7829****4521",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "GOAT PROTECTION POLICY\nRETURN WINDOW: 3 DAYS\n\nNEED HELP? SUPPORT@GOAT.COM\nTHANK YOU FOR SHOPPING WITH GOAT",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}

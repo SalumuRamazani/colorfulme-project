@@ -1,0 +1,121 @@
+{
+  "name": "Doctor Receipt",
+  "description": "Professional medical office receipt",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/doctor-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 50,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "EVERGREEN FAMILY MEDICAL\nPATIENT STATEMENT",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "════════════════════════════",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "2345 CEDAR AVENUE, SUITE 202\nSEATTLE, WA 98101\n(206) 555-1234\nEmail: billing@evergreenmedical.com",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "Patient: Michael James Thompson\nMRN: MJT-0982547\nDate: 08/15/2025  1:30 PM\nPhysician: Dr. James Reynolds, MD",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "SERVICES & PROCEDURES",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Office Visit (New Patient - 60 min)",
+            "price": 200.00
+          },
+          {
+            "quantity": 1,
+            "name": "Comprehensive Metabolic Panel",
+            "price": 125.00
+          },
+          {
+            "quantity": 1,
+            "name": "Lipid Panel (Blood Work)",
+            "price": 95.00
+          },
+          {
+            "quantity": 1,
+            "name": "EKG (Electrocardiogram)",
+            "price": 150.00
+          },
+          {
+            "quantity": 1,
+            "name": "Urinalysis",
+            "price": 35.00
+          }
+        ]
+      }
+    },
+    {
+      "type": "tax",
+      "position": 6,
+      "data": {
+        "taxLabel": "Tax",
+        "taxValue": 60.50
+      }
+    },
+    {
+      "type": "total",
+      "position": 7,
+      "data": {
+        "totalLabel": "AMOUNT DUE",
+        "totalValue": 665.50
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "INSURANCE\nBCBS Coverage Applied: -$250\nCopay: $50\n\nPAYMENT\nVisa ****1003\nAuthorization: 827391\n\nPrescriptions: Sent to pharmacy\nRx: Atorvastatin 20mg, Lisinopril 10mg\n\nFollow-up: 90 days (Lab recheck)\n\nThank you for your visit!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    }
+  ]
+}

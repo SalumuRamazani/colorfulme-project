@@ -1,0 +1,132 @@
+{
+  "name": "Vet Receipt",
+  "description": "Professional veterinary clinic receipt and pet medical service documentation template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/vet-logo-bw.svg",
+    "headerAlignment": "center",
+    "logoSize": 85,
+    "businessName": "PawCare Animal Hospital",
+    "headerDivider": "================================================",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "1523 Wellness Road, Seattle, WA 98101\nPhone: (206) 555-0167 | www.pawcareanimal.com\nLicensed Veterinarians • Emergency Care • Grooming Services",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "12/31/2025 03:30 PM",
+        "dateDivider": "================================================",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "VETERINARY SERVICE RECEIPT\nReceipt #: PC-2025-4521\nVeterinarian: Dr. Emily Chen, DVM",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "Pet Owner: Michael Patterson\nPet Name: Max (Golden Retriever)\nBreed & Age: Golden Retriever, 5 years old",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Comprehensive Physical Exam",
+            "price": 75.00
+          },
+          {
+            "quantity": 1,
+            "name": "Vaccines (DHPP, Rabies)",
+            "price": 95.00
+          },
+          {
+            "quantity": 1,
+            "name": "Blood Work & Lab Analysis",
+            "price": 150.00
+          },
+          {
+            "quantity": 1,
+            "name": "Dental Cleaning & Exam",
+            "price": 250.00
+          },
+          {
+            "quantity": 1,
+            "name": "Professional Grooming",
+            "price": 85.00
+          }
+        ],
+        "itemsDivider": "================================================",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 8.8,
+        "showTaxRate": true,
+        "paymentType": "card",
+        "paymentFields": [
+          {
+            "label": "Subtotal",
+            "value": "655.00"
+          },
+          {
+            "label": "Tax (8.8%)",
+            "value": "57.64"
+          },
+          {
+            "label": "TOTAL DUE",
+            "value": "712.64"
+          },
+          {
+            "label": "Payment Status",
+            "value": "Paid (Card)"
+          }
+        ],
+        "paymentDivider": "================================================",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "Thank you for choosing PawCare Animal Hospital!\n\nNext Appointment: Schedule annual checkup\nMedications: See discharge instructions\nFor emergencies, visit our 24/7 facility\n\nYour pet's health is our priority.\nwww.pawcareanimal.com | (206) 555-0167",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

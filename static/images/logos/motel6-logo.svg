@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+  <text x="60" y="60" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#000">Motel</text>
+  <rect x="110" y="25" width="50" height="50" fill="#000" rx="5"/>
+  <text x="135" y="60" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#fff">6</text>
+</svg>

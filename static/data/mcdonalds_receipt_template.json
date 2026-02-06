@@ -1,0 +1,170 @@
+{
+  "name": "McDonald's Receipt",
+  "description": "Professional McDonald's restaurant receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/mcdonalds-order-number.svg",
+    "headerAlignment": "center",
+    "logoSize": 150,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "McDonald's\nRestaurant #4521",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "123 MAIN STREET\nDALLAS, TX 75201\n(214) 555-0100",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "Visit McDVOICE.com\nCode: 12345-67890-12345-67890-12\nFree Medium Fries with $1 Purchase",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 4,
+      "data": {
+        "dateAlignment": "right",
+        "dateTime": "11/14/2025\n12:34 PM",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "ORDER #42",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 6,
+      "data": {
+        "items": [
+          {
+            "quantity": 2,
+            "name": "Big Mac",
+            "price": 10.58
+          },
+          {
+            "quantity": 1,
+            "name": "Medium Fries",
+            "price": 4.19
+          },
+          {
+            "quantity": 1,
+            "name": "Large Coke",
+            "price": 2.49
+          },
+          {
+            "quantity": 1,
+            "name": "10pc McNuggets",
+            "price": 5.29
+          },
+          {
+            "quantity": 1,
+            "name": "McChicken",
+            "price": 3.1
+          },
+          {
+            "quantity": 1,
+            "name": "Apple Pie",
+            "price": 1.79
+          }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "payment",
+      "position": 8,
+      "data": {
+        "taxRate": 8.25,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "Take-Out Total",
+            "value": "29.70"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "Payment: Visa ***1234",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "Thank You!\nTell us about your visit\nTransaction: 789456123",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 11,
+      "data": {
+        "customMessage": "Download the McDonald's App\nfor exclusive deals!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 12,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

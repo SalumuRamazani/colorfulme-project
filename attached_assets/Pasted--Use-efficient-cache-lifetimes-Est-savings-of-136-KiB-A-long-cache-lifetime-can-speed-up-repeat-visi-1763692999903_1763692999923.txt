@@ -1,0 +1,239 @@
+
+Use efficient cache lifetimes Est savings of 136 KiB
+A long cache lifetime can speed up repeat visits to your page. Learn more about caching.LCPFCPUnscored
+Request
+Cache TTL
+Transfer Size
+posthog.com
+156 KiB
+/static/array.js(us-assets.i.posthog.com)
+5m
+59 KiB
+/static/lazy-recorder.js?v=1.297.0(us-assets.i.posthog.com)
+4h
+54 KiB
+/static/surveys.js?v=1.297.0(us-assets.i.posthog.com)
+5m
+30 KiB
+/static/web-vitals.js?v=1.297.0(us-assets.i.posthog.com)
+5m
+5 KiB
+/static/dead-clicks-autocapture.js?v=1.297.0(us-assets.i.posthog.com)
+4h
+6 KiB
+…phc_9UvhL…/config.js(us-assets.i.posthog.com)
+5m
+2 KiB
+Crisp customer-success 
+4 KiB
+/l.js(client.crisp.chat)
+3h
+4 KiB
+JSDelivr CDN cdn 
+2 KiB
+…dist/cdn.min.js(cdn.jsdelivr.net)
+7d
+2 KiB
+Render blocking requests Est savings of 750 ms
+Requests are blocking the page's initial render, which may delay LCP. Deferring or inlining can move these network requests out of the critical path.LCPFCPUnscored
+URL
+Transfer Size
+Duration
+receiptmake.com 1st party
+34.4 KiB	710 ms
+…css/output.css(receiptmake.com)
+34.4 KiB
+710 ms
+Google Fonts cdn 
+1.5 KiB	780 ms
+/css2?family=Inter:wght@300;400;500;600;700&display=swap(fonts.googleapis.com)
+1.5 KiB
+780 ms
+Improve image delivery Est savings of 84 KiB
+Reducing the download time of images can improve the perceived load time of the page and LCP. Learn more about optimizing image sizeLCPFCPUnscored
+URL
+Resource Size
+Est Savings
+receiptmake.com 1st party
+413.6 KiB	84.1 KiB
+CVS Pharmacy Receipt Receipt
+<img src="/static/images/template-previews/cvs-pharmacy-preview.png" alt="CVS Pharmacy Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/cvs-pharmacy-preview.png(receiptmake.com)
+61.0 KiB
+17.6 KiB
+Using a modern image format (WebP, AVIF) or increasing the image compression could improve this image's download size.
+6.9 KiB
+This image file is larger than it needs to be (300x1107) for its displayed dimensions (269x992). Use responsive images to reduce the image download size.
+12.0 KiB
+Best Buy Receipt Receipt
+<img src="/static/images/template-previews/best-buy-preview.png" alt="Best Buy Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/best-buy-preview.png(receiptmake.com)
+62.0 KiB
+17.3 KiB
+Using a modern image format (WebP, AVIF) or increasing the image compression could improve this image's download size.
+17.3 KiB
+Walmart Receipt Receipt
+<img src="/static/images/template-previews/walmart-preview.png" alt="Walmart Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/walmart-preview.png(receiptmake.com)
+45.5 KiB
+12.2 KiB
+Using a modern image format (WebP, AVIF) or increasing the image compression could improve this image's download size.
+12.2 KiB
+Costco Receipt Receipt
+<img src="/static/images/template-previews/costco-wholesale-preview.png" alt="Costco Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/costco-wholesale-preview.png(receiptmake.com)
+44.7 KiB
+9.4 KiB
+Using a modern image format (WebP, AVIF) or increasing the image compression could improve this image's download size.
+9.4 KiB
+Store Express Receipt Example
+<img src="/static/images/template-previews/example-preview.png" alt="Store Express Receipt Example" class="w-full h-auto object-contain" style="box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+…template-previews/example-preview.png(receiptmake.com)
+47.0 KiB
+8.5 KiB
+Using a modern image format (WebP, AVIF) or increasing the image compression could improve this image's download size.
+8.5 KiB
+Albertsons Receipt Receipt
+<img src="/static/images/template-previews/albertsons-preview.png" alt="Albertsons Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/albertsons-preview.png(receiptmake.com)
+53.1 KiB
+7.7 KiB
+Using a modern image format (WebP, AVIF) or increasing the image compression could improve this image's download size.
+7.7 KiB
+Kroger Receipt Receipt
+<img src="/static/images/template-previews/kroger-preview.png" alt="Kroger Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/kroger-preview.png(receiptmake.com)
+49.6 KiB
+7.1 KiB
+Using a modern image format (WebP, AVIF) or increasing the image compression could improve this image's download size.
+7.1 KiB
+Target Receipt Receipt
+<img src="/static/images/template-previews/target-preview.png" alt="Target Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/target-preview.png(receiptmake.com)
+50.8 KiB
+4.3 KiB
+Using a modern image format (WebP, AVIF) or increasing the image compression could improve this image's download size.
+4.3 KiB
+Duplicated JavaScript Est savings of 6 KiB
+Remove large, duplicate JavaScript modules from bundles to reduce unnecessary bytes consumed by network activity.LCPFCPUnscored
+Source
+Duplicated bytes
+node_modules/fflate
+0 KiB
+/static/lazy-recorder.js?v=1.297.0(us-assets.i.posthog.com)
+--
+/static/array.js(us-assets.i.posthog.com)
+0 KiB
+../src/autocapture-utils.ts
+0 KiB
+/static/array.js(us-assets.i.posthog.com)
+--
+/static/dead-clicks-autocapture.js?v=1.297.0(us-assets.i.posthog.com)
+0 KiB
+../src/autocapture.ts
+0 KiB
+/static/array.js(us-assets.i.posthog.com)
+--
+/static/dead-clicks-autocapture.js?v=1.297.0(us-assets.i.posthog.com)
+0 KiB
+../src/uuidv7.ts
+0 KiB
+/static/array.js(us-assets.i.posthog.com)
+--
+/static/surveys.js?v=1.297.0(us-assets.i.posthog.com)
+0 KiB
+Legacy JavaScript Est savings of 31 KiB
+Polyfills and transforms enable older browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile Baseline features, unless you know you must support older browsers. Learn why most sites can deploy ES6+ code without transpilingLCPFCPUnscored
+URL
+Wasted bytes
+posthog.com
+31.2 KiB
+/static/lazy-recorder.js?v=1.297.0(us-assets.i.posthog.com)
+12.3 KiB
+../../../node_modules/.pnpm/@rrweb+record@2.0.0-alpha.17_patch_hash=4a974d451d029e3ef6c302f641dfaf41fb0881146b6d5198ccdbe8d50776b64f/node_modules/@rrweb/record/dist/record.js:4680:10
+Array.from
+/static/array.js(us-assets.i.posthog.com)
+9.6 KiB
+../src/uuidv7.ts:17:4
+Math.trunc
+/static/surveys.js?v=1.297.0(us-assets.i.posthog.com)
+9.4 KiB
+../src/uuidv7.ts:17:4
+Math.trunc
+Forced reflow
+A forced reflow occurs when JavaScript queries geometric properties (such as offsetWidth) after styles have been invalidated by a change to the DOM state. This can result in poor performance. Learn more about forced reflows and possible mitigations.Unscored
+Top function call
+Total reflow time
+/gtag/js?id=G-TVS6X3YV21:803:135(www.googletagmanager.com)
+32 ms
+Source
+Total reflow time
+/gtag/js?id=G-TVS6X3YV21:800:14(www.googletagmanager.com)
+32 ms
+LCP request discovery
+Optimize LCP by making the LCP image discoverable from the HTML immediately, and avoiding lazy-loadingLCPUnscored
+lazy load not applied
+fetchpriority=high should be applied
+Request is discoverable in initial document
+Store Express Receipt Example
+<img src="/static/images/template-previews/example-preview.png" alt="Store Express Receipt Example" class="w-full h-auto object-contain" style="box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+Network dependency tree
+Avoid chaining critical requests by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load.LCPUnscored
+Maximum critical path latency: 698 ms
+Initial Navigation
+https://receiptmake.com - 376 ms, 71.60 KiB
+…css/output.css(receiptmake.com) - 615 ms, 34.36 KiB
+/css2?family=Inter:wght@300;400;500;600;700&display=swap(fonts.googleapis.com) - 379 ms, 1.50 KiB
+…v20/UcC73FwrK….woff2(fonts.gstatic.com) - 698 ms, 48.09 KiB
+Preconnected origins
+preconnect hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The following are the origins that the page preconnected to.
+no origins were preconnected
+Preconnect candidates
+Add preconnect hints to your most important origins, but try to use no more than 4.
+Origin
+Est LCP savings
+https://us.i.posthog.com
+300 ms
+Document request latency Est savings of 48 KiB
+Your first network request is the most important. Reduce its latency by avoiding redirects, ensuring a fast server response, and enabling text compression.LCPFCPUnscored
+Avoids redirects
+Server responds quickly (observed 148 ms)
+No compression applied
+LCP breakdown
+3rd parties
+These insights are also available in the Chrome DevTools Performance Panel - record a trace to view more detailed information.
+Diagnostics
+Reduce unused JavaScript Est savings of 129 KiB
+Reduce unused CSS Est savings of 23 KiB
+Image elements do not have explicit width and height
+Set an explicit width and height on image elements to reduce layout shifts and improve CLS. Learn how to set image dimensionsCLSUnscored
+URL
+receiptmake.com 1st party
+CVS Pharmacy Receipt Receipt
+<img src="/static/images/template-previews/cvs-pharmacy-preview.png" alt="CVS Pharmacy Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/cvs-pharmacy-preview.png(receiptmake.com)
+Target Receipt Receipt
+<img src="/static/images/template-previews/target-preview.png" alt="Target Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/target-preview.png(receiptmake.com)
+Albertsons Receipt Receipt
+<img src="/static/images/template-previews/albertsons-preview.png" alt="Albertsons Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/albertsons-preview.png(receiptmake.com)
+Best Buy Receipt Receipt
+<img src="/static/images/template-previews/best-buy-preview.png" alt="Best Buy Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/best-buy-preview.png(receiptmake.com)
+Kroger Receipt Receipt
+<img src="/static/images/template-previews/kroger-preview.png" alt="Kroger Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/kroger-preview.png(receiptmake.com)
+Lowe's Receipt Receipt
+<img src="/static/images/template-previews/lowes-preview.png" alt="Lowe's Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/lowes-preview.png(receiptmake.com)
+Store Express Receipt Example
+<img src="/static/images/template-previews/example-preview.png" alt="Store Express Receipt Example" class="w-full h-auto object-contain" style="box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+…template-previews/example-preview.png(receiptmake.com)
+Costco Receipt Receipt
+<img src="/static/images/template-previews/costco-wholesale-preview.png" alt="Costco Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/costco-wholesale-preview.png(receiptmake.com)
+Walmart Receipt Receipt
+<img src="/static/images/template-previews/walmart-preview.png" alt="Walmart Receipt Receipt" class="h-full w-auto object-contain transform group-hover:scale-105 transition du…" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+…template-previews/walmart-preview.png(receiptmake.com)
+Avoid long main-thread tasks 4 long tasks found

@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Oil Change Receipt Generator - Free Professional Auto Maintenance Receipts{% endblock %}
+{% block description %}Create professional oil change and maintenance service receipts instantly. Perfect for auto shops, mechanics, and service centers. Fully customizable.{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.url_root.rstrip('/') }}/oilchange-receipt">{% endblock %}
+
+{% block meta_tags %}
+<meta property="og:title" content="Oil Change Receipt Generator - ReceiptMake">
+<meta property="og:description" content="Create professional oil change and auto maintenance service receipts. Perfect for mechanics and auto shops.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/images/template-previews/oilchange-preview.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Oil Change Receipt Generator",
+  "applicationCategory": "BusinessApplication",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+  <section class="px-4 py-12 md:py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4 leading-tight">
+            Free Oil Change Receipt Generator
+          </h1>
+          <p class="text-lg text-neutral-600 mb-6">
+            Create professional oil change and maintenance service receipts instantly. Perfect for auto shops, mechanics, and service centers. Fully customizable with service and mileage tracking.
+          </p>
+          <p class="text-neutral-600 mb-8">
+            Generate professional auto maintenance receipts in seconds. No sign-up required.
+          </p>
+          <div class="flex flex-col md:flex-row gap-3">
+            <a href="/generate-oilchange-receipt" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200 text-center">
+              Generate Oil Change Receipt →
+            </a>
+            <a href="/templates" class="inline-block border-2 border-neutral-300 hover:border-neutral-400 text-neutral-700 font-semibold py-3 px-8 rounded-lg transition duration-200 text-center">
+              View All Templates
+            </a>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden relative border border-neutral-200">
+          <picture>
+            <source srcset="/static/images/template-previews/oilchange-preview.webp?v=6" type="image/webp">
+            <img src="/static/images/template-previews/oilchange-preview.png?v=6" alt="Oil Change Service Receipt Preview" class="w-full h-auto" width="300" height="1107">
+          </picture>
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%); pointer-events: none; z-index: 100;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-neutral-900 mb-12">Powerful Features</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🚗</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Vehicle Information</h3>
+          <p class="text-neutral-600 text-sm">Track vehicle details, VIN, mileage, and maintenance history.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">⚙️</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Service Details</h3>
+          <p class="text-neutral-600 text-sm">Document oil changes, filter replacements, fluid checks, and inspections.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">💰</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Parts & Labor</h3>
+          <p class="text-neutral-600 text-sm">Itemize oil types, filters, parts, labor, and materials cost.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">📅</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Service History</h3>
+          <p class="text-neutral-600 text-sm">Include service dates, next service due, and warranty information.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🏢</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Shop Branding</h3>
+          <p class="text-neutral-600 text-sm">Add your auto shop logo, certification, and contact information.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">⚡</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Instant Creation</h3>
+          <p class="text-neutral-600 text-sm">Generate professional receipts in seconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Perfect For</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🔧</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Auto Repair Shops</h3>
+            <p class="text-neutral-600 text-sm">Professional receipts for oil changes and preventive maintenance.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">⛽</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Gas Stations</h3>
+            <p class="text-neutral-600 text-sm">Quick receipts for automotive service and maintenance at convenience locations.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🚙</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Dealerships</h3>
+            <p class="text-neutral-600 text-sm">Track scheduled maintenance and service records for vehicle owners.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">📊</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Fleet Maintenance</h3>
+            <p class="text-neutral-600 text-sm">Maintain detailed records of fleet vehicle maintenance and service history.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Create Your Oil Change Receipt Now</h2>
+      <p class="text-blue-100 mb-8">Professional maintenance receipts. Free, unlimited, and instantly downloadable.</p>
+      <a href="/generate-oilchange-receipt" class="inline-block bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 px-8 rounded-lg transition duration-200">
+        Generate Receipt Now →
+      </a>
+    </div>
+  </section>
+</div>
+{% endblock %}

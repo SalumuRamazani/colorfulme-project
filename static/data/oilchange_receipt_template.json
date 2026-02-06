@@ -1,0 +1,132 @@
+{
+  "name": "Oil Change Receipt",
+  "description": "Professional oil change and maintenance service receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/oilchange-logo-bw.svg",
+    "headerAlignment": "center",
+    "logoSize": 85,
+    "businessName": "QuickDrive Auto Service",
+    "headerDivider": "================================================",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "2156 Motor Avenue, Phoenix, AZ 85001\nPhone: (602) 555-0134 | www.quickdriveauto.com\nFast • Reliable • ASE Certified Technicians • Open Saturdays",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "12/31/2025 11:30 AM",
+        "dateDivider": "================================================",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "OIL CHANGE SERVICE RECEIPT\nReceipt #: QD-2025-5621\nTechnician: Mike Rodriguez",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "Vehicle: 2019 Toyota Camry\nMileage In: 68,245 miles\nMileage Out: 68,247 miles",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Oil Change Service (5qt Synthetic)",
+            "price": 59.99
+          },
+          {
+            "quantity": 1,
+            "name": "Oil Filter Replacement",
+            "price": 12.50
+          },
+          {
+            "quantity": 1,
+            "name": "Fluid Level Check & Top Off",
+            "price": 0.00
+          },
+          {
+            "quantity": 1,
+            "name": "Tire Pressure Inspection",
+            "price": 0.00
+          },
+          {
+            "quantity": 1,
+            "name": "Multi-Point Safety Inspection",
+            "price": 0.00
+          }
+        ],
+        "itemsDivider": "================================================",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 8.6,
+        "showTaxRate": true,
+        "paymentType": "card",
+        "paymentFields": [
+          {
+            "label": "Subtotal",
+            "value": "72.49"
+          },
+          {
+            "label": "Tax (8.6%)",
+            "value": "6.23"
+          },
+          {
+            "label": "TOTAL DUE",
+            "value": "78.72"
+          },
+          {
+            "label": "Payment Status",
+            "value": "Paid (Card)"
+          }
+        ],
+        "paymentDivider": "================================================",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "Thank you for choosing QuickDrive Auto Service!\n\nNext Oil Change: 5,000 miles (May 2026)\nWarranty: 12 months on service\nReceipt kept for warranty purposes\n\nSchedule your next service today!\nwww.quickdriveauto.com | (602) 555-0134",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

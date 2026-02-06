@@ -1,0 +1,149 @@
+{
+  "name": "LOWE'S RECEIPT",
+  "description": "Authentic Lowe's Home Centers receipt template",
+  "settings": {
+    "currencyFormat": "X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/lowes-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 100,
+    "businessName": "LOWE'S HOME CENTERS, LLC",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "6400 BRODIE LANE\nAUSTIN, TX 78745  (512) 895-5560",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "- SALE -",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "SALES#: S2513VSO 3644746  TRANS#: 18854480 07-09-21",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "23536 OATEY 14-OZ PLUMBERS PUTT",
+            "price": 2.99
+          }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "payment",
+      "position": 5,
+      "data": {
+        "taxRate": 8.25,
+        "showTaxRate": false,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "SUBTOTAL:",
+            "value": "2.99"
+          },
+          {
+            "label": "TAX:",
+            "value": "0.25"
+          },
+          {
+            "label": "INVOICE 18934 TOTAL:",
+            "value": "3.24"
+          },
+          {
+            "label": "MERCH/GIFT CARDS :",
+            "value": "3.24"
+          },
+          {
+            "label": "MERCH/GIFT CARD 5715 AUTHCODE",
+            "value": "370"
+          }
+        ],
+        "paymentDivider": "---------------------------------------------",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 6,
+      "data": {
+        "customFields": [
+          {
+            "label": "BEGIN BAL",
+            "value": "6.94",
+            "column": 1
+          },
+          {
+            "label": "TRANSACTION AMT",
+            "value": "3.24",
+            "column": 1
+          },
+          {
+            "label": "ENDING BAL",
+            "value": "3.70",
+            "column": 1
+          }
+        ],
+        "infoDivider": "---------------------------------------------",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "STORE: 2513  TERMINAL: 18  07/09/21 13:14:57\n# OF ITEMS PURCHASED: 1\nEXCLUDES FEES, SERVICES AND SPECIAL ORDER ITEMS",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "THANK YOU FOR SHOPPING LOWE'S.\n\nFOR DETAILS ON OUR RETURN POLICY, VISIT\nLOWES.COM/RETURNS\nA WRITTEN COPY OF THE RETURN POLICY IS AVAILABLE\nAT OUR CUSTOMER SERVICE DESK\n\nSTORE MANAGER: DOUG MATHES\n\nLOWE'S PRICE PROMISE\nFOR MORE DETAILS, VISIT LOWES.COM/PRICEPROMISE",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

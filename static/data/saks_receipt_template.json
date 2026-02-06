@@ -1,0 +1,132 @@
+{
+  "name": "Saks Fifth Avenue Receipt",
+  "description": "Professional Saks Fifth Avenue luxury retail receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "",
+    "headerAlignment": "center",
+    "logoSize": 100,
+    "businessName": "SAKS FIFTH AVENUE",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "611 FIFTH AVENUE\nNEW YORK, NY 10022\n(212) 753-4000",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "11/14/2024, 3:45:22 PM",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "Store: 0001\nRegister: 12\nTransaction: 847291\nAssociate: JENNIFER M.",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "GUCCI GG MARMONT BAG",
+            "price": 2350.00
+          },
+          {
+            "quantity": 1,
+            "name": "BURBERRY CASHMERE SCARF",
+            "price": 650.00
+          },
+          {
+            "quantity": 1,
+            "name": "PRADA LEATHER WALLET",
+            "price": 875.00
+          },
+          {
+            "quantity": 1,
+            "name": "TOM FORD SUNGLASSES",
+            "price": 445.00
+          },
+          {
+            "quantity": 1,
+            "name": "LA MER MOISTURIZER 2OZ",
+            "price": 380.00
+          }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "payment",
+      "position": 5,
+      "data": {
+        "taxRate": 8.875,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "Payment",
+            "value": "AMEX **** 1001"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "SaksFirst Points Earned: 4,700\nTotal Points Balance: 28,450",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "Returns accepted within 30 days\nwith original receipt\n\nThank you for shopping at\nSaks Fifth Avenue",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeValue": "0001128472911114",
+        "barcodeSize": 50,
+        "showBarcodeValue": true,
+        "showBarcodeDivider": false,
+        "barcodeDivider": ""
+      }
+    }
+  ]
+}

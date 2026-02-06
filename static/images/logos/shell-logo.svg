@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100">
+  <!-- Shell Logo - Black & White Pecten -->
+  <g transform="translate(50, 50)">
+    <!-- Shell pecten symbol -->
+    <path d="M0,-35 L10,-30 L8,-20 L15,-15 L10,-5 L20,0 L10,5 L15,15 L8,20 L10,30 L0,35 L-10,30 L-8,20 L-15,15 L-10,5 L-20,0 L-10,-5 L-15,-15 L-8,-20 L-10,-30 Z" 
+          fill="none" 
+          stroke="#000000" 
+          stroke-width="2"/>
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="3" fill="#000000"/>
+  </g>
+  <text x="100" y="58" fill="#000000" font-family="Arial Black, sans-serif" font-size="36" font-weight="900">Shell</text>
+</svg>

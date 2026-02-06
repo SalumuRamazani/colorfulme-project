@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80">
+  <!-- Walgreens Logo - Black & White -->
+  <text x="20" y="50" fill="#000000" font-family="Arial, sans-serif" font-size="32" font-weight="bold" font-style="italic">Walgreens</text>
+  <!-- Stylized W -->
+  <path d="M340 20 L350 55 L360 30 L370 55 L380 20" stroke="#000000" stroke-width="3" fill="none"/>
+</svg>

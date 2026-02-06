@@ -1,0 +1,199 @@
+{
+  "name": "Burberry Receipt",
+  "description": "Professional Burberry luxury clothing receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/burberry-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "BURBERRY",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "ESTABLISHED 1856",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "BURBERRY CHICAGO\n633 N MICHIGAN AVE\nCHICAGO, IL 60611\n312.787.2500",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 4,
+      "data": {
+        "customFields": [
+          {
+            "label": "TRANS",
+            "value": "BB-CHI-8472",
+            "column": 1
+          },
+          {
+            "label": "DATE",
+            "value": "13-NOV-2025",
+            "column": 1
+          },
+          {
+            "label": "ASSOCIATE",
+            "value": "EMMA W",
+            "column": 2
+          },
+          {
+            "label": "REGISTER",
+            "value": "02",
+            "column": 2
+          }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "KENSINGTON HERITAGE TRENCH",
+            "price": 2590.0
+          },
+          {
+            "quantity": 1,
+            "name": "  HONEY BEIGE, SIZE M",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "  STYLE: 8023747",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "  MADE IN ENGLAND",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "VINTAGE CHECK SCARF",
+            "price": 490.0
+          },
+          {
+            "quantity": 1,
+            "name": "  ARCHIVE BEIGE CASHMERE",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "TB MONOGRAM LEATHER BAG",
+            "price": 1990.0
+          },
+          {
+            "quantity": 1,
+            "name": "  BLACK - GOLD HARDWARE",
+            "price": 0
+          }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "BURBERRY MEMBER\nID: ****4729\nPOINTS EARNED: 507",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---",
+        "isBold": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 8,
+      "data": {
+        "taxRate": 10.25,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "MASTERCARD ****8234",
+            "value": "5,589.68"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 9,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "13-NOV-2025\n14:20",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "GIFT RECEIPT AVAILABLE\nCOMPLIMENTARY GIFT PACKAGING\nTRENCH BESPOKE PROGRAM AVAILABLE",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 11,
+      "data": {
+        "customMessage": "RETURNS WITHIN 30 DAYS\nORIGINAL TAGS REQUIRED\n\nTHANK YOU\nBURBERRY.COM",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 12,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 45,
+        "barcodeLength": 75,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

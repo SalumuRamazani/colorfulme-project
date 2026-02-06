@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Car Wash Receipt Generator - Free Professional Service Receipts{% endblock %}
+{% block description %}Create professional car wash service receipts and invoices instantly. Perfect for car wash facilities, detail shops, and mobile services. Fully customizable.{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.url_root.rstrip('/') }}/carwash-receipt">{% endblock %}
+
+{% block meta_tags %}
+<meta property="og:title" content="Car Wash Receipt Generator - ReceiptMake">
+<meta property="og:description" content="Create professional car wash service receipts and invoices. Perfect for car wash facilities and auto detail shops.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/images/template-previews/carwash-preview.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Car Wash Receipt Generator",
+  "applicationCategory": "BusinessApplication",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+  <section class="px-4 py-12 md:py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4 leading-tight">
+            Free Car Wash Receipt Generator
+          </h1>
+          <p class="text-lg text-neutral-600 mb-6">
+            Create professional car wash service receipts instantly. Perfect for car wash facilities, detail shops, and mobile services. Fully customizable with service packages and loyalty tracking.
+          </p>
+          <p class="text-neutral-600 mb-8">
+            Generate professional car wash receipts and memberships in seconds. No sign-up required.
+          </p>
+          <div class="flex flex-col md:flex-row gap-3">
+            <a href="/generate-carwash-receipt" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200 text-center">
+              Generate Car Wash Receipt →
+            </a>
+            <a href="/templates" class="inline-block border-2 border-neutral-300 hover:border-neutral-400 text-neutral-700 font-semibold py-3 px-8 rounded-lg transition duration-200 text-center">
+              View All Templates
+            </a>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden relative border border-neutral-200">
+          <picture>
+            <source srcset="/static/images/template-previews/carwash-preview.webp?v=6" type="image/webp">
+            <img src="/static/images/template-previews/carwash-preview.png?v=6" alt="Car Wash Service Receipt Preview" class="w-full h-auto" width="300" height="1107">
+          </picture>
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%); pointer-events: none; z-index: 100;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-neutral-900 mb-12">Powerful Features</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🚗</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Service Packages</h3>
+          <p class="text-neutral-600 text-sm">Track basic wash, premium detailing, wax, interior cleaning, and add-on services.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">💳</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Membership Billing</h3>
+          <p class="text-neutral-600 text-sm">Support loyalty programs, membership tiers, and subscription billing.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🎨</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Vehicle Details</h3>
+          <p class="text-neutral-600 text-sm">Customize vehicle information, customer details, and service specifications.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">📄</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Multiple Formats</h3>
+          <p class="text-neutral-600 text-sm">Download in PDF or PNG formats suitable for email and printing.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🏪</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Store Information</h3>
+          <p class="text-neutral-600 text-sm">Add your car wash location, phone, and business details.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">⚡</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Instant Creation</h3>
+          <p class="text-neutral-600 text-sm">Generate professional receipts in seconds with zero setup required.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Perfect For</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🚗</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Car Wash Facilities</h3>
+            <p class="text-neutral-600 text-sm">Professional receipts for automated and manual car wash services.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🛞</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Auto Detail Shops</h3>
+            <p class="text-neutral-600 text-sm">Create detailed receipts for premium detailing and restoration services.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">📱</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Mobile Services</h3>
+            <p class="text-neutral-600 text-sm">Generate receipts for mobile car wash and detailing operations.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">💼</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Business Operations</h3>
+            <p class="text-neutral-600 text-sm">Maintain customer records and transaction history for business tracking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Create Your Car Wash Receipt Now</h2>
+      <p class="text-blue-100 mb-8">Professional service receipts. Free, unlimited, and instantly downloadable.</p>
+      <a href="/generate-carwash-receipt" class="inline-block bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 px-8 rounded-lg transition duration-200">
+        Generate Receipt Now →
+      </a>
+    </div>
+  </section>
+</div>
+{% endblock %}

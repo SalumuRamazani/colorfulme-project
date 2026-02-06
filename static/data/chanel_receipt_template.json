@@ -1,0 +1,198 @@
+{
+  "name": "Chanel Receipt",
+  "description": "Professional Chanel luxury fashion receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/chanel-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "CHANEL",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "CHANEL BOUTIQUE\n400 N RODEO DRIVE\nBEVERLY HILLS, CA 90210\nTEL: 310.278.5500",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 3,
+      "data": {
+        "customFields": [
+          {
+            "label": "RECEIPT",
+            "value": "CC-BH-472891",
+            "column": 1
+          },
+          {
+            "label": "ADVISOR",
+            "value": "SOPHIE M",
+            "column": 1
+          },
+          {
+            "label": "CLIENT",
+            "value": "MRS. LAURENT",
+            "column": 2
+          },
+          {
+            "label": "MEMBER",
+            "value": "ELITE",
+            "column": 2
+          }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "CLASSIC FLAP BAG MEDIUM",
+            "price": 10800.0
+          },
+          {
+            "quantity": 1,
+            "name": "  BLACK QUILTED CAVIAR",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "  GOLD HARDWARE",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "  REF: A01112 Y01864 C3906",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "CHANEL 22 BAG",
+            "price": 6000.0
+          },
+          {
+            "quantity": 1,
+            "name": "  BEIGE",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "  REF: AS4054 B11645 NG435",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "CHANEL N\u00b05 EAU DE PARFUM",
+            "price": 220.0
+          },
+          {
+            "quantity": 1,
+            "name": "  100ML SPRAY",
+            "price": 0
+          }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "AUTHENTICITY CARD: ****8472\nSERIAL NUMBER: 31****56",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---",
+        "isBold": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 7,
+      "data": {
+        "taxRate": 9.5,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "AMEX BLACK ****8923",
+            "value": "18,636.90"
+          },
+          {
+            "label": "AUTH CODE",
+            "value": "CC847291"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 8,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "13 NOVEMBER 2025\n15:45",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "GIFT RECEIPT AVAILABLE\nCOMPLIMENTARY GIFT BOX\nCARE BOOKLET INCLUDED",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "EXCHANGE POLICY: 14 DAYS\nORIGINAL RECEIPT REQUIRED\n\nTHANK YOU\nCHANEL.COM",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 11,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 45,
+        "barcodeLength": 75,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

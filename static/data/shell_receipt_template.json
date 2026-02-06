@@ -1,0 +1,169 @@
+{
+  "name": "Shell Receipt",
+  "description": "Professional Shell gas station receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/shell-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 35,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "SHELL #28471",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "2850 N CLARK ST\nCHICAGO, IL 60657\n(773) 348-5500",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "PUMP: 04\nRECEIPT: 847291",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "FUEL TYPE: REGULAR 87 OCTANE",
+            "price": 0
+          },
+          {
+            "quantity": 14.2,
+            "name": "GALLONS",
+            "price": 48.14
+          },
+          {
+            "quantity": 1,
+            "name": "  @ $3.39/GALLON",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "FUEL REWARDS GOLD STATUS",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "  5\u00a2/GAL DISCOUNT APPLIED",
+            "price": -0.71
+          }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "FUEL REWARDS SAVINGS: $0.71",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "===",
+        "isBold": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 7,
+      "data": {
+        "taxRate": 0,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "CREDIT ****8923",
+            "value": "47.43"
+          },
+          {
+            "label": "APPROVAL",
+            "value": "FR847291"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "FUEL REWARDS MEMBER\n************5482",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---",
+        "isBold": true
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 9,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/14/2025\n14:45",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "EARN REWARDS AT 10,000+ RESTAURANTS\nSTACK SAVINGS WITH SHELL CREDIT CARD\n\nJOIN TODAY AT FUELREWARDS.COM",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 11,
+      "data": {
+        "customMessage": "E-RECEIPTS AVAILABLE VIA TEXT\nTHANK YOU FOR CHOOSING SHELL!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 12,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

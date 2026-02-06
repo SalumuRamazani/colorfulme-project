@@ -1,0 +1,175 @@
+{
+  "name": "AutoZone Receipt",
+  "description": "Professional AutoZone automotive parts receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/autozone-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 120,
+    "businessName": "",
+    "headerDivider": "---",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "AUTOMOTIVE PARTS & ACCESSORIES",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "11/24/2025\n03:15 PM",
+        "dateDivider": "---",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "STORE #4521 | TRANSACTION #89456",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "123 Main Street\nAustin, TX 78701\n(512) 555-0147",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Mobil Advanced Full Synthetic Oil",
+            "price": 34.99
+          },
+          {
+            "quantity": 1,
+            "name": "FRAM Premium Oil Filter",
+            "price": 12.49
+          },
+          {
+            "quantity": 2,
+            "name": "Energizer Max AA Battery 4pk",
+            "price": 13.98
+          },
+          {
+            "quantity": 1,
+            "name": "Armor All Protectant Spray",
+            "price": 7.99
+          },
+          {
+            "quantity": 1,
+            "name": "Bosch Edge Wiper Blade 26in",
+            "price": 16.99
+          }
+        ],
+        "itemsDivider": "---",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 6,
+      "data": {
+        "customFields": [
+          {
+            "label": "AutoZone Rewards",
+            "value": "Member",
+            "column": 1
+          },
+          {
+            "label": "SPEED PERKS",
+            "value": "Free",
+            "column": 1
+          },
+          {
+            "label": "Sales Associate",
+            "value": "Mike T.",
+            "column": 2
+          },
+          {
+            "label": "Register",
+            "value": "2",
+            "column": 2
+          }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 7,
+      "data": {
+        "taxRate": 8.25,
+        "showTaxRate": true,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "Total",
+            "value": "86.44"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "Payment: Visa ***4521\nPIN Entry Approved",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "Thank You!\nShop AutoZone.com for more",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 10,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

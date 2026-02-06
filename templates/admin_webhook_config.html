@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}Webhook Configuration - Admin | ReceiptMake{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-neutral-50 py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-neutral-900 mb-2">Site Webhook Configuration</h1>
+            <p class="text-neutral-600">Manage your Outrank.so blog integration webhook</p>
+        </div>
+
+        <!-- Webhook Info Card -->
+        <div class="bg-white rounded-xl shadow-soft border border-neutral-200 p-8 mb-6">
+            <h2 class="text-xl font-semibold text-neutral-900 mb-6">Current Configuration</h2>
+            
+            <div class="space-y-4">
+                <!-- Webhook URL -->
+                <div>
+                    <label class="block text-sm font-medium text-neutral-700 mb-2">Webhook URL</label>
+                    <div class="flex items-center gap-2">
+                        <input type="text" readonly value="{{ webhook_url }}" 
+                               class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg bg-neutral-50 font-mono text-sm">
+                        <button onclick="copyToClipboard('{{ webhook_url }}')" 
+                                class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition">
+                            Copy
+                        </button>
+                    </div>
+                </div>
+
+                <!-- API Key Hint -->
+                <div>
+                    <label class="block text-sm font-medium text-neutral-700 mb-2">API Key (Last 4 chars)</label>
+                    <div class="px-4 py-2 border border-neutral-300 rounded-lg bg-neutral-50 font-mono text-sm">
+                        ********{{ api_key_hint }}
+                    </div>
+                    <p class="mt-1 text-xs text-neutral-500">The full API key is never stored or displayed. Rotate to get a new key.</p>
+                </div>
+
+                <!-- Status -->
+                <div>
+                    <label class="block text-sm font-medium text-neutral-700 mb-2">Status</label>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium {% if is_active %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
+                        {% if is_active %}Active{% else %}Inactive{% endif %}
+                    </span>
+                </div>
+
+                <!-- Timestamps -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-700 mb-2">Created</label>
+                        <div class="text-sm text-neutral-600">{{ created_at.strftime('%Y-%m-%d %H:%M UTC') if created_at else 'N/A' }}</div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-700 mb-2">Last Key Rotation</label>
+                        <div class="text-sm text-neutral-600">{{ last_rotated.strftime('%Y-%m-%d %H:%M UTC') if last_rotated else 'Never' }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rotate Key Section -->
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-amber-900 mb-3">Rotate API Key</h3>
+            <p class="text-sm text-amber-800 mb-4">
+                Generate a new API key if the current one has been compromised or you need to update your Outrank configuration.
+                <strong>Warning:</strong> The old key will stop working immediately.
+            </p>
+            
+            <button onclick="rotateKey()" 
+                    class="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition font-medium">
+                Generate New API Key
+            </button>
+        </div>
+
+        <!-- New Key Display (Hidden by default) -->
+        <div id="newKeyDisplay" class="hidden mt-6 bg-green-50 border border-green-200 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-green-900 mb-3">✅ New API Key Generated</h3>
+            <p class="text-sm text-green-800 mb-4">
+                <strong>Save this key now!</strong> It will not be shown again.
+            </p>
+            
+            <div class="flex items-center gap-2 mb-4">
+                <input type="text" id="newApiKey" readonly 
+                       class="flex-1 px-4 py-2 border border-green-300 rounded-lg bg-white font-mono text-sm">
+                <button onclick="copyToClipboard(document.getElementById('newApiKey').value)" 
+                        class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                    Copy Key
+                </button>
+            </div>
+            
+            <p class="text-xs text-green-700">Update this key in your Outrank.so webhook configuration immediately.</p>
+        </div>
+
+        <!-- Back Link -->
+        <div class="mt-8">
+            <a href="/dashboard" class="text-primary hover:text-blue-600 font-medium">
+                ← Back to Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard!');
+    }).catch(err => {
+        console.error('Failed to copy:', err);
+    });
+}
+
+async function rotateKey() {
+    if (!confirm('Are you sure you want to rotate the API key? The old key will stop working immediately.')) {
+        return;
+    }
+    
+    try {
+        const response = await fetch('/admin/webhook-config/rotate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                csrf_token: '{{ csrf_token }}'
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            document.getElementById('newApiKey').value = data.api_key;
+            document.getElementById('newKeyDisplay').classList.remove('hidden');
+            
+            // Reload page after 30 seconds to show updated hint
+            setTimeout(() => {
+                location.reload();
+            }, 30000);
+        } else {
+            alert('Error: ' + (data.error || 'Failed to rotate key'));
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to rotate API key. Please try again.');
+    }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Allow: /generate-advanced
+Allow: /templates
+Allow: /blog
+Allow: /pricing
+Allow: /terms
+
+# Disallow admin and private pages
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /auth/
+Disallow: /api/
+Disallow: /.well-known/
+
+# Allow sitemap
+Sitemap: https://receiptmake.repl.co/sitemap.xml

@@ -1,0 +1,142 @@
+{
+  "name": "Uber Receipt",
+  "description": "Professional Uber ride receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/uber-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "UBER",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "TRIP RECEIPT",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "TRIP ID: B3D8F2A9-7C5E",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "DRIVER: Marcus T.\nToyota Camry - Black\nLicense: ABC 1234\nRating: 4.92 ★",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "PICKUP:\n123 Main St, Chicago, IL\n\nDROPOFF:\nO'Hare International Airport\n10000 W O'Hare Ave, Chicago, IL",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "DISTANCE: 18.3 miles\nTRIP TIME: 34 minutes",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "items",
+      "position": 7,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "UberX Base Fare", "price": 2.20 },
+          { "quantity": 1, "name": "Distance (18.3 mi)", "price": 23.79 },
+          { "quantity": 1, "name": "Time (34 min)", "price": 8.50 },
+          { "quantity": 1, "name": "Airport Fee", "price": 5.00 },
+          { "quantity": 1, "name": "Service Fee", "price": 2.75 },
+          { "quantity": 1, "name": "Tip", "price": 8.44 }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "payment",
+      "position": 8,
+      "data": {
+        "taxRate": 0,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "VISA ****4521", "value": "50.68" }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 9,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/14/2025\n7:15 AM",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "Thank you for riding with Uber!\n\nRate your driver:\n★ ★ ★ ★ ★\n\nQuestions? Visit help.uber.com",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 11,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

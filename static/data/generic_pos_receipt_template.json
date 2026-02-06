@@ -1,0 +1,117 @@
+{
+  "name": "Generic POS Receipt",
+  "description": "Professional generic point of sale receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/generic-pos-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 45,
+    "businessName": "YOUR BUSINESS NAME",
+    "headerDivider": "===",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "123 MAIN STREET\nANYTOWN, ST 12345\n(555) 123-4567\nwww.yourbusiness.com",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/13/2025 12:00:00 PM",
+        "dateDivider": "---",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 3,
+      "data": {
+        "customFields": [
+          { "label": "TRANS#", "value": "000001", "column": 1 },
+          { "label": "REG", "value": "01", "column": 1 },
+          { "label": "CASHIER", "value": "STAFF", "column": 2 },
+          { "label": "STORE", "value": "001", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "ITEM 1", "price": 19.99 },
+          { "quantity": 2, "name": "ITEM 2", "price": 29.98 },
+          { "quantity": 1, "name": "ITEM 3", "price": 15.00 },
+          { "quantity": 3, "name": "ITEM 4", "price": 44.97 },
+          { "quantity": 1, "name": "ITEM 5", "price": 8.99 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 5,
+      "data": {
+        "taxRate": 8.0,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "SUBTOTAL", "value": "118.93" },
+          { "label": "TAX", "value": "9.51" },
+          { "label": "TOTAL", "value": "128.44" },
+          { "label": "PAYMENT", "value": "128.44" },
+          { "label": "CHANGE DUE", "value": "0.00" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "ITEMS: 8\nSAVINGS: $0.00",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 7,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "RETURN POLICY: 30 DAYS WITH RECEIPT\nCUSTOMER SERVICE: (555) 123-4567\n\nTHANK YOU FOR YOUR PURCHASE!\nHAVE A GREAT DAY!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}

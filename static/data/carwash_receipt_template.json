@@ -1,0 +1,137 @@
+{
+  "name": "Car Wash Receipt",
+  "description": "Professional car wash service receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/carwash-logo-bw.svg",
+    "headerAlignment": "center",
+    "logoSize": 85,
+    "businessName": "ShineSpot Car Wash",
+    "headerDivider": "================================================",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "4521 Clean Avenue, Miami, FL 33101\nPhone: (305) 555-0198 | www.shinespotcarwash.com\nProfessional Detail • Eco-Friendly • Satisfaction Guaranteed",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "12/31/2025 04:45 PM",
+        "dateDivider": "================================================",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "CAR WASH SERVICE RECEIPT\nReceipt #: CW-2025-3847\nAttendant: Marcus Johnson",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "Vehicle: 2022 Honda Civic\nLicense Plate: SHN847BL\nMileage: 45,230 miles",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Premium Exterior Wash",
+            "price": 29.99
+          },
+          {
+            "quantity": 1,
+            "name": "Tire & Wheel Shine",
+            "price": 12.50
+          },
+          {
+            "quantity": 1,
+            "name": "Interior Vacuum & Wipe",
+            "price": 15.00
+          },
+          {
+            "quantity": 1,
+            "name": "Window Cleaning (Inside & Out)",
+            "price": 8.50
+          },
+          {
+            "quantity": 1,
+            "name": "Air Freshener & Protectant",
+            "price": 6.99
+          },
+          {
+            "quantity": 1,
+            "name": "Wax & Seal Treatment",
+            "price": 19.99
+          }
+        ],
+        "itemsDivider": "================================================",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 0.0,
+        "showTaxRate": false,
+        "paymentType": "card",
+        "paymentFields": [
+          {
+            "label": "Subtotal",
+            "value": "92.97"
+          },
+          {
+            "label": "TOTAL DUE",
+            "value": "92.97"
+          },
+          {
+            "label": "Payment Method",
+            "value": "Credit Card"
+          },
+          {
+            "label": "Next Service",
+            "value": "Recommended in 2 weeks"
+          }
+        ],
+        "paymentDivider": "================================================",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "Thank you for choosing ShineSpot Car Wash!\n\nYour car deserves to shine.\nVisit us again soon!\n\nwww.shinespotcarwash.com | (305) 555-0198",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

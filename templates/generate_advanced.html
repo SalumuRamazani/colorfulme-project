@@ -1,0 +1,804 @@
+{% extends "base.html" %}
+
+{% block title %}Advanced Receipt Generator - Create Professional Receipts | ReceiptMake{% endblock %}
+
+{% block canonical %}<link rel="canonical" href="{{ request.url_root.rstrip('/') }}/generate-advanced">{% endblock %}
+
+{% block content %}
+<script src="/static/js/advanced-receipt-generator.js"></script>
+
+<style>
+.receipt-paper {
+    background: linear-gradient(0deg, rgba(255,255,255,0.9) 0%, rgba(248,248,248,0.9) 100%);
+    box-shadow: 
+        0 0 10px rgba(0,0,0,0.1),
+        inset 0 0 60px rgba(0,0,0,0.02);
+}
+
+.receipt-paper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0,0,0,0.01) 2px,
+            rgba(0,0,0,0.01) 4px
+        );
+    pointer-events: none;
+}
+
+.barcode {
+    background: repeating-linear-gradient(
+        90deg,
+        #000 0px,
+        #000 1px,
+        transparent 1px,
+        transparent 3px,
+        #000 3px,
+        #000 5px,
+        transparent 5px,
+        transparent 7px
+    );
+    height: 60px;
+}
+
+.watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 48px;
+    color: rgba(0,0,0,0.05);
+    font-weight: bold;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+}
+
+@media print {
+    @page {
+        margin: 0;
+        size: auto;
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body * {
+        visibility: hidden;
+    }
+    
+    #receipt-preview, #receipt-preview * {
+        visibility: visible;
+    }
+    
+    #receipt-preview {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        margin: 0;
+        padding: 20px;
+        width: auto !important;
+    }
+    
+    /* Watermark visibility controlled by subscription status */
+    {% if has_subscription %}
+    .watermark {
+        display: none !important;
+    }
+    {% endif %}
+    
+    .receipt-paper {
+        background: white !important;
+        box-shadow: none !important;
+    }
+    
+    .receipt-paper::before {
+        display: none !important;
+    }
+}
+
+.font-1, .font-2, .font-3, .receipt-paper, #receipt-preview, #receipt-preview * { 
+    font-family: 'MerchantCopy' !important; 
+}
+.font-2 { font-family: 'Consolas', monospace; }
+.font-3 { font-family: 'Monaco', monospace; }
+
+.section-header {
+    cursor: pointer;
+    user-select: none;
+}
+
+.divider-btn {
+    width: 40px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d4d4d4;
+    border-radius: 6px;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+
+.divider-btn:hover {
+    background: #f5f5f5;
+}
+
+.divider-btn.active {
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+}
+</style>
+
+<div class="min-h-screen bg-neutral-50 py-8" x-data="advancedReceiptGenerator({{ 'true' if has_subscription else 'false' }})" x-init="init()">
+    <div class="max-w-7xl mx-auto px-4">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h1 class="text-3xl font-bold text-neutral-900">New Receipt Generator</h1>
+            </div>
+            <div class="flex gap-2">
+                <button @click="resetForm()" class="px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                    Reset
+                </button>
+                {% if current_user and current_user.is_authenticated %}
+                <button class="px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                    </svg>
+                    Save as new template
+                </button>
+                {% else %}
+                <a href="/auth/replit_auth" class="px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                    </svg>
+                    Save as new template
+                </a>
+                {% endif %}
+                {% if not has_subscription %}
+                <a href="{{ url_for('pricing') }}" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    Remove watermark
+                </a>
+                {% endif %}
+                <button @click="downloadReceipt()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                    Download
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Left Panel - Settings -->
+            <div class="space-y-4">
+                <!-- Settings -->
+                <div class="bg-white border border-neutral-200 rounded-xl p-6" x-data="{ open: true }">
+                    <div class="section-header flex items-center justify-between mb-4" @click="open = !open">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <h3 class="font-semibold text-neutral-900">Settings</h3>
+                        </div>
+                        <svg class="w-5 h-5 transition-transform" :class="open ? '' : 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </div>
+                    
+                    <div x-show="open" x-collapse class="space-y-4">
+                        <div>
+                            <label class="text-sm font-medium text-neutral-700 mb-2 block">Currency</label>
+                            <div class="text-sm text-neutral-600 mb-2">Format</div>
+                            <div class="flex gap-2">
+                                <button @click="currencyFormat = '$X'" :class="currencyFormat === '$X' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 rounded-lg text-sm transition">$2.99</button>
+                                <button @click="currencyFormat = 'X$'" :class="currencyFormat === 'X$' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 rounded-lg text-sm transition">2.99$</button>
+                                <button @click="currencyFormat = 'X $'" :class="currencyFormat === 'X $' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 rounded-lg text-sm transition">2.99 $</button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="text-sm font-medium text-neutral-700 mb-2 block">Font</label>
+                            <div class="flex gap-2">
+                                <button @click="selectedFont = 'font-1'" :class="selectedFont === 'font-1' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 rounded-lg text-sm transition font-1">Font 1</button>
+                                <button @click="selectedFont = 'font-2'" :class="selectedFont === 'font-2' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 rounded-lg text-sm transition font-2">Font 2</button>
+                                <button @click="selectedFont = 'font-3'" :class="selectedFont === 'font-3' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 rounded-lg text-sm transition font-3">Font 3</button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <label class="text-sm font-medium text-neutral-700">Text color</label>
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded border border-neutral-300" :style="'background: ' + textColor"></div>
+                                <input type="color" x-model="textColor" class="w-20 h-8 rounded cursor-pointer border-0">
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <label class="text-sm font-medium text-neutral-700">Show receipt background</label>
+                            <button @click="showBackground = !showBackground" :class="showBackground ? 'bg-blue-500' : 'bg-neutral-300'" class="relative inline-flex h-6 w-11 items-center rounded-full transition">
+                                <span :class="showBackground ? 'translate-x-6' : 'translate-x-1'" class="inline-block h-4 w-4 transform rounded-full bg-white transition"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Header Section -->
+                <div class="bg-white border border-neutral-200 rounded-xl p-6" x-data="{ open: true }">
+                    <div class="section-header flex items-center justify-between mb-4" @click="open = !open">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                            </svg>
+                            <h3 class="font-semibold text-neutral-900">Header</h3>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button class="p-1 hover:bg-neutral-100 rounded">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                </svg>
+                            </button>
+                            <button class="p-1 hover:bg-neutral-100 rounded text-red-500">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div x-show="open" x-collapse class="space-y-4">
+                        <div>
+                            <label class="text-sm font-medium text-neutral-700 mb-2 block">Alignment</label>
+                            <div class="flex gap-2">
+                                <button @click="headerAlignment = 'left'" :class="headerAlignment === 'left' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 p-2 rounded-lg transition">
+                                    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"></path>
+                                    </svg>
+                                </button>
+                                <button @click="headerAlignment = 'center'" :class="headerAlignment === 'center' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 p-2 rounded-lg transition">
+                                    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M8 12h8M4 18h16"></path>
+                                    </svg>
+                                </button>
+                                <button @click="headerAlignment = 'right'" :class="headerAlignment === 'right' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 p-2 rounded-lg transition">
+                                    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M12 12h8M4 18h16"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="text-sm font-medium text-neutral-700 mb-2 block">Logo</label>
+                            <div class="flex items-center gap-2">
+                                <input type="file" @change="uploadLogo($event)" accept="image/*" class="hidden" id="logo-upload">
+                                <label for="logo-upload" class="flex-1 px-4 py-2 border border-neutral-300 rounded-lg cursor-pointer hover:bg-neutral-50 text-center text-sm">
+                                    <span x-show="!logoUrl">Choose file</span>
+                                    <span x-show="logoUrl" class="text-blue-600">Logo uploaded</span>
+                                </label>
+                                <button x-show="logoUrl" @click="logoUrl = ''" class="p-2 text-red-500 hover:bg-red-50 rounded">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="text-sm font-medium text-neutral-700 mb-2 block">Size</label>
+                            <input type="range" x-model="logoSize" min="20" max="100" class="w-full">
+                        </div>
+                        
+                        <div>
+                            <label class="text-sm font-medium text-neutral-700 mb-2 block">Business Details</label>
+                            <textarea x-model="businessName" rows="3" class="w-full px-3 py-2 border border-neutral-300 rounded-lg text-sm" placeholder="Business name, address, phone..."></textarea>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <label class="text-sm font-medium text-neutral-700">Divider at the bottom</label>
+                            <div class="flex gap-1">
+                                <button @click="showHeaderDivider = !showHeaderDivider" :class="showHeaderDivider ? 'bg-blue-500' : 'bg-neutral-300'" class="relative inline-flex h-6 w-11 items-center rounded-full transition mr-2">
+                                    <span :class="showHeaderDivider ? 'translate-x-6' : 'translate-x-1'" class="inline-block h-4 w-4 transform rounded-full bg-white transition"></span>
+                                </button>
+                                <button @click="headerDivider = '---'" :class="headerDivider === '---' ? 'divider-btn active' : 'divider-btn'">---</button>
+                                <button @click="headerDivider = '==='" :class="headerDivider === '===' ? 'divider-btn active' : 'divider-btn'">===</button>
+                                <button @click="headerDivider = '...'" :class="headerDivider === '...' ? 'divider-btn active' : 'divider-btn'">...</button>
+                                <button @click="headerDivider = ':::'" :class="headerDivider === ':::' ? 'divider-btn active' : 'divider-btn'">:::</button>
+                                <button @click="headerDivider = '***'" :class="headerDivider === '***' ? 'divider-btn active' : 'divider-btn'">***</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Date & Time Section -->
+                <div class="bg-white border border-neutral-200 rounded-xl p-6" x-data="{ open: true }">
+                    <div class="section-header flex items-center justify-between mb-4" @click="open = !open">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <h3 class="font-semibold text-neutral-900">Date & Time</h3>
+                        </div>
+                        <svg class="w-5 h-5 transition-transform" :class="open ? '' : 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </div>
+                    
+                    <div x-show="open" x-collapse class="space-y-4">
+                        <div>
+                            <label class="text-sm font-medium text-neutral-700 mb-2 block">Alignment</label>
+                            <div class="flex gap-2">
+                                <button @click="dateAlignment = 'left'" :class="dateAlignment === 'left' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 p-2 rounded-lg transition">
+                                    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"></path>
+                                    </svg>
+                                </button>
+                                <button @click="dateAlignment = 'center'" :class="dateAlignment === 'center' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 p-2 rounded-lg transition">
+                                    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M8 12h8M4 18h16"></path>
+                                    </svg>
+                                </button>
+                                <button @click="dateAlignment = 'right'" :class="dateAlignment === 'right' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 p-2 rounded-lg transition">
+                                    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M12 12h8M4 18h16"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="text-sm font-medium text-neutral-700 mb-2 block">Date</label>
+                            <input type="text" x-model="dateTime" class="w-full px-3 py-2 border border-neutral-300 rounded-lg text-sm">
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <label class="text-sm font-medium text-neutral-700">Divider at the bottom</label>
+                            <div class="flex gap-1">
+                                <button @click="showDateDivider = !showDateDivider" :class="showDateDivider ? 'bg-blue-500' : 'bg-neutral-300'" class="relative inline-flex h-6 w-11 items-center rounded-full transition mr-2">
+                                    <span :class="showDateDivider ? 'translate-x-6' : 'translate-x-1'" class="inline-block h-4 w-4 transform rounded-full bg-white transition"></span>
+                                </button>
+                                <button @click="dateDivider = '---'" :class="dateDivider === '---' ? 'divider-btn active' : 'divider-btn'">---</button>
+                                <button @click="dateDivider = '==='" :class="dateDivider === '===' ? 'divider-btn active' : 'divider-btn'">===</button>
+                                <button @click="dateDivider = '...'" :class="dateDivider === '...' ? 'divider-btn active' : 'divider-btn'">...</button>
+                                <button @click="dateDivider = ':::'" :class="dateDivider === ':::' ? 'divider-btn active' : 'divider-btn'">:::</button>
+                                <button @click="dateDivider = '***'" :class="dateDivider === '***' ? 'divider-btn active' : 'divider-btn'">***</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Two Column Information Section -->
+                <div class="bg-white border border-neutral-200 rounded-xl p-6" x-data="{ open: true }">
+                    <div class="section-header flex items-center justify-between mb-4 cursor-pointer" @click="open = !open">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path>
+                            </svg>
+                            <h3 class="font-semibold text-neutral-900">Two Column Information</h3>
+                        </div>
+                        <svg class="w-5 h-5 transition-transform" :class="open ? '' : 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </div>
+                    
+                    <div x-show="open" x-collapse class="space-y-6">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <label class="text-sm font-semibold text-neutral-700">Column 1</label>
+                                <button type="button" @click="addCustomField(1)" class="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                    </svg>
+                                    Add line
+                                </button>
+                            </div>
+                            <div class="space-y-2">
+                                <template x-for="(field, idx) in column1Fields" :key="idx">
+                                    <div class="flex gap-2 items-center">
+                                        <input type="text" x-model="field.label" class="w-1/3 px-3 py-2 border border-neutral-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Label">
+                                        <input type="text" x-model="field.value" class="flex-1 px-3 py-2 border border-neutral-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Value">
+                                        <button type="button" @click="removeColumnField(field)" class="flex-shrink-0 w-10 h-10 flex items-center justify-center text-red-500 hover:bg-red-50 rounded-lg transition">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </template>
+                                <div x-show="column1Fields.length === 0" class="text-center py-4 text-sm text-neutral-400 border border-dashed border-neutral-200 rounded-lg">
+                                    No fields added
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <label class="text-sm font-semibold text-neutral-700">Column 2</label>
+                                <button type="button" @click="addCustomField(2)" class="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                    </svg>
+                                    Add line
+                                </button>
+                            </div>
+                            <div class="space-y-2">
+                                <template x-for="(field, idx) in column2Fields" :key="idx">
+                                    <div class="flex gap-2 items-center">
+                                        <input type="text" x-model="field.label" class="w-1/3 px-3 py-2 border border-neutral-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Label">
+                                        <input type="text" x-model="field.value" class="flex-1 px-3 py-2 border border-neutral-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Value">
+                                        <button type="button" @click="removeColumnField(field)" class="flex-shrink-0 w-10 h-10 flex items-center justify-center text-red-500 hover:bg-red-50 rounded-lg transition">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </template>
+                                <div x-show="column2Fields.length === 0" class="text-center py-4 text-sm text-neutral-400 border border-dashed border-neutral-200 rounded-lg">
+                                    No fields added
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between pt-4 border-t border-neutral-100">
+                            <label class="text-sm font-medium text-neutral-700">Divider at the bottom</label>
+                            <div class="flex gap-1">
+                                <button @click="showInfoDivider = !showInfoDivider" :class="showInfoDivider ? 'bg-blue-500' : 'bg-neutral-300'" class="relative inline-flex h-6 w-11 items-center rounded-full transition mr-2">
+                                    <span :class="showInfoDivider ? 'translate-x-6' : 'translate-x-1'" class="inline-block h-4 w-4 transform rounded-full bg-white transition"></span>
+                                </button>
+                                <button @click="infoDivider = '---'" :class="infoDivider === '---' ? 'divider-btn active' : 'divider-btn'">---</button>
+                                <button @click="infoDivider = '==='" :class="infoDivider === '===' ? 'divider-btn active' : 'divider-btn'">===</button>
+                                <button @click="infoDivider = '...'" :class="infoDivider === '...' ? 'divider-btn active' : 'divider-btn'">...</button>
+                                <button @click="infoDivider = ':::'" :class="infoDivider === ':::' ? 'divider-btn active' : 'divider-btn'">:::</button>
+                                <button @click="infoDivider = '***'" :class="infoDivider === '***' ? 'divider-btn active' : 'divider-btn'">***</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Items List Section -->
+                <div class="bg-white border border-neutral-200 rounded-xl p-6" x-data="{ open: true }">
+                    <div class="section-header flex items-center justify-between mb-4" @click="open = !open">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            <h3 class="font-semibold text-neutral-900">Items list</h3>
+                        </div>
+                        <svg class="w-5 h-5 transition-transform" :class="open ? '' : 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </div>
+                    
+                    <div x-show="open" x-collapse class="space-y-4">
+                        <div class="grid grid-cols-12 gap-2 text-sm font-medium text-neutral-700 mb-2">
+                            <div class="col-span-2">Quantity</div>
+                            <div class="col-span-7">Item</div>
+                            <div class="col-span-3">Total price</div>
+                        </div>
+                        <template x-for="(item, index) in items" :key="index">
+                            <div class="grid grid-cols-12 gap-2">
+                                <input type="number" x-model="item.quantity" class="col-span-2 px-3 py-2 border border-neutral-300 rounded-lg text-sm" placeholder="1">
+                                <input type="text" x-model="item.name" class="col-span-7 px-3 py-2 border border-neutral-300 rounded-lg text-sm" placeholder="Item name">
+                                <input type="number" x-model="item.price" step="0.01" class="col-span-2 px-3 py-2 border border-neutral-300 rounded-lg text-sm" placeholder="0.00">
+                                <button @click="removeItem(index)" class="col-span-1 p-2 text-red-500 hover:bg-red-50 rounded">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </template>
+                        
+                        <div class="flex items-center justify-between">
+                            <label class="text-sm font-medium text-neutral-700">Divider at the bottom</label>
+                            <div class="flex gap-1">
+                                <button @click="showItemsDivider = !showItemsDivider" :class="showItemsDivider ? 'bg-blue-500' : 'bg-neutral-300'" class="relative inline-flex h-6 w-11 items-center rounded-full transition mr-2">
+                                    <span :class="showItemsDivider ? 'translate-x-6' : 'translate-x-1'" class="inline-block h-4 w-4 transform rounded-full bg-white transition"></span>
+                                </button>
+                                <button @click="itemsDivider = '---'" :class="itemsDivider === '---' ? 'divider-btn active' : 'divider-btn'">---</button>
+                                <button @click="itemsDivider = '==='" :class="itemsDivider === '===' ? 'divider-btn active' : 'divider-btn'">===</button>
+                                <button @click="itemsDivider = '...'" :class="itemsDivider === '...' ? 'divider-btn active' : 'divider-btn'">...</button>
+                                <button @click="itemsDivider = ':::'" :class="itemsDivider === ':::' ? 'divider-btn active' : 'divider-btn'">:::</button>
+                                <button @click="itemsDivider = '***'" :class="itemsDivider === '***' ? 'divider-btn active' : 'divider-btn'">***</button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="text-sm font-medium text-neutral-700 mb-2 block">Tax Rate (%)</label>
+                            <input type="number" x-model="taxRate" step="0.1" class="w-full px-3 py-2 border border-neutral-300 rounded-lg text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Section -->
+                <div class="bg-white border border-neutral-200 rounded-xl p-6" x-data="{ open: true }">
+                    <div class="section-header flex items-center justify-between mb-4" @click="open = !open">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            <h3 class="font-semibold text-neutral-900">Payment</h3>
+                        </div>
+                        <svg class="w-5 h-5 transition-transform" :class="open ? '' : 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </div>
+                    
+                    <div x-show="open" x-collapse class="space-y-4">
+                        <div class="flex gap-2 mb-4">
+                            <button @click="paymentType = 'cash'" :class="paymentType === 'cash' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-4 py-2 rounded-lg text-sm transition">Cash</button>
+                            <button @click="paymentType = 'card'" :class="paymentType === 'card' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-4 py-2 rounded-lg text-sm transition">Card</button>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-2 text-sm font-medium text-neutral-700 mb-2">
+                            <div>Title</div>
+                            <div>Value</div>
+                        </div>
+                        <template x-for="(field, index) in paymentFields" :key="index">
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" x-model="field.label" class="px-3 py-2 border border-neutral-300 rounded-lg text-sm" placeholder="Label">
+                                <div class="flex gap-2">
+                                    <input type="text" x-model="field.value" class="flex-1 px-3 py-2 border border-neutral-300 rounded-lg text-sm" placeholder="Value">
+                                    <button @click="removePaymentField(index)" class="p-2 text-red-500 hover:bg-red-50 rounded">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </template>
+                        <button @click="addPaymentField()" class="w-full py-2 border border-dashed border-neutral-300 rounded-lg text-sm text-blue-600 hover:bg-blue-50 transition flex items-center justify-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            Add line
+                        </button>
+                        
+                        <div class="flex items-center justify-between">
+                            <label class="text-sm font-medium text-neutral-700">Divider at the bottom</label>
+                            <div class="flex gap-1">
+                                <button @click="showPaymentDivider = !showPaymentDivider" :class="showPaymentDivider ? 'bg-blue-500' : 'bg-neutral-300'" class="relative inline-flex h-6 w-11 items-center rounded-full transition mr-2">
+                                    <span :class="showPaymentDivider ? 'translate-x-6' : 'translate-x-1'" class="inline-block h-4 w-4 transform rounded-full bg-white transition"></span>
+                                </button>
+                                <button @click="paymentDivider = '---'" :class="paymentDivider === '---' ? 'divider-btn active' : 'divider-btn'">---</button>
+                                <button @click="paymentDivider = '==='" :class="paymentDivider === '===' ? 'divider-btn active' : 'divider-btn'">===</button>
+                                <button @click="paymentDivider = '...'" :class="paymentDivider === '...' ? 'divider-btn active' : 'divider-btn'">...</button>
+                                <button @click="paymentDivider = ':::'" :class="paymentDivider === ':::' ? 'divider-btn active' : 'divider-btn'">:::</button>
+                                <button @click="paymentDivider = '***'" :class="paymentDivider === '***' ? 'divider-btn active' : 'divider-btn'">***</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Message Section -->
+                <div class="bg-white border border-neutral-200 rounded-xl p-6" x-data="{ open: true }">
+                    <div class="section-header flex items-center justify-between mb-4" @click="open = !open">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                            </svg>
+                            <h3 class="font-semibold text-neutral-900">Custom message</h3>
+                        </div>
+                        <svg class="w-5 h-5 transition-transform" :class="open ? '' : 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </div>
+                    
+                    <div x-show="open" x-collapse class="space-y-4">
+                        <div>
+                            <label class="text-sm font-medium text-neutral-700 mb-2 block">Alignment</label>
+                            <div class="flex gap-2">
+                                <button @click="messageAlignment = 'left'" :class="messageAlignment === 'left' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 p-2 rounded-lg transition">
+                                    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"></path>
+                                    </svg>
+                                </button>
+                                <button @click="messageAlignment = 'center'" :class="messageAlignment === 'center' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 p-2 rounded-lg transition">
+                                    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M8 12h8M4 18h16"></path>
+                                    </svg>
+                                </button>
+                                <button @click="messageAlignment = 'right'" :class="messageAlignment === 'right' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 p-2 rounded-lg transition">
+                                    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M12 12h8M4 18h16"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="text-sm font-medium text-neutral-700 mb-2 block">Message</label>
+                            <textarea x-model="customMessage" rows="4" class="w-full px-3 py-2 border border-neutral-300 rounded-lg text-sm" placeholder="Enter your message..."></textarea>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <label class="text-sm font-medium text-neutral-700">Divider at the bottom</label>
+                            <div class="flex gap-1">
+                                <button @click="showMessageDivider = !showMessageDivider" :class="showMessageDivider ? 'bg-blue-500' : 'bg-neutral-300'" class="relative inline-flex h-6 w-11 items-center rounded-full transition mr-2">
+                                    <span :class="showMessageDivider ? 'translate-x-6' : 'translate-x-1'" class="inline-block h-4 w-4 transform rounded-full bg-white transition"></span>
+                                </button>
+                                <button @click="messageDivider = '---'" :class="messageDivider === '---' ? 'divider-btn active' : 'divider-btn'">---</button>
+                                <button @click="messageDivider = '==='" :class="messageDivider === '===' ? 'divider-btn active' : 'divider-btn'">===</button>
+                                <button @click="messageDivider = '...'" :class="messageDivider === '...' ? 'divider-btn active' : 'divider-btn'">...</button>
+                                <button @click="messageDivider = ':::'" :class="messageDivider === ':::' ? 'divider-btn active' : 'divider-btn'">:::</button>
+                                <button @click="messageDivider = '***'" :class="messageDivider === '***' ? 'divider-btn active' : 'divider-btn'">***</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Barcode Section -->
+                <div class="bg-white border border-neutral-200 rounded-xl p-6" x-data="{ open: true }">
+                    <div class="section-header flex items-center justify-between mb-4" @click="open = !open">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
+                            </svg>
+                            <h3 class="font-semibold text-neutral-900">Barcode</h3>
+                        </div>
+                        <svg class="w-5 h-5 transition-transform" :class="open ? '' : 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                        </svg>
+                    </div>
+                    
+                    <div x-show="open" x-collapse class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <label class="text-sm font-medium text-neutral-700">Enable Barcode</label>
+                            <button @click="barcodeEnabled = !barcodeEnabled" :class="barcodeEnabled ? 'bg-blue-500' : 'bg-neutral-300'" class="relative inline-flex h-6 w-11 items-center rounded-full transition">
+                                <span :class="barcodeEnabled ? 'translate-x-6' : 'translate-x-1'" class="inline-block h-4 w-4 transform rounded-full bg-white transition"></span>
+                            </button>
+                        </div>
+                        
+                        <div x-show="barcodeEnabled">
+                            <label class="text-sm font-medium text-neutral-700 mb-2 block">Size</label>
+                            <input type="range" x-model="barcodeSize" min="20" max="100" class="w-full">
+                            <div class="text-sm text-neutral-600 mt-1" x-text="barcodeSize + 'px'"></div>
+                        </div>
+                        
+                        <div x-show="barcodeEnabled">
+                            <label class="text-sm font-medium text-neutral-700 mb-2 block">Length</label>
+                            <input type="range" x-model="barcodeLength" min="10" max="100" class="w-full">
+                            <div class="text-sm text-neutral-600 mt-1" x-text="barcodeLength + '%'"></div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <label class="text-sm font-medium text-neutral-700">Divider at the bottom</label>
+                            <div class="flex gap-1">
+                                <button @click="showBarcodeDivider = !showBarcodeDivider" :class="showBarcodeDivider ? 'bg-blue-500' : 'bg-neutral-300'" class="relative inline-flex h-6 w-11 items-center rounded-full transition mr-2">
+                                    <span :class="showBarcodeDivider ? 'translate-x-6' : 'translate-x-1'" class="inline-block h-4 w-4 transform rounded-full bg-white transition"></span>
+                                </button>
+                                <button @click="barcodeDivider = '---'" :class="barcodeDivider === '---' ? 'divider-btn active' : 'divider-btn'">---</button>
+                                <button @click="barcodeDivider = '==='" :class="barcodeDivider === '===' ? 'divider-btn active' : 'divider-btn'">===</button>
+                                <button @click="barcodeDivider = '...'" :class="barcodeDivider === '...' ? 'divider-btn active' : 'divider-btn'">...</button>
+                                <button @click="barcodeDivider = ':::'" :class="barcodeDivider === ':::' ? 'divider-btn active' : 'divider-btn'">:::</button>
+                                <button @click="barcodeDivider = '***'" :class="barcodeDivider === '***' ? 'divider-btn active' : 'divider-btn'">***</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Preview -->
+            <div class="lg:sticky lg:top-24 h-fit">
+                <div class="bg-blue-50 rounded-xl p-8 flex justify-center">
+                    <div id="receipt-preview" class="relative w-80 bg-white receipt-paper p-8 rounded-lg shadow-lg" :class="selectedFont" :style="{ color: textColor }">
+                        {% if not has_subscription %}
+                        <div class="watermark" style="top: 20%;">RECEIPTMAKE</div>
+                        <div class="watermark" style="top: 50%;">RECEIPTMAKE</div>
+                        <div class="watermark" style="top: 80%;">RECEIPTMAKE</div>
+                        {% endif %}
+                        
+                        <!-- Header with Logo -->
+                        <div class="mb-4" :class="'text-' + headerAlignment">
+                            <div x-show="logoUrl" class="mb-2">
+                                <img :src="logoUrl" :style="'width: ' + logoSize + 'px'" class="inline-block">
+                            </div>
+                            <div class="text-sm font-bold whitespace-pre-line" x-text="businessName"></div>
+                            <div class="text-xs mt-2" :class="'text-' + dateAlignment" x-text="dateTime"></div>
+                        </div>
+                        
+                        <div x-show="showHeaderDivider" class="text-xs my-2" x-text="getDivider(headerDivider)"></div>
+                        
+                        <!-- Two Column Info -->
+                        <div class="text-xs mb-4">
+                            <div class="grid grid-cols-2 gap-x-4">
+                                <div>
+                                    <template x-for="field in column1Fields">
+                                        <div class="flex justify-between mb-1">
+                                            <span x-text="field.label + ':'"></span>
+                                            <span x-text="field.value"></span>
+                                        </div>
+                                    </template>
+                                </div>
+                                <div>
+                                    <template x-for="field in column2Fields">
+                                        <div class="flex justify-between mb-1">
+                                            <span x-text="field.label + ':'"></span>
+                                            <span x-text="field.value"></span>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div x-show="showInfoDivider" class="text-xs my-2" x-text="getDivider(infoDivider)"></div>
+                        
+                        <!-- Items -->
+                        <div class="text-xs mb-4">
+                            <template x-for="item in items">
+                                <div class="flex justify-between mb-1">
+                                    <div class="flex-1">
+                                        <span x-text="item.quantity + ' ' + item.name"></span>
+                                    </div>
+                                    <span x-text="formatCurrency(parseFloat(item.price))"></span>
+                                </div>
+                            </template>
+                        </div>
+                        
+                        <div x-show="showItemsDivider" class="text-xs my-2" x-text="getDivider(itemsDivider)"></div>
+                        
+                        <!-- Totals -->
+                        <div class="text-xs mb-4">
+                            <div class="flex justify-between">
+                                <span>Subtotal</span>
+                                <span x-text="formatCurrency(subtotal)"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Tax</span>
+                                <span x-text="formatCurrency(tax)"></span>
+                            </div>
+                            <div class="flex justify-between font-bold text-sm mt-1">
+                                <span>Total</span>
+                                <span x-text="formatCurrency(total)"></span>
+                            </div>
+                        </div>
+                        
+                        <div x-show="showPaymentDivider" class="text-xs my-2" x-text="getDivider(paymentDivider)"></div>
+                        
+                        <!-- Payment -->
+                        <div class="text-xs mb-4">
+                            <template x-for="field in paymentFields">
+                                <div class="flex justify-between mb-1">
+                                    <span x-text="field.label"></span>
+                                    <span x-text="formatCurrency(parseFloat(field.value) || 0)"></span>
+                                </div>
+                            </template>
+                        </div>
+                        
+                        <div x-show="showMessageDivider" class="text-xs my-2" x-text="getDivider(messageDivider)"></div>
+                        
+                        <!-- Custom Message -->
+                        <div x-show="customMessage" class="text-xs mb-4 whitespace-pre-line" :class="'text-' + messageAlignment" x-text="customMessage"></div>
+                        
+                        <div x-show="showBarcodeDivider && barcodeEnabled" class="text-xs my-2" x-text="getDivider(barcodeDivider)"></div>
+                        
+                        <!-- Barcode -->
+                        <div x-show="barcodeEnabled" class="barcode mx-auto" :style="'height: ' + barcodeSize + 'px; width: ' + barcodeLength + '%'"></div>
+                        
+                        <div x-show="barcodeEnabled" class="text-center text-xs mt-2" x-text="generateBarcode()"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

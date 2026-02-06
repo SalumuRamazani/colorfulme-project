@@ -1,0 +1,176 @@
+{
+  "name": "Hilton Hotel Receipt",
+  "description": "Professional Hilton hotel folio receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/hilton-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "HILTON CHICAGO",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "720 S MICHIGAN AVE\nCHICAGO, IL 60605\n(312) 922-4400\nwww.hilton.com",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "GUEST FOLIO",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 4,
+      "data": {
+        "customFields": [
+          { "label": "GUEST NAME", "value": "MR. JOHN SMITH", "column": 1 },
+          { "label": "ROOM", "value": "1247", "column": 1 },
+          { "label": "FOLIO #", "value": "289734", "column": 2 },
+          { "label": "HONORS #", "value": "***4892", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "CHECK-IN:  11/12/2024  3:00 PM\nCHECK-OUT: 11/14/2024  11:00 AM\nNIGHTS: 2",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "ITEMIZED CHARGES",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 7,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "11/12 ROOM CHARGE - KING DELUXE", "price": 199.00 },
+          { "quantity": 1, "name": "11/13 ROOM CHARGE - KING DELUXE", "price": 199.00 },
+          { "quantity": 1, "name": "11/12 ROOM SERVICE", "price": 45.50 },
+          { "quantity": 1, "name": "11/13 RESTAURANT CHARGE", "price": 67.80 },
+          { "quantity": 1, "name": "11/12 MINIBAR", "price": 18.00 },
+          { "quantity": 2, "name": "VALET PARKING ($30/NIGHT)", "price": 60.00 },
+          { "quantity": 1, "name": "11/13 SPA TREATMENT", "price": 120.00 },
+          { "quantity": 1, "name": "11/12 IN-ROOM MOVIE", "price": 14.99 }
+        ],
+        "itemsDivider": "---",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "ROOM SUBTOTAL:               $398.00\nINCIDENTALS SUBTOTAL:        $326.29\n-----------------------------------",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "payment",
+      "position": 9,
+      "data": {
+        "taxRate": 17.4,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "SUBTOTAL", "value": "724.29" },
+          { "label": "STATE TAX (5%)", "value": "36.21" },
+          { "label": "OCCUPANCY TAX (12.4%)", "value": "89.81" },
+          { "label": "GRAND TOTAL", "value": "850.31" },
+          { "label": "AMEX ****1234", "value": "850.31" },
+          { "label": "APPROVAL CODE", "value": "789234" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "HILTON HONORS POINTS EARNED: 8,503\nCURRENT POINTS BALANCE: 45,280",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---",
+        "isBold": true
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 11,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "CHECKOUT DATE: 11/14/2024  11:30 AM",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 12,
+      "data": {
+        "customMessage": "BALANCE DUE: $0.00",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 13,
+      "data": {
+        "customMessage": "Thank you for staying at Hilton\nWe hope to see you again soon!\n\nFor receipt inquiries:\nVisit Hilton.com or contact the hotel",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    }
+  ]
+}

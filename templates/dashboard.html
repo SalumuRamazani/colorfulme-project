@@ -1,0 +1,715 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | ReceiptMake{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-8">
+    <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Welcome back{% if current_user.first_name %}, {{ current_user.first_name }}{% endif %}!</h1>
+                    <p class="text-gray-600 mt-1">Create unlimited watermark-free receipts</p>
+                </div>
+                <a href="{{ url_for('replit_auth.logout') }}" class="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-colors border border-gray-300">
+                    Logout
+                </a>
+            </div>
+
+            <!-- Welcome Offer System (24-hour limited offer for new users) -->
+            {% if current_user.is_welcome_offer_valid() %}
+            <div x-data="welcomeOffer({{ current_user.get_welcome_offer_seconds_remaining() }}, {{ 'true' if not current_user.welcome_offer_popup_seen else 'false' }})" x-cloak>
+                
+                <!-- Sticky Banner (shows after popup is closed) -->
+                <template x-if="!showPopup && secondsRemaining > 0">
+                    <div class="bg-blue-600 text-white py-4 px-4 mb-6 rounded-lg shadow-lg">
+                        <div class="flex items-center justify-between flex-wrap gap-4">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">🔥</span>
+                                <div>
+                                    <span class="font-bold text-lg">🚀 NEW MEMBER SPECIAL: 50% OFF</span>
+                                    <span class="block text-sm text-blue-100">Get clean, watermark-free receipts for just <span class="font-bold underline">$6.00</span> today!</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="hidden sm:flex items-center gap-2 bg-blue-700/50 border border-blue-400/30 px-3 py-2 rounded-lg">
+                                    <span class="relative flex h-2 w-2">
+                                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                      <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                                    </span>
+                                    <span class="font-mono font-bold text-white text-xs" x-text="formatTime(secondsRemaining)"></span>
+                                </div>
+                                <form action="/claim-welcome-offer" method="POST" @submit="claimLoading = true">
+                                    <button type="submit" 
+                                            :disabled="claimLoading"
+                                            class="bg-white text-blue-600 hover:bg-blue-50 font-extrabold px-6 py-2 rounded-xl transition-all shadow-md hover:shadow-xl active:scale-[0.98] disabled:opacity-70 text-sm uppercase tracking-tight"
+                                            x-text="claimLoading ? 'Securing...' : 'Claim 50% Off'">
+                                        Claim 50% Off
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                
+                <!-- Welcome Offer Popup Modal -->
+                <template x-if="showPopup">
+                    <div class="fixed inset-0 z-50 flex items-center justify-center p-4" @keydown.escape.window="closePopup()">
+                        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" @click="closePopup()"></div>
+                        <div class="relative bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden transform transition-all" 
+                             x-transition:enter="ease-out duration-300"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100">
+                            
+                            <!-- Gradient Header -->
+                            <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 px-6 py-8 text-center text-white">
+                                <div class="text-4xl mb-2">✨</div>
+                                <h2 class="text-2xl font-bold mb-1">Unlock Premium Features</h2>
+                                <p class="text-white/90">Exclusive New Member Special Offer</p>
+                            </div>
+                            
+                            <!-- Offer Content -->
+                            <div class="px-6 py-6 text-center">
+                                <div class="mb-4">
+                                    <div class="inline-flex items-baseline gap-2">
+                                        <span class="text-5xl font-bold text-gray-900">$6</span>
+                                        <span class="text-gray-600">/first month</span>
+                                    </div>
+                                    <div class="mt-2 text-sm text-blue-600 font-bold uppercase tracking-wide">
+                                        Limited Time: Only $0.20 per day!
+                                    </div>
+                                    <div class="flex items-center justify-center gap-2 mt-2">
+                                        <span class="text-gray-400 line-through text-sm">Normally $12.00</span>
+                                        <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-full">SAVE 50% NOW</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Benefits - Main Selling Props -->
+                                <ul class="text-left space-y-4 mb-6">
+                                    <li class="flex items-start gap-3 text-gray-700">
+                                        <div class="mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <span class="font-bold block">Instant Watermark Removal</span>
+                                            <span class="text-xs text-gray-500">Get clean, professional receipts immediately.</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-3 text-gray-700">
+                                        <div class="mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <span class="font-bold block">Unlimited HD Downloads</span>
+                                            <span class="text-xs text-gray-500">No caps, no limits. Generate as many as you need.</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-3 text-gray-700">
+                                        <div class="mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <span class="font-bold block">Premium Business Templates</span>
+                                            <span class="text-xs text-gray-500">Access exclusive high-converting professional layouts.</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                
+                                <!-- Disclaimer in small text -->
+                                <p class="text-[10px] text-gray-400 mb-4 italic">
+                                    Renews at regular $9/mo rate after the first month. Cancel anytime with one click.
+                                </p>
+                                
+                                <!-- Countdown Timer -->
+                                <div class="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 mb-6">
+                                    <div class="flex items-center justify-center gap-2 text-blue-800">
+                                        <span class="relative flex h-3 w-3">
+                                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                          <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+                                        </span>
+                                        <span class="font-bold uppercase text-xs tracking-wider">Offer expires in:</span>
+                                        <span class="font-mono font-bold text-lg" x-text="formatTime(secondsRemaining)"></span>
+                                    </div>
+                                </div>
+                                
+                                <!-- CTA Buttons -->
+                                <form action="/claim-welcome-offer" method="POST" class="mb-3" @submit="claimLoading = true">
+                                    <button type="submit"
+                                            :disabled="claimLoading"
+                                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl active:scale-[0.98] disabled:opacity-70"
+                                            x-text="claimLoading ? 'Securing Offer...' : 'Claim My 50% Discount Now'">
+                                        Claim My 50% Discount Now
+                                    </button>
+                                </form>
+                                <button @click="closePopup()" class="text-gray-500 hover:text-gray-700 text-sm">
+                                    Maybe later
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            
+            <script>
+            function welcomeOffer(initialSeconds, showPopupInitially) {
+                return {
+                    secondsRemaining: initialSeconds,
+                    showPopup: showPopupInitially,
+                    claimLoading: false,
+                    timer: null,
+                    
+                    init() {
+                        this.startTimer();
+                        
+                        // Track popup view
+                        if (this.showPopup && window.posthog) {
+                            posthog.capture('welcome_offer_popup_shown');
+                        }
+                    },
+                    
+                    startTimer() {
+                        this.timer = setInterval(() => {
+                            if (this.secondsRemaining > 0) {
+                                this.secondsRemaining--;
+                            } else {
+                                this.stopTimer();
+                                // Hide everything when offer expires
+                                this.showPopup = false;
+                            }
+                        }, 1000);
+                    },
+                    
+                    stopTimer() {
+                        if (this.timer) {
+                            clearInterval(this.timer);
+                            this.timer = null;
+                        }
+                    },
+                    
+                    formatTime(seconds) {
+                        const hours = Math.floor(seconds / 3600);
+                        const minutes = Math.floor((seconds % 3600) / 60);
+                        const secs = seconds % 60;
+                        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                    },
+                    
+                    closePopup() {
+                        this.showPopup = false;
+                        
+                        // Track popup dismissal
+                        if (window.posthog) {
+                            posthog.capture('welcome_offer_popup_dismissed');
+                        }
+                        
+                        // Mark popup as seen on server
+                        fetch('/api/welcome-offer/popup-seen', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' }
+                        });
+                    },
+                    
+                    destroy() {
+                        this.stopTimer();
+                    }
+                };
+            }
+            </script>
+            {% endif %}
+
+            <!-- Auto-save Success Banner -->
+            {% if session.get('show_autosave_success') %}
+            <div class="bg-green-50 border border-green-200 rounded-xl p-4 mb-8" id="autosave-banner">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3 flex-1">
+                        <h3 class="text-sm font-medium text-green-800">
+                            Receipt saved successfully!
+                        </h3>
+                        <p class="text-sm text-green-700 mt-1">
+                            Your receipt has been automatically saved to your templates. You can now download it without watermarks!
+                        </p>
+                    </div>
+                    <div class="ml-3 flex-shrink-0">
+                        <button onclick="document.getElementById('autosave-banner').remove()" class="inline-flex text-green-400 hover:text-green-500">
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Upgrade Success Banner -->
+            {% if session.pop('upgrade_success', False) %}
+            <div class="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl p-6 mb-8 shadow-lg" id="upgrade-success-banner">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">You're Now a Lifetime Member! 🎉</h3>
+                            <p class="text-green-100 mt-1">Your weekly subscription has been cancelled and you now have unlimited watermark-free access forever.</p>
+                        </div>
+                    </div>
+                    <button onclick="document.getElementById('upgrade-success-banner').remove()" class="text-white/80 hover:text-white p-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Weekly to Lifetime Upgrade Offer Banner (One-Time Offer) -->
+            {% if current_user.is_eligible_for_weekly_to_lifetime_upgrade() and not session.get('upgrade_offer_dismissed') %}
+            <div x-data="upgradeOffer({{ current_user.get_upgrade_offer_seconds_remaining() }})" 
+                 x-show="!dismissed && secondsRemaining > 0"
+                 x-cloak
+                 style="background: linear-gradient(to right, #9333ea, #4f46e5, #2563eb);"
+                 class="text-white rounded-xl py-3 px-6 mb-8 shadow-lg border-2 border-purple-400/30">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 flex-wrap mb-2">
+                            <span class="bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full">CREDIT APPLIED</span>
+                        </div>
+                        <p class="text-white text-sm md:text-lg font-medium">Since you paid $4.50 for the week, upgrade to the <span class="font-bold text-yellow-200">Lifetime Deal</span> now for just <span class="font-bold text-yellow-200">$20.50</span> <span class="text-gray-100">(normally $25)</span>. Offer expires in 24 hours.</p>
+                    </div>
+                    <div class="flex flex-col items-end gap-2 w-full md:w-auto shrink-0">
+                        <div class="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-lg text-sm">
+                            <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="font-mono font-bold text-xs md:text-sm" x-text="formatTime(secondsRemaining)"></span>
+                        </div>
+                        <div class="flex gap-2 w-full md:w-auto">
+                            <button @click="dismiss()" class="px-3 py-2 text-xs md:text-sm text-purple-200 hover:text-white transition">
+                                No thanks
+                            </button>
+                            <form action="{{ url_for('upgrade_weekly_to_lifetime') }}" method="POST" @submit="loading = true">
+                                <button type="submit" 
+                                        :disabled="loading"
+                                        class="bg-white hover:bg-gray-100 text-blue-600 hover:text-blue-700 font-bold px-4 md:px-6 py-2 rounded-lg transition-all shadow-lg hover:shadow-xl disabled:opacity-70 whitespace-nowrap text-xs md:text-sm"
+                                        x-text="loading ? 'Processing...' : 'Get Lifetime Deal for $20.50'">
+                                    Get Lifetime Deal for $20.50
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+            function upgradeOffer(initialSeconds) {
+                return {
+                    secondsRemaining: initialSeconds,
+                    dismissed: false,
+                    loading: false,
+                    timer: null,
+                    
+                    init() {
+                        this.startTimer();
+                    },
+                    
+                    startTimer() {
+                        this.timer = setInterval(() => {
+                            if (this.secondsRemaining > 0) {
+                                this.secondsRemaining--;
+                            } else {
+                                this.stopTimer();
+                            }
+                        }, 1000);
+                    },
+                    
+                    stopTimer() {
+                        if (this.timer) {
+                            clearInterval(this.timer);
+                            this.timer = null;
+                        }
+                    },
+                    
+                    formatTime(seconds) {
+                        const hours = Math.floor(seconds / 3600);
+                        const minutes = Math.floor((seconds % 3600) / 60);
+                        const secs = seconds % 60;
+                        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                    },
+                    
+                    dismiss() {
+                        this.dismissed = true;
+                        this.stopTimer();
+                        fetch('/dismiss-upgrade-offer', { method: 'POST' });
+                        if (window.posthog) {
+                            posthog.capture('upgrade_offer_dismissed');
+                        }
+                    },
+                    
+                    destroy() {
+                        this.stopTimer();
+                    }
+                };
+            }
+            </script>
+            {% endif %}
+
+            <!-- Subscription Status -->
+            {% if current_user.has_active_subscription() %}
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <h2 class="text-xl font-semibold text-gray-900">Active Subscription</h2>
+                        </div>
+                        <p class="text-gray-600 mt-2">You have access to watermark-free receipts</p>
+                        {% set subscription = current_user.subscriptions|selectattr('status', 'equalto', 'active')|first %}
+                        {% if subscription %}
+                        <p class="text-sm text-gray-500 mt-1">Plan: {{ subscription.plan_type.capitalize() }} | Expires: {{ subscription.expires_at.strftime('%B %d, %Y') if subscription.expires_at else 'Never' }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="flex flex-col items-end space-y-2">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                            Premium
+                        </span>
+                        <a href="{{ url_for('manage_subscription') }}" class="text-sm text-blue-600 hover:text-blue-800">
+                            Manage →
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-900">No Active Subscription</h2>
+                        <p class="text-gray-600 mt-2">Subscribe to remove watermarks from your receipts</p>
+                    </div>
+                    <a href="{{ url_for('pricing') }}" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
+                        View Plans
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Quick Actions -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <a href="{{ url_for('generate_advanced') }}" class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-blue-500 text-white">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Create Receipt</h3>
+                            <p class="text-gray-600 mt-1">Advanced receipt generator with all features</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="{{ url_for('templates_page') }}" class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-purple-500 text-white">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Browse Templates</h3>
+                            <p class="text-gray-600 mt-1">100+ professional receipt templates</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Saved Templates Section -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900">Saved Templates</h3>
+                        <p class="text-sm text-gray-600 mt-1">Your custom receipt templates</p>
+                    </div>
+                    <a href="{{ url_for('generate_advanced') }}" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium text-sm">
+                        Create New
+                    </a>
+                </div>
+                
+                <div id="savedTemplatesContainer" class="space-y-3">
+                    <div class="text-center py-8">
+                        <svg class="mx-auto w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <p class="text-gray-500 mt-2">Loading templates...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features List -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Your Premium Benefits</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 text-blue-500 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-gray-900">{% if current_user.has_active_subscription() %}No Watermarks{% else %}Remove Watermarks{% endif %}</p>
+                            <p class="text-sm text-gray-600">Professional receipts without branding</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 text-blue-500 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-gray-900">Unlimited Downloads</p>
+                            <p class="text-sm text-gray-600">Create as many receipts as you need</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 text-blue-500 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-gray-900">100+ Templates</p>
+                            <p class="text-sm text-gray-600">All templates unlocked</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 text-blue-500 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-gray-900">Full Customization</p>
+                            <p class="text-sm text-gray-600">Logo upload, colors, fonts, and more</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Load saved templates on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Check for pending template save from "Remove Watermark" flow
+    checkAndSavePendingTemplate();
+    loadSavedTemplates();
+});
+
+// Auto-save pending template after successful payment
+async function checkAndSavePendingTemplate() {
+    const pendingSaveData = sessionStorage.getItem('pending_template_save');
+    if (!pendingSaveData) {
+        return;
+    }
+    
+    try {
+        const pendingSave = JSON.parse(pendingSaveData);
+        
+        // Only process remove_watermark intents
+        if (pendingSave.intent !== 'remove_watermark') {
+            return;
+        }
+        
+        // Check timestamp (should be within 30 minutes)
+        const age = Date.now() - (pendingSave.timestamp || 0);
+        if (age > 30 * 60 * 1000) {
+            sessionStorage.removeItem('pending_template_save');
+            return;
+        }
+        
+        // Validate data
+        if (!pendingSave.config || !pendingSave.config.sections || !pendingSave.name) {
+            sessionStorage.removeItem('pending_template_save');
+            return;
+        }
+        
+        // Auto-save the template
+        console.log('Auto-saving pending receipt template...');
+        const response = await fetch('/api/templates', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: pendingSave.name,
+                description: pendingSave.description || '',
+                template_type: 'custom',
+                config_json: pendingSave.config
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Show success message
+            showSuccessBanner('Your receipt has been saved! You can now edit it or create watermark-free receipts.');
+            console.log('Template auto-saved successfully');
+        } else {
+            console.error('Failed to auto-save template:', data.error);
+        }
+        
+        // Clear pending save
+        sessionStorage.removeItem('pending_template_save');
+        
+    } catch (error) {
+        console.error('Error processing pending template save:', error);
+        sessionStorage.removeItem('pending_template_save');
+    }
+}
+
+function showSuccessBanner(message) {
+    // Create success banner
+    const banner = document.createElement('div');
+    banner.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-green-50 border border-green-200 rounded-xl px-6 py-4 shadow-lg max-w-md';
+    banner.innerHTML = `
+        <div class="flex items-center gap-3">
+            <svg class="w-6 h-6 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <p class="text-green-800 font-medium">${message}</p>
+            <button onclick="this.parentElement.parentElement.remove()" class="text-green-600 hover:text-green-800 ml-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    `;
+    document.body.appendChild(banner);
+    
+    // Auto-dismiss after 8 seconds
+    setTimeout(() => {
+        banner.style.transition = 'opacity 0.5s';
+        banner.style.opacity = '0';
+        setTimeout(() => banner.remove(), 500);
+    }, 8000);
+}
+
+async function loadSavedTemplates() {
+    const container = document.getElementById('savedTemplatesContainer');
+    
+    try {
+        const response = await fetch('/api/templates');
+        const data = await response.json();
+        
+        if (!data.success) {
+            throw new Error(data.error || 'Failed to load templates');
+        }
+        
+        const templates = data.templates || [];
+        
+        if (templates.length === 0) {
+            container.innerHTML = `
+                <div class="text-center py-8">
+                    <svg class="mx-auto w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    <p class="text-gray-500 mt-2">No saved templates yet</p>
+                    <p class="text-sm text-gray-400 mt-1">Create a receipt and save it as a template to reuse later</p>
+                </div>
+            `;
+            return;
+        }
+        
+        container.innerHTML = templates.map(template => {
+            const updatedDate = new Date(template.updated_at).toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+            
+            return `
+                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3">
+                            <h4 class="font-medium text-gray-900">${escapeHtml(template.name)}</h4>
+                            <span class="px-2 py-0.5 text-xs rounded-full bg-purple-100 text-purple-700">${escapeHtml(template.template_type)}</span>
+                        </div>
+                        ${template.description ? `<p class="text-sm text-gray-600 mt-1">${escapeHtml(template.description)}</p>` : ''}
+                        <p class="text-xs text-gray-500 mt-1">Updated ${updatedDate}</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <a href="/generate-advanced?load_template=${template.id}" class="px-3 py-1.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">
+                            Load
+                        </a>
+                        <button onclick="deleteTemplate(${template.id}, '${escapeHtml(template.name)}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Delete template">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+    } catch (error) {
+        console.error('Error loading templates:', error);
+        container.innerHTML = `
+            <div class="text-center py-8">
+                <svg class="mx-auto w-12 h-12 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p class="text-red-600 mt-2">Failed to load templates</p>
+                <button onclick="loadSavedTemplates()" class="mt-2 text-sm text-blue-600 hover:text-blue-800">Try again</button>
+            </div>
+        `;
+    }
+}
+
+async function deleteTemplate(templateId, templateName) {
+    if (!confirm(`Are you sure you want to delete "${templateName}"? This action cannot be undone.`)) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/templates/${templateId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (!data.success) {
+            throw new Error(data.error || 'Failed to delete template');
+        }
+        
+        loadSavedTemplates();
+        
+    } catch (error) {
+        console.error('Error deleting template:', error);
+        alert('Failed to delete template. Please try again.');
+    }
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+</script>
+
+{% endblock %}

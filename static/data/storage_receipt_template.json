@@ -1,0 +1,132 @@
+{
+  "name": "Storage Facility Receipt",
+  "description": "Professional storage facility rental receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/storage-logo-bw.svg",
+    "headerAlignment": "center",
+    "logoSize": 85,
+    "businessName": "SecureSpace Storage",
+    "headerDivider": "================================================",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "2847 Industrial Blvd, Portland, OR 97214\nPhone: (503) 555-0145 | www.securespacestorage.com\n24/7 Access • Climate Controlled • Secure",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "12/31/2025 03:15 PM",
+        "dateDivider": "================================================",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "STORAGE RENTAL RECEIPT\nReceipt #: SR-2025-4521\nLease Manager: Patricia Chen",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "Tenant: Alexander Mitchell\nUnit: 2B-147 (Climate Controlled)\nSize: 10 x 15 ft (150 sq ft)",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Monthly Rental - 10x15 Unit",
+            "price": 149.99
+          },
+          {
+            "quantity": 1,
+            "name": "Climate Control Surcharge",
+            "price": 35.00
+          },
+          {
+            "quantity": 1,
+            "name": "Insurance & Protection Plan",
+            "price": 24.99
+          },
+          {
+            "quantity": 1,
+            "name": "Facility Maintenance Fee",
+            "price": 15.00
+          },
+          {
+            "quantity": 1,
+            "name": "Lock & Access Card (One-time)",
+            "price": 0.00
+          }
+        ],
+        "itemsDivider": "================================================",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 0.0,
+        "showTaxRate": false,
+        "paymentType": "card",
+        "paymentFields": [
+          {
+            "label": "Subtotal",
+            "value": "224.98"
+          },
+          {
+            "label": "TOTAL DUE",
+            "value": "224.98"
+          },
+          {
+            "label": "Lease Start Date",
+            "value": "Jan 1, 2026"
+          },
+          {
+            "label": "Next Payment Due",
+            "value": "Feb 1, 2026"
+          }
+        ],
+        "paymentDivider": "================================================",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "Thank you for choosing SecureSpace Storage!\n\nYour unit includes 24/7 access, climate control,\nand comprehensive insurance coverage.\nContact us for storage solutions.\n\nVisit: www.securespacestorage.com\nPhone: (503) 555-0145",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Programmatic Content Registry{% endblock %}
+{% block description %}Programmatic pages and tools generated from one spreadsheet source.{% endblock %}
+
+{% block content %}
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl md:text-4xl font-black text-gray-900">Programmatic Content Registry</h1>
+    <p class="mt-3 text-gray-700">Source: <code>{{ manifest.source_path }}</code></p>
+    <p class="text-gray-700">Generated: {{ manifest.generated_at or "Not generated yet" }}</p>
+
+    <div class="mt-8 grid md:grid-cols-3 gap-4">
+        <div class="bg-white border-2 border-gray-900 rounded-lg p-5 shadow-[3px_3px_0_0_#000000]">
+            <p class="text-sm text-gray-600">Total</p>
+            <p class="text-2xl font-black text-gray-900">{{ manifest.counts.total }}</p>
+        </div>
+        <div class="bg-white border-2 border-gray-900 rounded-lg p-5 shadow-[3px_3px_0_0_#000000]">
+            <p class="text-sm text-gray-600">Pages</p>
+            <p class="text-2xl font-black text-gray-900">{{ manifest.counts.pages }}</p>
+        </div>
+        <div class="bg-white border-2 border-gray-900 rounded-lg p-5 shadow-[3px_3px_0_0_#000000]">
+            <p class="text-sm text-gray-600">Tools</p>
+            <p class="text-2xl font-black text-gray-900">{{ manifest.counts.tools }}</p>
+        </div>
+    </div>
+
+    <div class="mt-10 space-y-4">
+        {% for entry in entries %}
+        <div class="bg-white border-2 border-gray-900 rounded-lg p-5 shadow-[3px_3px_0_0_#000000]">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                    <p class="text-xs uppercase font-bold tracking-wide text-gray-600">{{ entry.entry_type }}</p>
+                    <h2 class="text-xl font-black text-gray-900">{{ entry.title }}</h2>
+                    <p class="text-gray-600"><code>{{ entry.route_path }}</code></p>
+                </div>
+                <a href="{{ entry.route_path }}" class="px-4 py-2 bg-[#2563EB] text-white font-bold border-2 border-gray-900 shadow-[3px_3px_0_0_#000000] hover:shadow-[1px_1px_0_0_#000000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+                    Open
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <div class="bg-white border-2 border-gray-900 rounded-lg p-5 shadow-[3px_3px_0_0_#000000]">
+            <p class="text-gray-700">No published entries found. Run <code>scripts/generate_programmatic_content.py</code> first.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

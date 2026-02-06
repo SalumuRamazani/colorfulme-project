@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Auto Repair Receipt Generator - Professional Service Invoices{% endblock %}
+{% block description %}Create professional auto repair receipts with service details and warranty information. Perfect for repair shops, mechanics, and technicians. Free and fully customizable.{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.url_root.rstrip('/') }}/auto-repair-receipt">{% endblock %}
+
+{% block meta_tags %}
+<meta property="og:title" content="Auto Repair Receipt Generator - ReceiptMake">
+<meta property="og:description" content="Create professional auto repair receipts with vehicle details and warranty information. Perfect for mechanics and repair shops.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/images/template-previews/auto-repair-preview.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Auto Repair Receipt Generator",
+  "applicationCategory": "BusinessApplication",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a watermark on the receipts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, Receiptmake does not add watermarks to your receipts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add warranty information?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes! Include warranty period and coverage details on your receipts."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is this suitable for repair shops?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Perfect! Designed specifically for professional mechanics, independent repair shops, and auto technicians."}
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+  <section class="px-4 py-12 md:py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4 leading-tight">
+            Auto Repair Receipts
+          </h1>
+          <p class="text-lg text-neutral-600 mb-6">
+            Create professional auto repair receipts with complete service documentation. Perfect for mechanics, repair shops, and automotive technicians.
+          </p>
+          <p class="text-neutral-600 mb-8">
+            Document vehicle details, services performed, parts replaced, labor hours, warranty information, and costs. Generate professional invoices in seconds.
+          </p>
+          <a href="/generate-auto-repair-receipt" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200">
+            Create Receipt →
+          </a>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden relative border border-neutral-200">
+          <img src="/static/images/template-previews/auto-repair-preview.webp?v=1" alt="Auto Repair Receipt Preview" class="w-full h-auto">
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%); pointer-events: none; z-index: 100;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-neutral-900 mb-12">Complete Service Documentation</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🚗</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Vehicle Details</h3>
+          <p class="text-neutral-600 text-sm">Track year, make, model, mileage, and VIN information.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🔧</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Service Tracking</h3>
+          <p class="text-neutral-600 text-sm">Document all services performed with detailed descriptions.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">⏱️</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Labor Hours</h3>
+          <p class="text-neutral-600 text-sm">Track labor hours with custom rates for accurate billing.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🛡️</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Warranty Support</h3>
+          <p class="text-neutral-600 text-sm">Include warranty period and coverage terms on receipts.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">💰</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Cost Tracking</h3>
+          <p class="text-neutral-600 text-sm">Parts, labor, and total cost calculation with tax.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">📊</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Professional Format</h3>
+          <p class="text-neutral-600 text-sm">Industry-standard receipt layout for credibility.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Create Professional Auto Repair Receipts</h2>
+      <p class="text-blue-100 mb-8">Free receipt generation for repair shops and mechanics.</p>
+      <a href="/generate-auto-repair-receipt" class="inline-block bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 px-8 rounded-lg transition duration-200">
+        Generate Receipt Now →
+      </a>
+    </div>
+  </section>
+</div>
+{% endblock %}

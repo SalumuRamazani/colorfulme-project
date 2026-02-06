@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block title %}Moving Receipt Generator - ReceiptMake{% endblock %}
+{% block description %}Create professional moving company receipts with our free online generator. Track quotes, job details, and payment information for moving services.{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.url_root.rstrip('/') }}/moving-receipt">{% endblock %}
+
+{% block meta_tags %}
+<!-- Open Graph Tags -->
+<meta property="og:title" content="Moving Receipt Generator - ReceiptMake">
+<meta property="og:description" content="Create professional moving company receipts with our free online generator. Track quotes, job details, and payment information for moving services.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/images/template-previews/moving-receipt-preview.webp">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Moving Receipt Generator",
+  "applicationCategory": "BusinessApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Free professional moving company receipt generator. Create professional moving invoices with estimates, job details, crew information, and payment tracking.",
+  "operatingSystem": "Any"
+}
+</script>
+
+<!-- FAQ Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a watermark on the receipts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, Receiptmake does not add watermarks to your receipts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What should I include on a moving receipt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A complete moving receipt should include: estimate number, pickup and delivery locations, move date, crew details, truck size, labor hours, equipment fees, mileage charges, total cost, and customer signature."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I customize moving details?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Customize everything including move type, locations, crew size, truck size, service charges, labor costs, and special notes for your specific moving job."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this suitable for moving companies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely! Perfect for professional moving companies, local movers, interstate moving services, and independent moving contractors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I download or print the moving receipt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "After creating your receipt, simply click 'Download' to save as PDF or click 'Print' to print directly from your browser. Both produce professional, high-quality results."
+      }
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+  <!-- Hero Section -->
+  <section class="px-4 py-12 md:py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4 leading-tight">
+            Professional Moving Receipts
+          </h1>
+          <p class="text-lg text-neutral-600 mb-4">
+            Create professional moving company invoices instantly. Perfect for tracking estimates, job details, crew information, and payment records—all for free.
+          </p>
+          <p class="text-neutral-600 mb-8">
+            Ideal for professional moving companies, local movers, interstate services, and independent moving contractors. Customize pickup/delivery locations, labor costs, and service details effortlessly.
+          </p>
+          <a href="/generate-moving-receipt" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200">
+            Create Moving Receipt →
+          </a>
+        </div>
+        
+        <!-- Preview Receipt -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden relative border border-neutral-200">
+          <img src="/static/images/template-previews/moving-receipt-preview.webp?v=1" alt="Moving Receipt Preview" class="w-full h-auto">
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%); pointer-events: none; z-index: 100;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="px-4 py-12 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-neutral-900 mb-12">Why Choose Our Moving Receipt Generator?</h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">📦</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Complete Job Details</h3>
+          <p class="text-neutral-600 text-sm">Include pickup/delivery locations, move dates, crew size, truck details, and service notes for comprehensive documentation.</p>
+        </div>
+        
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">💰</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Flexible Pricing</h3>
+          <p class="text-neutral-600 text-sm">Customize labor hours, truck rental, equipment fees, mileage charges, and other service costs for accurate invoicing.</p>
+        </div>
+        
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">✍️</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Signature Confirmation</h3>
+          <p class="text-neutral-600 text-sm">Include signature lines for customer acceptance. Professional receipts that stand up to record-keeping requirements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section class="px-4 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Perfect for Your Moving Business</h2>
+      
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🚚</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Professional Moving Companies</h3>
+            <p class="text-neutral-600 text-sm">Create polished invoices for local, interstate, and specialty moves with detailed cost breakdowns.</p>
+          </div>
+        </div>
+        
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">📍</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Independent Movers</h3>
+            <p class="text-neutral-600 text-sm">Establish professionalism and trust with well-formatted moving receipts and invoices.</p>
+          </div>
+        </div>
+        
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🏢</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Corporate Relocations</h3>
+            <p class="text-neutral-600 text-sm">Document employee relocation expenses with comprehensive moving service receipts.</p>
+          </div>
+        </div>
+        
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">📋</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Record Keeping</h3>
+            <p class="text-neutral-600 text-sm">Maintain complete moving service records with organized, professional receipts for compliance and disputes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="px-4 py-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to Create Professional Moving Receipts?</h2>
+      <p class="text-blue-100 mb-8">Start creating professional moving invoices in seconds. No sign-up required—completely free.</p>
+      <a href="/generate-moving-receipt" class="inline-block bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 px-8 rounded-lg transition duration-200">
+        Generate Moving Receipt Now →
+      </a>
+    </div>
+  </section>
+</div>
+{% endblock %}

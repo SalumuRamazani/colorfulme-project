@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100">
+  <!-- Lowe's Logo -->
+  <!-- Blue house shape -->
+  <path d="M30 50 L50 30 L70 50 L70 70 L30 70 Z" fill="#004890"/>
+  
+  <!-- LOWE'S text -->
+  <text x="85" y="58" fill="#004890" font-family="Arial Black, sans-serif" font-size="32" font-weight="900">LOWE'S</text>
+  
+  <!-- Registered trademark -->
+  <circle cx="245" cy="40" r="4" fill="none" stroke="#004890" stroke-width="0.6"/>
+  <text x="242.5" y="43" fill="#004890" font-family="Arial, sans-serif" font-size="6" font-weight="bold">®</text>
+</svg>

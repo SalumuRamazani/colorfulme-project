@@ -1,0 +1,137 @@
+{
+  "name": "Summer Camp Receipt",
+  "description": "Professional summer camp registration and activity receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/summer-camp-logo-bw.svg",
+    "headerAlignment": "center",
+    "logoSize": 85,
+    "businessName": "Pine Valley Summer Camp",
+    "headerDivider": "================================================",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "123 Forest Park Road, Lake Tahoe, CA 96150\nPhone: (530) 555-0156 | www.pinevalleycamp.com\nSession: Summer 2025 (June 22 - August 15)",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "12/31/2025 02:45 PM",
+        "dateDivider": "================================================",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "CAMP REGISTRATION RECEIPT\nReceipt #: CAMP-2025-0847\nCounselor: Jennifer Martinez",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "Camper: Sarah Johnson\nAge Group: 10-12 years\nCabin: Pinewood A",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Summer Camp Session (4 weeks)",
+            "price": 2400.00
+          },
+          {
+            "quantity": 1,
+            "name": "Meals & Accommodations",
+            "price": 0.00
+          },
+          {
+            "quantity": 1,
+            "name": "Activity Package (Arts, Sports, etc)",
+            "price": 300.00
+          },
+          {
+            "quantity": 1,
+            "name": "Equipment & Supplies",
+            "price": 85.00
+          },
+          {
+            "quantity": 1,
+            "name": "Camp T-Shirt & Hoodie",
+            "price": 40.00
+          },
+          {
+            "quantity": 1,
+            "name": "Overnight Campout Adventure",
+            "price": 50.00
+          }
+        ],
+        "itemsDivider": "================================================",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 0.0,
+        "showTaxRate": false,
+        "paymentType": "card",
+        "paymentFields": [
+          {
+            "label": "Subtotal",
+            "value": "2,875.00"
+          },
+          {
+            "label": "TOTAL REGISTRATION",
+            "value": "2,875.00"
+          },
+          {
+            "label": "Deposit Paid",
+            "value": "1,000.00"
+          },
+          {
+            "label": "Balance Due",
+            "value": "1,875.00"
+          }
+        ],
+        "paymentDivider": "================================================",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "Welcome to Pine Valley Summer Camp!\n\nMake memories this summer with friends, adventure, and fun.\nPayment Due: May 15, 2025 (Early bird discount applied)\n\nThank you for choosing Pine Valley Summer Camp!",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

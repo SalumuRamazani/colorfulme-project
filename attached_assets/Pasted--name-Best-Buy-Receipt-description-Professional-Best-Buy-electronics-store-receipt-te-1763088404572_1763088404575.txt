@@ -1,0 +1,154 @@
+{
+  "name": "Best Buy Receipt",
+  "description": "Professional Best Buy electronics store receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/bestbuy-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "BEST BUY #1452\n1880 N CLYBOURN AVE\nCHICAGO, IL 60614\n(773) 328-1200",
+        "alignment": "center",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "Register: 003  Trans: 158743  Op: 089245",
+        "alignment": "left",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "My Best Buy Member: ***4782",
+        "alignment": "left",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "items",
+      "data": {
+        "items": [
+          {
+            "name": "SAMSUNG 65\" TV UN65TU7000",
+            "quantity": 1,
+            "price": 549.99
+          },
+          {
+            "name": "SKU: 6401722",
+            "quantity": 1,
+            "price": 0
+          },
+          {
+            "name": "ROKU STREAMING STICK 4K",
+            "quantity": 1,
+            "price": 39.99
+          },
+          {
+            "name": "SKU: 6479178",
+            "quantity": 1,
+            "price": 0
+          },
+          {
+            "name": "HDMI CABLE 6FT",
+            "quantity": 2,
+            "price": 19.99
+          },
+          {
+            "name": "SKU: 6426572",
+            "quantity": 1,
+            "price": 0
+          },
+          {
+            "name": "GEEK SQUAD 2YR PROTECTION",
+            "quantity": 1,
+            "price": 99.99
+          }
+        ],
+        "showDivider": false
+      }
+    },
+    {
+      "type": "payment",
+      "data": {
+        "taxRate": 10.25,
+        "paymentType": "card",
+        "paymentFields": [
+          {
+            "label": "VISA ENDING IN",
+            "value": "****8923"
+          },
+          {
+            "label": "AUTH CODE",
+            "value": "042578"
+          }
+        ],
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "YOU SAVED: $150.00",
+        "alignment": "center",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "barcode",
+      "data": {
+        "enabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "8943 2847 9182 7364 91",
+        "alignment": "center",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "dateTime",
+      "data": {
+        "dateTime": "11/14/2024   2:35 PM",
+        "alignment": "center",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "RETURN POLICY:\nElectronics: 15 days with receipt\nAppliances: 15 days\nAll other products: 15-45 days\nVisit BestBuy.com/Returns",
+        "alignment": "center",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "Thank you for shopping at Best Buy!",
+        "alignment": "center",
+        "showDivider": false
+      }
+    }
+  ]
+}

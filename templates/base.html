@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Free Receipt Maker - Online Receipt Generator{% endblock %}</title>
+    <meta name="description" content="{% block description %}Create professional receipts instantly with our free online receipt generator. Choose from 100+ templates including Walmart, Target, CVS, restaurants, and more. No sign-up required.{% endblock %}">
+    <meta name="google-site-verification" content="CitZ9P8jAAfG-uUOihULKAr8SLVYyk7IXaKzWCA-Vpc" />
+    {% block canonical %}<link rel="canonical" href="{{ request.base_url }}">{% endblock %}
+    {% block meta_tags %}{% endblock %}
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    
+    <!-- Performance: Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://us.i.posthog.com">
+    <link rel="dns-prefetch" href="https://us-assets.i.posthog.com">
+    
+    <!-- Performance: Preload critical Alpine.js -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" as="script">
+    
+    <!-- Performance: Preload critical font -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- Tailwind CSS Production Build -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+    
+    <!-- Critical Alpine.js for page interactivity (loaded with high priority) -->
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@1.9.10/dist/htmx.min.js" defer></script>
+    
+    <!-- Fonts with optimized loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Datafast Analytics -->
+    <script
+      defer
+      data-website-id="dfid_vzPbm5VD6JaOsTdUXMqpF"
+      data-domain="receiptmake.com"
+      src="https://datafa.st/js/script.js">
+    </script>
+    
+    <style>
+        @font-face {
+            font-family: 'MerchantCopy';
+            src: url('{{ url_for("static", filename="fonts/merchant_copy.ttf") }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Standard site font */
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        /* MerchantCopy ONLY for receipt elements - Absolute Lock */
+        .receipt-paper, 
+        .receipt-paper *,
+        .receipt-preview, 
+        .receipt-preview *,
+        #receipt-preview, 
+        #receipt-preview *,
+        [id*="receipt"] *,
+        [class*="receipt"] * {
+            font-family: 'MerchantCopy' !important;
+            font-size: 20px !important;
+            letter-spacing: 0px !important;
+            line-height: 1.2 !important;
+            text-transform: none !important;
+            filter: none !important;
+            -webkit-font-smoothing: antialiased !important;
+        }
+
+        /* Dash Fix: Professional thermal dash style - Robust gradient implementation for mobile downloads */
+        .receipt-paper .border-dashed,
+        .receipt-paper .border-b-dashed,
+        .receipt-paper .border-t-dashed,
+        .receipt-divider,
+        .receipt-paper .py-1.border-b.border-dashed {
+            border: none !important;
+            background-image: linear-gradient(to right, #000 50%, transparent 50%) !important;
+            background-position: bottom !important;
+            background-size: 8px 2px !important;
+            background-repeat: repeat-x !important;
+            height: 2px !important;
+            width: 100% !important;
+            margin: 8px 0 !important;
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* Ensure dashes appear in print/download */
+        @media print {
+            .receipt-paper .border-dashed,
+            .receipt-paper .border-b-dashed,
+            .receipt-paper .border-t-dashed,
+            .receipt-divider,
+            .receipt-paper .py-1.border-b.border-dashed {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* Print/Download: Compact margins */
+        @media print {
+            .receipt-paper {
+                padding: 16px 20px !important;
+                margin: 0 auto !important;
+                box-shadow: none !important;
+                width: 100% !important;
+                max-width: 500px !important;
+            }
+        }
+        
+        [x-cloak] { display: none !important; }
+    </style>
+    {% block head_extras %}
+    <meta name="robots" content="index, follow">
+    <meta property="og:site_name" content="ReceiptMake">
+    <meta property="og:locale" content="en_US">
+    {% endblock %}
+</head>
+<body class="bg-[#fffdf8] text-neutral-800 antialiased">
+    {% set current_path = request.path %}
+    {% set on_home = current_path == '/' %}
+    {% set on_templates = current_path.startswith('/templates') or current_path.startswith('/template/') %}
+    {% set on_blog = current_path.startswith('/blog') %}
+    {% set on_pricing = current_path.startswith('/pricing') %}
+    {% set on_dashboard = current_path.startswith('/dashboard') %}
+    {% set on_generator = current_path.startswith('/generate') %}
+
+    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b-2 border-gray-900" x-data="{ mobileMenuOpen: false }" @keydown.escape.window="mobileMenuOpen = false">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="h-20 py-3 flex items-center justify-between gap-3">
+                <a href="/" class="group inline-flex items-center gap-3">
+                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-md border-2 border-gray-900 bg-[#2563EB] text-white font-black text-sm shadow-[2px_2px_0_0_#000000] transition-transform group-hover:translate-y-[1px] group-hover:translate-x-[1px] group-hover:shadow-none">RM</span>
+                    <span class="text-lg font-black tracking-tight text-gray-900">ReceiptMake</span>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-3">
+                    <div class="flex items-center gap-1 rounded-full border-2 border-gray-900 bg-[#fff6f0] px-2 py-1">
+                        <a href="/" class="px-4 py-2 rounded-full text-sm font-bold transition-all {% if on_home %}bg-white text-gray-900 border-2 border-gray-900 shadow-[2px_2px_0_0_#000000]{% else %}text-gray-600 hover:text-gray-900 hover:bg-white{% endif %}">Receipt Maker</a>
+                        <a href="/templates" class="px-4 py-2 rounded-full text-sm font-bold transition-all {% if on_templates %}bg-white text-gray-900 border-2 border-gray-900 shadow-[2px_2px_0_0_#000000]{% else %}text-gray-600 hover:text-gray-900 hover:bg-white{% endif %}">Templates</a>
+                        <a href="/blog" class="px-4 py-2 rounded-full text-sm font-bold transition-all {% if on_blog %}bg-white text-gray-900 border-2 border-gray-900 shadow-[2px_2px_0_0_#000000]{% else %}text-gray-600 hover:text-gray-900 hover:bg-white{% endif %}">Blog</a>
+                        {% if current_user and current_user.is_authenticated %}
+                        <a href="/dashboard" class="px-4 py-2 rounded-full text-sm font-bold transition-all {% if on_dashboard %}bg-white text-gray-900 border-2 border-gray-900 shadow-[2px_2px_0_0_#000000]{% else %}text-gray-600 hover:text-gray-900 hover:bg-white{% endif %}">Dashboard</a>
+                        {% endif %}
+                        <a href="/pricing" class="px-4 py-2 rounded-full text-sm font-bold transition-all {% if on_pricing %}bg-white text-gray-900 border-2 border-gray-900 shadow-[2px_2px_0_0_#000000]{% else %}text-gray-600 hover:text-gray-900 hover:bg-white{% endif %}">Pricing</a>
+                    </div>
+
+                    {% if on_generator %}
+                    <span class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-600 text-sm font-black border-2 border-gray-900 rounded-lg cursor-not-allowed" title="Already on generator page">Generator Active</span>
+                    {% else %}
+                    <a href="/generate-advanced" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#2563EB] text-white text-sm font-black border-2 border-gray-900 rounded-lg shadow-[3px_3px_0_0_#000000] hover:shadow-[1px_1px_0_0_#000000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+                        Generate Receipt
+                    </a>
+                    {% endif %}
+                </div>
+
+                <div class="lg:hidden">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" :aria-expanded="mobileMenuOpen.toString()" aria-label="Toggle menu" class="inline-flex items-center justify-center h-11 w-11 border-2 border-gray-900 rounded-lg bg-white text-gray-700 shadow-[2px_2px_0_0_#000000]">
+                        <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg x-show="mobileMenuOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div x-show="mobileMenuOpen"
+             x-cloak
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-1"
+             class="lg:hidden border-t-2 border-gray-900 bg-[#fff6f0]">
+            <div class="px-4 py-4 space-y-3">
+                <a @click="mobileMenuOpen = false" href="/" class="block px-4 py-3 text-sm font-bold rounded-lg border-2 border-gray-900 {% if on_home %}bg-[#2563EB] text-white shadow-[2px_2px_0_0_#000000]{% else %}bg-white text-gray-800{% endif %}">Receipt Maker</a>
+                <a @click="mobileMenuOpen = false" href="/templates" class="block px-4 py-3 text-sm font-bold rounded-lg border-2 border-gray-900 {% if on_templates %}bg-[#2563EB] text-white shadow-[2px_2px_0_0_#000000]{% else %}bg-white text-gray-800{% endif %}">Templates</a>
+                <a @click="mobileMenuOpen = false" href="/blog" class="block px-4 py-3 text-sm font-bold rounded-lg border-2 border-gray-900 {% if on_blog %}bg-[#2563EB] text-white shadow-[2px_2px_0_0_#000000]{% else %}bg-white text-gray-800{% endif %}">Blog</a>
+                {% if current_user and current_user.is_authenticated %}
+                <a @click="mobileMenuOpen = false" href="/dashboard" class="block px-4 py-3 text-sm font-bold rounded-lg border-2 border-gray-900 {% if on_dashboard %}bg-[#2563EB] text-white shadow-[2px_2px_0_0_#000000]{% else %}bg-white text-gray-800{% endif %}">Dashboard</a>
+                {% endif %}
+                <a @click="mobileMenuOpen = false" href="/pricing" class="block px-4 py-3 text-sm font-bold rounded-lg border-2 border-gray-900 {% if on_pricing %}bg-[#2563EB] text-white shadow-[2px_2px_0_0_#000000]{% else %}bg-white text-gray-800{% endif %}">Pricing</a>
+
+                {% if on_generator %}
+                <span class="block mt-1 px-4 py-3 text-sm font-black text-center rounded-lg border-2 border-gray-900 bg-gray-200 text-gray-600">Generator Active</span>
+                {% else %}
+                <a @click="mobileMenuOpen = false" href="/generate-advanced" class="block mt-1 px-4 py-3 text-sm font-black text-center rounded-lg border-2 border-gray-900 bg-[#2563EB] text-white shadow-[3px_3px_0_0_#000000]">Generate Receipt</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <footer class="bg-white border-t-2 border-gray-900 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="grid gap-8 md:grid-cols-3 md:items-start">
+                <div>
+                    <div class="inline-flex items-center gap-2 mb-3">
+                        <span class="inline-flex h-8 w-8 items-center justify-center rounded-md border-2 border-gray-900 bg-[#2563EB] text-white font-black text-xs shadow-[2px_2px_0_0_#000000]">RM</span>
+                        <span class="text-lg font-black text-gray-900">ReceiptMake</span>
+                    </div>
+                    <p class="text-sm text-gray-600 max-w-xs">Generate clean, editable receipt templates in seconds for workflows, testing, and documentation.</p>
+                </div>
+
+                <div class="md:col-span-2">
+                    <div class="flex flex-wrap gap-2 md:justify-end">
+                        <a href="/" class="px-4 py-2 text-sm font-bold text-gray-700 bg-[#fff6f0] border-2 border-gray-900 rounded-full hover:bg-white">Receipt Maker</a>
+                        <a href="/templates" class="px-4 py-2 text-sm font-bold text-gray-700 bg-[#fff6f0] border-2 border-gray-900 rounded-full hover:bg-white">Templates</a>
+                        <a href="/blog" class="px-4 py-2 text-sm font-bold text-gray-700 bg-[#fff6f0] border-2 border-gray-900 rounded-full hover:bg-white">Blog</a>
+                        <a href="/pricing" class="px-4 py-2 text-sm font-bold text-gray-700 bg-[#fff6f0] border-2 border-gray-900 rounded-full hover:bg-white">Pricing</a>
+                        <a href="/privacy-policy" class="px-4 py-2 text-sm font-bold text-gray-700 bg-[#fff6f0] border-2 border-gray-900 rounded-full hover:bg-white">Privacy</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-5 border-t border-gray-200 text-sm text-gray-600 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                <p>&copy; 2026 ReceiptMake. All rights reserved.</p>
+                <p>Built for scalable template and programmatic content workflows.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- GDPR Cookie Consent Banner with EU Geolocation Detection -->
+    <div x-data="cookieConsent()" 
+    x-show="showBanner" 
+    x-cloak
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 translate-y-4"
+    x-transition:enter-end="opacity-100 translate-y-0"
+    class="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200 shadow-lg z-50 p-4 md:p-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div class="flex-1">
+                <div class="text-sm font-semibold text-neutral-900 mb-1">We value your privacy</div>
+                <p class="text-xs text-neutral-600 leading-relaxed">
+                    We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. 
+                    By clicking "Accept All", you consent to our use of cookies and analytics. 
+                    <a href="/privacy-policy" class="text-primary hover:underline">Learn more</a>
+                </p>
+            </div>
+            <div class="flex gap-3 flex-shrink-0">
+                <button @click="acceptEssential()" class="px-4 py-2 text-sm text-neutral-600 hover:text-neutral-900 border border-neutral-300 rounded-lg hover:bg-neutral-50 transition font-medium">
+                    Essential Only
+                </button>
+                <button @click="acceptAll()" class="px-4 py-2 text-sm text-white bg-primary hover:bg-blue-600 rounded-lg transition font-medium shadow-sm">
+                    Accept All
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- GDPR & Cookie Management System -->
+    <script>
+    // Cookie Consent Manager with EU Detection
+    function cookieConsent() {
+        const EU_COUNTRIES = [
+            'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 
+            'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE'
+        ];
+        
+        return {
+            showBanner: false,
+            isEU: false,
+            init() {
+                this.detectEUAndInitConsent();
+            },
+            async detectEUAndInitConsent() {
+                const existingConsent = localStorage.getItem('cookieConsent');
+                const detectedCountry = localStorage.getItem('userCountry');
+                
+                if (existingConsent) {
+                    // User already gave consent, apply it
+                    this.applyConsent(existingConsent);
+                    return;
+                }
+                
+                // Detect user location
+                try {
+                    const response = await fetch('https://ipapi.co/json/');
+                    const data = await response.json();
+                    const userCountry = data.country_code;
+                    localStorage.setItem('userCountry', userCountry);
+                    
+                    this.isEU = EU_COUNTRIES.includes(userCountry);
+                    
+                    if (this.isEU) {
+                        // EU users: Show banner (require explicit consent)
+                        this.showBanner = true;
+                    } else {
+                        // Non-EU users: Auto-accept all (no banner)
+                        localStorage.setItem('cookieConsent', 'all');
+                        this.applyConsent('all');
+                    }
+                } catch (error) {
+                    // If geolocation fails, show banner by default (safer for GDPR)
+                    this.showBanner = true;
+                    this.isEU = true;
+                }
+            },
+            acceptAll() {
+                localStorage.setItem('cookieConsent', 'all');
+                this.showBanner = false;
+                this.applyConsent('all');
+            },
+            acceptEssential() {
+                localStorage.setItem('cookieConsent', 'essential');
+                this.showBanner = false;
+                this.applyConsent('essential');
+            },
+            applyConsent(consentLevel) {
+                // TEST MODE: Load all analytics for both 'essential' and 'all' consent levels
+                // This allows testing of all tracking functionality regardless of user choice
+                this.loadAllAnalytics();
+            },
+            loadAllAnalytics() {
+                // Load GA4
+                this.loadGA4();
+                // Load PostHog
+                this.loadPostHog();
+                // Load Crisp Chat
+                this.loadCrisp();
+            },
+            loadGA4() {
+                if (document.querySelector('script[src*="googletagmanager"]')) {
+                    return; // Already loaded
+                }
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-TVS6X3YV21';
+                document.head.appendChild(script);
+                
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', 'G-TVS6X3YV21');
+            },
+            loadPostHog() {
+                if (window.posthog && window.posthog.__loaded) {
+                    return; // Already loaded
+                }
+                !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init hi $r kr ui wr Er capture Ri calculateEventProperties Ir register register_once register_for_session unregister unregister_for_session Fr getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Cr Tr createPersonProfile Or yr Mr opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Pr debug L Rr getPageViewId captureTraceFeedback captureTraceMetric gr".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+                posthog.init('phc_9UvhLF8AwjNQ9ehwAulfsb6pKerPU2ZyKhnaOmWZci9', {
+                    api_host: 'https://us.i.posthog.com',
+                    defaults: '2025-05-24',
+                    person_profiles: 'identified_only',
+                });
+            },
+            loadCrisp() {
+                if (window.$crisp) {
+                    return; // Already loaded
+                }
+                window.$crisp = [];
+                window.CRISP_WEBSITE_ID = '506012ae-82ae-4483-a8e9-67e297b2affe';
+                const s = document.createElement('script');
+                s.src = 'https://client.crisp.chat/l.js';
+                s.async = 1;
+                document.getElementsByTagName('head')[0].appendChild(s);
+            }
+        }
+    }
+    </script>
+</body>
+</html>

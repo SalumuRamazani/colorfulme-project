@@ -1,0 +1,121 @@
+{
+  "name": "Dentist Receipt",
+  "description": "Professional dental office receipt",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/dental-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 50,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "BRIGHTSMILE DENTAL CARE\nPATIENT INVOICE",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "════════════════════════════",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "1234 DENTAL BLVD, SUITE 301\nSEATTLE, WA 98101\n(206) 555-7800\nEmail: care@brightsmile.com",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "Patient: David Smith\nDate: 08/15/2025  2:00 PM\nDoctor: Dr. Emily Harper, DDS",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "SERVICES PROVIDED",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Comprehensive Exam & Assessment",
+            "price": 125.00
+          },
+          {
+            "quantity": 1,
+            "name": "Professional Cleaning (Prophylaxis)",
+            "price": 115.00
+          },
+          {
+            "quantity": 1,
+            "name": "Full Mouth X-Ray Series",
+            "price": 95.00
+          },
+          {
+            "quantity": 1,
+            "name": "Fluoride Treatment",
+            "price": 50.00
+          },
+          {
+            "quantity": 1,
+            "name": "Sealant Application (Tooth #14)",
+            "price": 45.00
+          }
+        ]
+      }
+    },
+    {
+      "type": "tax",
+      "position": 6,
+      "data": {
+        "taxLabel": "Tax",
+        "taxValue": 47.30
+      }
+    },
+    {
+      "type": "total",
+      "position": 7,
+      "data": {
+        "totalLabel": "TOTAL DUE",
+        "totalValue": 477.30
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "INSURANCE\nInsurance Deducted: -$200\nCopay Applied: $25\n\nPAYMENT\nVisa ****4521\nAuthorization: 847291\n\nNext Appointment: 02/15/2026\n\nThank you for choosing Brightsmile!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    }
+  ]
+}

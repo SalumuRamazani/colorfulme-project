@@ -1,0 +1,117 @@
+{
+  "name": "T-Mobile Store Receipt",
+  "description": "Professional T-Mobile telecom store receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/tmobile-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 100,
+    "businessName": "",
+    "headerDivider": "===",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "T-MOBILE STORE\n8500 BEVERLY BLVD\nLOS ANGELES, CA 90048\n(310) 854-6000\nSTORE #LA087",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/13/2025 04:22:15 PM",
+        "dateDivider": "---",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 3,
+      "data": {
+        "customFields": [
+          { "label": "INVOICE", "value": "TM-847291", "column": 1 },
+          { "label": "REP", "value": "ALEX K", "column": 1 },
+          { "label": "ACCOUNT", "value": "****8472", "column": 2 },
+          { "label": "TYPE", "value": "RETAIL", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "IPHONE 15 PRO 256GB", "price": 1099.99 },
+          { "quantity": 1, "name": "OTTERBOX DEFENDER CASE", "price": 59.99 },
+          { "quantity": 1, "name": "SCREEN PROTECTOR", "price": 29.99 },
+          { "quantity": 1, "name": "20W USB-C CHARGER", "price": 19.99 },
+          { "quantity": 1, "name": "ACTIVATION FEE", "price": 35.00 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "MAGENTA MAX PLAN ACTIVATED\nMONTHLY PLAN: $85/MO\nNEXT BILL DATE: 12/13/2025",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 9.5,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "SUBTOTAL", "value": "1244.96" },
+          { "label": "INSTANT TRADE-IN CREDIT", "value": "-200.00" },
+          { "label": "TAX", "value": "99.17" },
+          { "label": "TOTAL", "value": "1144.13" },
+          { "label": "MASTERCARD ****4521", "value": "1144.13" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 7,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "DEVICE PROTECTION AVAILABLE\nPROTECT YOUR INVESTMENT WITH\nT-MOBILE DEVICE PROTECTION\n\nRETURN POLICY: 14 DAYS\n\nQUESTIONS? CALL 611 FROM YOUR\nT-MOBILE PHONE OR 1-800-T-MOBILE\n\nTHANK YOU FOR CHOOSING T-MOBILE!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}

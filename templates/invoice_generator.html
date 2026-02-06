@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+
+{% block title %}Invoice Generator - Create Professional Invoices Free{% endblock %}
+{% block description %}Create professional invoices instantly with our free online invoice generator. Customizable templates, instant download, and no sign-up required.{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.base_url }}">{% endblock %}
+{% block meta_tags %}
+<meta name="keywords" content="invoice generator, free invoice, online invoice, create invoices">
+<meta property="og:title" content="Invoice Generator - Create Professional Invoices Free">
+<meta property="og:description" content="Create professional invoices instantly. Free, customizable, and no sign-up required.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Invoice Generator - Create Professional Invoices Free">
+<meta name="twitter:description" content="Create professional invoices instantly. Free, customizable templates.">
+{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="mb-8">
+        <a href="/" class="text-lg font-semibold text-primary hover:text-blue-600 transition inline-flex items-center gap-1 mb-6">
+            <span>●</span>
+            <span>Receipt Maker</span>
+        </a>
+    </div>
+    
+    <div class="mb-12">
+        <h1 class="text-4xl font-bold text-neutral-900 mb-3">Invoice Generator</h1>
+        <p class="text-lg text-neutral-600">Create professional invoices in seconds. Free, easy, and no sign-up required.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" x-data="invoiceGenerator()" x-cloak>
+        <!-- Form -->
+        <div class="space-y-6">
+            <div class="bg-white rounded-lg border border-neutral-200 p-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-neutral-900 mb-6">Invoice Details</h2>
+
+                <!-- Invoice Number & Date -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-700 mb-2">Invoice #</label>
+                        <input type="text" x-model="invoiceNumber" placeholder="INV-001" class="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-700 mb-2">Date</label>
+                        <input type="date" x-model="invoiceDate" class="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                    </div>
+                </div>
+
+                <!-- From & To -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-700 mb-2">From (Your Business)</label>
+                        <textarea x-model="fromBusiness" placeholder="Your Company Name&#10;123 Main St&#10;City, State 12345" rows="3" class="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-mono text-sm"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-neutral-700 mb-2">Bill To (Client)</label>
+                        <textarea x-model="billTo" placeholder="Client Name&#10;456 Client Ave&#10;City, State 67890" rows="3" class="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-mono text-sm"></textarea>
+                    </div>
+                </div>
+
+                <!-- Items -->
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <label class="block text-sm font-medium text-neutral-700">Line Items</label>
+                        <button @click="addItem()" class="text-sm px-3 py-1 bg-blue-50 text-primary rounded hover:bg-blue-100 transition">+ Add Item</button>
+                    </div>
+                    <div class="space-y-3 max-h-64 overflow-y-auto">
+                        <template x-for="(item, idx) in items" :key="idx">
+                            <div class="grid grid-cols-12 gap-2">
+                                <input type="text" x-model="item.description" placeholder="Description" class="col-span-5 px-3 py-2 border border-neutral-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                                <input type="number" x-model.number="item.quantity" placeholder="Qty" min="1" class="col-span-2 px-3 py-2 border border-neutral-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                                <input type="number" x-model.number="item.rate" placeholder="Rate" min="0" step="0.01" class="col-span-3 px-3 py-2 border border-neutral-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                                <button @click="removeItem(idx)" class="col-span-2 px-2 py-2 text-red-600 hover:bg-red-50 rounded transition text-sm">Remove</button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Totals -->
+                <div class="border-t border-neutral-200 pt-4 space-y-2 mb-6">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-neutral-600">Subtotal:</span>
+                        <span class="font-mono">$<span x-text="subtotal.toFixed(2)"></span></span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="number" x-model.number="taxRate" placeholder="Tax %" min="0" step="0.01" class="px-3 py-2 border border-neutral-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                        <div class="flex justify-between text-sm bg-neutral-50 px-3 py-2 rounded">
+                            <span class="text-neutral-600">Tax:</span>
+                            <span class="font-mono">$<span x-text="taxAmount.toFixed(2)"></span></span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between text-lg font-semibold border-t border-neutral-200 pt-2">
+                        <span>Total:</span>
+                        <span class="font-mono">$<span x-text="total.toFixed(2)"></span></span>
+                    </div>
+                </div>
+
+                <!-- Notes -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-neutral-700 mb-2">Notes/Terms</label>
+                    <textarea x-model="notes" placeholder="Thank you for your business!" rows="3" class="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-mono text-sm"></textarea>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-2">
+                    <button @click="downloadPDF()" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition font-medium">
+                        Download PDF
+                    </button>
+                    <button @click="printInvoice()" class="flex-1 px-4 py-2 bg-neutral-100 text-neutral-700 rounded-lg hover:bg-neutral-200 transition font-medium">
+                        Print
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview -->
+        <div class="bg-white rounded-lg border border-neutral-200 p-8 shadow-sm font-mono text-sm h-fit sticky top-24">
+            <div id="invoicePreview" class="space-y-4">
+                <div class="text-center pb-4 border-b-2 border-neutral-900">
+                    <div class="text-2xl font-bold">INVOICE</div>
+                    <div class="text-neutral-600 mt-1">Invoice #<span x-text="invoiceNumber || 'INV-001'"></span></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8 mb-6">
+                    <div>
+                        <div class="font-semibold mb-1">FROM:</div>
+                        <div class="text-xs whitespace-pre-line" x-text="fromBusiness || 'Your Company Name\n123 Main St\nCity, State 12345'"></div>
+                    </div>
+                    <div>
+                        <div class="font-semibold mb-1">BILL TO:</div>
+                        <div class="text-xs whitespace-pre-line" x-text="billTo || 'Client Name\n456 Client Ave\nCity, State 67890'"></div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8 mb-6 text-xs">
+                    <div>
+                        <div class="font-semibold">Invoice Date:</div>
+                        <div x-text="invoiceDate || new Date().toISOString().split('T')[0]"></div>
+                    </div>
+                </div>
+
+                <!-- Items Table -->
+                <table class="w-full text-xs mb-4 border-collapse">
+                    <thead>
+                        <tr class="border-b border-neutral-900">
+                            <th class="text-left py-1 font-semibold">Description</th>
+                            <th class="text-right w-12 py-1 font-semibold">Qty</th>
+                            <th class="text-right w-16 py-1 font-semibold">Rate</th>
+                            <th class="text-right w-16 py-1 font-semibold">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template x-for="(item, idx) in items" :key="idx">
+                            <tr class="border-b border-neutral-300">
+                                <td class="py-1" x-text="item.description"></td>
+                                <td class="text-right" x-text="item.quantity || 0"></td>
+                                <td class="text-right" x-text="'$' + (item.rate || 0).toFixed(2)"></td>
+                                <td class="text-right" x-text="'$' + ((item.quantity || 0) * (item.rate || 0)).toFixed(2)"></td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+
+                <div class="space-y-1 mb-4 border-t border-neutral-900 pt-3">
+                    <div class="flex justify-between text-xs">
+                        <span>Subtotal:</span>
+                        <span x-text="'$' + subtotal.toFixed(2)"></span>
+                    </div>
+                    <div class="flex justify-between text-xs" x-show="taxRate > 0">
+                        <span>Tax (<span x-text="taxRate.toFixed(1)"></span>%):</span>
+                        <span x-text="'$' + taxAmount.toFixed(2)"></span>
+                    </div>
+                    <div class="flex justify-between font-bold text-sm border-t border-neutral-900 pt-2">
+                        <span>TOTAL:</span>
+                        <span x-text="'$' + total.toFixed(2)"></span>
+                    </div>
+                </div>
+
+                <div class="text-xs whitespace-pre-line pt-4 border-t border-neutral-300 text-neutral-600" x-text="notes || 'Thank you for your business!'"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('alpine:init', () => {
+    Alpine.data('invoiceGenerator', () => ({
+        invoiceNumber: 'INV-001',
+        invoiceDate: new Date().toISOString().split('T')[0],
+        fromBusiness: 'Your Company Name\n123 Main St\nCity, State 12345',
+        billTo: 'Client Name\n456 Client Ave\nCity, State 67890',
+        items: [
+            { description: 'Professional Services', quantity: 1, rate: 500 }
+        ],
+        taxRate: 8,
+        notes: 'Thank you for your business!',
+
+        get subtotal() {
+            return this.items.reduce((sum, item) => sum + (item.quantity * item.rate), 0);
+        },
+
+        get taxAmount() {
+            return this.subtotal * (this.taxRate / 100);
+        },
+
+        get total() {
+            return this.subtotal + this.taxAmount;
+        },
+
+        addItem() {
+            this.items.push({ description: '', quantity: 1, rate: 0 });
+        },
+
+        removeItem(idx) {
+            this.items.splice(idx, 1);
+        },
+
+        downloadPDF() {
+            const element = document.getElementById('invoicePreview');
+            
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: `Invoice-${this.invoiceNumber}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    allowTaint: true
+                },
+                jsPDF: { 
+                    orientation: 'portrait', 
+                    unit: 'mm', 
+                    format: 'a4',
+                    compress: true
+                },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            };
+            
+            if (typeof html2pdf === 'undefined') {
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+                script.onload = () => {
+                    html2pdf()
+                        .set(opt)
+                        .from(element)
+                        .save()
+                        .catch(err => console.error('PDF generation error:', err));
+                };
+                document.head.appendChild(script);
+            } else {
+                html2pdf()
+                    .set(opt)
+                    .from(element)
+                    .save()
+                    .catch(err => console.error('PDF generation error:', err));
+            }
+        },
+
+        printInvoice() {
+            const element = document.getElementById('invoicePreview');
+            const printWindow = window.open('', '', 'width=800,height=600');
+            printWindow.document.write(element.innerHTML);
+            printWindow.document.close();
+            printWindow.print();
+        }
+    }));
+});
+</script>
+
+<style>
+[x-cloak] { display: none !important; }
+</style>
+{% endblock %}

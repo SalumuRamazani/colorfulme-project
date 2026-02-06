@@ -1,0 +1,85 @@
+{
+  "name": "BP Gas Station Receipt",
+  "description": "Professional BP gas station receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "",
+    "headerAlignment": "center",
+    "logoSize": 0,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "data": {
+        "customMessage": "OTR KENSINGTON\nTAX INVOICE\nOFFICIAL RECEIPT",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "customMessage": "ABN: 75492874033        Phone: 8200 5582\nClerk:DAN 08/06/20 19:48:31   023\nShift:3, 08/06/20",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "customMessage": "Item  Description    Qty        Amount\n----  -----------    ---        ------",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "customMessage": "18    #Hose 3 Pump  6\n      98.9c/L        x 16.65L\n      UNLEADED                $  16.47\n                              -------",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "customMessage": "           Total Incl. GST $    16.47\n                   Eftpos  $    16.47\n                              -------",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "customMessage": "      Sale includes GST of $     1.50\n* Indicates GST Inclusive Item(s)\nNo refunds given unless receipt shown.\nThankyou.  Please call again.",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "barcode",
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "customMessage": "From 01/03/20 New ABN: 19 638 356 466",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

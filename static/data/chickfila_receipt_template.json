@@ -1,0 +1,98 @@
+{
+  "name": "Chick-fil-A Receipt",
+  "description": "Professional Chick-fil-A restaurant receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "",
+    "headerAlignment": "center",
+    "logoSize": 100,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "Welcome to Chick-fil-A\nNoblesville FSU (#01438)\nNoblesville, IN\n(317) 773-4100\nOperator: Bill Riggs\nCUSTOMER COPY\n**** DUPLICATE RECEIPT ****\n7/25/2018 8:50:03 AM\nDINE IN",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "Order Number:   4314512",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "items",
+      "position": 3,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "Meal-CFASan", "price": "6.39", "indent": false },
+          { "quantity": 0, "name": "CFA Sand", "price": "0", "indent": true },
+          { "quantity": 0, "name": "Fries MD", "price": "0", "indent": true },
+          { "quantity": 0, "name": "Coke MD", "price": "0", "indent": true },
+          { "quantity": 1, "name": "Meal-Nugg 12ct", "price": "8.15", "indent": false },
+          { "quantity": 0, "name": "Nugget 12ct", "price": "0", "indent": true },
+          { "quantity": 0, "name": "Fries MD", "price": "0", "indent": true },
+          { "quantity": 0, "name": "Dt Coke MD", "price": "0", "indent": true },
+          { "quantity": 1, "name": "Cookie 6 Ct", "price": "6.99", "indent": false },
+          { "quantity": 1, "name": "CobSld HtBrMug", "price": "7.85", "indent": false },
+          { "quantity": 1, "name": "Kids Meal", "price": "4.75", "indent": false },
+          { "quantity": 0, "name": "Nugget 6ct", "price": "0", "indent": true },
+          { "quantity": 0, "name": "Fries SM", "price": "0", "indent": true },
+          { "quantity": 0, "name": "Kids Toy", "price": "0", "indent": true },
+          { "quantity": 0, "name": "Chocolate Milk KD", "price": "0", "indent": true },
+          { "quantity": 1, "name": "MlkShk Pch LG", "price": "3.89", "indent": false },
+          { "quantity": 2, "name": "Icedre Cone LG", "price": "3.50", "indent": false },
+          { "quantity": 1, "name": "Swt Tea LG", "price": "1.95", "indent": false }
+        ],
+        "showItemsDivider": false,
+        "itemsDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "\nSubtotal 43.47\nTax 3.04\nTotal 46.51",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "VISA 46.51\nChange 0.00",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "It's our pleasure to serve you!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    }
+  ]
+}

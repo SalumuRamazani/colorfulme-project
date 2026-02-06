@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100">
+  <!-- Chevron Logo - Black & White -->
+  <!-- Chevron V shapes -->
+  <path d="M30 30 L50 50 L70 30 L70 35 L50 55 L30 35 Z" fill="#000000"/>
+  <path d="M30 40 L50 60 L70 40 L70 45 L50 65 L30 45 Z" fill="#000000"/>
+  
+  <text x="90" y="58" fill="#000000" font-family="Arial, sans-serif" font-size="36" font-weight="bold">Chevron</text>
+</svg>

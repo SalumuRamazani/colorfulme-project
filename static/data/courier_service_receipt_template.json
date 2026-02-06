@@ -1,0 +1,197 @@
+{
+  "name": "Courier Service Receipt",
+  "description": "Professional courier service delivery receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/courier-service-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 120,
+    "businessName": "EXPRESS LOGISTICS",
+    "headerDivider": "---",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "DELIVERY RECEIPT",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "11/24/2025\n02:34 PM",
+        "dateDivider": "---",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "TRACKING #: TRK-2025-89456",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 4,
+      "data": {
+        "customFields": [
+          {
+            "label": "FROM",
+            "value": "John Smith",
+            "column": 1
+          },
+          {
+            "label": "PHONE",
+            "value": "(512) 555-0147",
+            "column": 1
+          },
+          {
+            "label": "TO",
+            "value": "Sarah Johnson",
+            "column": 2
+          },
+          {
+            "label": "PHONE",
+            "value": "(512) 555-0198",
+            "column": 2
+          }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "DELIVERY ADDRESS",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "456 Oak Avenue\nAustin, TX 78704",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "PACKAGE DETAILS",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---",
+        "isBold": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 8,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Standard Delivery",
+            "price": 12.99
+          },
+          {
+            "quantity": 1,
+            "name": "Signature Required",
+            "price": 3.50
+          },
+          {
+            "quantity": 1,
+            "name": "Insurance",
+            "price": 2.00
+          }
+        ],
+        "itemsDivider": "---",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 9,
+      "data": {
+        "taxRate": null,
+        "showTaxRate": false,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "Total Due",
+            "value": "18.49"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "DELIVERED BY: Alex Chen\nDELIVERY TIME: 2:34 PM",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 11,
+      "data": {
+        "customMessage": "CUSTOMER SIGNATURE\n\n_______________________",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 12,
+      "data": {
+        "customMessage": "Thank you for choosing Express Logistics!\nFor support: 1-800-EXPRESS-1\nwww.expresslogistics.com",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 13,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

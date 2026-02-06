@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100">
+  <!-- Subway Logo -->
+  <!-- Green background with arrows -->
+  <g>
+    <!-- Left arrow -->
+    <path d="M20 40 L10 50 L20 60 L20 52 L30 52 L30 48 L20 48 Z" fill="#008C15"/>
+    
+    <!-- SUBWAY text -->
+    <text x="45" y="58" fill="#008C15" font-family="Arial Black, sans-serif" font-size="36" font-weight="900">SUBWAY</text>
+    
+    <!-- Right arrow -->
+    <path d="M255 48 L255 52 L265 52 L265 60 L275 50 L265 40 L265 48 Z" fill="#FFC600"/>
+  </g>
+  
+  <!-- Registered trademark -->
+  <circle cx="290" cy="35" r="4" fill="none" stroke="#008C15" stroke-width="0.6"/>
+  <text x="287.5" y="38" fill="#008C15" font-family="Arial, sans-serif" font-size="6" font-weight="bold">®</text>
+</svg>

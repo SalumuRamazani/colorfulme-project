@@ -1,0 +1,130 @@
+{
+  "name": "Pawn Shop Receipt",
+  "description": "Professional pawn shop transaction receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/pawnshop-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 50,
+    "businessName": "ACE PAWN & GOLD",
+    "headerDivider": "===",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "LICENSED PAWNBROKER\n1847 E COLFAX AVE\nDENVER, CO 80218\n(303) 831-4726\nLIC #: CO-PB-2847",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 2,
+      "data": {
+        "customFields": [
+          { "label": "TICKET#", "value": "PW-284729", "column": 1 },
+          { "label": "TYPE", "value": "SALE", "column": 1 },
+          { "label": "CLERK", "value": "DAVE M", "column": 2 },
+          { "label": "CUST#", "value": "C-8472", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 3,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "11/13/2025 11:45 AM",
+        "dateDivider": "---",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "PLAYSTATION 5 CONSOLE", "price": 399.99 },
+          { "quantity": 1, "name": "SERIAL: PS5****8472", "price": 0.00 },
+          { "quantity": 1, "name": "14K GOLD CHAIN 24\" 18G", "price": 845.00 },
+          { "quantity": 1, "name": "TESTED & VERIFIED", "price": 0.00 },
+          { "quantity": 1, "name": "DEWALT DRILL SET 20V", "price": 125.00 },
+          { "quantity": 1, "name": "MODEL: DCD777C2", "price": 0.00 },
+          { "quantity": 1, "name": "SAMSUNG 55\" SMART TV", "price": 275.00 },
+          { "quantity": 1, "name": "MODEL: UN55TU7000", "price": 0.00 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "ALL ITEMS TESTED & WORKING\n30-DAY WARRANTY ON ELECTRONICS\n7-DAY RETURN POLICY",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 8.75,
+        "paymentType": "cash",
+        "paymentFields": [
+          { "label": "SUBTOTAL", "value": "1644.99" },
+          { "label": "TAX", "value": "143.94" },
+          { "label": "TOTAL", "value": "1788.93" },
+          { "label": "CASH", "value": "1800.00" },
+          { "label": "CHANGE", "value": "11.07" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "ID VERIFIED: DL****8472\nTRANSACTION RECORDED",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 45,
+        "barcodeLength": 75,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "WE BUY GOLD - TOP DOLLAR PAID\nLOANS AVAILABLE\n\nTHANK YOU FOR YOUR BUSINESS",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}

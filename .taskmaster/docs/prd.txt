@@ -1,0 +1,339 @@
+# ReceiptForge Boilerplate Transformation
+
+## Project Goal
+Transform ReceiptForge from a Replit-hosted app into a scalable, standalone boilerplate with MakeMyReceipt design system while preserving all receipt generation functionality.
+
+## Core Requirements
+
+### 1. Remove Replit Dependencies
+**Current State:** App is tightly coupled to Replit hosting and Replit Auth OAuth
+**Target State:** Standalone Flask app that works on any hosting platform
+
+**Files to Remove:**
+- replit_auth.py (OAuth integration)
+- replit.md (documentation)
+- .replit (Replit config)
+
+**Code Changes:**
+- Remove replit_auth imports from app.py
+- Remove OAuth blueprint registration
+- Replace all `redirect(url_for('replit_auth.login'))` with proper auth flow
+- Remove Replit-specific environment assumptions
+- Remove OAuth model from models.py
+
+**Authentication Strategy:**
+- Keep Flask-Login framework
+- Stub out authentication (future: implement email/password or social auth)
+- Create simple /login and /logout routes
+- Allow anonymous receipt generation
+- Require auth only for saving templates and premium features
+
+### 2. Keep Stripe Integration (Environment-Based)
+**Current State:** Stripe is properly integrated with environment variables
+**Target State:** Keep all Stripe functionality, ensure it's production-ready
+
+**Keep:**
+- All Stripe imports and initialization
+- Webhook endpoints for subscription management
+- Checkout session creation
+- Subscription models and logic
+- Pricing page with Stripe integration
+
+**Verify:**
+- STRIPE_SECRET_KEY from environment
+- STRIPE_WEBHOOK_SECRET from environment
+- All Stripe code uses environment variables
+- No hardcoded API keys anywhere
+
+### 3. Apply MakeMyReceipt Design System
+
+**Design Specifications:**
+- Primary color: #FF6B35 (orange)
+- Backgrounds: White (#FFFFFF) and Gray-50 (#F9FAFB)
+- Text: Gray-900 (primary), Gray-600 (secondary)
+- Borders: 2px solid Gray-900
+- 3D Shadow effect: `shadow-[3px_3px_0_0_#000000]`
+- Hover effect: `shadow-[1px_1px_0_0_#000000]` with translate
+
+**Button Styles:**
+```
+Primary: bg-[#FF6B35] text-white font-bold border-2 border-gray-900 shadow-[3px_3px_0_0_#000000]
+Hover: hover:shadow-[1px_1px_0_0_#000000] hover:translate-x-[2px] hover:translate-y-[2px]
+Secondary: bg-white text-gray-900 font-bold border-2 border-gray-900 shadow-[3px_3px_0_0_#000000]
+```
+
+**Card Styles:**
+```
+Base: bg-white border-2 border-gray-900 rounded-lg shadow-[3px_3px_0_0_#000000]
+Hover: hover:shadow-[1px_1px_0_0_#000000] hover:translate-x-[2px] hover:translate-y-[2px]
+```
+
+### Pages to Update (Priority Order)
+
+#### Priority 1: Core Pages
+1. **base.html** - Navigation and footer
+   - Orange CTA buttons in nav
+   - Clean, minimal footer
+   - 3D shadow effects on nav items
+
+2. **index.html** - Homepage (70KB file)
+   - Hero section with dual CTAs
+   - Template showcase grid
+   - Features section (6 cards)
+   - FAQ accordion
+   - Final CTA section
+
+3. **templates.html** - Template listing
+   - Responsive grid (2/3/4/5 columns)
+   - Template cards with previews
+   - Hover effects
+
+4. **template_detail.html** - Individual template pages
+   - Breadcrumb navigation
+   - Hero with template info
+   - Receipt preview
+   - Features grid
+   - Related templates
+
+#### Priority 2: Generator & Dashboard
+5. **generate_advanced_v2.html** - Receipt generator (147KB file)
+   - Keep functionality intact
+   - Update button styles
+   - Update color scheme
+   - Maintain all form controls
+
+6. **dashboard.html** - User dashboard
+   - Update card styling
+   - Orange accent colors
+   - 3D shadow effects
+
+#### Priority 3: Marketing Pages
+7. **pricing.html** - Pricing tiers
+   - Pricing cards with 3D shadows
+   - Orange CTAs
+   - Feature comparison
+
+8. **Landing Pages** (18 files):
+   - ace_landing.html
+   - auto_repair_landing.html
+   - autozone_landing.html
+   - cardetailing_landing.html
+   - carental_landing.html
+   - carwash_landing.html
+   - computer_repair_landing.html
+   - convenience_store_landing.html
+   - courier_service_landing.html
+   - electrician_landing.html
+   - moving_company_landing.html
+   - oilchange_landing.html
+   - roofing_landing.html
+   - service_landing.html
+   - storage_landing.html
+   - summer_camp_landing.html
+   - therapy_landing.html
+   - vet_landing.html
+
+   **Standardize all landing pages:**
+   - Hero section
+   - Features grid
+   - Use cases
+   - FAQ
+   - CTA
+
+### 4. Configuration & Environment
+
+**Create config.py:**
+```python
+import os
+
+class Config:
+    # Secret keys
+    SECRET_KEY = os.environ.get('SESSION_SECRET') or 'dev-secret-change-in-production'
+
+    # Database
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///receiptforge.db'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        'pool_pre_ping': True,
+        'pool_recycle': 300,
+    }
+
+    # Stripe
+    STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
+    STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET', '')
+
+    # Feature flags
+    ENABLE_SUBSCRIPTIONS = True
+    REQUIRE_AUTH_FOR_FREE = False  # Allow anonymous free generation
+```
+
+**Update .env.example:**
+```
+# Required
+SESSION_SECRET=your-secret-key-here
+DATABASE_URL=postgresql://user:pass@localhost/receiptforge
+
+# Stripe (required for subscriptions)
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+
+# Optional
+DEBUG=False
+LOG_LEVEL=INFO
+```
+
+### 5. Database & Models
+
+**Keep all models:**
+- User
+- Subscription
+- SavedTemplate
+- ReceiptLog
+- BlogPost
+
+**Remove:**
+- OAuth model (Replit-specific)
+- WebhookIntegration (if not used)
+- IncomingWebhookConfig (if not used)
+
+**Update User model:**
+- Remove Replit-specific fields
+- Keep subscription relationships
+- Add email/password fields (for future auth)
+
+### 6. Cleanup Tasks
+
+**Files to Remove:**
+- replit_auth.py
+- replit.md
+- .replit
+- attached_assets/ (468 files, if not needed)
+- WEBHOOK_INTEGRATION_GUIDE.md (if webhooks removed)
+- BIDIRECTIONAL_WEBHOOK_GUIDE.md (if webhooks removed)
+
+**Files to Create:**
+- config.py (centralized configuration)
+- README.md (boilerplate documentation)
+- SETUP.md (quick start guide)
+- DEPLOYMENT.md (deployment instructions)
+
+### 7. Testing Requirements
+
+**Functionality Tests:**
+1. Receipt generation works (PDF export)
+2. Template selection works
+3. All pages load without errors
+4. Stripe checkout works (test mode)
+5. Subscription management works
+6. Navigation works across all pages
+
+**Design Tests:**
+1. All buttons have 3D shadow effect
+2. Orange color scheme applied consistently
+3. Hover effects work
+4. Responsive design works (mobile/tablet/desktop)
+5. No design inconsistencies
+
+### 8. Documentation
+
+**README.md Structure:**
+```markdown
+# ReceiptForge - Receipt Generator SaaS Boilerplate
+
+## Features
+- Receipt generator with 100+ templates
+- Stripe subscription integration
+- User dashboard and saved templates
+- Blog system
+- Responsive design
+- PDF export
+
+## Quick Start
+1. Clone repo
+2. Install dependencies: `pip install -r requirements.txt`
+3. Set environment variables (see .env.example)
+4. Run migrations: `flask db upgrade`
+5. Start server: `flask run`
+
+## Configuration
+[Environment variables explained]
+
+## Deployment
+[Railway, Heroku, DigitalOcean guides]
+
+## Customization
+[How to customize design, add features, etc.]
+```
+
+## Implementation Strategy
+
+### Phase 1: Remove Replit (2 hours)
+1. Remove replit_auth.py and related files
+2. Update app.py to remove OAuth
+3. Create stub authentication
+4. Test that app runs without Replit
+
+### Phase 2: Base Design (3 hours)
+1. Update base.html with MakeMyReceipt nav/footer
+2. Create reusable component partials
+3. Update color scheme variables
+4. Test on multiple pages
+
+### Phase 3: Core Pages (4 hours)
+1. Homepage redesign
+2. Templates page redesign
+3. Template detail redesign
+4. Pricing page update
+
+### Phase 4: Generator & Dashboard (3 hours)
+1. Update generator styling (preserve functionality)
+2. Update dashboard with new design
+3. Test receipt generation end-to-end
+
+### Phase 5: Landing Pages (4 hours)
+1. Create landing page template
+2. Update all 18 landing pages
+3. Standardize structure
+
+### Phase 6: Configuration & Documentation (2 hours)
+1. Create config.py
+2. Update .env.example
+3. Write README.md
+4. Write SETUP.md
+5. Test fresh installation
+
+**Total Estimated Time: 18 hours**
+
+## Success Criteria
+
+✅ App runs without any Replit dependencies
+✅ All pages use MakeMyReceipt design system
+✅ Receipt generation works perfectly
+✅ Stripe integration functional
+✅ All tests pass
+✅ Documentation complete
+✅ Can be deployed to any hosting platform
+✅ Fresh clone and setup works in under 10 minutes
+
+## Risk Mitigation
+
+**Risk:** Breaking receipt generator
+- **Mitigation:** Test after each design change
+
+**Risk:** Missing Replit dependencies
+- **Mitigation:** Grep for "replit" case-insensitive
+
+**Risk:** Stripe integration breaks
+- **Mitigation:** Keep all Stripe code, only verify env vars
+
+**Risk:** Design inconsistencies
+- **Mitigation:** Create reusable component partials
+
+## Out of Scope
+
+- Email/password authentication implementation (stub only)
+- Email sending functionality
+- Advanced analytics
+- Multi-language support
+- API development
+- Mobile apps

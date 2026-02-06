@@ -1,0 +1,139 @@
+{
+  "name": "Oil Change Service Receipt",
+  "description": "Professional oil change service receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/oil-change-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 50,
+    "businessName": "QUICK LUBE EXPRESS",
+    "headerDivider": "===",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "PROFESSIONAL OIL CHANGE CENTER\n4521 AUTO CENTER DR\nPHOENIX, AZ 85012\n(602) 555-8472\nASE CERTIFIED TECHNICIANS",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/13/2025 10:15:00 AM",
+        "dateDivider": "---",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 3,
+      "data": {
+        "customFields": [
+          { "label": "INVOICE", "value": "OC-2025847", "column": 1 },
+          { "label": "TECH", "value": "MIKE R", "column": 1 },
+          { "label": "BAY", "value": "3", "column": 2 },
+          { "label": "RO#", "value": "45821", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "VEHICLE INFORMATION\nMAKE/MODEL: TOYOTA CAMRY\nYEAR: 2020  VIN: ****8472\nLICENSE: 7XYZ123  STATE: AZ\nMILEAGE IN: 45,827  OUT: 45,827",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          { "quantity": 5, "name": "SYNTHETIC BLEND 5W-30 (QTS)", "price": 34.95 },
+          { "quantity": 1, "name": "OIL FILTER - OEM", "price": 12.99 },
+          { "quantity": 1, "name": "LABOR - OIL CHANGE", "price": 19.99 },
+          { "quantity": 1, "name": "TIRE ROTATION", "price": 19.95 },
+          { "quantity": 1, "name": "21-POINT INSPECTION", "price": 0.00 },
+          { "quantity": 1, "name": "WINDSHIELD WASHER TOP-OFF", "price": 0.00 },
+          { "quantity": 1, "name": "BATTERY TEST", "price": 0.00 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "SERVICE RECOMMENDATIONS\n✓ OIL CHANGE COMPLETE\n✓ TIRE PRESSURE CHECKED\n□ AIR FILTER: REPLACE AT 50K\n□ CABIN FILTER: MODERATE DUST",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "payment",
+      "position": 7,
+      "data": {
+        "taxRate": 8.6,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "SUBTOTAL", "value": "87.88" },
+          { "label": "COUPON DISCOUNT", "value": "-10.00" },
+          { "label": "TAX", "value": "6.70" },
+          { "label": "TOTAL", "value": "84.58" },
+          { "label": "VISA ****2341", "value": "84.58" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "NEXT SERVICE DUE\nDATE: 02/13/2026 OR\nMILEAGE: 48,827",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 9,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 40,
+        "barcodeLength": 70,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "WARRANTY: 3 MONTHS/3000 MILES\nKEEP THIS RECEIPT FOR YOUR RECORDS\n\nTHANK YOU FOR YOUR BUSINESS!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}

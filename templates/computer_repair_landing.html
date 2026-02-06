@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Computer Repair Receipt Generator - IT Service Invoices{% endblock %}
+{% block description %}Create professional computer repair receipts with hardware details and warranty information. Perfect for IT repair shops, technicians, and support services. Free and customizable.{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.url_root.rstrip('/') }}/computer-repair-receipt">{% endblock %}
+
+{% block meta_tags %}
+<meta property="og:title" content="Computer Repair Receipt Generator - ReceiptMake">
+<meta property="og:description" content="Create professional computer repair receipts with hardware upgrades and warranty. Perfect for IT repair shops and technicians.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/images/template-previews/computer-repair-preview.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Computer Repair Receipt Generator",
+  "applicationCategory": "BusinessApplication",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a watermark on the receipts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, Receiptmake does not add watermarks to your receipts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I include warranty information?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes! Include warranty period and coverage details for customer reference."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is this suitable for IT support businesses?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Perfect! Designed for IT repair shops, computer technicians, and IT support services."}
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+  <section class="px-4 py-12 md:py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4 leading-tight">
+            Computer Repair Receipts
+          </h1>
+          <p class="text-lg text-neutral-600 mb-6">
+            Create professional computer repair receipts with detailed hardware documentation. Perfect for IT repair shops, technicians, and computer support services.
+          </p>
+          <p class="text-neutral-600 mb-8">
+            Document hardware upgrades, software installations, services performed, labor hours, warranty information, and costs. Generate professional invoices in seconds.
+          </p>
+          <a href="/generate-computer-repair-receipt" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200">
+            Create Receipt →
+          </a>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden relative border border-neutral-200">
+          <img src="/static/images/template-previews/computer-repair-preview.webp?v=1" alt="Computer Repair Receipt Preview" class="w-full h-auto">
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%); pointer-events: none; z-index: 100;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-neutral-900 mb-12">Hardware & Service Documentation</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">💻</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Device Tracking</h3>
+          <p class="text-neutral-600 text-sm">Document device type, brand, model, and serial number.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">⚙️</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Hardware Upgrades</h3>
+          <p class="text-neutral-600 text-sm">Track RAM, SSD, and component upgrades with pricing.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🔧</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Service Documentation</h3>
+          <p class="text-neutral-600 text-sm">Record software installs, OS reinstalls, and repairs.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">⏱️</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Labor Hours</h3>
+          <p class="text-neutral-600 text-sm">Track technician hours with customizable rates.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🛡️</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Warranty Coverage</h3>
+          <p class="text-neutral-600 text-sm">Include warranty period and coverage terms.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">💰</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Cost Calculation</h3>
+          <p class="text-neutral-600 text-sm">Parts, labor, and tax calculations automatically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Create Professional Computer Repair Receipts</h2>
+      <p class="text-blue-100 mb-8">Free receipt generation for IT support and repair services.</p>
+      <a href="/generate-computer-repair-receipt" class="inline-block bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 px-8 rounded-lg transition duration-200">
+        Generate Receipt Now →
+      </a>
+    </div>
+  </section>
+</div>
+{% endblock %}

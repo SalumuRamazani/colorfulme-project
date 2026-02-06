@@ -1,0 +1,128 @@
+{
+  "name": "Auto Repair Receipt",
+  "description": "Professional auto repair receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/auto-repair-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 80,
+    "businessName": "Auto Repair Services",
+    "headerDivider": "---",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "1425 Motorway Drive, Charlotte, NC 28202\nPhone: (704) 555-0147\ncontact@carrepair.com",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "08/25/2025\n11:45 AM",
+        "dateDivider": "---",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "AUTO REPAIR RECEIPT\nRECEIPT #: 10253582\nTECHNICIAN: David Burnett",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "Vehicle: 2018 Honda Civic\nMileage: 65,234",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Synthetic Oil Change Service",
+            "price": 52.00
+          },
+          {
+            "quantity": 1,
+            "name": "Brake Pad Replacement (Front)",
+            "price": 185.00
+          },
+          {
+            "quantity": 1,
+            "name": "Windshield Wiper Blades (Pair)",
+            "price": 39.98
+          },
+          {
+            "quantity": 2.5,
+            "name": "Labor @ $85/hour",
+            "price": 212.50
+          }
+        ],
+        "itemsDivider": "---",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 7.0,
+        "showTaxRate": true,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "Total",
+            "value": "227.34"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "Thank You for Your Business!\nWe recommend service every 5,000 miles.",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

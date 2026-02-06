@@ -1,0 +1,1913 @@
+{% extends "base.html" %}
+
+{% block title %}{% if template_name %}{% if is_generator_route %}Create {{ template_name }}{% if not template_name.lower().endswith('receipt') %} Receipt{% endif %} - Free Online Generator | ReceiptMake{% else %}Generate {{ template_name }}{% if not template_name.lower().endswith('receipt') %} receipt{% endif %} - ReceiptMake{% endif %}{% else %}Create Custom Receipts - Advanced Receipt Generator | ReceiptMake{% endif %}{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.url.split('?')[0] }}">{% endblock %}
+{% block head_extras %}
+<link rel="preload" href="/static/js/advanced-receipt-generator-v2.min.js?v=1" as="script">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js" as="script">
+{% endblock %}
+
+{% block content %}
+<script>
+// Track generator page load
+if (typeof window !== 'undefined' && window.posthog) {
+    posthog.capture('generator_loaded', {
+        template_name: '{{ template_name }}' || 'custom',
+        has_subscription: {{ 'true' if has_subscription else 'false' }}
+    });
+}
+
+// Track first field edit (only once per session)
+let firstEditTracked = false;
+document.addEventListener('alpine:init', () => {
+    document.addEventListener('input', function(e) {
+        if (!firstEditTracked && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) {
+            firstEditTracked = true;
+            if (typeof window !== 'undefined' && window.posthog) {
+                posthog.capture('first_field_edited', {
+                    field_type: e.target.tagName.toLowerCase()
+                });
+            }
+        }
+    }, { once: false });
+});
+</script>
+
+<!-- New modular receipt generator (CDN libraries lazy-loaded for fast page load) -->
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js" async></script>
+<script src="/static/js/advanced-receipt-generator-v2.min.js?v=1"></script>
+
+<!-- Set flag if auto-save succeeded -->
+<script>
+if ({{ 'true' if session.get('show_autosave_success') else 'false' }}) {
+    document.body.setAttribute('data-autosave-success', 'true');
+}
+</script>
+
+<style>
+/* MOBILE UX FIXES - Award-Winning Smoothness */
+
+/* Fix iOS auto-zoom on inputs - 16px minimum */
+@media screen and (max-width: 1024px) {
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+    
+    /* Touch targets - 44px minimum for accessibility */
+    button, .cursor-pointer {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Scale receipt preview to fit entire receipt on mobile - ReceiptFaker pattern */
+    #receipt-preview {
+        transform: scale(0.75);
+        transform-origin: top center;
+    }
+    
+    /* Adjust preview container padding on mobile */
+    .bg-neutral-100.rounded-xl {
+        padding: 1rem !important;
+    }
+    
+    /* Ensure mobile action buttons stay above receipt preview */
+    .lg\:hidden {
+        position: relative;
+        z-index: 10;
+    }
+    
+    /* Mobile sticky toggle - fixed at top, scrolls with content */
+    .mb-4.lg\:hidden.flex.gap-2.sticky {
+        position: fixed !important;
+        top: 56px !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0.75rem !important;
+        padding-left: max(0.75rem, env(safe-area-inset-left)) !important;
+        padding-right: max(0.75rem, env(safe-area-inset-right)) !important;
+        z-index: 40 !important;
+        box-sizing: border-box !important;
+        gap: 0.75rem !important;
+        height: auto !important;
+        background-color: white !important;
+        border-bottom: 1px solid #e5e7eb !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+    }
+    
+    .mb-4.lg\:hidden.flex.gap-2.sticky button {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 0.9375rem !important;
+        height: 44px !important;
+        min-height: 44px !important;
+        font-weight: 600 !important;
+        border-radius: 0.5rem !important;
+    }
+    
+    /* Add spacing to main container for toggle */
+    .max-w-7xl.mx-auto.px-4.pb-8.pt-8 {
+        padding-top: 100px !important;
+    }
+}
+
+/* VISUAL FEEDBACK FOR ALL INTERACTIONS - Anti-rage-click UX */
+
+/* Input fields - highlight border when focused/typing */
+input:focus, textarea:focus, select:focus {
+    outline: none !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    transition: all 0.15s ease !important;
+}
+
+/* Button press feedback - scale down on click */
+button:active:not(:disabled) {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+/* Button ripple effect */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    pointer-events: none;
+}
+
+.btn-ripple:active::after {
+    animation: ripple 0.6s ease-out;
+}
+
+/* Item added - flash green */
+@keyframes flashGreen {
+    0% { background-color: #10b981; }
+    100% { background-color: transparent; }
+}
+
+.item-added {
+    animation: flashGreen 0.6s ease-out;
+}
+
+/* Item deleted - fade out */
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(20px); }
+}
+
+.item-deleted {
+    animation: fadeOut 0.3s ease-out forwards;
+}
+
+/* Loading state for buttons */
+.btn-loading {
+    opacity: 0.7;
+    cursor: wait;
+    pointer-events: none;
+}
+
+/* Smooth accordion animations - ReceiptFaker-level polish */
+.section-content {
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    overflow: hidden;
+}
+
+.section-header {
+    transition: background-color 0.2s ease;
+}
+
+.section-header:active {
+    background-color: #f9fafb !important;
+}
+
+/* Smooth chevron rotation */
+.chevron-icon {
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Draggable section animations */
+.draggable-section {
+    position: relative;
+    transition: opacity 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.draggable-section.dragging {
+    opacity: 0.35;
+    z-index: 50;
+    background-color: #f9fafb;
+    will-change: opacity;
+}
+
+.draggable-section.drag-over {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 2px solid #3b82f6 !important;
+    box-shadow: inset 0 2px 8px rgba(59, 130, 246, 0.15), 0 4px 12px rgba(59, 130, 246, 0.1);
+    will-change: background, border-color, box-shadow;
+}
+
+.draggable-section.drag-over::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, #3b82f6 100%);
+    border-radius: 2px;
+    animation: dropIndicator 0.6s ease-in-out infinite;
+}
+
+@keyframes dropIndicator {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Mobile section reorder animations */
+.mobile-section-btn {
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.mobile-section-btn:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.mobile-section-btn:disabled {
+    opacity: 0.3 !important;
+    cursor: not-allowed !important;
+}
+
+.mobile-section-btn:not(:disabled) {
+    cursor: pointer;
+}
+
+.drag-handle {
+    cursor: move;
+    transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (hover: hover) {
+    .drag-handle:hover {
+        background: rgba(59, 130, 246, 0.1);
+    }
+}
+
+.drag-handle:active {
+    background: rgba(59, 130, 246, 0.2);
+    transform: scale(0.98);
+}
+
+/* Thermal receipt paper look */
+.receipt-paper {
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-size: 20px !important;
+    line-height: 1.2 !important;
+    padding: 16px 20px !important;
+    margin: 0 auto;
+    font-weight: 500 !important;
+    letter-spacing: 0px !important;
+}
+
+
+/* Thermal receipt fonts - MerchantCopy is the absolute only font allowed */
+.font-1, .font-2, .font-3, .receipt-paper, #receipt-preview, #receipt-preview * { 
+    font-family: 'MerchantCopy' !important; 
+}
+
+/* Realistic barcode */
+.barcode {
+    background: repeating-linear-gradient(
+        90deg,
+        #000 0px,
+        #000 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    height: 60px;
+    margin: 6px 0 4px 0;
+}
+
+/* Spacing for receipts */
+.receipt-paper * {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+}
+
+.receipt-paper .mb-1 { margin-bottom: 2px !important; }
+.receipt-paper .mb-2 { margin-bottom: 6px !important; }
+.receipt-paper .mb-3 { margin-bottom: 8px !important; }
+.receipt-paper .mb-4 { margin-bottom: 10px !important; }
+.receipt-paper .mt-2 { margin-top: 6px !important; }
+.receipt-paper .mt-4 { margin-top: 10px !important; }
+
+/* Logo sizing */
+.receipt-paper img {
+    max-width: 200px !important;
+    height: auto !important;
+    margin: 6px auto 4px auto !important;
+    display: block;
+}
+
+/* Item rows */
+.receipt-paper .flex {
+    display: flex;
+    line-height: 1.4;
+}
+
+.receipt-paper .justify-between {
+    justify-content: space-between;
+}
+
+/* Bold only for TOTAL */
+.receipt-paper .font-bold {
+    font-weight: bold;
+}
+
+.receipt-paper .text-base {
+    font-size: 11px !important;
+}
+
+@media print {
+    @page {
+        margin: 0;
+        size: auto;
+    }
+    
+    body * {
+        visibility: hidden;
+    }
+    
+    #receipt-preview, #receipt-preview * {
+        visibility: visible;
+    }
+    
+    #receipt-preview {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+    
+    /* Watermarks removed */
+}
+
+@keyframes gentle-glow {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.3); }
+    50% { box-shadow: 0 0 8px 2px rgba(59, 130, 246, 0.15); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+.quick-tips {
+    animation: gentle-glow 3s ease-in-out 1;
+}
+</style>
+
+{% if template_config %}
+<script>
+    window.TEMPLATE_CONFIG = {{ template_config|tojson|safe }};
+</script>
+{% endif %}
+
+<!-- Loading skeleton shown instantly while Alpine/JS loads -->
+<div id="loading-skeleton" class="min-h-screen bg-neutral-50 py-8 px-4" style="display:block !important;">
+    <div class="max-w-7xl mx-auto">
+        <!-- Mobile: Show loading message -->
+        <div class="lg:hidden text-center py-4 mb-4">
+            <div class="inline-flex items-center gap-2 text-neutral-600">
+                <svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span class="font-medium">Loading generator...</span>
+            </div>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-8">
+            <div class="space-y-4">
+                <div class="h-12 bg-neutral-200 rounded-lg animate-pulse"></div>
+                <div class="h-32 bg-neutral-200 rounded-lg animate-pulse"></div>
+                <div class="h-24 bg-neutral-200 rounded-lg animate-pulse"></div>
+                <div class="h-48 bg-neutral-200 rounded-lg animate-pulse"></div>
+            </div>
+            <div class="hidden lg:block bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
+                <div class="h-96 bg-neutral-100 rounded-lg animate-pulse"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="min-h-screen bg-neutral-50" x-data='advancedReceiptGeneratorV2({{ "true" if has_subscription else "false" }}, window.TEMPLATE_CONFIG || null, {{ "true" if current_user and current_user.is_authenticated else "false" }}, {{ (template_name or "")|tojson|safe }})' x-init="$nextTick(() => { const el = document.getElementById('loading-skeleton'); if(el) el.remove(); }); init()"  x-cloak>
+    <div class="max-w-7xl mx-auto px-4 pb-8 pt-8">
+        <!-- Error Notification -->
+        {% if load_error %}
+        <div class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
+            <div class="flex items-center">
+                <svg class="w-5 h-5 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                <p class="text-red-800 font-medium">{{ load_error }}</p>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Restore Receipt Banner (sticky at top) -->
+        <div x-show="showRestoreModal" 
+             x-cloak
+             style="display: none;"
+             class="sticky top-0 z-40 bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 mb-4 flex items-center justify-between gap-4 flex-wrap"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0">
+            
+            <div class="flex items-center gap-3">
+                <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <span class="text-blue-800 font-medium text-sm sm:text-base">You have a saved receipt. Keep working on it?</span>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <button @click="handleRestoreContinue()" 
+                        class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                    Continue
+                </button>
+                <button @click="handleRestoreStartFresh()" 
+                        class="px-4 py-2 bg-white text-neutral-700 text-sm font-medium rounded-lg border border-neutral-300 hover:bg-neutral-50 transition">
+                    Start Fresh
+                </button>
+                <button @click="handleRestoreStartFresh()" 
+                        class="p-1.5 text-neutral-400 hover:text-neutral-600 transition"
+                        title="Dismiss">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Desktop Header (Title Only - Buttons moved to preview section) -->
+        <div class="mb-6 hidden lg:block">
+            <h1 class="text-2xl lg:text-3xl font-bold text-neutral-900">{% if template_name %}{{ template_name }} Generator{% else %}Advanced Receipt Generator{% endif %}</h1>
+        </div>
+        
+        <!-- Mobile EDIT/PREVIEW Toggle (Sticky) -->
+        <div class="mb-4 lg:hidden flex gap-2 sticky top-0 bg-white z-50 py-3 -mx-4 px-4 border-b border-neutral-200 shadow-md">
+            <button @click="showPreview = false" :class="!showPreview ? 'bg-blue-600 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-4 py-3 rounded-lg font-medium transition-all">
+                <span class="block sm:hidden">EDIT RECEIPT</span>
+                <span class="hidden sm:block">EDIT</span>
+            </button>
+            <button @click="showPreview = true" :class="showPreview ? 'bg-blue-600 text-white' : 'bg-neutral-100 text-neutral-700 border-2 border-blue-600 hover:bg-blue-50 animate-pulse'" class="flex-1 px-4 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2">
+                <span class="block sm:hidden">TAP TO SEE RECEIPT</span>
+                <span class="hidden sm:block">PREVIEW</span>
+                <svg class="block sm:hidden w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Download Success Toast -->
+        <div x-show="downloadSuccessToast"
+             x-cloak
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 translate-y-2"
+             class="fixed bottom-4 right-4 z-50 bg-green-600 text-white px-6 py-4 rounded-lg shadow-2xl max-w-md">
+            <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <div>
+                    <p class="font-semibold text-lg">✓ Receipt downloaded!</p>
+                    <p class="text-sm text-green-100 mt-1">Check your downloads folder.</p>
+                </div>
+                <button @click="downloadSuccessToast = false" class="ml-4 text-green-200 hover:text-white">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+
+    <!-- Desktop: Guidance Section -->
+    <div class="mb-6 hidden lg:block max-w-7xl mx-auto px-4">
+            <div class="bg-gradient-to-r from-blue-50 to-transparent rounded-lg border border-blue-100 px-6 py-4 flex items-center">
+                <svg class="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <p class="text-sm text-neutral-700">
+                    <span class="font-semibold">Create your receipt in 3 easy steps:</span> Fill → Preview → Download <span class="text-neutral-500">(2 minutes)</span>
+                </p>
+            </div>
+                </button>
+            </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" :class="showPreview ? 'lg:grid-cols-1' : ''">
+            <!-- Left Panel - Sections -->
+            <div x-show="!showPreview" class="space-y-2 lg:space-y-4 lg:max-h-[calc(100vh-200px)] lg:overflow-y-auto">
+                <!-- Section Tip -->
+                <div x-data="{ showSectionTip: true }" x-show="showSectionTip" class="bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 flex items-center justify-between">
+                    <p class="text-xs text-amber-700">
+                        <span class="font-medium">Tip:</span> Click on the section name to expand/collapse
+                    </p>
+                    <button @click="showSectionTip = false" class="ml-2 text-amber-400 hover:text-amber-600 transition flex-shrink-0">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Sections Container (Sortable) -->
+                <div x-ref="sectionsContainer" class="gap-2 flex flex-col space-y-2">
+                    <template x-for="section in sections" :key="section.instanceId">
+                        <div :data-instance-id="section.instanceId" 
+                             :draggable="!isMobile && dragHandleActive"
+                             @dragstart="dragStartFromHandle($event, section)"
+                             @dragover.prevent="dragOver($event, section)"
+                             @drop="dragDrop($event, section)"
+                             @dragleave.prevent="dragLeave()"
+                             @dragend="dragEnd($event); dragHandleActive = false"
+                             :class="{
+                               'dragging': draggedId === section.instanceId,
+                               'drag-over': draggedOverId === section.instanceId && draggedId !== section.instanceId
+                             }"
+                             class="draggable-section bg-white rounded-lg sm:rounded-lg lg:rounded-2xl overflow-hidden hover:border-neutral-300/80 hover:shadow-lg border border-neutral-200 sm:border-neutral-200/70 select-none">
+                            
+                            <!-- Desktop Section Header -->
+                            <div class="hidden lg:flex items-center gap-3 px-4 py-2.5 bg-neutral-50 rounded-lg border border-neutral-200 hover:bg-neutral-100 transition-colors duration-200">
+                                <!-- Section Icon -->
+                                <div class="text-neutral-700 flex-shrink-0">
+                                    <svg class="w-5 h-5" x-show="section.type === 'settings'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'header'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'dateTime'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'twoColumn'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v18m6 0V3M3 9h18M3 15h18"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'items'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'payment'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h10m4 0a1 1 0 100-2 1 1 0 000 2zM3 6a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V6z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'customMessage'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'barcode'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 6h1v12H5V6zm2 0h1v12H7V6zm2 0h1v12H9V6zm2 0h2v12h-2V6zm3 0h1v12h-1V6zm2 0h1v12h-1V6z"></path>
+                                    </svg>
+                                </div>
+                                
+                                <!-- Section Title (clickable to expand) -->
+                                <div @click="toggleSection(section.instanceId)" 
+                                     :title="section.collapsed ? 'Expand section' : 'Collapse section'"
+                                     class="flex items-center gap-1.5 flex-1 cursor-pointer group">
+                                    <span class="font-medium text-sm text-neutral-900 group-hover:text-neutral-950 transition-colors duration-150" x-text="getSectionTemplate(section.type).name"></span>
+                                    
+                                    <!-- Chevron -->
+                                    <svg class="w-5 h-5 text-neutral-400 group-hover:text-neutral-600 transition-all duration-200" :class="section.collapsed ? '' : 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                                
+                                <!-- Drag Handle (Hamburger Menu) -->
+                                <div @mousedown.stop="handleDragStart($event, section)"
+                                     @mouseup.stop="isDraggingNow = false; dragHandleActive = false"
+                                     @dragend.stop="isDraggingNow = false; dragHandleActive = false"
+                                     title="Drag to reorder sections"
+                                     :style="{ cursor: isDraggingNow || draggedId === section.instanceId ? 'grabbing' : 'grab' }"
+                                     class="flex items-center gap-0.5 px-2 py-1 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded transition-colors duration-150 flex-shrink-0">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                        <!-- Hamburger menu (3 horizontal lines) -->
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                                    </svg>
+                                </div>
+                                
+                                <!-- Delete Button -->
+                                <button @click.stop="removeSection(section.instanceId)" 
+                                        title="Delete section"
+                                        class="p-1.5 rounded text-red-500 border border-red-300 hover:bg-red-50 active:bg-red-100 transition-colors duration-150 flex-shrink-0">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <!-- Mobile Section Header -->
+                            <div class="lg:hidden flex items-center gap-2 px-3 py-2 bg-white border border-neutral-200 rounded-lg hover:border-neutral-300/80 hover:shadow-lg transition-all duration-200">
+                                <!-- Section Icon (SVG) -->
+                                <div class="text-neutral-700 flex-shrink-0">
+                                    <svg class="w-5 h-5" x-show="section.type === 'settings'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'header'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'dateTime'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'twoColumn'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v18m6 0V3M3 9h18M3 15h18"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'items'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'payment'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h10m4 0a1 1 0 100-2 1 1 0 000 2zM3 6a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V6z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'customMessage'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5" x-show="section.type === 'barcode'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 6h1v12H5V6zm2 0h1v12H7V6zm2 0h1v12H9V6zm2 0h2v12h-2V6zm3 0h1v12h-1V6zm2 0h1v12h-1V6z"></path>
+                                    </svg>
+                                </div>
+                                
+                                <!-- Section Title + Chevron (clickable to expand) -->
+                                <div @click="toggleSection(section.instanceId)" 
+                                     :title="section.collapsed ? 'Expand section' : 'Collapse section'"
+                                     class="flex-1 cursor-pointer group flex items-center gap-1.5 min-w-0">
+                                    <span class="font-medium text-sm text-neutral-900 transition-colors truncate" x-text="getSectionTemplate(section.type).name"></span>
+                                    <!-- Chevron -->
+                                    <svg class="w-4 h-4 text-neutral-400 flex-shrink-0 transition-all duration-200" :class="section.collapsed ? '' : 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                                
+                                <!-- Desktop: Reorder Menu (Hamburger) - Drag handle -->
+                                <div class="hidden lg:flex items-center px-1.5 py-1 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded transition-colors duration-150 flex-shrink-0"
+                                     @mousedown.stop="handleDragStart($event, section)"
+                                     @mouseup.stop="isDraggingNow = false; dragHandleActive = false"
+                                     @dragend.stop="isDraggingNow = false; dragHandleActive = false"
+                                     title="Drag to reorder sections"
+                                     :style="{ cursor: isDraggingNow || draggedId === section.instanceId ? 'grabbing' : 'grab' }"
+                                     style="user-select: none; -webkit-user-select: none;">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                        <!-- Hamburger menu (3 horizontal lines) -->
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                                    </svg>
+                                </div>
+                                
+                                <!-- Mobile: Up/Down arrow buttons -->
+                                <div class="lg:hidden flex items-center gap-0.5">
+                                    <button @click.stop="moveSectionUp(section.instanceId); vibrate(50)"
+                                            :disabled="sections.findIndex(s => s.instanceId === section.instanceId) === 0"
+                                            :class="sections.findIndex(s => s.instanceId === section.instanceId) === 0 ? 'text-neutral-300 cursor-not-allowed' : 'text-neutral-600 hover:text-neutral-900 active:scale-95'"
+                                            title="Move section up"
+                                            class="p-1.5 rounded transition-colors duration-150 flex-shrink-0">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M7 14l5-5 5 5z"></path>
+                                        </svg>
+                                    </button>
+                                    <button @click.stop="moveSectionDown(section.instanceId); vibrate(50)"
+                                            :disabled="sections.findIndex(s => s.instanceId === section.instanceId) === sections.length - 1"
+                                            :class="sections.findIndex(s => s.instanceId === section.instanceId) === sections.length - 1 ? 'text-neutral-300 cursor-not-allowed' : 'text-neutral-600 hover:text-neutral-900 active:scale-95'"
+                                            title="Move section down"
+                                            class="p-1.5 rounded transition-colors duration-150 flex-shrink-0">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M7 10l5 5 5-5z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                <!-- Delete Button -->
+                                <button @click.stop="removeSection(section.instanceId)" 
+                                        title="Delete section"
+                                        class="p-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 active:bg-red-100 rounded-lg transition-all flex-shrink-0">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <!-- Section Content -->
+                            <div x-show="!section.collapsed" x-collapse class="px-6 py-4 border-t border-neutral-150/50 space-y-3 lg:space-y-4 bg-white/50">
+                                
+                                <!-- Settings Section Editor -->
+                                <template x-if="section.type === 'settings'">
+                                    <div class="space-y-5">
+                                        <!-- Currency & Format Row -->
+                                        <div>
+                                            <label class="block text-xs font-semibold text-neutral-700 uppercase tracking-wide mb-3">Currency</label>
+                                            <input x-model="section.data.currencySymbol" type="text" maxlength="5" placeholder="$" class="w-full px-4 py-3 border border-neutral-300 rounded-lg text-sm bg-white hover:border-neutral-400 focus:border-blue-400 focus:ring-1 focus:ring-blue-200 transition-colors" style="font-family: monospace;">
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-xs font-semibold text-neutral-700 uppercase tracking-wide mb-3">Format</label>
+                                            <div class="flex gap-2">
+                                                <button @click="section.data.currencyPosition = 'before'" :class="section.data.currencyPosition === 'before' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-4 py-2.5 border rounded-lg text-sm font-mono transition-colors" x-text="section.data.currencySymbol + '2.99'"></button>
+                                                <button @click="section.data.currencyPosition = 'after'" :class="section.data.currencyPosition === 'after' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-4 py-2.5 border rounded-lg text-sm font-mono transition-colors" x-text="'2.99' + section.data.currencySymbol"></button>
+                                                <button @click="section.data.currencyPosition = 'after-space'" :class="section.data.currencyPosition === 'after-space' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-4 py-2.5 border rounded-lg text-sm font-mono transition-colors" x-text="'2.99 ' + section.data.currencySymbol"></button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Font Selection -->
+                                        <div>
+                                            <label class="block text-xs font-semibold text-neutral-700 uppercase tracking-wide mb-3">Font</label>
+                                            <div class="flex gap-2">
+                                                <button @click="section.data.selectedFont = 'font-1'" :class="section.data.selectedFont === 'font-1' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-4 py-2.5 border rounded-lg text-sm font-mono transition-colors">Font 1</button>
+                                                <button @click="section.data.selectedFont = 'font-2'" :class="section.data.selectedFont === 'font-2' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-4 py-2.5 border rounded-lg text-sm font-mono transition-colors">Font 2</button>
+                                                <button @click="section.data.selectedFont = 'font-3'" :class="section.data.selectedFont === 'font-3' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-4 py-2.5 border rounded-lg text-sm font-mono transition-colors">Font 3</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Text Color -->
+                                        <div class="flex items-center gap-3">
+                                            <input type="color" x-model="section.data.textColor" class="w-16 h-12 border border-neutral-300 rounded-lg cursor-pointer hover:border-neutral-400 transition-colors">
+                                            <label class="text-sm font-medium text-neutral-900">Text color</label>
+                                        </div>
+                                        
+                                        <!-- Receipt Width -->
+                                        <div>
+                                            <label class="block text-xs font-semibold text-neutral-700 uppercase tracking-wide mb-3">Receipt Width</label>
+                                            <input type="range" x-model.number="section.data.receiptWidth" min="200" max="450" step="10" class="w-full h-2 rounded-lg appearance-none bg-gradient-to-r from-blue-200 to-blue-300 cursor-pointer" style="accent-color: rgb(37, 99, 235)" x-init="if (!section.data.receiptWidth) section.data.receiptWidth = 320">
+                                            <div class="flex justify-between text-xs text-neutral-500 mt-2">
+                                                <span>Narrow</span>
+                                                <span class="font-medium text-neutral-700" x-text="(section.data.receiptWidth || 320) + 'px'"></span>
+                                                <span>Wide</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                
+                                <!-- Header Section Editor -->
+                                <template x-if="section.type === 'header'">
+                                    <div class="space-y-4 lg:space-y-5">
+                                        <div>
+                                            <label class="block text-sm font-semibold text-neutral-900 mb-2.5">Logo</label>
+                                            <input type="file" @change="uploadLogo(section.instanceId, $event)" accept="image/*" class="w-full text-sm px-4 py-3 border border-neutral-300 rounded-lg bg-white hover:border-neutral-400 transition-colors cursor-pointer">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-semibold text-neutral-900 mb-2.5">Logo Size (%)</label>
+                                            <input type="range" x-model="section.data.logoSize" min="10" max="200" class="w-full h-2 rounded-lg appearance-none bg-gradient-to-r from-blue-200 to-blue-300 cursor-pointer" style="accent-color: rgb(37, 99, 235)">
+                                            <span class="text-sm text-neutral-600 mt-2 block font-medium" x-text="section.data.logoSize + '%'"></span>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-semibold text-neutral-900 mb-2.5">Business Name</label>
+                                            <textarea x-model="section.data.businessName" rows="3" class="w-full px-4 py-3 border border-neutral-300 rounded-lg text-sm bg-white hover:border-neutral-400 focus:border-blue-400 focus:ring-1 focus:ring-blue-200 transition-colors resize-none"></textarea>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-semibold text-neutral-900 mb-2.5">Alignment</label>
+                                            <select x-model="section.data.headerAlignment" class="w-full px-4 py-3 border border-neutral-300 rounded-lg text-sm bg-white hover:border-neutral-400 transition-colors">
+                                                <option value="left">Left</option>
+                                                <option value="center">Center</option>
+                                                <option value="right">Right</option>
+                                            </select>
+                                        </div>
+                                        <div class="space-y-3 lg:space-y-4 pt-2 border-t border-neutral-200">
+                                            <div class="flex items-center gap-3 pt-2">
+                                                <input type="checkbox" x-model="section.data.showHeaderDivider" class="w-5 h-5 rounded accent-blue-600 cursor-pointer">
+                                                <label class="text-sm font-medium text-neutral-900 cursor-pointer">Show divider</label>
+                                            </div>
+                                            <div class="flex gap-2">
+                                                <button @click="section.data.headerDivider = '---'" :class="section.data.headerDivider === '---' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-3 py-2.5 border rounded-lg text-sm font-mono transition-colors">---</button>
+                                                <button @click="section.data.headerDivider = '==='" :class="section.data.headerDivider === '===' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-3 py-2.5 border rounded-lg text-sm font-mono transition-colors">===</button>
+                                                <button @click="section.data.headerDivider = '...'" :class="section.data.headerDivider === '...' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-3 py-2.5 border rounded-lg text-sm font-mono transition-colors">...</button>
+                                                <button @click="section.data.headerDivider = ':::'" :class="section.data.headerDivider === ':::' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-3 py-2.5 border rounded-lg text-sm font-mono transition-colors">:::</button>
+                                                <button @click="section.data.headerDivider = '***'" :class="section.data.headerDivider === '***' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-3 py-2.5 border rounded-lg text-sm font-mono transition-colors">***</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                
+                                <!-- Date & Time Section Editor -->
+                                <template x-if="section.type === 'dateTime'">
+                                    <div class="space-y-4 lg:space-y-5">
+                                        <div>
+                                            <label class="block text-sm font-semibold text-neutral-900 mb-2.5">Date & Time</label>
+                                            <input type="text" x-model="section.data.dateTime" class="w-full px-4 py-3 border border-neutral-300 rounded-lg text-sm bg-white hover:border-neutral-400 focus:border-blue-400 focus:ring-1 focus:ring-blue-200 transition-colors" placeholder="11/11/2025, 3:04:14 PM">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-semibold text-neutral-900 mb-2.5">Alignment</label>
+                                            <select x-model="section.data.dateAlignment" class="w-full px-4 py-3 border border-neutral-300 rounded-lg text-sm bg-white hover:border-neutral-400 transition-colors">
+                                                <option value="left">Left</option>
+                                                <option value="center">Center</option>
+                                                <option value="right">Right</option>
+                                            </select>
+                                        </div>
+                                        <div class="space-y-3 lg:space-y-4 pt-2 border-t border-neutral-200">
+                                            <div class="flex items-center gap-3 pt-2">
+                                                <input type="checkbox" x-model="section.data.showDateDivider" class="w-5 h-5 rounded accent-blue-600 cursor-pointer">
+                                                <label class="text-sm font-medium text-neutral-900 cursor-pointer">Show divider</label>
+                                            </div>
+                                            <div class="flex gap-2">
+                                                <button @click="section.data.dateDivider = '---'" :class="section.data.dateDivider === '---' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-3 py-2.5 border rounded-lg text-sm font-mono transition-colors">---</button>
+                                                <button @click="section.data.dateDivider = '==='" :class="section.data.dateDivider === '===' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-3 py-2.5 border rounded-lg text-sm font-mono transition-colors">===</button>
+                                                <button @click="section.data.dateDivider = '...'" :class="section.data.dateDivider === '...' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-3 py-2.5 border rounded-lg text-sm font-mono transition-colors">...</button>
+                                                <button @click="section.data.dateDivider = ':::'" :class="section.data.dateDivider === ':::' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-3 py-2.5 border rounded-lg text-sm font-mono transition-colors">:::</button>
+                                                <button @click="section.data.dateDivider = '***'" :class="section.data.dateDivider === '***' ? 'bg-blue-500 text-white border-blue-600' : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'" class="flex-1 px-3 py-2.5 border rounded-lg text-sm font-mono transition-colors">***</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                
+                                <!-- Two Column Information Section Editor -->
+                                <template x-if="section.type === 'twoColumn'">
+                                    <div class="space-y-1.5 lg:space-y-2">
+                                        <div class="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <label class="text-xs font-medium text-neutral-600 mb-2 block">Column 1</label>
+                                                <template x-for="(field, idx) in section.data.customFields.filter(f => f.column === 1)" :key="idx">
+                                                    <div class="flex gap-1 lg:gap-2 mb-2">
+                                                        <input type="text" x-model="field.label" placeholder="Label" class="flex-1 min-w-0 px-1 lg:px-2 py-1 border rounded text-sm">
+                                                        <input type="text" x-model="field.value" placeholder="Value" class="flex-1 min-w-0 px-1 lg:px-2 py-1 border rounded text-sm">
+                                                        <button @click="removeCustomField(section.instanceId, section.data.customFields.indexOf(field))" class="text-red-500 hover:bg-red-50 px-2 py-1 rounded shrink-0 text-lg lg:text-xl touch-manipulation">×</button>
+                                                    </div>
+                                                </template>
+                                                <button @click="addCustomField(section.instanceId, 1)" class="text-blue-600 text-xs hover:underline">+ Add field</button>
+                                            </div>
+                                            <div>
+                                                <label class="text-xs font-medium text-neutral-600 mb-2 block">Column 2</label>
+                                                <template x-for="(field, idx) in section.data.customFields.filter(f => f.column === 2)" :key="idx">
+                                                    <div class="flex gap-1 lg:gap-2 mb-2">
+                                                        <input type="text" x-model="field.label" placeholder="Label" class="flex-1 min-w-0 px-1 lg:px-2 py-1 border rounded text-sm">
+                                                        <input type="text" x-model="field.value" placeholder="Value" class="flex-1 min-w-0 px-1 lg:px-2 py-1 border rounded text-sm">
+                                                        <button @click="removeCustomField(section.instanceId, section.data.customFields.indexOf(field))" class="text-red-500 hover:bg-red-50 px-2 py-1 rounded shrink-0 text-lg lg:text-xl touch-manipulation">×</button>
+                                                    </div>
+                                                </template>
+                                                <button @click="addCustomField(section.instanceId, 2)" class="text-blue-600 text-xs hover:underline">+ Add field</button>
+                                            </div>
+                                        </div>
+                                        <div class="space-y-1.5 lg:space-y-2">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" x-model="section.data.showInfoDivider" class="rounded">
+                                                <label class="text-sm text-neutral-700">Show divider</label>
+                                            </div>
+                                            <div class="flex gap-2">
+                                                <button @click="section.data.infoDivider = '---'" :class="section.data.infoDivider === '---' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">---</button>
+                                                <button @click="section.data.infoDivider = '==='" :class="section.data.infoDivider === '===' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">===</button>
+                                                <button @click="section.data.infoDivider = '...'" :class="section.data.infoDivider === '...' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">...</button>
+                                                <button @click="section.data.infoDivider = ':::'" :class="section.data.infoDivider === ':::' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">:::</button>
+                                                <button @click="section.data.infoDivider = '***'" :class="section.data.infoDivider === '***' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">***</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                
+                                <!-- Items List Section Editor -->
+                                <template x-if="section.type === 'items'">
+                                    <div class="space-y-1 lg:space-y-2">
+                                        <template x-for="(item, idx) in section.data.items" :key="item.id || ('fallback_' + section.instanceId + '_' + idx)">
+                                            <div class="flex gap-1 lg:gap-2 items-center" data-item-row>
+                                                <button @click="item.indent = !item.indent" :class="item.indent ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-500 hover:bg-neutral-200'" class="w-7 h-7 lg:w-8 lg:h-8 flex items-center justify-center rounded text-xs font-medium shrink-0 transition-colors" :title="item.indent ? 'Sub-item (indented)' : 'Click to make sub-item'">
+                                                    <svg x-show="item.indent" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
+                                                    <svg x-show="!item.indent" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                                                </button>
+                                                <input x-show="!item.indent" type="number" x-model="item.quantity" min="0" max="999" class="w-12 lg:w-16 px-1 lg:px-2 py-1 border rounded text-sm" placeholder="Qty">
+                                                <input type="text" x-model="item.name" :class="item.indent ? 'flex-1 min-w-0 px-1 lg:px-2 py-1 border rounded text-sm bg-blue-50 border-blue-200' : 'flex-1 min-w-0 px-1 lg:px-2 py-1 border rounded text-sm'" :placeholder="item.indent ? 'Sub-item (indented)' : 'Item'">
+                                                <input x-show="!item.indent" type="number" x-model="item.price" step="0.01" min="0" max="999999" class="w-16 lg:w-20 px-1 lg:px-2 py-1 border rounded text-sm" placeholder="$">
+                                                <button @click="$el.closest('[data-item-row]').classList.add('item-deleted'); setTimeout(() => removeItem(section.instanceId, idx), 300); window.posthog && posthog.capture('item_deleted')" class="btn-ripple text-red-500 hover:bg-red-50 px-2 lg:px-3 py-1 rounded shrink-0 text-lg lg:text-xl touch-manipulation">×</button>
+                                            </div>
+                                        </template>
+                                        <button @click="addItem(section.instanceId); window.posthog && posthog.capture('item_added'); setTimeout(() => { const items = $el.previousElementSibling.querySelectorAll('[data-item-row]'); if(items.length > 0) items[items.length-1].classList.add('item-added'); }, 50)" class="btn-ripple text-blue-600 text-sm hover:underline px-2 py-1 rounded">+ Add Item</button>
+                                        <div class="mt-3 pt-3 border-t space-y-1.5 lg:space-y-2">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" x-model="section.data.showItemsDivider" class="rounded">
+                                                <label class="text-sm text-neutral-700">Show divider</label>
+                                            </div>
+                                            <div class="flex gap-2">
+                                                <button @click="section.data.itemsDivider = '---'" :class="section.data.itemsDivider === '---' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">---</button>
+                                                <button @click="section.data.itemsDivider = '==='" :class="section.data.itemsDivider === '===' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">===</button>
+                                                <button @click="section.data.itemsDivider = '...'" :class="section.data.itemsDivider === '...' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">...</button>
+                                                <button @click="section.data.itemsDivider = ':::'" :class="section.data.itemsDivider === ':::' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">:::</button>
+                                                <button @click="section.data.itemsDivider = '***'" :class="section.data.itemsDivider === '***' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">***</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                
+                                <!-- Payment Section Editor -->
+                                <template x-if="section.type === 'payment'">
+                                    <div class="space-y-1.5 lg:space-y-2">
+                                        <!-- Cash/Card Tabs -->
+                                        <div class="grid grid-cols-2 gap-2 mb-3">
+                                            <button @click="section.data.paymentType = 'cash'; section.data.paymentFields = []" :class="section.data.paymentType === 'cash' ? 'bg-white border-2 border-neutral-300 shadow-sm' : 'bg-neutral-50 border border-neutral-200'" class="px-4 py-3 rounded-lg text-sm font-medium text-neutral-700 hover:bg-white transition-all">
+                                                Cash
+                                            </button>
+                                            <button @click="section.data.paymentType = 'card'; section.data.paymentFields = [
+                                                { label: 'Card number', value: '**** **** **** 4922' },
+                                                { label: 'Card type', value: 'Debit' },
+                                                { label: 'Card entry', value: 'Chip' },
+                                                { label: 'Transaction #', value: '458721' },
+                                                { label: 'Cashier', value: 'Sarah M.' },
+                                                { label: 'Register', value: '03' },
+                                                { label: 'REWARDS MEMBER', value: '#SE892341' },
+                                                { label: 'Points earned', value: '45' },
+                                                { label: 'Total points', value: '1,245' }
+                                            ]" :class="section.data.paymentType === 'card' ? 'bg-white border-2 border-neutral-300 shadow-sm' : 'bg-neutral-50 border border-neutral-200'" class="px-4 py-3 rounded-lg text-sm font-medium text-neutral-700 hover:bg-white transition-all">
+                                                Card
+                                            </button>
+                                        </div>
+                                        
+                                        <!-- Tax Rate Toggle -->
+                                        <div class="flex items-center gap-2 p-2 bg-neutral-50 rounded-lg">
+                                            <input type="checkbox" x-model="section.data.showTaxRate" class="rounded">
+                                            <label class="text-sm font-medium text-neutral-700">Show Tax Rate</label>
+                                        </div>
+                                        
+                                        <!-- Tax Rate Input (conditional) -->
+                                        <template x-if="section.data.showTaxRate">
+                                            <div>
+                                                <label class="block text-sm font-medium text-neutral-700 mb-1">Tax Rate (%)</label>
+                                                <input type="number" x-model="section.data.taxRate" step="0.1" min="0" max="100" class="w-full px-3 py-2 border border-neutral-300 rounded-lg text-sm" placeholder="e.g. 8.5">
+                                            </div>
+                                        </template>
+                                        
+                                        <!-- Payment Fields (visible in both modes) -->
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <label class="block text-sm font-medium text-neutral-700">Title</label>
+                                                <label class="block text-sm font-medium text-neutral-700">Value</label>
+                                            </div>
+                                            <template x-for="(field, idx) in section.data.paymentFields" :key="idx">
+                                                <div class="flex gap-1 lg:gap-2 mb-2">
+                                                    <input type="text" x-model="field.label" placeholder="Label" class="flex-1 min-w-0 px-1 lg:px-2 py-1 border rounded text-sm">
+                                                    <input type="text" x-model="field.value" placeholder="Value" class="w-20 lg:w-24 px-1 lg:px-2 py-1 border rounded text-sm">
+                                                    <button @click="removePaymentField(section.instanceId, idx)" class="text-red-500 hover:bg-red-50 px-2 lg:px-3 py-1 rounded shrink-0 text-lg lg:text-xl touch-manipulation">×</button>
+                                                </div>
+                                            </template>
+                                            <button @click="addPaymentField(section.instanceId)" class="text-blue-600 text-sm hover:underline inline-flex items-center gap-1">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                                </svg>
+                                                Add line
+                                            </button>
+                                        </div>
+                                        <div class="space-y-1.5 lg:space-y-2">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" x-model="section.data.showPaymentDivider" class="rounded">
+                                                <label class="text-sm text-neutral-700">Show divider</label>
+                                            </div>
+                                            <div class="flex gap-2">
+                                                <button @click="section.data.paymentDivider = '---'" :class="section.data.paymentDivider === '---' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">---</button>
+                                                <button @click="section.data.paymentDivider = '==='" :class="section.data.paymentDivider === '===' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">===</button>
+                                                <button @click="section.data.paymentDivider = '...'" :class="section.data.paymentDivider === '...' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">...</button>
+                                                <button @click="section.data.paymentDivider = ':::'" :class="section.data.paymentDivider === ':::' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">:::</button>
+                                                <button @click="section.data.paymentDivider = '***'" :class="section.data.paymentDivider === '***' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">***</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                
+                                <!-- Custom Message Section Editor -->
+                                <template x-if="section.type === 'customMessage'">
+                                    <div class="space-y-1.5 lg:space-y-2">
+                                        <div>
+                                            <label class="block text-sm font-medium text-neutral-700 mb-1">Message</label>
+                                            <textarea x-model="section.data.customMessage" rows="3" class="w-full px-3 py-2 border border-neutral-300 rounded-lg text-sm" placeholder="THANK YOU\nHAVE A NICE DAY"></textarea>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-neutral-700 mb-1">Alignment</label>
+                                            <select x-model="section.data.messageAlignment" class="w-full px-3 py-2 border border-neutral-300 rounded-lg text-sm">
+                                                <option value="left">Left</option>
+                                                <option value="center">Center</option>
+                                                <option value="right">Right</option>
+                                            </select>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <input type="checkbox" x-model="section.data.messageBold" class="rounded">
+                                            <label class="text-sm text-neutral-700">Bold text</label>
+                                        </div>
+                                        <div class="space-y-1.5 lg:space-y-2">
+                                            <div class="flex items-center gap-2">
+                                                <input type="checkbox" x-model="section.data.showMessageDivider" class="rounded">
+                                                <label class="text-sm text-neutral-700">Show divider</label>
+                                            </div>
+                                            <div class="flex gap-2">
+                                                <button @click="section.data.messageDivider = '---'" :class="section.data.messageDivider === '---' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">---</button>
+                                                <button @click="section.data.messageDivider = '==='" :class="section.data.messageDivider === '===' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">===</button>
+                                                <button @click="section.data.messageDivider = '...'" :class="section.data.messageDivider === '...' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">...</button>
+                                                <button @click="section.data.messageDivider = ':::'" :class="section.data.messageDivider === ':::' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">:::</button>
+                                                <button @click="section.data.messageDivider = '***'" :class="section.data.messageDivider === '***' ? 'bg-blue-500 text-white' : 'bg-neutral-100 text-neutral-700'" class="flex-1 px-3 py-2 border rounded-lg text-sm font-mono hover:bg-blue-50">***</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                
+                                <!-- Barcode Section Editor -->
+                                <template x-if="section.type === 'barcode'">
+                                    <div class="space-y-1.5 lg:space-y-2">
+                                        <div class="flex items-center gap-2">
+                                            <input type="checkbox" x-model="section.data.barcodeEnabled" class="rounded">
+                                            <label class="text-sm text-neutral-700">Show barcode</label>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-neutral-700 mb-1">Barcode Height (px)</label>
+                                            <input type="range" x-model="section.data.barcodeSize" min="20" max="100" class="w-full">
+                                            <span class="text-xs text-neutral-500" x-text="section.data.barcodeSize + 'px'"></span>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-neutral-700 mb-1">Barcode Length</label>
+                                            <input type="range" x-model="section.data.barcodeLength" min="10" max="100" step="10" class="w-full">
+                                            <span class="text-xs text-neutral-500" x-text="section.data.barcodeLength"></span>
+                                        </div>
+                                    </div>
+                                </template>
+                                
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                
+                <!-- Add Section Button -->
+                <button @click="addSectionModalOpen = true; window.posthog && posthog.capture('add_section_clicked')" class="btn-ripple w-full py-3 lg:py-4 border-2 border-dashed border-blue-300 rounded-xl text-blue-600 hover:border-blue-500 hover:bg-blue-50 transition font-medium text-sm">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Add Section
+                </button>
+                
+            </div>
+            
+            <!-- Right Panel - Preview -->
+            <div class="lg:sticky lg:top-4">
+                <!-- Desktop Action Buttons (Above Receipt Preview) -->
+                <div class="hidden lg:block mb-4">
+                    <!-- Row 1: Title + Save Template -->
+                    <div class="flex justify-between items-center gap-2 mb-3">
+                        <h2 class="text-lg font-bold text-neutral-900 truncate">{% if template_name %}{{ template_name }}{% else %}Receipt Preview{% endif %}</h2>
+                        <button @click="handleSaveTemplate()" class="px-4 py-2.5 bg-white text-neutral-700 rounded-lg hover:bg-neutral-50 transition font-semibold text-sm whitespace-nowrap border border-neutral-300 flex items-center gap-1.5 shadow-sm" aria-label="Save your receipt as a template">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                            </svg>
+                            Save as New Template
+                        </button>
+                    </div>
+                    
+                    <!-- Row 2: Reset + Remove Watermark + Download -->
+                    <div class="flex justify-between items-center gap-2">
+                        <!-- Reset Button (Left) -->
+                        <button @click="resetForm()" class="px-3 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition text-xs whitespace-nowrap flex items-center gap-1 font-medium flex-shrink-0" aria-label="Reset receipt to default values">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                            Reset
+                        </button>
+                        
+                        <!-- Remove Watermark Button (Center) - Only for non-subscribers -->
+                        {% if not has_subscription %}
+                        <a href="/pricing"
+                           onclick="window.posthog && posthog.capture('remove_watermark_clicked', { source: 'desktop_center' })"
+                           class="btn-ripple flex-1 py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-sm flex items-center justify-center gap-1.5 transition no-underline">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                            </svg>
+                            Remove watermark
+                        </a>
+                        {% endif %}
+                        
+                        <!-- Download Dropdown -->
+                        <div class="relative flex-1" @click.away="showDownloadMenu = false">
+                            <!-- Download Button with Dropdown -->
+                            <button @click="showDownloadMenu = !showDownloadMenu" 
+                                    :disabled="downloadingFormat"
+                                    class="btn-ripple w-full px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm whitespace-nowrap flex items-center justify-center gap-1.5 font-semibold shadow-md"
+                                    aria-label="Download receipt">
+                                <svg x-show="downloadingFormat" class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                <svg x-show="!downloadingFormat" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                <span x-text="downloadingFormat ? 'Downloading...' : 'Download'"></span>
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            
+                            <!-- Dropdown Menu -->
+                            <div x-show="showDownloadMenu" 
+                                 x-transition:enter="transition ease-out duration-200"
+                                 x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                                 x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                                 x-transition:leave="transition ease-in duration-150"
+                                 x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                                 x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                                 class="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-neutral-100 z-50 overflow-hidden">
+                                
+                                <!-- SIMPLIFIED MENU FOR FREE USERS -->
+                                <template x-if="!hasSubscription">
+                                    <div class="p-1">
+                                        <!-- Standard Option -->
+                                        <button @click.stop="downloadImage('preview')" 
+                                                class="w-full px-4 py-4 text-left hover:bg-neutral-50 active:bg-neutral-100 transition-all rounded-xl flex items-center gap-4 group">
+                                            <div class="w-10 h-10 rounded-full bg-neutral-100 flex items-center justify-center text-neutral-500 group-hover:bg-white group-hover:shadow-sm transition-all flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <div class="flex items-center justify-between gap-2">
+                                                    <p class="font-bold text-neutral-900 text-[15px]">Standard Export</p>
+                                                    <span class="text-[9px] font-bold text-neutral-400 uppercase tracking-wider bg-neutral-100 px-1.5 py-0.5 rounded">Watermarked</span>
+                                                </div>
+                                                <p class="text-xs text-neutral-500 mt-0.5 truncate">Quick 300px PNG preview</p>
+                                            </div>
+                                        </button>
+                                        
+                                        <div class="h-px bg-neutral-50 my-1"></div>
+                                        
+                                        <!-- Professional Option -->
+                                        <a href="/pricing"
+                                           @click.stop
+                                           class="w-full px-4 py-4 text-left hover:bg-blue-50/50 active:bg-blue-100/50 transition-all rounded-xl flex items-center gap-4 group block no-underline">
+                                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-white group-hover:shadow-sm transition-all flex-shrink-0 shadow-sm">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <div class="flex items-center justify-between gap-2">
+                                                    <p class="font-bold text-neutral-900 text-[15px]">Professional HD</p>
+                                                    <span class="text-[9px] font-bold text-blue-600 uppercase tracking-wider bg-blue-100 px-1.5 py-0.5 rounded">Clean</span>
+                                                </div>
+                                                <p class="text-xs text-neutral-500 mt-0.5 truncate">HD PDF & PNG (No Watermark)</p>
+                                            </div>
+                                            <svg class="w-4 h-4 text-neutral-300 group-hover:text-blue-400 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+
+                                        <!-- Trust Indicator -->
+                                        <div class="px-4 py-3 bg-neutral-50/50 border-t border-neutral-100 flex items-center justify-center gap-2 mt-1">
+                                            <div class="flex -space-x-1.5">
+                                                <div class="w-4 h-4 rounded-full bg-neutral-200 border border-white"></div>
+                                                <div class="w-4 h-4 rounded-full bg-neutral-300 border border-white"></div>
+                                                <div class="w-4 h-4 rounded-full bg-neutral-400 border border-white"></div>
+                                            </div>
+                                            <p class="text-[11px] text-neutral-500 font-medium">Join 5,000+ happy users</p>
+                                        </div>
+                                    </div>
+                                </template>
+                                
+                                <!-- FULL MENU FOR PRO USERS -->
+                                <template x-if="hasSubscription">
+                                    <div>
+                                        <div class="p-3 border-b border-neutral-100">
+                                            <p class="text-xs font-semibold text-neutral-500 uppercase tracking-wide">Select format & quality</p>
+                                        </div>
+                                        
+                                        <!-- PNG - Standard -->
+                                        <button @click.stop="downloadImage('standard')" 
+                                                class="w-full px-4 py-3 text-left hover:bg-neutral-50 transition flex items-center justify-between group">
+                                            <div>
+                                                <p class="font-semibold text-neutral-900">PNG - Standard</p>
+                                                <p class="text-xs text-neutral-500">Good for most uses · 750px</p>
+                                            </div>
+                                        </button>
+                                        
+                                        <!-- PNG - High Quality -->
+                                        <button @click.stop="downloadImage('hd')" 
+                                                class="w-full px-4 py-3 text-left hover:bg-neutral-50 transition flex items-center justify-between group">
+                                            <div>
+                                                <p class="font-semibold text-neutral-900">PNG - High Quality</p>
+                                                <p class="text-xs text-neutral-500">Full resolution · 1500px</p>
+                                            </div>
+                                        </button>
+                                        
+                                        <!-- PDF Document -->
+                                        <button @click.stop="downloadPDF()" 
+                                                class="w-full px-4 py-3 text-left hover:bg-neutral-50 transition flex items-center justify-between group border-t border-neutral-100">
+                                            <div>
+                                                <p class="font-semibold text-neutral-900">PDF Document</p>
+                                                <p class="text-xs text-neutral-500">Print-ready PDF file</p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Action Buttons (Preview Mode Only) -->
+                <div x-show="showPreview" class="lg:hidden mb-6 space-y-4 bg-gradient-to-b from-blue-50 to-transparent p-4 rounded-xl border border-blue-100">
+                    <!-- Download Receipt CTA (for all users) -->
+                    <button @click="showDownloadMenu = !showDownloadMenu; window.posthog && posthog.capture('get_receipt_clicked', { source: 'mobile_top', has_subscription: hasSubscription })"
+                       class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold flex items-center justify-center gap-2 transition shadow-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        Download Receipt
+                    </button>
+                    
+                    <!-- Mobile Download Menu (appears below Download Receipt button) -->
+                    <div x-show="showDownloadMenu" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                         class="bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-neutral-100 overflow-hidden mt-3">
+                        
+                        <!-- SIMPLIFIED MENU FOR FREE USERS -->
+                        <template x-if="!hasSubscription">
+                            <div class="p-1">
+                                <!-- Standard Option -->
+                                <button @click.stop="downloadImage('preview')" 
+                                        class="w-full px-4 py-4 text-left hover:bg-neutral-50 active:bg-neutral-100 transition-all rounded-xl flex items-center gap-4 group">
+                                    <div class="w-10 h-10 rounded-full bg-neutral-100 flex items-center justify-center text-neutral-500 flex-shrink-0">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between gap-2">
+                                            <p class="font-bold text-neutral-900 text-[15px]">Standard Export</p>
+                                            <span class="text-[9px] font-bold text-neutral-400 uppercase tracking-wider bg-neutral-100 px-1.5 py-0.5 rounded">Watermarked</span>
+                                        </div>
+                                        <p class="text-xs text-neutral-500 mt-0.5">Quick PNG preview</p>
+                                    </div>
+                                </button>
+                                
+                                <div class="h-px bg-neutral-50 my-1"></div>
+
+                                <!-- Professional Option -->
+                                <a href="/pricing"
+                                   @click.stop
+                                   class="w-full px-4 py-4 text-left hover:bg-blue-50/50 active:bg-blue-100/50 transition-all rounded-xl flex items-center gap-4 group block no-underline">
+                                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 flex-shrink-0 shadow-sm">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between gap-2">
+                                            <p class="font-bold text-neutral-900 text-[15px]">Professional HD</p>
+                                            <span class="text-[9px] font-bold text-blue-600 uppercase tracking-wider bg-blue-100 px-1.5 py-0.5 rounded">Clean</span>
+                                        </div>
+                                        <p class="text-xs text-neutral-500 mt-0.5">HD PDF & PNG (No Watermark)</p>
+                                    </div>
+                                </a>
+
+                                <!-- Trust Indicator -->
+                                <div class="px-4 py-3 bg-neutral-50/50 border-t border-neutral-100 flex items-center justify-center gap-2 mt-1">
+                                    <p class="text-[11px] text-neutral-500 font-medium text-center">Join 5,000+ happy users</p>
+                                </div>
+                            </div>
+                        </template>
+                        
+                        <!-- FULL MENU FOR PRO USERS -->
+                        <template x-if="hasSubscription">
+                            <div>
+                                <div class="p-3 border-b border-neutral-100">
+                                    <p class="text-xs font-semibold text-neutral-500 uppercase tracking-wide">Select format & quality</p>
+                                </div>
+                                
+                                <!-- PNG - Standard -->
+                                <button @click.stop="downloadImage('standard')" 
+                                        class="w-full px-4 py-3 text-left hover:bg-neutral-50 transition flex items-center justify-between group border-b border-neutral-100">
+                                    <div>
+                                        <p class="font-semibold text-neutral-900">PNG - Standard</p>
+                                        <p class="text-xs text-neutral-500">Good for most uses · 750px</p>
+                                    </div>
+                                </button>
+                                
+                                <!-- PNG - High Quality -->
+                                <button @click.stop="downloadImage('hd')" 
+                                        class="w-full px-4 py-3 text-left hover:bg-neutral-50 transition flex items-center justify-between group border-b border-neutral-100">
+                                    <div>
+                                        <p class="font-semibold text-neutral-900">PNG - High Quality</p>
+                                        <p class="text-xs text-neutral-500">Full resolution · 1500px</p>
+                                    </div>
+                                </button>
+                                
+                                <!-- PDF Document -->
+                                <button @click.stop="downloadPDF()" 
+                                        class="w-full px-4 py-3 text-left hover:bg-neutral-50 transition flex items-center justify-between group border-b border-neutral-100">
+                                    <div>
+                                        <p class="font-semibold text-neutral-900">PDF Document</p>
+                                        <p class="text-xs text-neutral-500">Print-ready PDF file</p>
+                                    </div>
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+                    
+                    <!-- Save Template Button -->
+                    <div>
+                        <button @click="showSaveTemplateModal = true" class="w-full py-3 px-4 bg-purple-100 hover:bg-purple-200 text-purple-700 rounded-lg font-semibold flex items-center justify-center gap-2 transition" aria-label="Save receipt as a new template">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                            </svg>
+                            Save as New Template
+                        </button>
+                        <p class="text-xs text-purple-600 mt-1.5 text-center">Save for next time</p>
+                    </div>
+                    
+                    <!-- Reset Button -->
+                    <button @click="resetForm()" class="w-full py-2 px-4 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 font-medium text-sm transition rounded-lg flex items-center justify-center gap-1.5" aria-label="Reset receipt to default values">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        Reset
+                    </button>
+                </div>
+                
+                <div class="bg-neutral-100 rounded-xl p-8" x-show="showPreview || !isMobile">
+                    <!-- Debug: show current width -->
+                    <p class="text-xs text-neutral-400 text-center mb-2" x-text="'Width: ' + currentReceiptWidth + 'px'"></p>
+                    <div id="receipt-preview" class="receipt-paper mx-auto bg-white p-8 shadow-lg text-sm relative transition-all duration-300" :class="globalSettings.selectedFont" x-bind:style="'width: ' + currentReceiptWidth + 'px; max-width: ' + currentReceiptWidth + 'px; color: ' + (globalSettings.textColor || '#000000') + '; opacity: ' + (previewUpdating ? '0.6' : '1') + ';'">
+                        
+                        <!-- Loading Indicator (Week 3.1) -->
+                        <div x-show="previewUpdating" 
+                             x-transition:enter="transition ease-out duration-100"
+                             x-transition:enter-start="opacity-0"
+                             x-transition:enter-end="opacity-100"
+                             class="absolute top-4 right-4 bg-blue-50 border border-blue-200 rounded-lg px-3 py-2 flex items-center gap-2 shadow-sm z-10"
+                             role="status"
+                             aria-live="polite">
+                            <svg class="animate-spin h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span class="text-xs text-blue-700 font-medium">Updating...</span>
+                        </div>
+                        
+                        <!-- Render sections in order -->
+                        <template x-for="section in debouncedSections" :key="section.instanceId">
+                            <div>
+                                <!-- Header Section Preview -->
+                                <template x-if="section.type === 'header'">
+                                    <div class="mb-4">
+                                        <template x-if="section.data.logoUrl">
+                                            <div :class="`flex ${section.data.headerAlignment === 'left' ? 'justify-start' : section.data.headerAlignment === 'right' ? 'justify-end' : 'justify-center'}`">
+                                                <img :src="section.data.logoUrl" :style="`width: ${section.data.logoSize}%;`" class="mb-2" :alt="section.data.businessName ? section.data.businessName + ' logo' : 'Business logo'">
+                                            </div>
+                                        </template>
+                                        <div class="text-base font-bold whitespace-pre-line" :class="section.data.headerAlignment === 'left' ? 'text-left' : section.data.headerAlignment === 'right' ? 'text-right' : 'text-center'" x-text="section.data.businessName"></div>
+                                        <template x-if="section.data.showHeaderDivider">
+                                            <div class="mt-2 overflow-hidden whitespace-nowrap" x-text="getDivider(section.data.headerDivider)"></div>
+                                        </template>
+                                    </div>
+                                </template>
+                                
+                                <!-- Date & Time Section Preview -->
+                                <template x-if="section.type === 'dateTime'">
+                                    <div class="mb-3" :class="section.data.dateAlignment === 'left' ? 'text-left' : section.data.dateAlignment === 'right' ? 'text-right' : 'text-center'">
+                                        <div x-text="section.data.dateTime"></div>
+                                        <template x-if="section.data.showDateDivider">
+                                            <div class="mt-2 overflow-hidden whitespace-nowrap" x-text="getDivider(section.data.dateDivider)"></div>
+                                        </template>
+                                    </div>
+                                </template>
+                                
+                                <!-- Two Column Information Section Preview -->
+                                <template x-if="section.type === 'twoColumn'">
+                                    <div class="mb-3">
+                                        <div class="grid grid-cols-2 gap-8">
+                                            <div>
+                                                <template x-for="field in section.data.customFields.filter(f => f.column === 1)">
+                                                    <div class="flex justify-between mb-1">
+                                                        <span x-text="field.label"></span>
+                                                        <span x-text="field.value"></span>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                            <div>
+                                                <template x-for="field in section.data.customFields.filter(f => f.column === 2)">
+                                                    <div class="flex justify-between mb-1">
+                                                        <span x-text="field.label"></span>
+                                                        <span x-text="field.value"></span>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                        <template x-if="section.data.showInfoDivider">
+                                            <div class="mt-2 overflow-hidden whitespace-nowrap" x-text="getDivider(section.data.infoDivider)"></div>
+                                        </template>
+                                    </div>
+                                </template>
+                                
+                                <!-- Items Section Preview -->
+                                <template x-if="section.type === 'items'">
+                                    <div class="mb-2">
+                                        <template x-for="(item, itemIdx) in section.data.items" :key="`item-${section.instanceId}-${itemIdx}`">
+                                            <div class="flex justify-between" style="margin-bottom: 1px;">
+                                                <span :style="item.indent ? 'padding-left: 16px; flex: 1;' : 'flex: 1;'">
+                                                    <span x-show="!item.indent && item.quantity && parseInt(item.quantity) > 0" x-text="parseInt(item.quantity) + ' '"></span><span x-text="item.name"></span>
+                                                </span>
+                                                <span x-show="!item.indent" x-text="formatCurrency(parseFloat(item.price) || 0)" style="text-align: right; white-space: nowrap;"></span>
+                                            </div>
+                                        </template>
+                                        <template x-if="section.data.showItemsDivider">
+                                            <div class="overflow-hidden whitespace-nowrap" style="margin: 3px 0;" x-text="getDivider(section.data.itemsDivider)"></div>
+                                        </template>
+                                    </div>
+                                </template>
+                                
+                                <!-- Payment Section Preview (with totals) -->
+                                <template x-if="section.type === 'payment'">
+                                    <div class="mb-2">
+                                        <template x-if="section.data.showPaymentDivider">
+                                            <div class="overflow-hidden whitespace-nowrap" style="margin: 3px 0;" x-text="getDivider(section.data.paymentDivider)"></div>
+                                        </template>
+                                        <!-- Subtotal line only shows if tax rate is enabled -->
+                                        <template x-if="section.data.showTaxRate && section.data.taxRate">
+                                            <div class="flex justify-between" style="margin-bottom: 1px;">
+                                                <span>Subtotal</span>
+                                                <span x-text="section.data.subtotal ? formatCurrency(parseFloat(section.data.subtotal)) : formatCurrency(subtotal)" style="text-align: right;"></span>
+                                            </div>
+                                        </template>
+                                        <!-- Tax line only shows if tax rate is enabled -->
+                                        <template x-if="section.data.showTaxRate && section.data.taxRate">
+                                            <div class="flex justify-between" style="margin-bottom: 1px;">
+                                                <span>Tax (<span x-text="section.data.taxRate"></span>%)</span>
+                                                <span x-text="section.data.tax ? formatCurrency(parseFloat(section.data.tax)) : formatCurrency(tax)" style="text-align: right;"></span>
+                                            </div>
+                                        </template>
+                                        <div class="flex justify-between font-bold" style="margin-top: 2px; margin-bottom: 1px; font-size: 11px;">
+                                            <span>TOTAL</span>
+                                            <span x-text="section.data.total ? formatCurrency(parseFloat(section.data.total)) : formatCurrency(total)" style="text-align: right;"></span>
+                                        </div>
+                                        <!-- Payment fields only show if they exist -->
+                                        <template x-if="section.data.paymentFields && section.data.paymentFields.length > 0">
+                                            <template x-for="field in section.data.paymentFields" :key="field.label">
+                                                <div class="flex justify-between" style="margin-top: 3px; margin-bottom: 1px;">
+                                                    <span x-text="field.label"></span>
+                                                    <span x-text="field.value" style="text-align: right;"></span>
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </div>
+                                </template>
+                                
+                                <!-- Custom Message Section Preview -->
+                                <template x-if="section.type === 'customMessage'">
+                                    <div class="mb-2" :style="`text-align: ${section.data.messageAlignment}`">
+                                        <div class="whitespace-pre-line" x-text="section.data.messageText || section.data.customMessage" :style="`line-height: 1.15; font-weight: ${section.data.messageBold ? 'bold' : 'normal'}`"></div>
+                                        <template x-if="section.data.showMessageDivider && section.data.messageDivider">
+                                            <div class="overflow-hidden whitespace-nowrap" style="margin: 3px 0;" x-text="getDivider(section.data.messageDivider)"></div>
+                                        </template>
+                                    </div>
+                                </template>
+                                
+                                <!-- Barcode Section Preview (uses canvas for PDF capture) -->
+                                <template x-if="section.type === 'barcode' && section.data.barcodeEnabled">
+                                    <div class="mb-3 flex flex-col items-center"
+                                         x-init="$nextTick(() => {
+                                             if (typeof JsBarcode !== 'undefined') {
+                                                 const canvas = $el.querySelector('canvas');
+                                                 const value = getBarcodeValue(section) || '0';
+                                                 const height = section.data.barcodeSize || 50;
+                                                 try {
+                                                     JsBarcode(canvas, value, {
+                                                         format: 'CODE128',
+                                                         width: 2,
+                                                         height: parseInt(height),
+                                                         displayValue: false,
+                                                         margin: 0,
+                                                         background: '#ffffff',
+                                                         lineColor: '#000000'
+                                                     });
+                                                 } catch(e) { console.error('Barcode error:', e); }
+                                             }
+                                         })"
+                                         x-effect="$nextTick(() => {
+                                             if (typeof JsBarcode !== 'undefined') {
+                                                 const canvas = $el.querySelector('canvas');
+                                                 const value = getBarcodeValue(section) || '0';
+                                                 const height = section.data.barcodeSize || 50;
+                                                 try {
+                                                     JsBarcode(canvas, value, {
+                                                         format: 'CODE128',
+                                                         width: 2,
+                                                         height: parseInt(height),
+                                                         displayValue: false,
+                                                         margin: 0,
+                                                         background: '#ffffff',
+                                                         lineColor: '#000000'
+                                                     });
+                                                 } catch(e) {}
+                                             }
+                                         })">
+                                        <canvas :id="`barcode-${section.instanceId}`" 
+                                             style="display: block; margin: 0 auto;"></canvas>
+                                        <div class="text-center text-xs mt-1" x-text="getBarcodeValue(section)"></div>
+                                    </div>
+                                </template>
+                                
+                            </div>
+                        </template>
+                        
+                        {% if not has_subscription %}
+                        <!-- Dense uniform watermark overlay - covers entire receipt evenly -->
+                        <div class="absolute inset-0 pointer-events-none overflow-hidden z-20 print:hidden watermark-overlay" id="watermark-overlay"
+                             style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%2260%22><text x=%2260%22 y=%2230%22 fill=%22%236B7280%22 font-size=%2211%22 font-weight=%22600%22 font-family=%22Arial, sans-serif%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 transform=%22rotate(-25 60 30)%22 letter-spacing=%221%22>ReceiptMake</text></svg>'); background-repeat: repeat; background-position: top left; background-size: 120px 60px; opacity: 0.14; mix-blend-mode: multiply;">
+                        </div>
+                        <!-- Second layer offset for denser coverage -->
+                        <div class="absolute inset-0 pointer-events-none overflow-hidden z-20 print:hidden watermark-overlay"
+                             style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%2270%22><text x=%2270%22 y=%2235%22 fill=%22%239CA3AF%22 font-size=%2210%22 font-weight=%22500%22 font-family=%22Arial, sans-serif%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 transform=%22rotate(-30 70 35)%22 letter-spacing=%221.5%22>ReceiptMake</text></svg>'); background-repeat: repeat; background-position: 60px 30px; background-size: 140px 70px; opacity: 0.10; mix-blend-mode: multiply;">
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Mobile Download Button (Sticky at Bottom) -->
+                <div x-show="showPreview" class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200 shadow-2xl z-50" style="padding-bottom: env(safe-area-inset-bottom);" x-data="{ mobileDownloadMenu: false }">
+                    
+                    <!-- Dropdown Menu (slides up from bottom) -->
+                    <div x-show="mobileDownloadMenu" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-4"
+                         x-transition:enter-end="opacity-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 translate-y-0"
+                         x-transition:leave-end="opacity-0 translate-y-4"
+                         @click.away="mobileDownloadMenu = false"
+                         class="bg-white border-t border-neutral-100 px-4 pt-3 pb-2">
+                        
+                        <p class="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-2">Select format & quality</p>
+                        
+                        <!-- PNG - Preview (FREE) -->
+                        <button @click.stop="downloadImage('preview'); mobileDownloadMenu = false" 
+                                class="w-full px-4 py-3 text-left bg-neutral-50 hover:bg-neutral-100 rounded-lg mb-2 flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold text-neutral-900">PNG - Preview</p>
+                                <p class="text-xs text-neutral-500">Quick preview · 300px</p>
+                            </div>
+                        </button>
+                        
+                        <!-- PNG - Standard (PRO) -->
+                        <button @click.stop="downloadImage('standard'); mobileDownloadMenu = false" 
+                                class="w-full px-4 py-3 text-left bg-neutral-50 hover:bg-neutral-100 rounded-lg mb-2 flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold text-neutral-900">PNG - Standard</p>
+                                <p class="text-xs text-neutral-500">Good for most uses · 750px</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">PRO</span>
+                                <svg x-show="!hasSubscription" class="w-4 h-4 text-neutral-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </button>
+                        
+                        <!-- PNG - High Quality (PRO) -->
+                        <button @click.stop="downloadImage('hd'); mobileDownloadMenu = false" 
+                                class="w-full px-4 py-3 text-left bg-neutral-50 hover:bg-neutral-100 rounded-lg mb-2 flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold text-neutral-900">PNG - High Quality</p>
+                                <p class="text-xs text-neutral-500">Full resolution · 1500px</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">PRO</span>
+                                <svg x-show="!hasSubscription" class="w-4 h-4 text-neutral-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </button>
+                        
+                        <!-- PDF Document (PRO) -->
+                        <button @click.stop="downloadPDF(); mobileDownloadMenu = false" 
+                                class="w-full px-4 py-3 text-left bg-neutral-50 hover:bg-neutral-100 rounded-lg mb-2 flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold text-neutral-900">PDF Document</p>
+                                <p class="text-xs text-neutral-500">Print-ready PDF file</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">PRO</span>
+                                <svg x-show="!hasSubscription" class="w-4 h-4 text-neutral-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </button>
+                        
+                        <!-- Upgrade to Pro CTA -->
+                        <a x-show="!hasSubscription" 
+                           href="/pricing"
+                           @click.stop
+                           class="block px-4 py-3 bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg border border-amber-200">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                                </svg>
+                                <div>
+                                    <p class="font-bold text-amber-700">Unlock High-Res PDF</p>
+                                    <p class="text-xs text-amber-600">Remove watermark & print instantly</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Main Download Button (for subscribers) -->
+                    <div x-show="hasSubscription" class="p-4">
+                        <button @click="mobileDownloadMenu = !mobileDownloadMenu" 
+                                :disabled="downloadingFormat"
+                                class="btn-ripple w-full py-4 px-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold text-base flex items-center justify-center gap-2 transition shadow-lg active:scale-95">
+                            <svg x-show="!downloadingFormat" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            <svg x-show="downloadingFormat" x-cloak class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span x-text="downloadingFormat ? 'Downloading...' : 'Download Receipt'"></span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Remove Watermark Button (for non-subscribers) -->
+                    <a x-show="!hasSubscription" 
+                       href="/pricing"
+                       @click="window.posthog && posthog.capture('remove_watermark_clicked', { source: 'mobile_sticky_bottom' })"
+                       class="block p-4">
+                        <button class="btn-ripple w-full py-4 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-base flex items-center justify-center gap-2 transition shadow-lg active:scale-95 no-underline">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Remove watermark</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Section Modal -->
+    <div x-show="addSectionModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" @click.self="addSectionModalOpen = false">
+        <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4">
+            <h3 class="text-lg font-semibold mb-4">Add Section</h3>
+            <div class="grid grid-cols-2 gap-2">
+                <template x-for="(template, key) in sectionRegistry" :key="key">
+                    <template x-if="key !== 'settings'">
+                        <button @click="addSection(key)" :disabled="!canAddSection(key)" :class="canAddSection(key) ? 'bg-neutral-50 hover:bg-blue-50 border-neutral-300' : 'bg-neutral-100 border-neutral-200 opacity-50 cursor-not-allowed'" class="px-4 py-3 border rounded-lg text-left">
+                            <div class="font-medium text-sm" x-text="template.name"></div>
+                            <div class="text-xs text-neutral-500 mt-1" x-show="!template.allowMultiple">Single only</div>
+                        </button>
+                    </template>
+                </template>
+            </div>
+            <button @click="addSectionModalOpen = false" class="mt-4 w-full px-4 py-2 bg-neutral-200 rounded-lg hover:bg-neutral-300">Close</button>
+        </div>
+    </div>
+    
+    <!-- Save Template Modal -->
+    <div x-show="showSaveTemplateModal" 
+         x-cloak
+         style="display: none;"
+         class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[9999] p-4" 
+         @click.self="showSaveTemplateModal = false"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0">
+        <div class="bg-white rounded-2xl p-4 lg:p-8 max-w-lg w-full shadow-2xl max-h-[90vh] overflow-y-auto"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95">
+            
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-900">Save Template</h3>
+                </div>
+                <button @click="showSaveTemplateModal = false" class="text-neutral-400 hover:text-neutral-600 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Form -->
+            <div class="space-y-4 mb-6">
+                <div>
+                    <label class="block text-sm font-semibold text-neutral-700 mb-2">Template Name*</label>
+                    <input x-model="saveTemplateName" 
+                           type="text" 
+                           class="w-full px-4 py-3 border-2 border-neutral-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition outline-none" 
+                           placeholder="e.g., My Target Receipt"
+                           @keyup.enter="saveTemplate()">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-neutral-700 mb-2">Description (optional)</label>
+                    <textarea x-model="saveTemplateDescription" 
+                              class="w-full px-4 py-3 border-2 border-neutral-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition outline-none resize-none" 
+                              rows="3" 
+                              placeholder="Brief description of this template"></textarea>
+                </div>
+            </div>
+            
+            <!-- Alert Messages -->
+            <div x-show="saveTemplateError" class="mb-4 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                <p class="text-red-800 text-sm font-medium" x-text="saveTemplateError"></p>
+            </div>
+            
+            <div x-show="saveTemplateSuccess" class="mb-4 p-4 bg-green-50 border border-green-200 rounded-xl flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <p class="text-green-800 text-sm font-medium">Template saved successfully!</p>
+            </div>
+            
+            <!-- Actions -->
+            <div class="flex gap-3">
+                <button @click="showSaveTemplateModal = false" 
+                        class="flex-1 px-6 py-3 bg-neutral-100 text-neutral-700 font-semibold rounded-xl hover:bg-neutral-200 transition">
+                    Cancel
+                </button>
+                <button @click="saveTemplate()" 
+                        :disabled="!saveTemplateName.trim() || saveTemplateLoading" 
+                        :class="saveTemplateName.trim() && !saveTemplateLoading ? 'bg-purple-600 hover:bg-purple-700' : 'bg-neutral-300 cursor-not-allowed'" 
+                        class="flex-1 px-6 py-3 text-white font-semibold rounded-xl transition flex items-center justify-center gap-2">
+                    <svg x-show="saveTemplateLoading" class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span x-text="saveTemplateLoading ? 'Saving...' : 'Save it as a template'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+<style>
+[x-cloak] { display: none !important; }
+</style>
+</div>
+
+<!-- Login to Save Modal (OUTSIDE Alpine component for proper popup behavior) -->
+<div x-data="{ showLoginModal: false, templateData: null }" 
+     @open-login-modal.window="showLoginModal = true; templateData = $event.detail"
+     @close-login-modal.window="showLoginModal = false">
+    <div x-show="showLoginModal" 
+         x-cloak
+         style="display: none;"
+         class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[9999] p-4" 
+         @click.self="showLoginModal = false"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0">
+        <div class="bg-white rounded-2xl p-3 lg:p-8 max-w-2xl w-full shadow-2xl max-h-[85vh] overflow-y-auto"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95">
+            
+            <!-- Header -->
+            <div class="flex items-start justify-between mb-3 lg:mb-6">
+                <div>
+                    <h3 class="text-base lg:text-2xl font-bold text-neutral-900 mb-1">Save This Template</h3>
+                    <p class="text-xs lg:text-base text-neutral-600">Create a free account to save and reuse your custom receipt templates</p>
+                </div>
+                <button @click="showLoginModal = false" class="text-neutral-400 hover:text-neutral-600 transition flex-shrink-0 p-1 -mt-1">
+                    <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-6 mb-3 lg:mb-8">
+                <!-- Left: Mini Receipt Preview -->
+                <div class="bg-neutral-50 rounded-xl p-3 lg:p-6 flex flex-col items-center justify-center">
+                    <div class="text-xs lg:text-sm font-semibold text-neutral-700 mb-2 lg:mb-4">Your Template Preview</div>
+                    <div class="bg-white p-3 lg:p-6 rounded-lg shadow-md max-w-[160px] lg:max-w-[200px] w-full" style="font-family: 'Lucida Console', monospace; font-size: 9px; line-height: 1.3;">
+                        <template x-if="templateData">
+                            <div>
+                                <div class="text-center font-bold mb-2" x-text="templateData.businessName || 'Your Business'"></div>
+                                <div class="text-center mb-2 text-[8px]" x-text="templateData.dateTime || new Date().toLocaleString()"></div>
+                                <div class="border-t border-neutral-300 my-2"></div>
+                                <template x-if="templateData.items && templateData.items.length > 0">
+                                    <div class="mb-2">
+                                        <template x-for="item in templateData.items.slice(0, 3)">
+                                            <div class="flex justify-between text-[9px]">
+                                                <span x-text="item.name"></span>
+                                                <span x-text="'$' + parseFloat(item.price || 0).toFixed(2)"></span>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+                                <div class="border-t border-neutral-300 my-2"></div>
+                                <div class="flex justify-between font-bold text-[9px]">
+                                    <span>TOTAL</span>
+                                    <span x-text="'$' + parseFloat(templateData.total || 0).toFixed(2)"></span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="mt-2 lg:mt-4 text-xs text-neutral-500 text-center">This is your custom template</div>
+                </div>
+                
+                <!-- Right: Benefits -->
+                <div>
+                    <h4 class="text-sm lg:text-lg font-semibold text-neutral-900 mb-2 lg:mb-4">Why create an account?</h4>
+                    <div class="space-y-1.5 lg:space-y-3">
+                        <div class="flex items-start gap-2 lg:gap-3">
+                            <div class="w-4 h-4 lg:w-5 lg:h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-2.5 h-2.5 lg:w-3 lg:h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs lg:text-base font-medium text-neutral-900">Save Unlimited Templates</p>
+                                <p class="text-xs lg:text-sm text-neutral-600">Store all your custom receipt designs</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2 lg:gap-3">
+                            <div class="w-4 h-4 lg:w-5 lg:h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-2.5 h-2.5 lg:w-3 lg:h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs lg:text-base font-medium text-neutral-900">Access from Anywhere</p>
+                                <p class="text-xs lg:text-sm text-neutral-600">Use your templates on any device</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2 lg:gap-3">
+                            <div class="w-4 h-4 lg:w-5 lg:h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-2.5 h-2.5 lg:w-3 lg:h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs lg:text-base font-medium text-neutral-900">Reuse Anytime</p>
+                                <p class="text-xs lg:text-sm text-neutral-600">Instantly load saved templates</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="flex flex-col lg:flex-row gap-2 lg:gap-3">
+                <button @click="showLoginModal = false" 
+                        class="w-full lg:flex-1 px-4 lg:px-6 py-3 bg-neutral-100 text-neutral-700 font-semibold rounded-xl hover:bg-neutral-200 transition text-sm lg:text-base">
+                    Cancel
+                </button>
+                <a :href="'/auth/replit_auth?next=' + encodeURIComponent(window.location.pathname + window.location.search + (window.location.search ? '&' : '?') + 'redirect_to_dashboard=1')" 
+                   @click="window.dispatchEvent(new CustomEvent('store-template-for-save'))"
+                   class="w-full lg:flex-1 px-4 lg:px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:from-blue-700 hover:to-purple-700 transition text-center flex items-center justify-center gap-2 text-sm lg:text-base touch-manipulation">
+                    <svg class="w-4 h-4 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                    </svg>
+                    Create Free Account to Save
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

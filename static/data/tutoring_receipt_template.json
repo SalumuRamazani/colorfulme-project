@@ -1,0 +1,126 @@
+{
+  "name": "Tutoring Receipt",
+  "description": "Professional tutoring services invoice",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/tutoring-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 50,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "BRIGHTLIGHT TUTORING\nMONTHLY INVOICE",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "════════════════════════════",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "123 LEARNING LANE, SUITE 105\nSEATTLE, WA 98101\n(206) 555-7800\nEmail: hello@brightlight.com",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "Student: Olivia Nelson\nStudent ID: STU-524897\nInvoice Period: August 2025\nHead Tutor: Dr. Sarah Thompson, Ph.D.",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "TUTORING SESSIONS",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 8,
+            "name": "Advanced Mathematics (1 hr)",
+            "price": 65.00
+          },
+          {
+            "quantity": 4,
+            "name": "English Literature (1 hr)",
+            "price": 60.00
+          },
+          {
+            "quantity": 2,
+            "name": "SAT Test Prep (1.5 hr sessions)",
+            "price": 85.00
+          },
+          {
+            "quantity": 1,
+            "name": "Study Materials Package",
+            "price": 50.00
+          }
+        ]
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "Bulk Hour Discount (5%):      -$49.50",
+        "messageAlignment": "right",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "tax",
+      "position": 7,
+      "data": {
+        "taxLabel": "Tax (8.9%)",
+        "taxValue": 79.51
+      }
+    },
+    {
+      "type": "total",
+      "position": 8,
+      "data": {
+        "totalLabel": "INVOICE TOTAL",
+        "totalValue": 943.01
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "PERFORMANCE METRICS\nScore Improvement: +12.5%\nAttendance Rate: 100%\nEstimated SAT Increase: 150+ pts\n\nPAYMENT\nVisa ****8869\nDue: Net 30 days\n\nMonthly subscription available - Save 15%!\n\nThank you!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    }
+  ]
+}

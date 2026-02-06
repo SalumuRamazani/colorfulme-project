@@ -1,0 +1,128 @@
+{
+  "name": "Computer Repair Receipt",
+  "description": "Professional computer repair receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/computer-repair-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 80,
+    "businessName": "Computer Repair Center",
+    "headerDivider": "---",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "3830 Innovation Drive\nAustin, TX 73301\nPhone: (512) 555-0198",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "09/10/2025\n04:20 PM",
+        "dateDivider": "---",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "COMPUTER REPAIR RECEIPT\nRECEIPT #: 6813\nTECH: John Crew",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "Device: Laptop (Asus VivoBook)\nSerial #: X7A2D3B4C5\nData: 08/30/2025",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "DDR5 Memory 32GB Kit Upgrade",
+            "price": 170.00
+          },
+          {
+            "quantity": 1,
+            "name": "NVMe SSD 1TB Upgrade",
+            "price": 145.00
+          },
+          {
+            "quantity": 1,
+            "name": "Windows 11 Pro Installation",
+            "price": 65.00
+          },
+          {
+            "quantity": 2.5,
+            "name": "Labor @ $70/hour",
+            "price": 175.00
+          }
+        ],
+        "itemsDivider": "---",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 8.25,
+        "showTaxRate": true,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "Total",
+            "value": "373.81"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "90-Day Hardware Warranty\nIncluded on all repairs!",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "name": "Therapy Receipt",
+  "description": "Professional therapy session receipt and service documentation template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/therapy-logo-bw.svg",
+    "headerAlignment": "center",
+    "logoSize": 85,
+    "businessName": "MindCare Therapy & Counseling",
+    "headerDivider": "================================================",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "456 Serenity Lane, Portland, OR 97214\nPhone: (503) 555-0178 | www.mindcaretherapy.com\nLicensed Therapists • Confidential • Telehealth Available",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "12/31/2025 02:00 PM",
+        "dateDivider": "================================================",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "THERAPY SESSION RECEIPT\nReceipt #: MC-2025-1847\nTherapist: Dr. Sarah Williams, LMFT",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "Client: Emma Johnson\nSession Date: Dec 31, 2025\nSession Time: 2:00 PM - 3:00 PM (60 min)",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "SESSION DETAILS\nSession Type: Individual Therapy\nSession Focus: Anxiety Management & Coping Skills\nSession Status: Completed",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "items",
+      "position": 6,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Individual Therapy Session (60 min)",
+            "price": 120.00
+          },
+          {
+            "quantity": 1,
+            "name": "Treatment Plan Review",
+            "price": 0.00
+          },
+          {
+            "quantity": 1,
+            "name": "Crisis Assessment & Support",
+            "price": 0.00
+          }
+        ],
+        "itemsDivider": "================================================",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 7,
+      "data": {
+        "taxRate": 0.0,
+        "showTaxRate": false,
+        "paymentType": "card",
+        "paymentFields": [
+          {
+            "label": "Session Fee",
+            "value": "120.00"
+          },
+          {
+            "label": "TOTAL DUE",
+            "value": "120.00"
+          },
+          {
+            "label": "Payment Status",
+            "value": "Paid (Card)"
+          },
+          {
+            "label": "Insurance Filing",
+            "value": "Not filed - Out of pocket"
+          }
+        ],
+        "paymentDivider": "================================================",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "Thank you for choosing MindCare Therapy!\n\nYour mental health is our priority.\nNext Appointment: Schedule at your discretion\nFor emergencies, call 988 (Suicide & Crisis Lifeline)\n\nwww.mindcaretherapy.com | (503) 555-0178",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

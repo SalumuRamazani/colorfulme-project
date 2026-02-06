@@ -1,0 +1,155 @@
+{
+  "name": "Dior Receipt",
+  "description": "Professional Dior luxury fashion receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/dior-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "===",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "CHRISTIAN DIOR COUTURE",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "DIOR BOUTIQUE\n510 MADISON AVENUE\nNEW YORK, NY 10022\n+1 (212) 931-2950",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 3,
+      "data": {
+        "customFields": [
+          { "label": "INVOICE", "value": "CD-NY-84729", "column": 1 },
+          { "label": "DATE", "value": "14/11/2025", "column": 1 },
+          { "label": "STYLIST", "value": "MARIE L.", "column": 2 },
+          { "label": "CLIENT", "value": "MS. CHEN", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "ITEM DETAILS",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "LADY DIOR MEDIUM BAG", "price": 5800.00 },
+          { "quantity": 1, "name": "  BLACK CANNAGE LAMBSKIN", "price": 0.00 },
+          { "quantity": 1, "name": "  REF: M0565ONGE_M900", "price": 0.00 },
+          { "quantity": 1, "name": "DIOR OBLIQUE POUCH", "price": 1150.00 },
+          { "quantity": 1, "name": "  BEIGE/BLACK JACQUARD", "price": 0.00 },
+          { "quantity": 1, "name": "J'ADIOR SLINGBACK PUMP", "price": 990.00 },
+          { "quantity": 1, "name": "  BLACK TECHNICAL FABRIC", "price": 0.00 },
+          { "quantity": 1, "name": "  SIZE: 38 EU (8 US)", "price": 0.00 },
+          { "quantity": 1, "name": "DIOR TRIBALES EARRINGS", "price": 470.00 },
+          { "quantity": 1, "name": "  GOLD-FINISH METAL & PEARLS", "price": 0.00 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "DIOR PRIVILEGE LOYALTY MEMBER\nMEMBER ID: ****8472\nPOINTS EARNED THIS PURCHASE: 841",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---",
+        "isBold": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 7,
+      "data": {
+        "taxRate": 8.875,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "MERCHANDISE TOTAL", "value": "8,410.00" },
+          { "label": "NY STATE TAX (8.875%)", "value": "746.39" },
+          { "label": "GRAND TOTAL", "value": "9,156.39" },
+          { "label": "VISA INFINITE ****7823", "value": "9,156.39" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "COMPLIMENTARY SERVICES INCLUDED:\n• GIFT WRAPPING\n• AUTHENTICITY CARD\n• CARE INSTRUCTIONS\n• DUST BAG",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 9,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 45,
+        "barcodeLength": 75,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "EXCHANGE POLICY:\nWithin 30 days with original receipt\nItems must be unworn and in original condition\n\nFor assistance: contactdiorus@dior.com\n+1 (800) 929-3467",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 11,
+      "data": {
+        "customMessage": "THANK YOU FOR VISITING DIOR\nWWW.DIOR.COM",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    }
+  ]
+}

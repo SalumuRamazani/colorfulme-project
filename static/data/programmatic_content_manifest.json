@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "source_path": "content/programmatic_content.csv",
+  "generated_at": "2026-02-06T03:39:46.663226+00:00",
+  "counts": {
+    "total": 2,
+    "pages": 1,
+    "tools": 1
+  },
+  "entries": [
+    {
+      "entry_type": "page",
+      "route_path": "/walmart-receipt-template-guide",
+      "slug": "walmart-receipt-template-guide",
+      "title": "Walmart Receipt Template Guide",
+      "meta_description": "Learn how to customize and generate professional Walmart-style receipts quickly.",
+      "h1": "Walmart Receipt Template Guide",
+      "intro": "Use this page format for scalable programmatic SEO pages.",
+      "intro_paragraphs": [
+        "Use this page format for scalable programmatic SEO pages."
+      ],
+      "body": "Add your store-specific copy, then run the generator to publish at scale.",
+      "body_paragraphs": [
+        "Add your store-specific copy, then run the generator to publish at scale."
+      ],
+      "primary_cta_label": "Generate Walmart Receipt",
+      "primary_cta_url": "/generate-walmart-receipt",
+      "secondary_cta_label": "View All Templates",
+      "secondary_cta_url": "/templates",
+      "generator_slug": "",
+      "template_slug": "Walmart-Receipt",
+      "feature_bullets": [
+        "Single spreadsheet workflow",
+        "Bulk page generation",
+        "Built-in metadata support"
+      ],
+      "faq": [
+        {
+          "question": "Can I create 100+ pages from one sheet?",
+          "answer": "Yes. Add rows and rerun the generator."
+        },
+        {
+          "question": "Does this replace hardcoded routes?",
+          "answer": "Yes, new rows become available through dynamic routing."
+        }
+      ],
+      "tags": [
+        "programmatic",
+        "seo",
+        "receipt"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/tools/walmart-receipt-generator",
+      "slug": "walmart-receipt-generator",
+      "title": "Walmart Receipt Generator Tool",
+      "meta_description": "Generate Walmart-style receipts online with editable fields and instant PDF export.",
+      "h1": "Walmart Receipt Generator",
+      "intro": "Tool pages can point users to existing receipt generators.",
+      "intro_paragraphs": [
+        "Tool pages can point users to existing receipt generators."
+      ],
+      "body": "Use this entry type to scale tool landing pages from the same sheet.",
+      "body_paragraphs": [
+        "Use this entry type to scale tool landing pages from the same sheet."
+      ],
+      "primary_cta_label": "Open Generator",
+      "primary_cta_url": "/generate-walmart-receipt",
+      "secondary_cta_label": "See Pricing",
+      "secondary_cta_url": "/pricing",
+      "generator_slug": "walmart",
+      "template_slug": "Walmart-Receipt",
+      "feature_bullets": [
+        "Tool-specific CTAs",
+        "Reusable dynamic template",
+        "Spreadsheet-controlled publishing"
+      ],
+      "faq": [
+        {
+          "question": "How does tool routing work?",
+          "answer": "Set route_path in the sheet and it becomes live after generation."
+        }
+      ],
+      "tags": [
+        "tool",
+        "receipt",
+        "walmart"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    }
+  ]
+}

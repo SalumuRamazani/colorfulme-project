@@ -1,0 +1,173 @@
+{
+  "name": "Verizon Receipt",
+  "description": "Professional Verizon wireless store receipt",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/verizon-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "VERIZON WIRELESS\nCUSTOMER RECEIPT",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "════════════════════════════",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "STORE #2847\n2850 N CLARK ST\nCHICAGO, IL 60657\n(312) 555-0100",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "Transaction #: 847291\nDate: 08/15/2025  Time: 2:45 PM\nSales Associate: JESSICA M\nCustomer Phone: (555) 123-4567",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "DEVICE & ACCESSORIES",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "iPhone 15 Pro Max 512GB (Space Black)",
+            "price": 1299.99
+          },
+          {
+            "quantity": 1,
+            "name": "Premium Leather Case",
+            "price": 59.99
+          },
+          {
+            "quantity": 1,
+            "name": "Screen Protector (Tempered Glass)",
+            "price": 29.99
+          },
+          {
+            "quantity": 1,
+            "name": "Wireless Charger Pad",
+            "price": 49.99
+          }
+        ]
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "SERVICES & FEES",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────",
+        "isBold": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 7,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Device Activation",
+            "price": 30.00
+          },
+          {
+            "quantity": 1,
+            "name": "Unlimited Premium Plan (Setup)",
+            "price": 0.00
+          },
+          {
+            "quantity": 1,
+            "name": "Device Protection Plan (24mo)",
+            "price": 149.99
+          }
+        ]
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "PROMOTIONS & DISCOUNTS",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "Member Discount (5%):              -$86.45\nTrade-In Credit (Old Device):     -$200.00",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "Subtotal:                       $1,633.94\nSales Tax (IL 6.25%):            $102.12",
+        "messageAlignment": "right",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "total",
+      "position": 11,
+      "data": {
+        "totalLabel": "TOTAL AMOUNT DUE",
+        "totalValue": 1736.06
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 12,
+      "data": {
+        "customMessage": "PAYMENT & TERMS\n────────────────────────────\nPayment Method: Visa ****8429\nAuthorization Code: 827391\n\nRETURN POLICY\nReturn Window: 14 days\nRestocking Fee: $35 per device\nAccess to device must not be opened\n\nFor questions, visit verizonwireless.com\nor call 1-800-922-0204\n\nThank you for choosing Verizon!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Therapy Receipt Generator - Free Professional Counseling Service Documentation{% endblock %}
+{% block description %}Create professional therapy session receipts instantly. Perfect for therapists, counselors, and mental health practices. Fully customizable.{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.url_root.rstrip('/') }}/therapy-receipt">{% endblock %}
+
+{% block meta_tags %}
+<meta property="og:title" content="Therapy Receipt Generator - ReceiptMake">
+<meta property="og:description" content="Create professional therapy session receipts and mental health service documentation. Perfect for therapists and counseling practices.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/images/template-previews/therapy-preview.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Therapy Receipt Generator",
+  "applicationCategory": "BusinessApplication",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+  <section class="px-4 py-12 md:py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4 leading-tight">
+            Free Therapy Receipt Generator
+          </h1>
+          <p class="text-lg text-neutral-600 mb-6">
+            Create professional therapy session receipts instantly. Perfect for therapists, counselors, and mental health practices. Fully customizable with client information, session details, and billing documentation.
+          </p>
+          <p class="text-neutral-600 mb-8">
+            Generate professional therapy receipts and insurance documentation in seconds. No sign-up required.
+          </p>
+          <div class="flex flex-col md:flex-row gap-3">
+            <a href="/generate-therapy-receipt" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200 text-center">
+              Generate Therapy Receipt →
+            </a>
+            <a href="/templates" class="inline-block border-2 border-neutral-300 hover:border-neutral-400 text-neutral-700 font-semibold py-3 px-8 rounded-lg transition duration-200 text-center">
+              View All Templates
+            </a>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden relative border border-neutral-200">
+          <picture>
+            <source srcset="/static/images/template-previews/therapy-preview.webp?v=6" type="image/webp">
+            <img src="/static/images/template-previews/therapy-preview.png?v=6" alt="Therapy Session Receipt Preview" class="w-full h-auto" width="300" height="1107">
+          </picture>
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%); pointer-events: none; z-index: 100;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-neutral-900 mb-12">Powerful Features</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">👤</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Client Information</h3>
+          <p class="text-neutral-600 text-sm">Track client details, session dates, therapist information, and session focus areas.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">📋</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Session Documentation</h3>
+          <p class="text-neutral-600 text-sm">Document session type, duration, treatment focus, and session outcomes.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">💰</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Billing & Insurance</h3>
+          <p class="text-neutral-600 text-sm">Manage session fees, insurance filing status, and payment documentation.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">📄</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Professional Format</h3>
+          <p class="text-neutral-600 text-sm">Download as PDF or PNG with professional formatting suitable for records and insurance.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🔒</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Privacy Focused</h3>
+          <p class="text-neutral-600 text-sm">Your receipts are never stored. All data stays private and secure on your device.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">⚡</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Instant Generation</h3>
+          <p class="text-neutral-600 text-sm">Create professional receipts in seconds with our fast and intuitive builder.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Perfect For</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">👨‍⚕️</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Licensed Therapists</h3>
+            <p class="text-neutral-600 text-sm">Generate professional session receipts for individual therapy practices and maintain client records.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🏥</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Mental Health Clinics</h3>
+            <p class="text-neutral-600 text-sm">Create receipts for group therapy sessions, counseling services, and clinical documentation.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">📑</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Insurance Reimbursement</h3>
+            <p class="text-neutral-600 text-sm">Generate professional documentation for insurance claims and reimbursement purposes.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">💼</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Coaching & Wellness</h3>
+            <p class="text-neutral-600 text-sm">Create receipts for life coaching, wellness sessions, and personal development services.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Create Your Therapy Receipt Now</h2>
+      <p class="text-blue-100 mb-8">Professional receipts for mental health professionals. Free, unlimited, and private.</p>
+      <a href="/generate-therapy-receipt" class="inline-block bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 px-8 rounded-lg transition duration-200">
+        Generate Receipt Now →
+      </a>
+    </div>
+  </section>
+</div>
+{% endblock %}

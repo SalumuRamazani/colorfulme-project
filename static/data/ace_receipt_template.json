@@ -1,0 +1,132 @@
+{
+  "name": "ACE Receipt",
+  "description": "Professional ACE Hardware receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/ace-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 80,
+    "businessName": "ACE HARDWARE",
+    "headerDivider": "---",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "8101 MAIN STREET | NEWTON, NC 28658\nPHONE: (800) 838-8600",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "11/24/2025\n03:15 PM",
+        "dateDivider": "---",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "REGISTER 1 | ASSOCIATE: SARAH T.",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "HAMMER CLAW 16OZ",
+            "price": 24.99
+          },
+          {
+            "quantity": 2,
+            "name": "DUCT TAPE SILVER",
+            "price": 5.99
+          },
+          {
+            "quantity": 4,
+            "name": "LED LIGHT BULB 60W",
+            "price": 3.49
+          },
+          {
+            "quantity": 1,
+            "name": "PAINT ROLLER SET",
+            "price": 15.99
+          }
+        ],
+        "itemsDivider": "---",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 5,
+      "data": {
+        "customFields": [
+          {
+            "label": "ACE REWARDS #",
+            "value": "3286577",
+            "column": 1
+          },
+          {
+            "label": "POINTS EARNED",
+            "value": "18",
+            "column": 2
+          }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 7.5,
+        "showTaxRate": true,
+        "paymentType": "credit",
+        "paymentFields": [],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "THANK YOU FOR SHOPPING AT\nACE HARDWARE!",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

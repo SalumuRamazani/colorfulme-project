@@ -1,0 +1,204 @@
+{
+  "name": "Popeyes Receipt",
+  "description": "Professional Popeyes Louisiana Kitchen receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/popeyes-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 120,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "Popeyes Louisiana Kitchen",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "STORE #13119\n2211 BADGER DR\nHUDSON, WI 54016\n(715) 808-8272",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "ORDER #42",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "DRIVE THRU",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "3PC CHICKEN COMBO",
+            "price": 8.49
+          },
+          {
+            "quantity": 1,
+            "name": "  SPICY CHICKEN",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "  CAJUN FRIES (REG)",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "  BISCUIT",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "  SWEET TEA (MED)",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "5PC TENDERS COMBO",
+            "price": 16.29
+          },
+          {
+            "quantity": 1,
+            "name": "  BLACKENED RANCH",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "  RED BEANS & RICE (REG)",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "  BISCUIT",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "  LEMONADE (LG)",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "CINNAMON APPLE PIE",
+            "price": 1.99
+          },
+          {
+            "quantity": 2,
+            "name": "BISCUIT",
+            "price": 1.98
+          }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "payment",
+      "position": 7,
+      "data": {
+        "taxRate": 6.5,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "CREDIT CARD",
+            "value": "30.62"
+          },
+          {
+            "label": "CHANGE",
+            "value": "0.00"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "****************************************",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "TOTAL CHARGE: $30.62",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 10,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/14/2025\n2:45 PM",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 11,
+      "data": {
+        "customMessage": "Love That Chicken!\nTell us about your visit:\nwww.tellpopeyes.com",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 12,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "name": "Generic Gas Station Receipt",
+  "description": "Professional generic gas station receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/generic-gas-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 50,
+    "businessName": "QUICK FUEL",
+    "headerDivider": "===",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "24 HOUR GAS STATION\n1234 HIGHWAY 99\nANYTOWN, ST 12345\n(555) 234-5678",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/13/2025 08:15:42 AM",
+        "dateDivider": "---",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 3,
+      "data": {
+        "customFields": [
+          { "label": "PUMP", "value": "06", "column": 1 },
+          { "label": "TRANS", "value": "004729", "column": 1 },
+          { "label": "AUTH", "value": "A84729", "column": 2 },
+          { "label": "CLERK", "value": "SELF", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "PRODUCT: UNLEADED REGULAR\nPRICE/GAL: $3.899\nGALLONS: 10.256\nFUEL AMOUNT: $39.99",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          { "quantity": 10.256, "name": "REGULAR UNLEADED", "price": 39.99 },
+          { "quantity": 1, "name": "CAR WASH - BASIC", "price": 7.99 },
+          { "quantity": 1, "name": "ENERGY DRINK", "price": 3.49 },
+          { "quantity": 1, "name": "CHIPS", "price": 2.99 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "REWARDS MEMBER: YES\nMEMBER ID: ****8472\nPOINTS EARNED: 54\nDISCOUNT APPLIED: $0.10/GAL",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "payment",
+      "position": 7,
+      "data": {
+        "taxRate": 8.5,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "FUEL", "value": "39.99" },
+          { "label": "MERCHANDISE", "value": "14.47" },
+          { "label": "TAX", "value": "1.23" },
+          { "label": "TOTAL", "value": "55.69" },
+          { "label": "DEBIT ****4521", "value": "55.69" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "SAVE 10¢/GAL WITH REWARDS\nDOWNLOAD OUR APP\n\nTHANK YOU\nCOME AGAIN!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}

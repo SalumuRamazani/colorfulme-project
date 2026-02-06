@@ -1,0 +1,144 @@
+{
+  "name": "Example Store Receipt",
+  "description": "Professional example receipt template with modern design",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "",
+    "headerAlignment": "center",
+    "logoSize": 120,
+    "businessName": "STORE EXPRESS",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "123 Main Street\nSpringfield, IL 62701\n(555) 123-4567",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "11/15/2025     2:45 PM",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "Transaction #: 458721\nCashier: Sarah M.\nRegister: 03",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          { "quantity": 2, "name": "Organic Bananas", "price": 3.98 },
+          { "quantity": 1, "name": "Whole Wheat Bread", "price": 4.99 },
+          { "quantity": 3, "name": "Greek Yogurt", "price": 8.97 },
+          { "quantity": 1, "name": "Orange Juice 64oz", "price": 6.49 },
+          { "quantity": 2, "name": "Pasta Sauce", "price": 7.98 },
+          { "quantity": 1, "name": "Chicken Breast 2lb", "price": 12.99 }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "*** TOTAL ITEMS: 10 ***",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---",
+        "isBold": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 8.5,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "MASTERCARD ****5678", "value": "" }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "REWARDS MEMBER: *****9234\nPOINTS EARNED: 45\nTOTAL POINTS: 1,245",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "===",
+        "isBold": true
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 45,
+        "barcodeLength": 75,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "4582 1093 6547 2918 45",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "THANK YOU FOR SHOPPING!\nSave 20% on your next purchase\nwith code: SAVE20\nValid thru: 12/15/2025\n\nVisit us: www.storeexpress.com\nDownload our app for exclusive deals",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "===",
+        "isBold": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 11,
+      "data": {
+        "customMessage": "Returns accepted within 30 days\nwith original receipt.\n\nCustomer Satisfaction Guaranteed!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    }
+  ]
+}

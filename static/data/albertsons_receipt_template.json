@@ -1,0 +1,219 @@
+{
+  "name": "Albertsons Receipt",
+  "description": "Professional Albertsons grocery store receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/albertsons-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 100,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "ALBERTSONS #2847",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "1850 W NORTH AVE\nCHICAGO, IL 60622\n(773) 227-3000",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 3,
+      "data": {
+        "customFields": [
+          {
+            "label": "CASHIER",
+            "value": "SARAH T.",
+            "column": 1
+          },
+          {
+            "label": "LANE",
+            "value": "04",
+            "column": 1
+          },
+          {
+            "label": "TRANS#",
+            "value": "7823",
+            "column": 2
+          },
+          {
+            "label": "STORE#",
+            "value": "2847",
+            "column": 2
+          }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "for U Member: ***-***-3927",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "O ORGANICS SPINACH 5OZ",
+            "price": 3.99
+          },
+          {
+            "quantity": 1,
+            "name": "  for U Digital Coupon",
+            "price": -1.0
+          },
+          {
+            "quantity": 3.12,
+            "name": "SIGNATURE FARMS APPLES",
+            "price": 5.61
+          },
+          {
+            "quantity": 1,
+            "name": "  @ $1.80/LB",
+            "price": 0
+          },
+          {
+            "quantity": 2,
+            "name": "LUCERNE YOGURT 4PK",
+            "price": 7.98
+          },
+          {
+            "quantity": 1,
+            "name": "  Buy 1 Get 1 FREE",
+            "price": -3.99
+          },
+          {
+            "quantity": 2.45,
+            "name": "OPEN NATURE CHICKEN",
+            "price": 14.67
+          },
+          {
+            "quantity": 1,
+            "name": "  @ $5.99/LB",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "SIGNATURE BREAD",
+            "price": 1.99
+          },
+          {
+            "quantity": 1,
+            "name": "LUCERNE MILK GALLON",
+            "price": 4.49
+          },
+          {
+            "quantity": 1,
+            "name": "SIGNATURE EGGS DOZEN",
+            "price": 3.99
+          }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "payment",
+      "position": 7,
+      "data": {
+        "taxRate": 3.25,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "CREDIT ****6234",
+            "value": "38.96"
+          },
+          {
+            "label": "AUTH",
+            "value": "782934"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "for U SAVINGS SUMMARY",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "===",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "CLUB CARD SAVINGS: $3.99\nDIGITAL COUPONS: $1.00\nTOTAL SAVINGS: $4.99\n\nPOINTS EARNED THIS VISIT: 38\nTOTAL POINTS BALANCE: 285",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 10,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/14/2025\n16:15",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 11,
+      "data": {
+        "customMessage": "100 POINTS = $1 OFF\nREDEEM FOR GROCERY OR GAS REWARDS\n\nTHANK YOU FOR SHOPPING!\nALBERTSONS.COM",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 12,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

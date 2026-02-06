@@ -1,0 +1,128 @@
+
+{
+  "name": "Walgreens Receipt",
+  "description": "Professional Walgreens pharmacy receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/walgreens-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "data": {
+        "customMessage": "07824 425 E MAIN ST\nMARSHFIELD, WI 54449\n715-384-2156",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "customMessage": "382       8421  0015  11/13/2024 2:17 PM",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "items",
+      "data": {
+        "items": [
+          {
+            "name": "NEUTROGENA MAKEUP REMOVER\n  03574823945                B",
+            "quantity": 1,
+            "price": 8.99
+          },
+          {
+            "name": "  REGULAR PRICE 12.49\n  SAVINGS 3.50\n  RETURN VALUE 8.99",
+            "quantity": "",
+            "price": ""
+          },
+          {
+            "name": "COLGATE TOOTHPASTE 6OZ\n  07693582146                A",
+            "quantity": 2,
+            "price": 7.98
+          },
+          {
+            "name": "  2 @ 3.99 ea\n  REGULAR PRICE 5.49\n  SAVINGS 3.02\n  RETURN VALUE 3.99 ea",
+            "quantity": "",
+            "price": ""
+          },
+          {
+            "name": "ENERGIZER AA BATTERIES          24PK\n  08156293847                C",
+            "quantity": 1,
+            "price": 18.99
+          },
+          {
+            "name": "  REGULAR PRICE 24.99\n  REWARDS SAVINGS 6.00\n  REWARDS POINTS EARNED  12000\n  RETURN VALUE 18.99",
+            "quantity": "",
+            "price": ""
+          },
+          {
+            "name": "TIDE PODS LAUNDRY               42CT\n  04729385621                D",
+            "quantity": 1,
+            "price": 16.49
+          },
+          {
+            "name": "  REGULAR PRICE 19.99\n  REWARDS SAVINGS 3.50\n  REWARDS POINTS EARNED  6500\n  RETURN VALUE 16.49",
+            "quantity": "",
+            "price": ""
+          },
+          {
+            "name": "MFG CPN",
+            "quantity": 1,
+            "price": -3.00
+          },
+          {
+            "name": "MFG CPN",
+            "quantity": 1,
+            "price": -2.50
+          }
+        ],
+        "showQuantity": false,
+        "showItemDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "customMessage": "        SUBTOTAL                       46.95\n        SALES TAX A=7.75%               0.62\n        SALES TAX B=1.75%               0.16",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "customMessage": "        TOTAL                          47.73\n        VISA ENDING IN 3842            47.73\n        CHANGE                           .00",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "customMessage": "BALANCE REWARDS SAVINGS            16.02\nSTORE ADVERTISED SAVINGS            6.52\nMFG COUPON SAVINGS                  5.50",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "customMessage": "THANK YOU FOR SHOPPING AT WALGREENS",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

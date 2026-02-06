@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect x="60" y="60" width="80" height="100" fill="none" stroke="#000" stroke-width="4" rx="5"/>
+  <rect x="70" y="70" width="60" height="40" fill="#000"/>
+  <rect x="85" y="50" width="30" height="20" fill="#000"/>
+  <path d="M140 80 L160 80 L160 120 Q160 130 150 130 L150 100" stroke="#000" stroke-width="4" fill="none"/>
+  <text x="100" y="140" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000">FUEL</text>
+</svg>

@@ -1,0 +1,128 @@
+{
+  "name": "Neiman Marcus Receipt",
+  "description": "Professional Neiman Marcus department store receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/neimanmarcus-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "===",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "NEIMAN MARCUS\n\nTHE SHOPS AT WILLOW BEND\n6121 W PARK BLVD\nPLANO, TX 75093\n(214) 379-2800",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 2,
+      "data": {
+        "customFields": [
+          { "label": "SALE", "value": "NM-847291", "column": 1 },
+          { "label": "REG", "value": "04", "column": 1 },
+          { "label": "ASSOC", "value": "JESSICA R", "column": 2 },
+          { "label": "DEPT", "value": "342", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 3,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/13/2025 3:15:22 PM",
+        "dateDivider": "---",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "TOM FORD SILK BLOUSE", "price": 1290.00 },
+          { "quantity": 1, "name": "SIZE: 6  COLOR: IVORY", "price": 0.00 },
+          { "quantity": 1, "name": "GUCCI LEATHER LOAFERS", "price": 890.00 },
+          { "quantity": 1, "name": "SIZE: 8.5  COLOR: BLACK", "price": 0.00 },
+          { "quantity": 1, "name": "LA MER MOISTURIZING CREAM", "price": 345.00 },
+          { "quantity": 1, "name": "2 OZ JAR", "price": 0.00 },
+          { "quantity": 2, "name": "HERMÈS SILK SCARF", "price": 790.00 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "INCIRCLE MEMBER\nPOINTS EARNED: 331\nTOTAL POINTS: 8,472",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 8.25,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "MERCHANDISE", "value": "3315.00" },
+          { "label": "TX TAX", "value": "273.49" },
+          { "label": "TOTAL", "value": "3588.49" },
+          { "label": "NM CARD ****4521", "value": "3588.49" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "EARN 2 POINTS PER DOLLAR\nWITH YOUR NM CARD",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 45,
+        "barcodeLength": 75,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "RETURN POLICY: 30 DAYS WITH RECEIPT\nGIFT RETURNS: MERCHANDISE CREDIT\n\nTHANK YOU FOR SHOPPING\nNEIMANMARCUS.COM",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}

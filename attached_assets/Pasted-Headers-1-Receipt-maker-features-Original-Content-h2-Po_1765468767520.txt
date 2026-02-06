@@ -1,0 +1,710 @@
+Headers
+
+1. Receipt maker features
+
+
+
+
+
+Original Content: <h2>Powerful Receipt Maker Features</h2>
+
+
+
+Recommended Change: <h2>Receipt maker features</h2>
+
+
+
+Rationale: Removes unnecessary adjective and switches to sentence case for leaner, competitor-aligned phrasing.
+
+
+
+Location: First feature section (top of features block).
+
+2. Custom branding
+
+
+
+
+
+Original Content: <h3>Custom Branding</h3>
+
+
+
+Recommended Change: <h3>Custom branding</h3>
+
+
+
+Rationale: Sentence case for uniform heading hierarchy.
+
+
+
+Location: Features block, sub-feature 1.
+
+3. Flexible line items
+
+
+
+
+
+Original Content: <h3>Flexible Line Items</h3>
+
+
+
+Recommended Change: <h3>Flexible line items</h3>
+
+
+
+Rationale: Maintains visual consistency; aids scan-reading.
+
+
+
+Location: Features block, sub-feature 2.
+
+4. Multiple payment options
+
+
+
+
+
+Original Content: <h3>Multiple Payment Options</h3>
+
+
+
+Recommended Change: <h3>Multiple payment options</h3>
+
+
+
+Rationale: Sentence case alignment.
+
+
+
+Location: Features block, sub-feature 3.
+
+5. Live preview
+
+
+
+
+
+Original Content: <h3>Live Preview</h3>
+
+
+
+Recommended Change: <h3>Live preview</h3>
+
+
+
+Rationale: Uniform casing rule.
+
+
+
+Location: Features block, sub-feature 4.
+
+6. Instant download
+
+
+
+
+
+Original Content: <h3>Instant Download</h3>
+
+
+
+Recommended Change: <h3>Instant download</h3>
+
+
+
+Rationale: Consistent sentence case; improves accessibility.
+
+
+
+Location: Features block, sub-feature 5.
+
+7. Privacy first
+
+
+
+
+
+Original Content: <h3>Privacy First</h3>
+
+
+
+Recommended Change: <h3>Privacy first</h3>
+
+
+
+Rationale: Friendlier, sentence-case phrasing echoes privacy messaging in SERP competitors.
+
+
+
+Location: Features block, sub-feature 6.
+
+8. Receipt maker templates
+
+
+
+
+
+Original Content: <h2>Receipt Maker Templates</h2>
+
+
+
+Recommended Change: <h2>Receipt maker templates</h2>
+
+
+
+Rationale: Matches Google’s plain-language heading guidance.
+
+
+
+Location: Templates section.
+
+9. How the receipt generator works
+
+
+
+
+
+Original Content: <h2>How the Receipt Generator Works</h2>
+
+
+
+Recommended Change: <h2>How the receipt generator works</h2>
+
+
+
+Rationale: Sentence case; maintains conversational “how” lead-in.
+
+
+
+Location: Process/tutorial section.
+
+10. Choose a template
+
+
+
+
+
+Original Content: <h3>Choose a Template</h3>
+
+
+
+Recommended Change: <h3>Choose a template</h3>
+
+
+
+Rationale: Minor case adjustment for consistency.
+
+
+
+Location: Process step 1.
+
+11. Fill in details
+
+
+
+
+
+Original Content: <h3>Fill in Details</h3>
+
+
+
+Recommended Change: <h3>Fill in details</h3>
+
+
+
+Rationale: Sentence-case alignment.
+
+
+
+Location: Process step 2.
+
+12. Download & use
+
+
+
+
+
+Original Content: <h3>Download &amp; Use</h3>
+
+
+
+Recommended Change: <h3>Download &amp; use</h3>
+
+
+
+Rationale: Lower-case “use” for smoother flow.
+
+
+
+Location: Process step 3.
+
+13. Instant, professional receipts with our online receipt generator
+
+
+
+
+
+Original Content: <h2>Instant, Professional Receipts: The Ultimate Online Receipt Generator</h2>
+
+
+
+Recommended Change: <h2>Instant, professional receipts with our online receipt generator</h2>
+
+
+
+Rationale: Drops colon, enforces sentence case, keeps keywords front-loaded.
+
+
+
+Location: Mid-page credibility section.
+
+14. Popular receipt templates in ReceiptMake generator
+
+
+
+
+
+Original Content: <h3>Popular Receipt Templates in ReceiptMake Generator</h3>
+
+
+
+Recommended Change: <h3>Popular receipt templates in ReceiptMake generator</h3>
+
+
+
+Rationale: Streamlined wording; sentence-case uniformity.
+
+
+
+Location: Templates showcase subsection.
+
+15. Generate custom receipts with ReceiptMake in 3 easy steps
+
+
+
+
+
+Original Content: <h3>Generate Custom Receipts with ReceiptMake: 3 Easy Steps</h3>
+
+
+
+Recommended Change: <h3>Generate custom receipts with ReceiptMake in 3 easy steps</h3>
+
+
+
+Rationale: Replaces colon; keeps numeric promise; sentence-case.
+
+
+
+Location: Process overview header.
+
+16. Step 1: input core business information
+
+
+
+
+
+Original Content: <h4>Step 1: Input Core Business Information</h4>
+
+
+
+Recommended Change: <h4>Step 1: input core business information</h4>
+
+
+
+Rationale: Post-colon part shifted to sentence case.
+
+
+
+Location: Detailed step list.
+
+17. Step 2: detail the itemized transaction
+
+
+
+
+
+Original Content: <h4>Step 2: Detail the Itemized Transaction</h4>
+
+
+
+Recommended Change: <h4>Step 2: detail the itemized transaction</h4>
+
+
+
+Rationale: Sentence-case harmonization.
+
+
+
+Location: Detailed step list.
+
+18. Step 3: finalize, download, and print
+
+
+
+
+
+Original Content: <h4>Step 3: Finalize, Download, and Print</h4>
+
+
+
+Recommended Change: <h4>Step 3: finalize, download, and print</h4>
+
+
+
+Rationale: Sentence-case consistency across steps.
+
+
+
+Location: Detailed step list.
+
+19. Frequently asked questions
+
+
+
+
+
+Original Content: <h2>Frequently Asked Questions</h2>
+
+
+
+Recommended Change: <h2>Frequently asked questions</h2>
+
+
+
+Rationale: Sentence-case style aligns with FAQ schema examples.
+
+
+
+Location: FAQ block introduction.
+
+
+
+Body Content
+
+1. Hero H1 social-proof injection High Priority
+
+
+
+
+
+Location: <h1>Free Receipt Maker</h1> intro sentence.
+
+
+
+Original Content:
+Make receipts with custom information from selected templates in seconds!
+
+
+
+Recommended Change:
+Make receipts with custom information from 100+ templates in seconds — trusted by thousands of users worldwide!
+
+
+
+Rationale: Adds concise social proof to build credibility and mirror top-ranking competitor messaging.
+
+2. Hero feature list formatting
+
+
+
+
+
+Location: Feature list beneath hero image.
+
+
+
+Original Content: Series of nested <div> tags (seven items).
+
+
+
+Recommended Change: Replace with semantic bullet list:
+```html
+
+
+
+
+
+
+Brand your receipts with your logo
+
+
+
+Add or edit line items instantly
+
+
+
+Multiple payment methods supported
+
+
+
+Full control over receipt layout
+
+
+
+Set your business information once
+
+
+
+Choose from multiple font styles
+
+
+
+Professional receipt appearance
+
+```
+
+
+
+
+
+Rationale: Improves scannability, accessibility, and mirrors layout on high-ranking SERP pages.
+
+3. Features intro speed benefit
+
+
+
+
+
+Location: Immediately under “Receipt maker features” header.
+
+
+
+Original Content:
+Professional receipt generator features that make creation simple and efficient
+
+
+
+Recommended Change:
+Professional receipt generator features that make creation simple, efficient, and completely sign-up-free—you can generate a polished receipt in under a minute.
+
+
+
+Rationale: Addresses content gap by highlighting no-sign-up speed benefit seen on competitors.
+
+4. Two-paragraph split for credibility section
+
+
+
+
+
+Location: Section headed “Instant, professional receipts with our online receipt generator.”
+
+
+
+Original Content: One 70-word paragraph.
+
+
+
+Recommended Change: Two short paragraphs (see supplied text).
+
+
+
+Rationale: Breaks wall of text for easier reading while preserving meaning/length.
+
+5. Primary hero CTA button copy High Priority
+
+
+
+
+
+Location: Hero section call-to-action link.
+
+
+
+Original Content:
+Generate Receipt Loading...
+
+
+
+Recommended Change:
+Generate Receipt
+
+
+
+Rationale: Removes confusing default “Loading…” text; keeps action-oriented copy while dynamic loading state continues via CSS.
+
+
+
+FAQ Updates
+
+1. Legality clarification High Priority
+
+
+
+
+
+Location: FAQ block – Question: “Is using ReceiptMake receipts legal?”
+
+
+
+Original Answer: Verbose, wrapped in extra nested <p> tags.
+
+
+
+Recommended Change:
+```html
+
+
+Yes. Creating receipts with ReceiptMake is legal when you use them for honest purposes like expense tracking, record keeping, or client documentation. Using any receipt to commit fraud or evade taxes is illegal and violates our Terms of Service. Always follow the laws in your area.
+
+```
+
+
+
+
+
+Rationale: Streamlines wording, removes redundant tags, emphasizes compliance.
+
+2. Watermark explanation
+
+
+
+
+
+Location: FAQ – Question: “Why do free receipts have a watermark?”
+
+
+
+Original Answer: Wordy and partially overlaps Premium FAQ.
+
+
+
+Recommended Change:
+```html
+
+
+The small “RECEIPTMAKE” watermark lets us offer the generator at no cost. Upgrade to Premium to download receipts without any watermark.
+
+```
+
+
+
+
+
+Rationale: Concise, eliminates duplication.
+
+3. Premium plan details
+
+
+
+
+
+Location: FAQ – replaces former FAQ #13.
+
+
+
+Original QA: Repetitive watermark focus.
+
+
+
+Recommended Change (Question): What does the Premium plan include?
+Answer:
+```html
+
+
+Premium removes all watermarks and ads, lets you save unlimited templates, and gives you priority email support—ideal for business use.
+
+```
+
+
+
+
+
+Rationale: Adds full benefits, removes redundancy.
+
+4. New FAQ – usage limits
+
+
+
+
+
+Location: Added at end of FAQ list.
+
+
+
+Original: N/A (new).
+
+
+
+Recommended Change:
+Q: Is there a limit to how many receipts I can create for free?
+A:
+```html
+
+
+No. You can generate as many free receipts as you need. Each free receipt will include a small watermark.
+
+```
+
+
+
+
+
+Rationale: Addresses common SERP query; clarifies policy.
+
+5. New FAQ – no software installation
+
+
+
+
+
+Location: Added after previous new FAQ.
+
+
+
+Original: N/A (new).
+
+
+
+Recommended Change:
+Q: Do I need to install any software or app?
+A:
+```html
+
+
+No installation needed. ReceiptMake runs entirely in your web browser on desktop, tablet, or phone—just open the site and start creating.
+
+```
+
+
+
+
+
+Rationale: Fills gap about web-based nature; meets user expectations.
+
+6. New FAQ – automatic tax calculation
+
+
+
+
+
+Location: Added after previous new FAQ.
+
+
+
+Original: N/A (new).
+
+
+
+Recommended Change:
+Q: Does ReceiptMake calculate taxes and totals for me?
+A:
+```html
+
+
+Yes. Enter the item price and tax rate, and the generator automatically calculates subtotals, tax, and the grand total.
+
+```
+
+
+
+
+
+Rationale: Highlights value-add feature competitors showcase; responds to frequent search intent.
+
+
+
+All recommended updates honor the brand’s educational, friendly tone while tightening copy, improving structure, and reinforcing the target keyword “free receipt maker.”

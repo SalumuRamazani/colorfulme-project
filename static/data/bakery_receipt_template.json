@@ -1,0 +1,131 @@
+{
+  "name": "Bakery Receipt",
+  "description": "Professional bakery shop sales receipt",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/bakery-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 50,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "SWEET CRUST BAKERY\nSALES RECEIPT",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "════════════════════════════",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "456 BAKER STREET\nPORTLAND, OR 97205\n(503) 555-2253\nwww.sweetcrustbakery.com",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "Date: 05/24/2025  Time: 10:30 AM\nCashier: Mike\nRegister: 01  Receipt: 5742",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "FRESH BAKED ITEMS",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Sourdough Loaf (500g)",
+            "price": 7.50
+          },
+          {
+            "quantity": 2,
+            "name": "French Butter Croissants",
+            "price": 5.99
+          },
+          {
+            "quantity": 1,
+            "name": "Chocolate Croissant (Artisan)",
+            "price": 6.50
+          },
+          {
+            "quantity": 2,
+            "name": "Blueberry Muffin",
+            "price": 4.50
+          },
+          {
+            "quantity": 1,
+            "name": "Lemon Poppy Seed Scone",
+            "price": 4.00
+          }
+        ]
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "LOYALTY PROGRAM\nMember Discount (10%):       -$5.55\nPoints Earned: 34 pts",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "────────────────────────────"
+      }
+    },
+    {
+      "type": "tax",
+      "position": 7,
+      "data": {
+        "taxLabel": "Tax (8.1%)",
+        "taxValue": 4.04
+      }
+    },
+    {
+      "type": "total",
+      "position": 8,
+      "data": {
+        "totalLabel": "TOTAL",
+        "totalValue": 53.98
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "PAYMENT\nVisa ****8203\n\nCURRENT SPECIALS\n• Fresh Donuts: 20% OFF\n• Subscribe to Weekly Delivery: Save 15%\n• Custom Cake Orders: Call for quote\n\nHOURS\nM-F: 6:00 AM - 8:00 PM\nSat: 7:00 AM - 9:00 PM\nSun: 8:00 AM - 6:00 PM\n\nThank you! Come again soon!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    }
+  ]
+}

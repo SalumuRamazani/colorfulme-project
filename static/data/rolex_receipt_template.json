@@ -1,0 +1,129 @@
+{
+  "name": "Rolex Receipt",
+  "description": "Professional Rolex luxury watches receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/rolex-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 70,
+    "businessName": "",
+    "headerDivider": "===",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "ROLEX\nA CROWN FOR EVERY ACHIEVEMENT\n\nOFFICIAL ROLEX RETAILER\nRODEO DRIVE BOUTIQUE\n421 N RODEO DR\nBEVERLY HILLS, CA 90210\n(310) 271-8200",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "NOVEMBER 13, 2025 - 2:30 PM",
+        "dateDivider": "---",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 3,
+      "data": {
+        "customFields": [
+          { "label": "INVOICE", "value": "RLX-2025-8472", "column": 1 },
+          { "label": "ASSOCIATE", "value": "JAMES C", "column": 1 },
+          { "label": "CLIENT", "value": "MR. ANDERSON", "column": 2 },
+          { "label": "VIP#", "value": "****4521", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "ROLEX SUBMARINER DATE", "price": 42500.00 },
+          { "quantity": 1, "name": "REF: 126610LN", "price": 0.00 },
+          { "quantity": 1, "name": "MOVEMENT: PERPETUAL, AUTOMATIC", "price": 0.00 },
+          { "quantity": 1, "name": "CASE: 41MM OYSTERSTEEL", "price": 0.00 },
+          { "quantity": 1, "name": "BRACELET: OYSTER, GLIDELOCK", "price": 0.00 },
+          { "quantity": 1, "name": "WARRANTY: 5 YEARS INTERNATIONAL", "price": 0.00 },
+          { "quantity": 1, "name": "COMPLIMENTARY SERVICE (2 YEARS)", "price": 0.00 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "SERIAL NUMBER: ****8N4K\nCARD NUMBER: 847.291.562\nWARRANTY ACTIVATION: 11/13/2025",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 9.5,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "SUBTOTAL", "value": "42500.00" },
+          { "label": "LUXURY TAX", "value": "4037.50" },
+          { "label": "TOTAL", "value": "46537.50" },
+          { "label": "AMEX CENTURION ****1234", "value": "46537.50" },
+          { "label": "AUTHORIZATION", "value": "RLX847291" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "AUTHENTICITY CERTIFICATE INCLUDED\nREGISTERED WITH ROLEX SA, GENEVA\nINTERNATIONAL WARRANTY ACTIVATED",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 40,
+        "barcodeLength": 70,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "THANK YOU FOR YOUR PURCHASE\nYOUR ROLEX IS A TESTAMENT TO EXCELLENCE\n\nFOR SERVICE: SERVICE.ROLEX.COM",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}

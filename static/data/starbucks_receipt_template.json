@@ -1,0 +1,121 @@
+{
+  "name": "Starbucks Receipt",
+  "description": "Professional Starbucks coffee shop receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/starbucks-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 70,
+    "businessName": "",
+    "headerDivider": "===",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "STARBUCKS COFFEE\nSTORE #12453 - LOS ANGELES\n1356 3RD STREET PROMENADE\nSANTA MONICA, CA 90401\n(310) 393-0677",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "11/13/2025 08:45:23 AM",
+        "dateDivider": "---",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "Terminal: 0427101\nPartner: Alex T\nCust.Name:",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "ITEM NAME                    QTY     AMOUNT",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "..................................."
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "Grande Caffe Mocha", "price": 6.95 }
+        ],
+        "itemsDivider": "..................................."
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 9.5,
+        "paymentType": "cash",
+        "paymentFields": [],
+        "paymentDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "Cash                                  $20.00\n\nChange                                $12.39",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "..................................."
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "Thank you for visiting Starbucks!\nWe appreciate your business.\n\nTell us about your visit:\nwww.starbuckssurvey.com",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==================================="
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "Free wifi access code:\n\n1577152971\n\nValid for one hour only.",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 10,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

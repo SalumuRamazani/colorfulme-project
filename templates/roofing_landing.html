@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Roofing Receipt Generator - Free Professional Contractor Invoices{% endblock %}
+{% block description %}Create professional roofing service receipts and contractor invoices instantly. Perfect for roofers, contractors, quotes, and billing documentation. Fully customizable.{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ request.url_root.rstrip('/') }}/roofing-receipt">{% endblock %}
+
+{% block meta_tags %}
+<meta property="og:title" content="Roofing Receipt Generator - ReceiptMake">
+<meta property="og:description" content="Create professional roofing contractor invoices and service receipts. Perfect for quotes, estimates, and billing documentation.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/images/template-previews/roofing-preview.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Roofing Receipt Generator",
+  "applicationCategory": "BusinessApplication",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+  <section class="px-4 py-12 md:py-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4 leading-tight">
+            Free Roofing Receipt Generator
+          </h1>
+          <p class="text-lg text-neutral-600 mb-6">
+            Create professional roofing service receipts instantly. Perfect for roofing contractors, roofers, and construction companies. Fully customizable with project details, materials, labor costs, and comprehensive invoicing.
+          </p>
+          <p class="text-neutral-600 mb-8">
+            Generate professional roofing receipts, estimates, and invoices in seconds. No sign-up required.
+          </p>
+          <div class="flex flex-col md:flex-row gap-3">
+            <a href="/generate-roofing-receipt" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200 text-center">
+              Generate Roofing Receipt →
+            </a>
+            <a href="/templates" class="inline-block border-2 border-neutral-300 hover:border-neutral-400 text-neutral-700 font-semibold py-3 px-8 rounded-lg transition duration-200 text-center">
+              View All Templates
+            </a>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden relative border border-neutral-200">
+          <picture>
+            <source srcset="/static/images/template-previews/roofing-preview.webp?v=6" type="image/webp">
+            <img src="/static/images/template-previews/roofing-preview.png?v=6" alt="Roofing Service Receipt Preview" class="w-full h-auto" width="300" height="1107">
+          </picture>
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%); pointer-events: none; z-index: 100;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-neutral-900 mb-12">Powerful Features</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">🏗️</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Project Details</h3>
+          <p class="text-neutral-600 text-sm">Include property address, job scope, materials used, and labor specifications.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">💰</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Cost Breakdown</h3>
+          <p class="text-neutral-600 text-sm">Itemize materials, labor, permits, and taxes for complete transparency.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">📋</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Professional Invoicing</h3>
+          <p class="text-neutral-600 text-sm">Create invoices suitable for estimates, quotes, and final billing.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">📄</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">PDF & PNG Export</h3>
+          <p class="text-neutral-600 text-sm">Download in multiple formats suitable for email, printing, and archival.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">⚙️</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Custom Branding</h3>
+          <p class="text-neutral-600 text-sm">Add your company logo, license numbers, and insurance information.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-lg">
+          <div class="text-3xl mb-3">⚡</div>
+          <h3 class="text-lg font-bold text-neutral-900 mb-2">Instant Creation</h3>
+          <p class="text-neutral-600 text-sm">Generate professional receipts in seconds with no setup required.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Perfect For</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🏢</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Roofing Contractors</h3>
+            <p class="text-neutral-600 text-sm">Professional receipts and invoices for roof repairs, replacements, and installations.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🏠</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Home Improvement</h3>
+            <p class="text-neutral-600 text-sm">Create detailed receipts for residential roofing projects and customer billing.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">🎯</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Estimates & Quotes</h3>
+            <p class="text-neutral-600 text-sm">Generate professional project estimates and quotes for potential customers.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 text-2xl">📊</div>
+          <div>
+            <h3 class="font-bold text-neutral-900 mb-1">Business Records</h3>
+            <p class="text-neutral-600 text-sm">Maintain detailed documentation of all roofing projects for accounting and tax purposes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Create Your Roofing Receipt Now</h2>
+      <p class="text-blue-100 mb-8">Professional contractor receipts. Free, unlimited, and instantly downloadable.</p>
+      <a href="/generate-roofing-receipt" class="inline-block bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 px-8 rounded-lg transition duration-200">
+        Generate Receipt Now →
+      </a>
+    </div>
+  </section>
+</div>
+{% endblock %}

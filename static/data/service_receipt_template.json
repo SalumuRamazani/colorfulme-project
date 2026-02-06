@@ -1,0 +1,128 @@
+{
+  "name": "Generic Service Receipt",
+  "description": "Professional generic service receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/service-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 80,
+    "businessName": "Professional Services",
+    "headerDivider": "---",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "238 Oswood Lane, St James, FL 32046\nPhone: (631) 555-0102\nEmail: info@services.com",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "06/30/2025\n02:15 PM",
+        "dateDivider": "---",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "SERVICE RECEIPT\nINVOICE #: 5847",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "Service Rendered To:\nJohn Doe\n123 First Street\nNew York, NY 10001\njohn@email.com",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "New Electrical Outlet Installation",
+            "price": 125.00
+          },
+          {
+            "quantity": 1,
+            "name": "Drywall Repair & Paint Matching",
+            "price": 95.00
+          },
+          {
+            "quantity": 1,
+            "name": "Light Fixture Installation",
+            "price": 85.00
+          },
+          {
+            "quantity": 2.5,
+            "name": "Labor Hours @ $60/hr",
+            "price": 150.00
+          }
+        ],
+        "itemsDivider": "---",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 8.25,
+        "showTaxRate": true,
+        "paymentType": "check",
+        "paymentFields": [
+          {
+            "label": "Total",
+            "value": "429.56"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "Thank You for Your Business!\nWe appreciate your trust.",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

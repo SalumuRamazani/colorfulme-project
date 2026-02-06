@@ -1,0 +1,96 @@
+Looking at the receipt image, here's the JSON to recreate it identically using only custom message sections:
+
+```json
+{
+  "name": "Best Buy Receipt",
+  "description": "Best Buy receipt #1407",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "WELCOME TO BEST BUY #1407\n(380)605-4078\nKeep your receipt!",
+        "alignment": "center",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\nVal#: 000259-186772-719168-782808-447\n188808 120  12/19/2017 09:18 54364",
+        "alignment": "left",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "6009801 MGA52LL                    41.63\n    APPLE - IPHONE X 64GB\n    SUPERBOWL LII 41-33              0.00\n    PHIL EAGLES VS N.ENGL PATRIOTS",
+        "alignment": "left",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "SUBTOTAL                           41.63\nTAX 8.0%                            3.33\nTOTAL                              44.96\nDEBIT TEND                         44.96\nCHANGE DUE                          0.00",
+        "alignment": "left",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "xxxxxxxxxxxxx5372        VISA      44.96\nAPPROVED",
+        "alignment": "left",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "15-day return policy on eligible items\n\nExcept where prohibited, a valid receipt\nand ID is required for all returns. ID info\n    may be stored in a secure, encrypted\n    database used for tracking returns &\nexchanges. Best Buy reserves the right to\n    deny any return",
+        "alignment": "left",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "For return policy details and a complete\n  list of exceptions, ask for a policy\n    brochure at any cash register\n    or go to BestBuy.com/Returns",
+        "alignment": "left",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "Best Buy is not responsible for any\npersonal data left on a returned device.\n\nTo learn about our Privacy Practices\nplease visit www.BestBuy.com/privacy",
+        "alignment": "center",
+        "showDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "data": {
+        "message": "YOUR CUSTOMER SERVICE PIN IS:\n1421 002 1391 122613",
+        "alignment": "center",
+        "showDivider": false
+      }
+    }
+  ]
+}
+```

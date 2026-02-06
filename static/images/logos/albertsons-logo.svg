@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80">
+  <!-- Albertsons Logo -->
+  <!-- Stylized A leaf -->
+  <path d="M30 20 Q25 35, 30 50 Q35 35, 40 50 Q45 35, 50 50 L50 20 Z" fill="#FF6900"/>
+  
+  <!-- Albertsons text -->
+  <text x="65" y="50" fill="#003DA5" font-family="Arial, sans-serif" font-size="32" font-weight="bold">albertsons</text>
+  
+  <!-- Trademark -->
+  <circle cx="280" cy="30" r="4" fill="none" stroke="#003DA5" stroke-width="0.6"/>
+  <text x="277.5" y="33" fill="#003DA5" font-family="Arial, sans-serif" font-size="6" font-weight="bold">®</text>
+</svg>

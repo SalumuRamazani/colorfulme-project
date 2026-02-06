@@ -1,0 +1,143 @@
+{
+  "name": "Motel 6 Receipt",
+  "description": "Professional Motel 6 hotel receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/motel6-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "MOTEL 6",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "WE'LL LEAVE THE LIGHT ON FOR YOU",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "MOTEL 6 - PHOENIX AIRPORT\n4130 E VAN BUREN ST\nPHOENIX, AZ 85008\n(602) 267-8555",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 4,
+      "data": {
+        "customFields": [
+          { "label": "FOLIO#", "value": "M6-847291", "column": 1 },
+          { "label": "CONFIRM#", "value": "84729156", "column": 1 },
+          { "label": "ROOM", "value": "217", "column": 2 },
+          { "label": "CLERK", "value": "SARAH", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "GUEST: ROBERT WILLIAMS\nCHECK-IN:  11/12/2025 3:00 PM\nCHECK-OUT: 11/14/2025 11:00 AM\nNIGHTS: 2  GUESTS: 2",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "items",
+      "position": 6,
+      "data": {
+        "items": [
+          { "quantity": 2, "name": "ROOM CHARGE - DOUBLE QUEEN", "price": 169.98 },
+          { "quantity": 2, "name": "PET FEE (UP TO 2 PETS)", "price": 20.00 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "ROOM TYPE: DOUBLE QUEEN NON-SMOKING\nAMENITIES: FREE WIFI, CABLE TV\nPARKING: FREE",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---",
+        "isBold": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 8,
+      "data": {
+        "taxRate": 12,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "VISA ****3478", "value": "212.78" },
+          { "label": "AUTH CODE", "value": "847291" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 9,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/14/2025\n11:15 AM",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "THANK YOU FOR STAYING WITH US\nWE HOPE TO SEE YOU AGAIN SOON!\n\nFor duplicate receipt:\nCall 1-800-899-9841",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 11,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 45,
+        "barcodeLength": 75,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

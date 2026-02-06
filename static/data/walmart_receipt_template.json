@@ -1,0 +1,137 @@
+{
+  "name": "Walmart Receipt",
+  "description": "Professional Walmart retail receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/walmart-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 100,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "Give us feedback @ survey.walmart.com\nThank you! ID #:7PB65.MCF22",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "949-498-6669 SAN MICHAEL\n951 AVENIDA PICO\nSAN CLEMENTE CA 92673",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "ST# 02527 OP# 008045 TE# 45 TR# 06193",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "GV OATMEAL 007874243405 Q", "price": 1.76 },
+          { "quantity": 1, "name": "OT 2002 TUM 081236800115 X", "price": 6.74 },
+          { "quantity": 1, "name": "M ATHLETICS 061799457781 X", "price": 24.97 },
+          { "quantity": 1, "name": "DEXAS 15X20 008429770921 X", "price": 12.97 }
+        ],
+        "itemsDivider": ""
+      }
+    },
+    {
+      "type": "payment",
+      "position": 5,
+      "data": {
+        "taxRate": 7.46,
+        "paymentType": "debit",
+        "paymentFields": [
+          { "label": "DEBIT TEND", "value": "$49.90" },
+          { "label": "CHANGE", "value": "$0.00" }
+        ],
+        "paymentDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "EFT DEBIT        PAY FROM PRIMARY\n***************     TOTAL PURCHASE\n      49.90             ****** 9689 I O",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "REF # 029200639128\nNETWORK: 5011004  APPR CODE 461506\nUS DEBIT\nAID A0000000980840\nAAC 775GF4BB2854EED\nTERMINAL # SC011004",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 8,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "10/18/20     11:30:42",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "# ITEMS SOLD 4",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "TC# 2400 4776 4305 8847 1471",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 11,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 90,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

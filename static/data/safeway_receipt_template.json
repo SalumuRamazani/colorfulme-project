@@ -1,0 +1,120 @@
+{
+  "name": "Safeway Grocery Receipt",
+  "description": "Professional Safeway grocery store receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/safeway-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "Store 1847 Dir Jennifer Walsh\nMain:(541) 754-8820 Rx:(541) 754-8825\n2855 NW Grant Ave\nCorvallis OR 97330",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "GROCERY",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "O ORGANICS MILK GALLON    4.99 F\nLUCERNE YOGURT 32OZ       3.49 F\nFRESH BANANAS             2.87 F\n  2.47 lb @ $1.49/lb\nO ORG BABY SPINACH 5OZ    3.99 F\n  Club Card Savings      -1.00",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "REFRIG/FROZEN",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "BANQUET FRIED CHICKEN     5.99 F\nSTOUFFERS MAC&CHEESE      6.49 F\nBEN&JERRYS CHOC CHIP      5.99 F\n  Club Card Savings      -1.50",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 6,
+      "data": {
+        "customMessage": "DELI",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "ROTISSERIE CHICKEN        7.99 F\nHUMMUS TRADITIONAL 10OZ   4.49 F",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "SUBTOTAL                 43.79\nTAX                       2.19\n**** BALANCE             45.98\n---------------------------------------",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "Debit Purchase    11/14/24 14:32\nCARD # ****2847        GROCERY\nTOTAL TRANSACTION AMOUNT: 45.98\nCASH BACK AMOUNT:       20.00\nREF # 730015892A7  AUTH: 892741\n---------------------------------------",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "AL US DEBIT\nAID A0000000980840\nTVR 8000048000\nTSI 6800",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 14,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

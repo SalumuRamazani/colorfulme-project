@@ -1,0 +1,204 @@
+{
+  "name": "Dollar Tree Receipt",
+  "description": "Professional Dollar Tree receipt template with $1.25 pricing",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/dollar-tree-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "DOLLAR TREE",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "STORE #4892\n2850 N BROADWAY\nCHICAGO, IL 60657\n(773) 528-1125",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 3,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "DATE: 11/14/2024    TIME: 3:15PM",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "STORE #4892         REG #02\nTRANSACTION: 7823\nCashier: TINA",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "GREETING CARDS",
+            "price": 1.25
+          },
+          {
+            "quantity": 2,
+            "name": "PARTY NAPKINS",
+            "price": 2.5
+          },
+          {
+            "quantity": 1,
+            "name": "COKE 1.25L",
+            "price": 1.75
+          },
+          {
+            "quantity": 3,
+            "name": "RAMEN NOODLES",
+            "price": 4.5
+          },
+          {
+            "quantity": 1,
+            "name": "CERAMIC MUG",
+            "price": 1.5
+          },
+          {
+            "quantity": 2,
+            "name": "DOG TREATS",
+            "price": 2.5
+          },
+          {
+            "quantity": 1,
+            "name": "CANDY BAG 3LB",
+            "price": 3.0
+          },
+          {
+            "quantity": 4,
+            "name": "CLEANING SPRAY",
+            "price": 5.0
+          },
+          {
+            "quantity": 2,
+            "name": "PAPER PLATES 40CT",
+            "price": 2.5
+          },
+          {
+            "quantity": 1,
+            "name": "BATTERIES AA 4PK",
+            "price": 1.25
+          },
+          {
+            "quantity": 3,
+            "name": "SCOTCH TAPE",
+            "price": 3.75
+          },
+          {
+            "quantity": 2,
+            "name": "NOTEBOOKS",
+            "price": 2.5
+          }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "ITEMS SOLD: 23",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 8,
+      "data": {
+        "taxRate": 10.25,
+        "paymentType": "cash",
+        "paymentFields": [
+          {
+            "label": "CASH",
+            "value": "$40.00"
+          },
+          {
+            "label": "CHANGE",
+            "value": "$4.72"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 9,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "4892 0002 7823 1114 2024",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": ""
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 11,
+      "data": {
+        "customMessage": "RETURN POLICY:\nWith receipt, items can be exchanged\nor refunded in original payment form",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 12,
+      "data": {
+        "customMessage": "Thank You for Shopping\nDollar Tree!\n\nFor duplicate receipts:\nCall 1-877-530-TREE (8733)",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    }
+  ]
+}

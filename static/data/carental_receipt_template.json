@@ -1,0 +1,146 @@
+{
+  "name": "Car Rental Receipt",
+  "description": "Professional car rental invoice and agreement receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/carental-logo-bw.svg",
+    "headerAlignment": "center",
+    "logoSize": 85,
+    "businessName": "DriveEasy Rentals",
+    "headerDivider": "================================================",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "2847 Highway Commerce Drive, Denver, CO 80202\nPhone: (303) 555-0142 | www.driveeasyrentals.com\nOpen 24/7 • Airport & Downtown Locations • Licensed & Insured",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "12/31/2025 03:15 PM",
+        "dateDivider": "================================================",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "VEHICLE RENTAL AGREEMENT\nConfirmation #: DR-2025-6284\nAgent: Jennifer Martinez",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "Renter: John Smith\nDriver License: CO-D1234567\nRental Period: Dec 31 - Jan 5, 2026 (6 days)",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "VEHICLE DETAILS\nVehicle: 2024 Toyota Camry LE\nLicense Plate: DER-4829\nOdometer: 22,450 miles",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "items",
+      "position": 6,
+      "data": {
+        "items": [
+          {
+            "quantity": 6,
+            "name": "Daily Rate (6 days @ $45/day)",
+            "price": 270.00
+          },
+          {
+            "quantity": 1,
+            "name": "Fuel Service Package",
+            "price": 35.00
+          },
+          {
+            "quantity": 1,
+            "name": "Insurance Coverage (CDW)",
+            "price": 45.00
+          },
+          {
+            "quantity": 1,
+            "name": "GPS Navigation System",
+            "price": 8.99
+          },
+          {
+            "quantity": 1,
+            "name": "Infant Car Seat Rental",
+            "price": 12.00
+          }
+        ],
+        "itemsDivider": "================================================",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 7,
+      "data": {
+        "taxRate": 8.75,
+        "showTaxRate": true,
+        "paymentType": "card",
+        "paymentFields": [
+          {
+            "label": "Subtotal",
+            "value": "370.99"
+          },
+          {
+            "label": "Tax (8.75%)",
+            "value": "32.46"
+          },
+          {
+            "label": "TOTAL DUE",
+            "value": "403.45"
+          },
+          {
+            "label": "Payment Status",
+            "value": "Paid (Card)"
+          },
+          {
+            "label": "Due Return",
+            "value": "Jan 5, 2026 @ 3:15 PM"
+          }
+        ],
+        "paymentDivider": "================================================",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "Thank you for choosing DriveEasy Rentals!\n\nFuel: Full tank provided. Return with full tank.\nDamage: Report any damage immediately.\nReturn Location: Same location or designated airport counter.\n\nSafe travels! Call 1-800-DRIVE-EASY for roadside assistance.",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "name": "Gucci Receipt",
+  "description": "Professional Gucci luxury receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/gucci-logo.png",
+    "headerAlignment": "center",
+    "logoSize": 60,
+    "businessName": "",
+    "headerDivider": "",
+    "showHeaderDivider": false
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "GUCCI",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 2,
+      "data": {
+        "customMessage": "THE SHOPS AT NORTH BRIDGE\n520 N MICHIGAN AVE\nCHICAGO, IL 60611\n+1 312 664 5504",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "CLIENT ADVISOR: ISABELLA M.\nTRANSACTION: GC478293",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "GG MARMONT CAMERA BAG",
+            "price": 1550.0
+          },
+          {
+            "quantity": 1,
+            "name": "  STYLE: 448065 DTDIT 1000",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "JACKIE 1961 SMALL SHOULDER",
+            "price": 3200.0
+          },
+          {
+            "quantity": 1,
+            "name": "  STYLE: 636709 1DB0G 2535",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "LEATHER BELT DOUBLE G",
+            "price": 550.0
+          },
+          {
+            "quantity": 1,
+            "name": "  STYLE: 414516 AP00T 1000",
+            "price": 0
+          },
+          {
+            "quantity": 1,
+            "name": "SILK FLORAL SCARF",
+            "price": 495.0
+          },
+          {
+            "quantity": 1,
+            "name": "  STYLE: 663017 3GA21 9264",
+            "price": 0
+          }
+        ],
+        "itemsDivider": "",
+        "showItemsDivider": false
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 8.5,
+        "paymentType": "credit",
+        "paymentFields": [
+          {
+            "label": "AMEX ****8923",
+            "value": "6,287.58"
+          },
+          {
+            "label": "AUTH CODE",
+            "value": "892347"
+          }
+        ],
+        "paymentDivider": "",
+        "showPaymentDivider": false
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 7,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/14/2025\n2:30 PM",
+        "dateDivider": "",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "AUTHENTICATION CODE: GCI478293US",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "EXCHANGE/RETURN WITHIN 30 DAYS\nWITH ORIGINAL RECEIPT & TAGS\n\nCOMPLIMENTARY SERVICES:\nGift Wrapping & Personalization",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 10,
+      "data": {
+        "customMessage": "THANK YOU FOR YOUR PURCHASE",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "",
+        "isBold": true
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 11,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "",
+        "showBarcodeDivider": false
+      }
+    }
+  ]
+}

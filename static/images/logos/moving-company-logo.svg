@@ -1,0 +1,84 @@
+<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+  <!-- Professional moving company logo in black and white -->
+  
+  <!-- Main truck frame -->
+  <g fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Cabin -->
+    <rect x="15" y="55" width="45" height="50" rx="3"/>
+    
+    <!-- Cargo bed main rectangle -->
+    <rect x="60" y="48" width="100" height="58" rx="2"/>
+    
+    <!-- Connection piece -->
+    <line x1="55" y1="75" x2="62" y2="75" stroke-width="2"/>
+  </g>
+  
+  <!-- Windshield with glass effect -->
+  <rect x="22" y="65" width="28" height="18" fill="none" stroke="#000000" stroke-width="2" rx="2"/>
+  <line x1="36" y1="65" x2="36" y2="83" stroke="#000000" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Door line -->
+  <line x1="45" y1="55" x2="45" y2="105" stroke="#000000" stroke-width="1.5"/>
+  
+  <!-- Side mirrors -->
+  <circle cx="12" cy="70" r="3.5" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <circle cx="165" cy="70" r="3.5" fill="none" stroke="#000000" stroke-width="1.5"/>
+  
+  <!-- Headlights -->
+  <circle cx="18" cy="100" r="4" fill="none" stroke="#000000" stroke-width="2"/>
+  <circle cx="30" cy="100" r="4" fill="none" stroke="#000000" stroke-width="2"/>
+  
+  <!-- Bumper -->
+  <line x1="15" y1="105" x2="45" y2="105" stroke="#000000" stroke-width="2"/>
+  
+  <!-- Wheels with detailed rims -->
+  <g>
+    <!-- Front wheel -->
+    <circle cx="32" cy="108" r="10" fill="none" stroke="#000000" stroke-width="2.5"/>
+    <circle cx="32" cy="108" r="6" fill="#000000"/>
+    <circle cx="32" cy="108" r="3" fill="none" stroke="#000000" stroke-width="1"/>
+    
+    <!-- Rear left wheel -->
+    <circle cx="95" cy="113" r="10" fill="none" stroke="#000000" stroke-width="2.5"/>
+    <circle cx="95" cy="113" r="6" fill="#000000"/>
+    <circle cx="95" cy="113" r="3" fill="none" stroke="#000000" stroke-width="1"/>
+    
+    <!-- Rear right wheel -->
+    <circle cx="140" cy="113" r="10" fill="none" stroke="#000000" stroke-width="2.5"/>
+    <circle cx="140" cy="113" r="6" fill="#000000"/>
+    <circle cx="140" cy="113" r="3" fill="none" stroke="#000000" stroke-width="1"/>
+  </g>
+  
+  <!-- Cargo boxes with stacking effect -->
+  <g fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round">
+    <!-- Bottom box (largest) -->
+    <rect x="70" y="85" width="40" height="28" rx="1"/>
+    <line x1="76" y1="85" x2="76" y2="113"/>
+    <line x1="84" y1="85" x2="84" y2="113"/>
+    <line x1="92" y1="85" x2="92" y2="113"/>
+    <line x1="100" y1="85" x2="100" y2="113"/>
+    
+    <!-- Middle box -->
+    <rect x="74" y="68" width="35" height="24" rx="1"/>
+    <line x1="80" y1="68" x2="80" y2="92"/>
+    <line x1="87" y1="68" x2="87" y2="92"/>
+    <line x1="94" y1="68" x2="94" y2="92"/>
+    
+    <!-- Top box -->
+    <rect x="78" y="52" width="30" height="20" rx="1"/>
+    <line x1="84" y1="52" x2="84" y2="72"/>
+    <line x1="90" y1="52" x2="90" y2="72"/>
+  </g>
+  
+  <!-- Directional arrow indicating movement -->
+  <g stroke="#000000" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <line x1="125" y1="38" x2="165" y2="38"/>
+    <path d="M 165 38 L 157 33 L 157 43 Z" fill="#000000"/>
+  </g>
+  
+  <!-- Company name text with professional styling -->
+  <text x="100" y="142" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000" letter-spacing="0.5">PREMIER MOVERS</text>
+  
+  <!-- Decorative line -->
+  <line x1="60" y1="148" x2="140" y2="148" stroke="#000000" stroke-width="1.5"/>
+</svg>

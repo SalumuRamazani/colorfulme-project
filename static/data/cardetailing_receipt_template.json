@@ -1,0 +1,132 @@
+{
+  "name": "Car Detailing Receipt",
+  "description": "Professional car detailing and exterior/interior detail service receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/cardetailing-logo-bw.svg",
+    "headerAlignment": "center",
+    "logoSize": 85,
+    "businessName": "PremiumGloss Detailing",
+    "headerDivider": "================================================",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "3847 Shine Court, Atlanta, GA 30301\nPhone: (404) 555-0156 | www.premiumglossdetailing.com\nProfessional Hand Detailing • Eco-Friendly Products • Mobile Available",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "12/31/2025 01:45 PM",
+        "dateDivider": "================================================",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "CAR DETAILING SERVICE RECEIPT\nReceipt #: PG-2025-7834\nDetailer: Alex Thompson",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "Vehicle: 2023 BMW 3 Series\nColor: Pearl White\nCondition Before: Light oxidation, road grime",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Exterior Detail Package (2-step)",
+            "price": 149.99
+          },
+          {
+            "quantity": 1,
+            "name": "Paint Correction & Ceramic Coating",
+            "price": 199.99
+          },
+          {
+            "quantity": 1,
+            "name": "Interior Deep Clean & Vacuum",
+            "price": 89.99
+          },
+          {
+            "quantity": 1,
+            "name": "Leather Conditioning & Protection",
+            "price": 59.99
+          },
+          {
+            "quantity": 1,
+            "name": "Wheel & Tire Shine",
+            "price": 34.99
+          }
+        ],
+        "itemsDivider": "================================================",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 7.0,
+        "showTaxRate": true,
+        "paymentType": "card",
+        "paymentFields": [
+          {
+            "label": "Subtotal",
+            "value": "534.95"
+          },
+          {
+            "label": "Tax (7.0%)",
+            "value": "37.45"
+          },
+          {
+            "label": "TOTAL DUE",
+            "value": "572.40"
+          },
+          {
+            "label": "Payment Status",
+            "value": "Paid (Card)"
+          }
+        ],
+        "paymentDivider": "================================================",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "Thank you for choosing PremiumGloss Detailing!\n\nYour vehicle now has professional protection.\nCeramic coating warranty: 12 months\nMaintenance wash recommended every 2 weeks\n\nSchedule next appointment: (404) 555-0156\nwww.premiumglossdetailing.com",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

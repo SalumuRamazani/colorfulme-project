@@ -1,0 +1,131 @@
+{
+  "name": "Generic Restaurant Bill",
+  "description": "Professional generic restaurant bill receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/generic-restaurant-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 50,
+    "businessName": "THE RESTAURANT",
+    "headerDivider": "===",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "FINE DINING EXPERIENCE\n456 RESTAURANT ROW\nCITY, STATE 12345\n(555) 987-6543",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 2,
+      "data": {
+        "customFields": [
+          { "label": "CHECK", "value": "2847", "column": 1 },
+          { "label": "TABLE", "value": "12", "column": 1 },
+          { "label": "SERVER", "value": "ALEX", "column": 2 },
+          { "label": "GUESTS", "value": "4", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 3,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/13/2025 7:45 PM",
+        "dateDivider": "---",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "items",
+      "position": 4,
+      "data": {
+        "items": [
+          { "quantity": 2, "name": "APPETIZER SAMPLER", "price": 24.00 },
+          { "quantity": 1, "name": "CAESAR SALAD", "price": 12.00 },
+          { "quantity": 1, "name": "HOUSE SALAD", "price": 10.00 },
+          { "quantity": 1, "name": "GRILLED SALMON", "price": 28.00 },
+          { "quantity": 1, "name": "RIBEYE STEAK - MEDIUM", "price": 42.00 },
+          { "quantity": 1, "name": "CHICKEN ALFREDO", "price": 22.00 },
+          { "quantity": 1, "name": "VEGETARIAN PASTA", "price": 18.00 },
+          { "quantity": 2, "name": "CHOCOLATE CAKE", "price": 16.00 },
+          { "quantity": 1, "name": "CHEESECAKE", "price": 8.00 },
+          { "quantity": 4, "name": "SOFT DRINKS", "price": 12.00 },
+          { "quantity": 2, "name": "COFFEE", "price": 6.00 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 5,
+      "data": {
+        "customMessage": "SUBTOTAL: $198.00\nTAX (8.5%): $16.83\n=====================\nTOTAL: $214.83\n\nSUGGESTED GRATUITY:\n18%: $38.67\n20%: $42.97\n22%: $47.26",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 0,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "AMOUNT", "value": "214.83" },
+          { "label": "TIP", "value": "____" },
+          { "label": "TOTAL", "value": "____" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "SIGNATURE: _____________________",
+        "messageAlignment": "left",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 8,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 40,
+        "barcodeLength": 70,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 9,
+      "data": {
+        "customMessage": "THANK YOU FOR DINING WITH US!\nWE APPRECIATE YOUR BUSINESS\n\nFOLLOW US ON SOCIAL MEDIA\n@THERESTAURANT",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}

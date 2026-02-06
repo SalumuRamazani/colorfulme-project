@@ -1,0 +1,114 @@
+{
+  "name": "Parking Receipt",
+  "description": "Professional parking garage receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/parking-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 50,
+    "businessName": "CITY CENTER PARKING",
+    "headerDivider": "===",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "DOWNTOWN PARKING GARAGE\n350 S HOPE ST\nLOS ANGELES, CA 90071\n24 HOUR ATTENDED\n(213) 629-1200",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 2,
+      "data": {
+        "customFields": [
+          { "label": "TICKET#", "value": "P847291", "column": 1 },
+          { "label": "LEVEL", "value": "3", "column": 1 },
+          { "label": "SPACE", "value": "C-142", "column": 2 },
+          { "label": "BOOTH", "value": "EXIT-1", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "VEHICLE LICENSE: 7ABC123\nVEHICLE TYPE: STANDARD",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "---"
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "ENTRY TIME: 11/13/2025 08:30 AM\nEXIT TIME:  11/13/2025 02:45 PM\nDURATION:   6 HOURS 15 MINUTES",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "FIRST HOUR", "price": 8.00 },
+          { "quantity": 5.25, "name": "ADDITIONAL HOURS @$6.00", "price": 31.50 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 0,
+        "showTaxRate": false,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "PARKING FEE", "value": "39.50" },
+          { "label": "TOTAL DUE", "value": "39.50" },
+          { "label": "VISA ****8923", "value": "39.50" },
+          { "label": "AUTH CODE", "value": "847291" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 7,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 50,
+        "barcodeLength": 80,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "LOST TICKET FEE: $50.00\nMAXIMUM DAILY RATE: $45.00\n\nVALIDATIONS ACCEPTED\nMONTHLY PARKING AVAILABLE\n\nTHANK YOU - DRIVE SAFELY",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100">
+  <!-- Dollar Tree Logo - Black & White -->
+  <text x="50" y="45" fill="#000000" font-family="Arial Black, sans-serif" font-size="32" font-weight="900">DOLLAR</text>
+  <text x="50" y="75" fill="#000000" font-family="Arial Black, sans-serif" font-size="32" font-weight="900">TREE</text>
+  <!-- Dollar sign -->
+  <text x="200" y="60" fill="#000000" font-family="Arial, sans-serif" font-size="48" font-weight="bold">$1.25</text>
+</svg>

@@ -1,0 +1,186 @@
+{
+  "version": "1.0.0",
+  "project": "ReceiptForge Boilerplate Transformation",
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Remove Replit Auth Integration",
+      "description": "Remove all Replit authentication dependencies and replace with standalone auth",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [],
+      "subtasks": [],
+      "details": "Remove replit_auth.py, update app.py to remove OAuth blueprint, replace auth redirects, remove OAuth model from models.py"
+    },
+    {
+      "id": "2",
+      "title": "Remove Replit Configuration Files",
+      "description": "Remove Replit-specific configuration and documentation files",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [],
+      "subtasks": [],
+      "details": "Remove .replit, replit.md, and any Replit-specific environment assumptions"
+    },
+    {
+      "id": "3",
+      "title": "Create Centralized Configuration",
+      "description": "Create config.py with environment-based configuration",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": ["1", "2"],
+      "subtasks": [],
+      "details": "Create config.py with Config class containing all environment variables, database config, Stripe config, feature flags"
+    },
+    {
+      "id": "4",
+      "title": "Update Base Template with MakeMyReceipt Design",
+      "description": "Apply MakeMyReceipt design system to base.html navigation and footer",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": ["3"],
+      "subtasks": [],
+      "details": "Update navigation with orange CTAs, 3D shadows, clean footer, consistent spacing. Colors: #FF6B35 orange, gray-900 borders, shadow-[3px_3px_0_0_#000000]"
+    },
+    {
+      "id": "5",
+      "title": "Redesign Homepage (index.html)",
+      "description": "Apply complete MakeMyReceipt design to homepage",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": ["4"],
+      "subtasks": [],
+      "details": "Hero section with dual CTAs, template showcase grid, features section (6 cards), FAQ accordion, final CTA. Use orange primary color, 3D shadows on all buttons/cards"
+    },
+    {
+      "id": "6",
+      "title": "Redesign Templates Listing Page",
+      "description": "Apply MakeMyReceipt design to templates.html",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": ["4"],
+      "subtasks": [],
+      "details": "Responsive grid (2/3/4/5 columns), template cards with receipt previews, hover effects with shadow transitions, orange accents"
+    },
+    {
+      "id": "7",
+      "title": "Redesign Template Detail Pages",
+      "description": "Apply MakeMyReceipt design to template_detail.html",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": ["4"],
+      "subtasks": [],
+      "details": "Breadcrumb navigation, hero section, receipt preview component, features grid, related templates section, orange CTAs throughout"
+    },
+    {
+      "id": "8",
+      "title": "Update Receipt Generator Styling",
+      "description": "Apply design system to generate_advanced_v2.html while preserving functionality",
+      "status": "pending",
+      "priority": "medium",
+      "dependencies": ["4"],
+      "subtasks": [],
+      "details": "Update button styles, color scheme to orange, maintain all form controls and functionality, test PDF generation after changes"
+    },
+    {
+      "id": "9",
+      "title": "Redesign User Dashboard",
+      "description": "Apply MakeMyReceipt design to dashboard.html",
+      "status": "pending",
+      "priority": "medium",
+      "dependencies": ["4"],
+      "subtasks": [],
+      "details": "Update card styling with 3D shadows, orange accents, clean layout, saved templates grid, receipt history"
+    },
+    {
+      "id": "10",
+      "title": "Update Pricing Page",
+      "description": "Apply MakeMyReceipt design to pricing.html",
+      "status": "pending",
+      "priority": "medium",
+      "dependencies": ["4"],
+      "subtasks": [],
+      "details": "Pricing cards with 3D shadows, orange CTAs for subscriptions, feature comparison table, FAQ section"
+    },
+    {
+      "id": "11",
+      "title": "Standardize All Landing Pages",
+      "description": "Apply consistent MakeMyReceipt design to all 18 landing pages",
+      "status": "pending",
+      "priority": "low",
+      "dependencies": ["4"],
+      "subtasks": [],
+      "details": "Update all landing pages (ace, auto_repair, autozone, cardetailing, carental, carwash, computer_repair, convenience_store, courier_service, electrician, moving_company, oilchange, roofing, service, storage, summer_camp, therapy, vet) with: hero, features, use cases, FAQ, CTA"
+    },
+    {
+      "id": "12",
+      "title": "Verify Stripe Integration",
+      "description": "Ensure all Stripe functionality uses environment variables properly",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": ["3"],
+      "subtasks": [],
+      "details": "Verify STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET from env, test checkout flow in test mode, verify subscription management, check webhook endpoints"
+    },
+    {
+      "id": "13",
+      "title": "Update Environment Configuration",
+      "description": "Create comprehensive .env.example file",
+      "status": "pending",
+      "priority": "medium",
+      "dependencies": ["3"],
+      "subtasks": [],
+      "details": "Document all required environment variables: SESSION_SECRET, DATABASE_URL, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, optional configs"
+    },
+    {
+      "id": "14",
+      "title": "Cleanup Unnecessary Files",
+      "description": "Remove attached_assets and unused documentation",
+      "status": "pending",
+      "priority": "low",
+      "dependencies": [],
+      "subtasks": [],
+      "details": "Remove attached_assets directory (468 files), remove webhook docs if not needed, clean up any other Replit-specific files"
+    },
+    {
+      "id": "15",
+      "title": "Create Comprehensive README",
+      "description": "Write complete documentation for the boilerplate",
+      "status": "pending",
+      "priority": "medium",
+      "dependencies": ["12", "13"],
+      "subtasks": [],
+      "details": "README with: features, quick start, configuration, deployment guides (Railway, Heroku, DigitalOcean), customization instructions, architecture overview"
+    },
+    {
+      "id": "16",
+      "title": "Test Receipt Generation End-to-End",
+      "description": "Verify all receipt functionality works correctly",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": ["5", "6", "7", "8"],
+      "subtasks": [],
+      "details": "Test: template selection, form filling, live preview, PDF export, different receipt types, saved templates"
+    },
+    {
+      "id": "17",
+      "title": "Test Responsive Design",
+      "description": "Verify design works on all device sizes",
+      "status": "pending",
+      "priority": "medium",
+      "dependencies": ["5", "6", "7", "8", "9", "10"],
+      "subtasks": [],
+      "details": "Test on mobile (375px), tablet (768px), desktop (1920px). Verify grids adjust properly, navigation works, all content accessible"
+    },
+    {
+      "id": "18",
+      "title": "Verify Fresh Installation Works",
+      "description": "Test that boilerplate can be set up from scratch",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": ["15"],
+      "subtasks": [],
+      "details": "Clone repo in fresh directory, follow README instructions, verify all steps work, time the setup process (target: under 10 minutes)"
+    }
+  ]
+}

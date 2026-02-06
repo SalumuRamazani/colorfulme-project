@@ -1,0 +1,137 @@
+{
+  "name": "Electrician Receipt",
+  "description": "Professional electrician service receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/electrician-logo-bw.svg",
+    "headerAlignment": "center",
+    "logoSize": 85,
+    "businessName": "ElectroMax Services",
+    "headerDivider": "================================================",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "1524 Voltage Lane, Austin, TX 78704\nPhone: (512) 555-0167 | www.electromaxservices.com\nLicensed • Insured • Available 24/7",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "left",
+        "dateTime": "12/31/2025 02:30 PM",
+        "dateDivider": "================================================",
+        "showDateDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 3,
+      "data": {
+        "customMessage": "ELECTRICAL SERVICE RECEIPT\nInvoice #: ES-2025-7392\nTechnician: David Thompson",
+        "messageAlignment": "left",
+        "showMessageDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "Service Location: 789 Oak Avenue, Austin, TX\nService Type: Residential Electrical Wiring\nWork Date: Dec 31, 2025",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "================================================"
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          {
+            "quantity": 1,
+            "name": "Service Call & Diagnostic",
+            "price": 85.00
+          },
+          {
+            "quantity": 1,
+            "name": "Circuit Breaker Installation (2 units)",
+            "price": 320.00
+          },
+          {
+            "quantity": 1,
+            "name": "Electrical Wiring Installation (120 ft)",
+            "price": 480.00
+          },
+          {
+            "quantity": 1,
+            "name": "Outlet & Switch Installation (6 units)",
+            "price": 180.00
+          },
+          {
+            "quantity": 1,
+            "name": "Electrical Testing & Inspection",
+            "price": 75.00
+          },
+          {
+            "quantity": 1,
+            "name": "Materials & Supplies",
+            "price": 165.00
+          }
+        ],
+        "itemsDivider": "================================================",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 8.25,
+        "showTaxRate": true,
+        "paymentType": "card",
+        "paymentFields": [
+          {
+            "label": "Subtotal",
+            "value": "1,305.00"
+          },
+          {
+            "label": "Tax (8.25%)",
+            "value": "107.66"
+          },
+          {
+            "label": "TOTAL DUE",
+            "value": "1,412.66"
+          },
+          {
+            "label": "Payment Status",
+            "value": "Paid (Card)"
+          }
+        ],
+        "paymentDivider": "================================================",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 7,
+      "data": {
+        "customMessage": "Thank you for choosing ElectroMax Services!\n\nAll work comes with 1-year warranty.\nFor emergencies, call (512) 555-0167\n\nVisit: www.electromaxservices.com",
+        "messageAlignment": "center",
+        "showMessageDivider": false
+      }
+    }
+  ]
+}

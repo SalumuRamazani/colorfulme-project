@@ -1,0 +1,117 @@
+{
+  "name": "Taxi Receipt",
+  "description": "Professional taxi cab receipt template",
+  "settings": {
+    "currencyFormat": "$X",
+    "selectedFont": "font-1",
+    "textColor": "#000000",
+    "showBackground": true
+  },
+  "header": {
+    "logoUrl": "/static/images/logos/taxi-logo.svg",
+    "headerAlignment": "center",
+    "logoSize": 50,
+    "businessName": "YELLOW CAB CO.",
+    "headerDivider": "===",
+    "showHeaderDivider": true
+  },
+  "sections": [
+    {
+      "type": "customMessage",
+      "position": 1,
+      "data": {
+        "customMessage": "NYC YELLOW CAB\nLICENSE: T847K\nMEDALLION: 2M45\nDISPATCH: (212) 555-7777",
+        "messageAlignment": "center",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "dateTime",
+      "position": 2,
+      "data": {
+        "dateAlignment": "center",
+        "dateTime": "11/13/2025 09:42:00 PM",
+        "dateDivider": "---",
+        "showDateDivider": false
+      }
+    },
+    {
+      "type": "twoColumn",
+      "position": 3,
+      "data": {
+        "customFields": [
+          { "label": "DRIVER", "value": "JOHN SMITH", "column": 1 },
+          { "label": "HACK#", "value": "458721", "column": 1 },
+          { "label": "TRIP#", "value": "NYC847291", "column": 2 },
+          { "label": "VEHICLE", "value": "CAMRY", "column": 2 }
+        ],
+        "infoDivider": "---",
+        "showInfoDivider": true
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 4,
+      "data": {
+        "customMessage": "PICKUP:  TIMES SQUARE, NYC\nDROP OFF: JFK AIRPORT TERMINAL 4\n\nTRIP START: 09:42 PM\nTRIP END:   10:35 PM\nDISTANCE:   18.5 MILES",
+        "messageAlignment": "left",
+        "showMessageDivider": true,
+        "messageDivider": "==="
+      }
+    },
+    {
+      "type": "items",
+      "position": 5,
+      "data": {
+        "items": [
+          { "quantity": 1, "name": "INITIAL FARE", "price": 3.50 },
+          { "quantity": 18.5, "name": "MILEAGE", "price": 52.25 },
+          { "quantity": 1, "name": "PEAK HOURS SURCHARGE", "price": 2.50 },
+          { "quantity": 1, "name": "AIRPORT SURCHARGE", "price": 1.75 },
+          { "quantity": 1, "name": "NY STATE TAX", "price": 0.50 },
+          { "quantity": 1, "name": "MTA TAX", "price": 0.50 }
+        ],
+        "itemsDivider": "===",
+        "showItemsDivider": true
+      }
+    },
+    {
+      "type": "payment",
+      "position": 6,
+      "data": {
+        "taxRate": 0,
+        "paymentType": "credit",
+        "paymentFields": [
+          { "label": "FARE TOTAL", "value": "61.00" },
+          { "label": "TIP (20%)", "value": "12.20" },
+          { "label": "TOTAL CHARGED", "value": "73.20" },
+          { "label": "AMEX ****3456", "value": "73.20" }
+        ],
+        "paymentDivider": "===",
+        "showPaymentDivider": true
+      }
+    },
+    {
+      "type": "barcode",
+      "position": 7,
+      "data": {
+        "barcodeEnabled": true,
+        "barcodeSize": 40,
+        "barcodeLength": 70,
+        "barcodeDivider": "---",
+        "showBarcodeDivider": false
+      }
+    },
+    {
+      "type": "customMessage",
+      "position": 8,
+      "data": {
+        "customMessage": "COMPLAINTS: 311 OR NYC.GOV/TAXI\nLOST PROPERTY: (212) 692-8294\n\nTHANK YOU FOR RIDING WITH US\nHAVE A GREAT DAY!",
+        "messageAlignment": "center",
+        "showMessageDivider": false,
+        "messageDivider": "---"
+      }
+    }
+  ]
+}
