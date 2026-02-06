@@ -1,392 +1,206 @@
 {% extends "base.html" %}
 
 {% block title %}ColorfulMe | AI Coloring Page Generator{% endblock %}
-{% block description %}ColorfulMe helps you make printable coloring pages from prompts, photos, and sketches in seconds. Family-safe AI, blue-first design, and instant PNG/PDF export.{% endblock %}
+{% block description %}AI coloring page generator for printable pages in seconds. Turn prompts and photos into kid-friendly line art with ColorfulMe.{% endblock %}
 
 {% block content %}
-<section class="relative overflow-hidden border-b border-blue-100/80">
-  <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_14%_8%,rgba(37,99,235,0.22),transparent_36%),radial-gradient(circle_at_88%_94%,rgba(14,165,233,0.20),transparent_34%)]"></div>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 md:pt-16 md:pb-24">
-    <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/90 px-3 py-1 text-xs font-semibold text-blue-700 uppercase tracking-wide">
-      New: Consistent Characters + Fast Photo Conversion
+<section class="pt-8 pb-10 md:pt-12 md:pb-14 border-b border-blue-100 relative overflow-hidden">
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_6%,rgba(14,165,233,0.16),transparent_34%),radial-gradient(circle_at_84%_12%,rgba(59,130,246,0.14),transparent_38%),linear-gradient(180deg,#ffffff_0%,#f3f9ff_65%,#ffffff_100%)]"></div>
+  <div class="absolute inset-0 -z-20 soft-grid opacity-30"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-center text-2xl md:text-5xl font-display font-bold text-slate-700">*colorful* me.</p>
+
+    <div class="mt-8 text-center max-w-4xl mx-auto">
+      <span class="eyebrow">New: Consistent Characters →</span>
+      <h1 class="mt-4 section-title text-4xl sm:text-5xl md:text-6xl leading-[1.04]">
+        AI coloring page generator - make
+        <span class="block">printable pages in seconds</span>
+      </h1>
+      <p class="mt-5 text-lg md:text-[1.45rem] text-slate-600">
+        ColorfulMe is the AI coloring page generator for kids, grownups, and anyone who loves to color.
+      </p>
+
+      <div class="mt-7">
+        <a href="/create" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 px-12 py-4 text-white text-2xl md:text-4xl font-display font-bold shadow-[0_14px_36px_rgba(37,99,235,0.3)] hover:translate-y-[-1px] transition">Start for free</a>
+      </div>
+
+      <p class="mt-4 text-xl md:text-3xl text-slate-500">No credit card. Just creativity.</p>
+
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-2 text-sm md:text-base">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-500 text-white font-semibold">A</span>
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white font-semibold">N</span>
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-cyan-500 text-white font-semibold">J</span>
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sky-300 text-slate-700 font-semibold">M</span>
+        <span class="ml-2 rating-stars text-lg">★★★★★</span>
+        <span class="text-slate-600">from 196 reviews</span>
+      </div>
+
+      <p class="mt-2 text-xl md:text-3xl font-display text-slate-700">Over 1,435,440 coloring pages created!</p>
     </div>
 
-    <div class="mt-6 grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-12 items-start">
-      <div>
-        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-slate-900">
-          AI Coloring Pages
-          <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">That Actually Look Good</span>
-        </h1>
-
-        <p class="mt-5 text-lg text-slate-600 max-w-2xl">
-          ColorfulMe turns your ideas, photos, and sketches into print-ready coloring pages in seconds. Built for families, teachers, and creators who need speed without messy outputs.
-        </p>
-
-        <div class="mt-6 flex flex-wrap items-center gap-2 text-sm text-slate-600">
-          <span class="rounded-full border border-slate-200 bg-white px-3 py-1.5">No credit card required</span>
-          <span class="rounded-full border border-slate-200 bg-white px-3 py-1.5">PNG + PDF export</span>
-          <span class="rounded-full border border-slate-200 bg-white px-3 py-1.5">Family-safe moderation</span>
-        </div>
-
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="/create" class="px-6 py-3 rounded-xl btn-primary text-sm sm:text-base font-semibold transition">Start For Free</a>
-          <a href="/library" class="px-6 py-3 rounded-xl btn-secondary text-sm sm:text-base font-semibold transition">Browse Gallery</a>
-        </div>
-
-        <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div class="rounded-xl border border-blue-100 bg-white px-4 py-3">
-            <p class="text-xs text-slate-500">Reviews</p>
-            <p class="mt-1 font-display text-xl font-bold text-slate-900">4.9/5</p>
-          </div>
-          <div class="rounded-xl border border-blue-100 bg-white px-4 py-3">
-            <p class="text-xs text-slate-500">Pages Created</p>
-            <p class="mt-1 font-display text-xl font-bold text-slate-900">1.4M+</p>
-          </div>
-          <div class="rounded-xl border border-blue-100 bg-white px-4 py-3">
-            <p class="text-xs text-slate-500">Avg Time</p>
-            <p class="mt-1 font-display text-xl font-bold text-slate-900">~6 sec</p>
-          </div>
-          <div class="rounded-xl border border-blue-100 bg-white px-4 py-3">
-            <p class="text-xs text-slate-500">Free Credits</p>
-            <p class="mt-1 font-display text-xl font-bold text-slate-900">20</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="glass rounded-3xl border border-blue-100 p-5 sm:p-6 shadow-xl">
-        <div class="rounded-2xl border border-blue-100 bg-white p-4 sm:p-5">
-          <div class="flex items-center justify-between gap-3">
-            <p class="text-sm font-semibold text-slate-900">Generator Preview</p>
-            <span class="text-[11px] rounded-full bg-blue-50 border border-blue-200 px-2 py-1 text-blue-700">Live Workflow</span>
-          </div>
-
-          <div class="mt-4 grid grid-cols-4 gap-2 text-xs font-semibold">
-            <span class="rounded-lg border border-blue-200 bg-blue-50 text-blue-700 px-2 py-1.5 text-center">Text</span>
-            <span class="rounded-lg border border-slate-200 bg-slate-50 text-slate-600 px-2 py-1.5 text-center">Photo</span>
-            <span class="rounded-lg border border-slate-200 bg-slate-50 text-slate-600 px-2 py-1.5 text-center">Sketch</span>
-            <span class="rounded-lg border border-slate-200 bg-slate-50 text-slate-600 px-2 py-1.5 text-center">Word Art</span>
-          </div>
-
-          <div class="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p class="text-[11px] uppercase tracking-wide text-slate-500">Prompt</p>
-            <p class="mt-2 text-sm text-slate-700">"Friendly octopus reading books under the sea, clear outlines, printable style"</p>
-          </div>
-
-          <div class="mt-4 rounded-xl border border-slate-200 bg-white p-3">
-            <div class="flex items-center justify-between text-[11px] text-slate-500">
-              <span>Generation status</span>
-              <span>Ready to download</span>
-            </div>
-            <div class="mt-2 h-2 rounded-full bg-slate-100 overflow-hidden"><div class="h-full w-full bg-gradient-to-r from-blue-500 to-cyan-500"></div></div>
-
-            <div class="mt-3 aspect-[4/3] rounded-lg border border-blue-100 bg-[linear-gradient(180deg,#ffffff,#f8fbff)] p-3">
-              <img src="{{ url_for('static', filename='images/colorfulme/hero-preview.png') }}" alt="ColorfulMe generator preview" class="h-full w-full rounded-lg border border-blue-100 object-cover" loading="lazy">
-            </div>
-          </div>
-
-          <a href="/create" class="mt-4 inline-flex w-full items-center justify-center rounded-xl btn-primary px-4 py-2.5 font-semibold transition">Generate My Coloring Page</a>
-        </div>
-      </div>
+    <div class="mt-10 md:mt-14 relative h-[220px] sm:h-[300px] md:h-[390px] lg:h-[460px]">
+      <img src="{{ url_for('static', filename='images/colorfulme/v2/hero-card-left.png') }}" alt="Coloring page sample left" class="absolute left-[2%] bottom-0 w-[42%] md:w-[34%] rounded-2xl border-4 border-slate-900 bg-white rotate-[-9deg] shadow-2xl">
+      <img src="{{ url_for('static', filename='images/colorfulme/v2/hero-card-center.png') }}" alt="Coloring page sample center" class="absolute left-1/2 -translate-x-1/2 bottom-1 w-[52%] md:w-[40%] rounded-2xl border-4 border-slate-900 bg-white z-20 shadow-2xl">
+      <img src="{{ url_for('static', filename='images/colorfulme/v2/hero-card-right.png') }}" alt="Coloring page sample right" class="absolute right-[2%] bottom-0 w-[42%] md:w-[34%] rounded-2xl border-4 border-slate-900 bg-white rotate-[8deg] shadow-2xl">
     </div>
   </div>
 </section>
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-  <div class="text-center max-w-3xl mx-auto">
-    <h2 class="font-display text-3xl md:text-4xl font-bold">Create Coloring Pages In Every Mode</h2>
-    <p class="mt-3 text-slate-600">A ColorBliss-inspired layout with a clearer blue-first product hierarchy for ColorfulMe.</p>
-  </div>
-
-  <div class="mt-8 grid md:grid-cols-2 xl:grid-cols-4 gap-4">
-    <article class="group rounded-2xl border border-blue-100 bg-white p-5 hover:shadow-lg transition">
-      <div class="aspect-[16/10] rounded-xl border border-blue-100 bg-gradient-to-br from-blue-50 to-cyan-50 p-4">
-        <img src="{{ url_for('static', filename='images/colorfulme/mode-text.png') }}" alt="Text to coloring page preview" class="h-full w-full rounded-lg border border-blue-100 object-cover" loading="lazy">
-      </div>
-      <h3 class="mt-4 font-display text-lg font-bold">Text to Coloring</h3>
-      <p class="mt-2 text-sm text-slate-600">Prompt-driven generation for characters, scenes, worksheets, and activity books.</p>
-      <a href="/create" class="mt-3 inline-block text-sm font-semibold text-blue-700 hover:text-blue-900">Try text mode →</a>
-    </article>
-
-    <article class="group rounded-2xl border border-blue-100 bg-white p-5 hover:shadow-lg transition">
-      <div class="aspect-[16/10] rounded-xl border border-blue-100 bg-gradient-to-br from-sky-50 to-blue-100 p-4">
-        <img src="{{ url_for('static', filename='images/colorfulme/mode-photo.png') }}" alt="Photo to coloring preview" class="h-full w-full rounded-lg border border-blue-100 object-cover" loading="lazy">
-      </div>
-      <h3 class="mt-4 font-display text-lg font-bold">Photo to Coloring</h3>
-      <p class="mt-2 text-sm text-slate-600">Convert portraits, pets, classrooms, and products into coloring pages.</p>
-      <a href="/create" class="mt-3 inline-block text-sm font-semibold text-blue-700 hover:text-blue-900">Convert photo →</a>
-    </article>
-
-    <article class="group rounded-2xl border border-blue-100 bg-white p-5 hover:shadow-lg transition">
-      <div class="aspect-[16/10] rounded-xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-        <img src="{{ url_for('static', filename='images/colorfulme/mode-sketch.png') }}" alt="Sketch assist preview" class="h-full w-full rounded-lg border border-blue-100 object-cover" loading="lazy">
-      </div>
-      <h3 class="mt-4 font-display text-lg font-bold">Sketch to Coloring</h3>
-      <p class="mt-2 text-sm text-slate-600">Perfect for visual thinkers and classroom activities where speed matters.</p>
-      <a href="/create" class="mt-3 inline-block text-sm font-semibold text-blue-700 hover:text-blue-900">Enhance sketch →</a>
-    </article>
-
-    <article class="group rounded-2xl border border-blue-100 bg-white p-5 hover:shadow-lg transition">
-      <div class="aspect-[16/10] rounded-xl border border-blue-100 bg-gradient-to-br from-cyan-50 to-blue-100 p-4">
-        <img src="{{ url_for('static', filename='images/colorfulme/mode-wordart.png') }}" alt="Word art coloring preview" class="h-full w-full rounded-lg border border-blue-100 object-cover" loading="lazy">
-      </div>
-      <h3 class="mt-4 font-display text-lg font-bold">Word Art</h3>
-      <p class="mt-2 text-sm text-slate-600">Great for banners, teacher handouts, birthday sheets, and custom packs.</p>
-      <a href="/create" class="mt-3 inline-block text-sm font-semibold text-blue-700 hover:text-blue-900">Create word art →</a>
-    </article>
-  </div>
-</section>
-
-<section class="border-y border-slate-200 bg-white/70">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-    <div class="text-center max-w-2xl mx-auto">
-      <h2 class="font-display text-3xl md:text-4xl font-bold">How ColorfulMe Works</h2>
-      <p class="mt-3 text-slate-600">Simple flow, minimal friction, print-ready output.</p>
-    </div>
-
-    <div class="mt-10 grid md:grid-cols-4 gap-4">
-      <div class="rounded-2xl border border-blue-100 bg-white p-5 relative">
-        <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">1</span>
-        <h3 class="mt-3 font-display text-lg font-bold">Create a free account</h3>
-        <p class="mt-2 text-sm text-slate-600">Start immediately with free credits and no card required.</p>
-      </div>
-      <div class="rounded-2xl border border-blue-100 bg-white p-5 relative">
-        <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">2</span>
-        <h3 class="mt-3 font-display text-lg font-bold">Write or upload</h3>
-        <p class="mt-2 text-sm text-slate-600">Use a text prompt, photo, or sketch based on your workflow.</p>
-      </div>
-      <div class="rounded-2xl border border-blue-100 bg-white p-5 relative">
-        <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">3</span>
-        <h3 class="mt-3 font-display text-lg font-bold">Generate in seconds</h3>
-        <p class="mt-2 text-sm text-slate-600">AI returns clean line art with strict family-safe moderation.</p>
-      </div>
-      <div class="rounded-2xl border border-blue-100 bg-white p-5 relative">
-        <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">4</span>
-        <h3 class="mt-3 font-display text-lg font-bold">Download and print</h3>
-        <p class="mt-2 text-sm text-slate-600">Export PNG or PDF, print at home, class, or studio scale.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-  <div class="flex items-end justify-between gap-3 flex-wrap">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+  <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
     <div>
-      <h2 class="font-display text-3xl md:text-4xl font-bold">See What You Can Create</h2>
-      <p class="mt-2 text-slate-600">Inspired by the best AI coloring showcases, tuned for your product catalog.</p>
+      <h2 class="section-title text-4xl md:text-6xl leading-[1.06]">Create AI Coloring Pages in Seconds</h2>
+      <p class="mt-5 text-xl text-slate-600 leading-relaxed">
+        Type any prompt - ‘Captain Blue Whale at Rainbow Castle’, ‘Donkey King riding a dinosaur’, you name it - and get a printable coloring page in seconds.
+      </p>
+      <a href="/create" class="mt-8 inline-flex items-center rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 px-6 py-3 text-white text-2xl font-display font-bold shadow-lg">Try it now</a>
     </div>
-    <a href="/library" class="text-sm font-semibold text-blue-700 hover:text-blue-900">Open full library →</a>
+
+    <div class="relative h-[300px] sm:h-[360px] md:h-[440px]">
+      <img src="{{ url_for('static', filename='images/colorfulme/v2/feature-text-back1.png') }}" alt="Text generation card back left" class="absolute left-[6%] top-10 w-[44%] rounded-2xl border-4 border-slate-900 bg-white rotate-[-8deg] shadow-xl">
+      <img src="{{ url_for('static', filename='images/colorfulme/v2/feature-text-back2.png') }}" alt="Text generation card back right" class="absolute right-[4%] top-9 w-[44%] rounded-2xl border-4 border-slate-900 bg-white rotate-[7deg] shadow-xl">
+      <img src="{{ url_for('static', filename='images/colorfulme/v2/feature-text-main.png') }}" alt="Text generation main card" class="absolute left-1/2 -translate-x-1/2 top-1 w-[54%] rounded-2xl border-4 border-slate-900 bg-white z-10 shadow-2xl">
+    </div>
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 md:pb-20">
+  <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+    <div class="order-2 lg:order-1 relative h-[300px] sm:h-[360px] md:h-[440px]">
+      <img src="{{ url_for('static', filename='images/colorfulme/v2/photo-input.png') }}" alt="Photo input example" class="absolute left-[8%] top-10 w-[46%] rounded-2xl border-4 border-slate-900 bg-white rotate-[-8deg] shadow-xl">
+      <img src="{{ url_for('static', filename='images/colorfulme/v2/photo-output.png') }}" alt="Photo output line art" class="absolute right-[8%] top-2 w-[46%] rounded-2xl border-4 border-slate-900 bg-white rotate-[6deg] shadow-2xl">
+    </div>
+
+    <div class="order-1 lg:order-2">
+      <h2 class="section-title text-4xl md:text-6xl leading-[1.06]">Turn photos into coloring pages</h2>
+      <p class="mt-5 text-xl text-slate-600 leading-relaxed">
+        Upload a picture, our AI removes the background, cleans noise, and returns crisp line art ready to print.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-2 text-sm">
+        <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-blue-700">Background cleanup</span>
+        <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-blue-700">Noise reduction</span>
+        <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-blue-700">Crisp outlines</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+  <div class="text-center max-w-4xl mx-auto">
+    <h2 class="section-title text-3xl md:text-5xl">The complete guide to creating coloring pages with AI</h2>
+    <p class="mt-4 text-lg text-slate-600">Go from idea to printable page with a streamlined workflow that’s easy to repeat.</p>
   </div>
 
-  {% set fallback_titles = [
-    'Doodle Art Adventure',
-    'Underwater Alphabet Set',
-    'Cute Animal Word Art',
-    'Fantasy Castle Scene',
-    'Space Explorer Activity Page',
-    'Mandala Calm Pack'
-  ] %}
-  {% set fallback_images = [
-    'images/colorfulme/gallery-1.png',
-    'images/colorfulme/gallery-2.png',
-    'images/colorfulme/gallery-3.png',
-    'images/colorfulme/gallery-4.png',
-    'images/colorfulme/gallery-5.png',
-    'images/colorfulme/gallery-6.png'
-  ] %}
-  {% set fallback_prompts = [
-    'Bold doodle style with thick outlines',
-    'Ocean creatures with letter tracing',
-    'Name art with bubble lettering',
-    'Detailed but printable line complexity',
-    'Kid-friendly sci-fi theme',
-    'Relaxing geometric pattern set'
-  ] %}
-
-  <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    {% if featured_library %}
-      {% for entry in featured_library[:6] %}
-      <a href="{{ entry.route_path }}" class="group rounded-2xl border border-blue-100 bg-white overflow-hidden hover:shadow-lg transition">
-        <div class="aspect-[4/3] border-b border-blue-100 bg-gradient-to-br from-blue-50 to-cyan-50 p-4">
-          {% if entry.image_url %}
-          <img src="{{ entry.image_url }}" alt="{{ entry.title }}" class="h-full w-full object-cover rounded-lg border border-blue-100" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-          <img src="{{ url_for('static', filename=fallback_images[loop.index0 % (fallback_images|length)]) }}" alt="{{ entry.title }} preview fallback" class="hidden h-full w-full rounded-lg border border-blue-100 object-cover">
-          {% else %}
-          <img src="{{ url_for('static', filename=fallback_images[loop.index0 % (fallback_images|length)]) }}" alt="{{ entry.title }} preview" class="h-full w-full rounded-lg border border-blue-100 object-cover" loading="lazy">
-          {% endif %}
-        </div>
-        <div class="p-4">
-          <h3 class="font-display text-lg font-bold text-slate-900">{{ entry.title }}</h3>
-          <p class="mt-2 text-sm text-slate-600">{{ entry.meta_description or entry.intro or 'Printable AI coloring page generated with ColorfulMe.' }}</p>
-          <p class="mt-3 text-xs font-semibold text-blue-700">Try this idea →</p>
-        </div>
-      </a>
-      {% endfor %}
-    {% else %}
-      {% for i in range(6) %}
-      <a href="/create" class="group rounded-2xl border border-blue-100 bg-white overflow-hidden hover:shadow-lg transition">
-        <div class="aspect-[4/3] border-b border-blue-100 bg-gradient-to-br from-blue-50 to-cyan-50 p-4">
-          <img src="{{ url_for('static', filename=fallback_images[i]) }}" alt="{{ fallback_titles[i] }} preview" class="h-full w-full rounded-lg border border-blue-100 object-cover" loading="lazy">
-        </div>
-        <div class="p-4">
-          <h3 class="font-display text-lg font-bold text-slate-900">{{ fallback_titles[i] }}</h3>
-          <p class="mt-2 text-sm text-slate-600">Prompt-ready idea card with a fixed aspect ratio and clean fallback layout.</p>
-          <p class="mt-3 text-xs font-semibold text-blue-700">Try this idea →</p>
-        </div>
-      </a>
-      {% endfor %}
-    {% endif %}
+  <div class="mt-8 grid md:grid-cols-3 gap-4">
+    <article class="section-shell p-5">
+      <h3 class="font-display text-xl font-bold">Prompt crafting</h3>
+      <p class="mt-2 text-sm text-slate-600">Use simple sentence patterns to get cleaner scenes and better composition.</p>
+    </article>
+    <article class="section-shell p-5">
+      <h3 class="font-display text-xl font-bold">Photo conversion</h3>
+      <p class="mt-2 text-sm text-slate-600">Convert portraits or objects into kid-friendly outlines without complex editing.</p>
+    </article>
+    <article class="section-shell p-5">
+      <h3 class="font-display text-xl font-bold">Export + print</h3>
+      <p class="mt-2 text-sm text-slate-600">Download PNG/PDF and print in minutes for classrooms, events, and home.</p>
+    </article>
   </div>
+</section>
 
-  <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-    {% set quick_ideas = [
-      'Dragon baking cupcakes in a castle kitchen',
-      'Rainforest classroom poster with animals',
-      'Mermaid city with friendly sea creatures',
-      'Race car pit stop for kids activity sheet',
-      'Spring flower mandala with butterflies',
-      'Pirate map with letter tracing challenge'
+<section class="border-y border-slate-200 bg-white py-14 md:py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="section-title text-4xl md:text-6xl">See what you can create</h2>
+      <p class="mt-4 text-xl text-slate-600">Real examples -- all made with ColorfulMe. Click on any example to try it yourself!</p>
+    </div>
+
+    {% set gallery_titles = [
+      'Doodle Art', 'Minimalist', 'Cozy Landscape', 'Realistic Character',
+      'Name Poster', 'Reading Scene', 'Cloud Garden', 'Village Story',
+      'Ocean Lines', 'Nature Shapes', 'Word Pattern', 'Cartoon Pair'
     ] %}
-    {% for idea in quick_ideas %}
-    <a href="/create" class="rounded-xl border border-blue-100 bg-white px-4 py-3 hover:bg-blue-50/50 hover:border-blue-300 transition">
-      <p class="text-sm text-slate-700">{{ idea }}</p>
-      <p class="mt-1 text-xs font-semibold text-blue-700">Use this prompt →</p>
-    </a>
-    {% endfor %}
+    {% set gallery_tags = [
+      'Word art', 'From photo', 'From photo', 'Text prompt',
+      'Word art', 'Text prompt', 'From photo', 'Text prompt',
+      'Text prompt', 'From photo', 'Word art', 'Text prompt'
+    ] %}
+
+    <div class="mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[178px] md:auto-rows-[200px]">
+      {% for i in range(1, 13) %}
+      {% set tall = i in [3,5,6,8,11] %}
+      <a href="/create" class="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-lg hover:border-blue-200 transition {{ 'row-span-2' if tall else 'row-span-1' }}">
+        <div class="{{ 'h-[74%]' if tall else 'h-[70%]' }} border-b border-slate-100 p-2 bg-slate-50">
+          <img src="{{ url_for('static', filename='images/colorfulme/v2/gallery-card-' ~ i ~ '.png') }}" alt="{{ gallery_titles[i-1] }} example" class="h-full w-full object-cover rounded-lg border border-slate-200" loading="lazy">
+        </div>
+        <div class="h-[26%] px-3 py-2 flex items-center justify-between gap-2">
+          <p class="font-display text-base font-bold text-slate-900 truncate">{{ gallery_titles[i-1] }}</p>
+          <p class="text-sm text-slate-500 whitespace-nowrap">{{ gallery_tags[i-1] }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
   </div>
 </section>
 
-<section class="border-y border-slate-200 bg-white/70">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-    <div class="text-center max-w-2xl mx-auto">
-      <h2 class="font-display text-3xl md:text-4xl font-bold">Wall of Love</h2>
-      <p class="mt-3 text-slate-600">Feedback from creators using ColorfulMe for classes, books, and family projects.</p>
+<section class="bg-blue-50/55 py-14 md:py-20 border-y border-blue-100/70">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="section-title text-3xl md:text-5xl">Wall of Love</h2>
     </div>
 
-    <div class="mt-8 grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-      <article class="glass rounded-2xl border border-blue-100 p-5">
-        <div class="flex items-center gap-3">
-          <span class="h-10 w-10 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center">AH</span>
-          <div>
-            <p class="font-semibold text-slate-900">Amanda H.</p>
-            <p class="text-xs text-slate-500">Elementary Teacher</p>
-          </div>
-        </div>
-        <p class="mt-3 text-sm text-slate-700">"The workflow is simple and quick. I can create lesson-ready coloring sheets for class themes in minutes."</p>
+    <div class="mt-8 grid md:grid-cols-3 gap-4">
+      <article class="section-shell p-5">
+        <p class="text-sm text-slate-700">"My classroom worksheets now look polished and consistent every week."</p>
+        <p class="mt-3 font-semibold text-slate-900">Amanda H. • Teacher</p>
       </article>
-
-      <article class="glass rounded-2xl border border-blue-100 p-5">
-        <div class="flex items-center gap-3">
-          <span class="h-10 w-10 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center">JN</span>
-          <div>
-            <p class="font-semibold text-slate-900">Juli N.</p>
-            <p class="text-xs text-slate-500">Parent Creator</p>
-          </div>
-        </div>
-        <p class="mt-3 text-sm text-slate-700">"Photo mode helped me turn family memories into coloring pages for birthdays. Great quality and fast output."</p>
+      <article class="section-shell p-5">
+        <p class="text-sm text-slate-700">"Photo mode gave us amazing birthday coloring activities in minutes."</p>
+        <p class="mt-3 font-semibold text-slate-900">Juli N. • Parent</p>
       </article>
-
-      <article class="glass rounded-2xl border border-blue-100 p-5">
-        <div class="flex items-center gap-3">
-          <span class="h-10 w-10 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center">MG</span>
-          <div>
-            <p class="font-semibold text-slate-900">Megan G.</p>
-            <p class="text-xs text-slate-500">Book Publisher</p>
-          </div>
-        </div>
-        <p class="mt-3 text-sm text-slate-700">"The quality-to-speed ratio is excellent. We use ColorfulMe to prototype activity book concepts quickly."</p>
+      <article class="section-shell p-5">
+        <p class="text-sm text-slate-700">"Great output quality for rapid activity-book prototyping and testing."</p>
+        <p class="mt-3 font-semibold text-slate-900">Megan G. • Publisher</p>
       </article>
     </div>
   </div>
 </section>
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
   <div class="text-center max-w-2xl mx-auto">
-    <h2 class="font-display text-3xl md:text-4xl font-bold">Simple Pricing</h2>
-    <p class="mt-3 text-slate-600">Start free. Upgrade when you need more credits and higher throughput.</p>
+    <h2 class="section-title text-3xl md:text-5xl">Simple pricing</h2>
+    <p class="mt-3 text-lg text-slate-600">Start free and scale as you grow.</p>
   </div>
 
   <div class="mt-8 grid md:grid-cols-2 xl:grid-cols-4 gap-4">
-    <div class="rounded-2xl border border-blue-100 bg-white p-5">
-      <p class="text-xs uppercase tracking-wide text-slate-500">Free</p>
-      <p class="mt-2 font-display text-3xl font-bold">$0</p>
-      <p class="mt-2 text-sm text-slate-600">20 credits / cycle</p>
-      <ul class="mt-4 space-y-2 text-xs text-slate-600">
-        <li>Text + photo generation</li>
-        <li>PNG + PDF export</li>
-        <li>Community support</li>
-      </ul>
-    </div>
-
-    <div class="rounded-2xl border border-blue-100 bg-white p-5">
-      <p class="text-xs uppercase tracking-wide text-slate-500">Starter</p>
-      <p class="mt-2 font-display text-3xl font-bold">$9</p>
-      <p class="mt-2 text-sm text-slate-600">300 credits / month</p>
-      <ul class="mt-4 space-y-2 text-xs text-slate-600">
-        <li>Faster queue priority</li>
-        <li>Commercial-friendly use</li>
-        <li>Email support</li>
-      </ul>
-    </div>
-
-    <div class="rounded-2xl border border-blue-200 bg-gradient-to-b from-blue-50 to-white p-5 shadow-lg">
-      <p class="text-xs uppercase tracking-wide text-blue-700 font-semibold">Most Popular • Pro</p>
-      <p class="mt-2 font-display text-3xl font-bold">$29</p>
-      <p class="mt-2 text-sm text-slate-600">1200 credits / month</p>
-      <ul class="mt-4 space-y-2 text-xs text-slate-600">
-        <li>Bulk generation flow</li>
-        <li>Higher resolution outputs</li>
-        <li>API access</li>
-      </ul>
-    </div>
-
-    <div class="rounded-2xl border border-blue-100 bg-white p-5">
-      <p class="text-xs uppercase tracking-wide text-slate-500">Studio</p>
-      <p class="mt-2 font-display text-3xl font-bold">$79</p>
-      <p class="mt-2 text-sm text-slate-600">5000 credits / month</p>
-      <ul class="mt-4 space-y-2 text-xs text-slate-600">
-        <li>Team workflows</li>
-        <li>Priority support</li>
-        <li>Scale-ready usage</li>
-      </ul>
-    </div>
+    <div class="rounded-2xl border border-blue-100 bg-white p-5"><p class="text-xs uppercase tracking-wide text-slate-500">Free</p><p class="mt-2 font-display text-3xl font-bold">$0</p><p class="mt-2 text-sm text-slate-600">20 credits / cycle</p></div>
+    <div class="rounded-2xl border border-blue-100 bg-white p-5"><p class="text-xs uppercase tracking-wide text-slate-500">Starter</p><p class="mt-2 font-display text-3xl font-bold">$9</p><p class="mt-2 text-sm text-slate-600">300 credits / month</p></div>
+    <div class="rounded-2xl border border-blue-200 bg-gradient-to-b from-blue-50 to-white p-5 shadow-lg"><p class="text-xs uppercase tracking-wide text-blue-700 font-semibold">Most Popular • Pro</p><p class="mt-2 font-display text-3xl font-bold">$29</p><p class="mt-2 text-sm text-slate-600">1200 credits / month</p></div>
+    <div class="rounded-2xl border border-blue-100 bg-white p-5"><p class="text-xs uppercase tracking-wide text-slate-500">Studio</p><p class="mt-2 font-display text-3xl font-bold">$79</p><p class="mt-2 text-sm text-slate-600">5000 credits / month</p></div>
   </div>
 
-  <div class="mt-6 text-center">
-    <a href="/pricing" class="px-6 py-3 rounded-xl btn-primary text-sm sm:text-base font-semibold transition">See Full Pricing</a>
+  <div class="mt-7 text-center">
+    <a href="/pricing" class="px-6 py-3 rounded-xl btn-primary text-sm sm:text-base font-semibold transition">See full pricing</a>
   </div>
 </section>
 
-<section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-  <h2 class="font-display text-3xl md:text-4xl font-bold text-center">Frequently Asked Questions</h2>
-  <p class="mt-3 text-center text-slate-600">Everything most users ask before creating their first coloring book pages.</p>
+<section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 md:pb-20">
+  <h2 class="section-title text-3xl md:text-5xl text-center">Frequently asked questions</h2>
 
   <div class="mt-8 space-y-3">
-    <details class="glass rounded-xl border border-blue-100 p-4">
-      <summary class="cursor-pointer font-semibold text-slate-900">Is ColorfulMe free to start?</summary>
-      <p class="mt-2 text-sm text-slate-600">Yes. You can create an account and start with free credits before upgrading.</p>
-    </details>
-    <details class="glass rounded-xl border border-blue-100 p-4">
-      <summary class="cursor-pointer font-semibold text-slate-900">Can I turn photos into coloring pages?</summary>
-      <p class="mt-2 text-sm text-slate-600">Yes. Upload a JPG/PNG and ColorfulMe converts it to clean black-and-white outlines.</p>
-    </details>
-    <details class="glass rounded-xl border border-blue-100 p-4">
-      <summary class="cursor-pointer font-semibold text-slate-900">Do you support PNG and PDF downloads?</summary>
-      <p class="mt-2 text-sm text-slate-600">Yes. Every completed generation supports PNG and PDF exports.</p>
-    </details>
-    <details class="glass rounded-xl border border-blue-100 p-4">
-      <summary class="cursor-pointer font-semibold text-slate-900">Can I use this for print-on-demand or books?</summary>
-      <p class="mt-2 text-sm text-slate-600">Yes, commercial usage depends on plan terms. Pro and Studio are built for production workflows.</p>
-    </details>
+    <details class="section-shell p-4"><summary class="cursor-pointer font-semibold text-slate-900">Is ColorfulMe free to use?</summary><p class="mt-2 text-sm text-slate-600">Yes. You can start with free credits and upgrade only when needed.</p></details>
+    <details class="section-shell p-4"><summary class="cursor-pointer font-semibold text-slate-900">Can I turn photos into coloring pages?</summary><p class="mt-2 text-sm text-slate-600">Yes. Upload a photo and we return clean printable outlines.</p></details>
+    <details class="section-shell p-4"><summary class="cursor-pointer font-semibold text-slate-900">Can I download PNG and PDF?</summary><p class="mt-2 text-sm text-slate-600">Yes. Both formats are supported for completed pages.</p></details>
   </div>
 </section>
 
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
   <div class="rounded-3xl border border-blue-200 bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-10 text-white text-center shadow-xl">
-    <h2 class="font-display text-3xl md:text-4xl font-bold">Build Your Next Coloring Project With ColorfulMe</h2>
-    <p class="mt-3 text-blue-50 max-w-2xl mx-auto">Better structure, better output quality, and a cleaner blue UI inspired by top-performing coloring tools.</p>
+    <h2 class="font-display text-3xl md:text-4xl font-bold">Start creating with ColorfulMe</h2>
+    <p class="mt-3 text-blue-50 max-w-2xl mx-auto">A ColorBliss-level structure with your own blue brand identity.</p>
     <div class="mt-7 flex justify-center gap-3 flex-wrap">
-      <a href="/create" class="px-6 py-3 rounded-xl bg-white text-blue-700 font-semibold hover:bg-blue-50 transition">Start Creating Free</a>
-      <a href="/library" class="px-6 py-3 rounded-xl border border-white/70 text-white font-semibold hover:bg-white/10 transition">Explore Gallery</a>
+      <a href="/create" class="px-6 py-3 rounded-xl bg-white text-blue-700 font-semibold hover:bg-blue-50 transition">Start free</a>
+      <a href="/library" class="px-6 py-3 rounded-xl border border-white/70 text-white font-semibold hover:bg-white/10 transition">Explore gallery</a>
     </div>
   </div>
 </section>

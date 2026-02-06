@@ -1,14 +1,54 @@
 {
   "version": 2,
   "source_path": "content/programmatic_content.csv",
-  "generated_at": "2026-02-06T06:53:35.180122+00:00",
+  "generated_at": "2026-02-06T09:51:11.554889+00:00",
   "counts": {
-    "total": 4,
+    "total": 37,
     "pages": 2,
-    "tools": 1,
+    "tools": 34,
     "library": 1
   },
   "entries": [
+    {
+      "entry_type": "page",
+      "route_path": "/blog/how-to-turn-photos-into-coloring-pages",
+      "slug": "how-to-turn-photos-into-coloring-pages",
+      "title": "How To Turn Photos Into Coloring Pages",
+      "meta_description": "Step-by-step guide to convert photos into printable coloring pages.",
+      "h1": "How To Turn Photos Into Coloring Pages",
+      "intro": "Learn how to convert your own photos into clean outlines.",
+      "intro_paragraphs": [
+        "Learn how to convert your own photos into clean outlines."
+      ],
+      "body": "Use Photo mode in ColorfulMe to upload any image, automatically simplify edges, and export print-ready PDF pages in minutes.",
+      "body_paragraphs": [
+        "Use Photo mode in ColorfulMe to upload any image, automatically simplify edges, and export print-ready PDF pages in minutes."
+      ],
+      "primary_cta_label": "Try Photo Mode",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "See More Guides",
+      "secondary_cta_url": "/blog",
+      "generation_seed_prompt": "",
+      "image_url": "",
+      "feature_bullets": [
+        "Photo-to-outline conversion",
+        "Instant download",
+        "Beginner friendly"
+      ],
+      "faq": [
+        {
+          "question": "Do I need design skills?",
+          "answer": "No, ColorfulMe handles conversion automatically."
+        }
+      ],
+      "tags": [
+        "blog",
+        "guide",
+        "photo"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
     {
       "entry_type": "page",
       "route_path": "/coloring-pages-for-kids",
@@ -55,44 +95,1232 @@
     },
     {
       "entry_type": "tool",
-      "route_path": "/tools/ai-coloring-page-generator",
+      "route_path": "/ai-coloring-page-generator",
       "slug": "ai-coloring-page-generator",
-      "title": "AI Coloring Page Generator Tool",
-      "meta_description": "Generate black-and-white coloring pages from any prompt.",
+      "title": "AI Coloring Page Generator",
+      "meta_description": "Generate printable AI coloring pages from any prompt in seconds with clean, kid-safe outlines.",
       "h1": "AI Coloring Page Generator",
-      "intro": "Use this tool to convert ideas into clean line art.",
+      "intro": "Create custom coloring pages from text prompts with print-ready line quality.",
       "intro_paragraphs": [
-        "Use this tool to convert ideas into clean line art."
+        "Create custom coloring pages from text prompts with print-ready line quality."
       ],
-      "body": "Enter your prompt, choose style and aspect ratio, then generate, download, and print in seconds.",
+      "body": "Use this AI coloring page generator to turn any idea into black-and-white printable art. Pick style, aspect ratio, and difficulty, then export as PNG or PDF.",
       "body_paragraphs": [
-        "Enter your prompt, choose style and aspect ratio, then generate, download, and print in seconds."
+        "Use this AI coloring page generator to turn any idea into black-and-white printable art. Pick style, aspect ratio, and difficulty, then export as PNG or PDF."
       ],
-      "primary_cta_label": "Open Generator",
+      "primary_cta_label": "Try This Generator",
       "primary_cta_url": "/create",
-      "secondary_cta_label": "See Pricing",
-      "secondary_cta_url": "/pricing",
-      "generation_seed_prompt": "A friendly dinosaur in a park with balloons",
-      "image_url": "",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "a happy dinosaur playing soccer in a park",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-1.png",
       "feature_bullets": [
-        "Prompt-based creation",
-        "Multiple aspect ratios",
-        "Credit-aware generation"
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
       ],
       "faq": [
         {
-          "question": "How many credits does text generation use?",
-          "answer": "Text generation uses 1 credit."
+          "question": "How fast does generation take?",
+          "answer": "Most prompts return a printable page in seconds."
         },
         {
-          "question": "Can I use this for classrooms?",
-          "answer": "Yes, it is built for home and classroom use."
+          "question": "Can I print the result?",
+          "answer": "Yes, export as PDF or PNG for home or classroom printing."
         }
       ],
       "tags": [
-        "tool",
-        "ai",
-        "coloring"
+        "ai coloring page generator",
+        "printable coloring pages",
+        "ai coloring tool"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/bible-verse-coloring-page-generator",
+      "slug": "bible-verse-coloring-page-generator",
+      "title": "Bible Verse Coloring Page Generator",
+      "meta_description": "Generate printable Bible verse coloring pages with decorative line art and scripture text.",
+      "h1": "Bible Verse Coloring Page Generator",
+      "intro": "Create scripture-based coloring pages for church groups, homeschool, and family activities.",
+      "intro_paragraphs": [
+        "Create scripture-based coloring pages for church groups, homeschool, and family activities."
+      ],
+      "body": "Design Bible verse coloring sheets with floral borders, symbols, and easy-to-read text layouts. Great for Sunday school and faith-based printables.",
+      "body_paragraphs": [
+        "Design Bible verse coloring sheets with floral borders, symbols, and easy-to-read text layouts. Great for Sunday school and faith-based printables."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "Bible verse coloring page for Psalm 23 with simple floral border",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-10.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I choose any verse?",
+          "answer": "Yes, you can prompt with specific verses and style preferences."
+        },
+        {
+          "question": "Is this suitable for church classes?",
+          "answer": "Yes, it is commonly used for Sunday school and group activities."
+        }
+      ],
+      "tags": [
+        "bible verse coloring page generator",
+        "scripture coloring pages",
+        "sunday school coloring sheets"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/bubble-letter-coloring-page-generator",
+      "slug": "bubble-letter-coloring-page-generator",
+      "title": "Bubble Letter Coloring Page Generator",
+      "meta_description": "Generate bubble letter coloring pages for names, words, and playful printable typography.",
+      "h1": "Bubble Letter Coloring Page Generator",
+      "intro": "Make bubble letter coloring pages with clean outlines and custom words.",
+      "intro_paragraphs": [
+        "Make bubble letter coloring pages with clean outlines and custom words."
+      ],
+      "body": "Use this tool for classroom vocabulary sheets, birthday names, and custom word art. Bubble letters are optimized for easy coloring with markers or crayons.",
+      "body_paragraphs": [
+        "Use this tool for classroom vocabulary sheets, birthday names, and custom word art. Bubble letters are optimized for easy coloring with markers or crayons."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "bubble letter coloring page for the word AMAZING",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-8.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I generate single words?",
+          "answer": "Yes, single words and short phrases work best for bold bubble layouts."
+        },
+        {
+          "question": "Is this printable at home?",
+          "answer": "Yes, output is optimized for standard home printing sizes."
+        }
+      ],
+      "tags": [
+        "bubble letter coloring page generator",
+        "bubble letter word art",
+        "coloring typography generator"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/coloring-book-generator",
+      "slug": "coloring-book-generator",
+      "title": "Coloring Book Generator",
+      "meta_description": "Create full printable coloring books with AI prompts, themed pages, and export-ready files.",
+      "h1": "AI Coloring Book Generator",
+      "intro": "Build themed coloring books faster with reusable AI prompts and consistent style.",
+      "intro_paragraphs": [
+        "Build themed coloring books faster with reusable AI prompts and consistent style."
+      ],
+      "body": "Generate multiple related pages for animals, holidays, classroom packs, and activity books. Use ColorfulMe prompts to keep character style consistent across pages.",
+      "body_paragraphs": [
+        "Generate multiple related pages for animals, holidays, classroom packs, and activity books. Use ColorfulMe prompts to keep character style consistent across pages."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "10-page jungle adventure coloring book for kids age 6",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-2.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I generate a full set of pages?",
+          "answer": "Yes, create and download pages one by one with consistent style prompts."
+        },
+        {
+          "question": "Is this good for teachers?",
+          "answer": "Yes, many users build class activity packs and worksheets with this flow."
+        }
+      ],
+      "tags": [
+        "coloring book generator",
+        "ai coloring book",
+        "printable activity book creator"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/dinosaur-coloring-page-generator",
+      "slug": "dinosaur-coloring-page-generator",
+      "title": "Dinosaur Coloring Page Generator",
+      "meta_description": "Generate printable dinosaur coloring pages with T-Rex, triceratops, and fun prehistoric scenes.",
+      "h1": "Dinosaur Coloring Page Generator",
+      "intro": "Create custom dinosaur coloring pages for kids in seconds.",
+      "intro_paragraphs": [
+        "Create custom dinosaur coloring pages for kids in seconds."
+      ],
+      "body": "Build dinosaur-themed coloring sheets with custom species, backgrounds, and difficulty level. Perfect for science units, homeschool packs, and activity books.",
+      "body_paragraphs": [
+        "Build dinosaur-themed coloring sheets with custom species, backgrounds, and difficulty level. Perfect for science units, homeschool packs, and activity books."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "friendly t-rex and triceratops in prehistoric jungle, coloring page",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-4.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I request specific dinosaurs?",
+          "answer": "Yes, include species names in your prompt for targeted outputs."
+        },
+        {
+          "question": "Are dinosaur pages kid-friendly?",
+          "answer": "Yes, moderation and style constraints keep pages family-safe."
+        }
+      ],
+      "tags": [
+        "dinosaur coloring page generator",
+        "dino coloring sheets",
+        "printable dinosaur pages"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/family-photo-coloring-page",
+      "slug": "family-photo-coloring-page",
+      "title": "Family Photo Coloring Page Converter",
+      "meta_description": "Convert family photos into printable coloring pages with cleaner lines and custom detail.",
+      "h1": "Family Photo Coloring Page Converter",
+      "intro": "Turn family photos into custom coloring pages quickly.",
+      "intro_paragraphs": [
+        "Turn family photos into custom coloring pages quickly."
+      ],
+      "body": "Upload portraits and family event photos to make memorable custom coloring sheets. Great for birthday parties, school events, and keepsake activity books.",
+      "body_paragraphs": [
+        "Upload portraits and family event photos to make memorable custom coloring sheets. Great for birthday parties, school events, and keepsake activity books."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "turn this family portrait into a printable coloring sheet",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-4.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Is this good for birthday parties?",
+          "answer": "Yes, many users make custom party activity pages from family photos."
+        },
+        {
+          "question": "Can I download and print quickly?",
+          "answer": "Yes, export immediately as PNG or PDF after generation."
+        }
+      ],
+      "tags": [
+        "family photo coloring page",
+        "family photo to coloring page converter",
+        "custom coloring page"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/family-photo-coloring-page-generator",
+      "slug": "family-photo-coloring-page-generator",
+      "title": "Family Photo Coloring Page Generator",
+      "meta_description": "Turn family photos into custom printable coloring pages for birthdays, holidays, and keepsakes.",
+      "h1": "Family Photo Coloring Page Generator",
+      "intro": "Create personalized coloring pages from your own family images.",
+      "intro_paragraphs": [
+        "Create personalized coloring pages from your own family images."
+      ],
+      "body": "Upload portraits and family event photos to make memorable custom coloring sheets. Great for birthday parties, school events, and keepsake activity books.",
+      "body_paragraphs": [
+        "Upload portraits and family event photos to make memorable custom coloring sheets. Great for birthday parties, school events, and keepsake activity books."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "turn this family portrait into a printable coloring sheet",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-4.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Is this good for birthday parties?",
+          "answer": "Yes, many users make custom party activity pages from family photos."
+        },
+        {
+          "question": "Can I download and print quickly?",
+          "answer": "Yes, export immediately as PNG or PDF after generation."
+        }
+      ],
+      "tags": [
+        "family photo coloring page generator",
+        "custom family coloring page",
+        "personalized coloring page"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/flux-prompt-generator-for-coloring-pages",
+      "slug": "flux-prompt-generator-for-coloring-pages",
+      "title": "FLUX Prompt Generator for Coloring Pages",
+      "meta_description": "Generate FLUX prompts tailored for printable coloring pages with clear line-art direction.",
+      "h1": "FLUX Prompt Generator for Coloring Pages",
+      "intro": "Build FLUX prompts designed for crisp, printable coloring page results.",
+      "intro_paragraphs": [
+        "Build FLUX prompts designed for crisp, printable coloring page results."
+      ],
+      "body": "Use this generator to produce FLUX-ready prompt structures for family-safe themes, bold outlines, and easy color regions suitable for kids.",
+      "body_paragraphs": [
+        "Use this generator to produce FLUX-ready prompt structures for family-safe themes, bold outlines, and easy color regions suitable for kids."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "flux prompt: cartoon farm scene coloring page, bold black outlines",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-1.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Why use a dedicated FLUX prompt generator?",
+          "answer": "It helps enforce line-art constraints that improve printability."
+        },
+        {
+          "question": "Can I adapt prompts for different ages?",
+          "answer": "Yes, include age target and detail level in your prompt for better results."
+        }
+      ],
+      "tags": [
+        "flux prompt generator",
+        "coloring page prompts",
+        "ai prompt engineering for line art"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/generators/bible-verse-coloring-page-generator",
+      "slug": "generators-bible-verse-coloring-page-generator",
+      "title": "Bible Verse Coloring Page Generator",
+      "meta_description": "Generate printable Bible verse coloring pages for church, homeschool, and family activities.",
+      "h1": "Bible Verse Coloring Page Generator",
+      "intro": "Create scripture-based coloring pages with decorative line art.",
+      "intro_paragraphs": [
+        "Create scripture-based coloring pages with decorative line art."
+      ],
+      "body": "Design Bible verse coloring sheets with floral borders, symbols, and easy-to-read text layouts. Great for Sunday school and faith-based printables.",
+      "body_paragraphs": [
+        "Design Bible verse coloring sheets with floral borders, symbols, and easy-to-read text layouts. Great for Sunday school and faith-based printables."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "Bible verse coloring page for Psalm 23 with simple floral border",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-10.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I choose any verse?",
+          "answer": "Yes, you can prompt with specific verses and style preferences."
+        },
+        {
+          "question": "Is this suitable for church classes?",
+          "answer": "Yes, it is commonly used for Sunday school and group activities."
+        }
+      ],
+      "tags": [
+        "bible verse coloring page generator",
+        "generators",
+        "scripture coloring pages"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/generators/bubble-letter-coloring-page-generator",
+      "slug": "generators-bubble-letter-coloring-page-generator",
+      "title": "Bubble Letter Coloring Page Generator",
+      "meta_description": "Generate bubble letter coloring pages for names and words with bold printable outlines.",
+      "h1": "Bubble Letter Coloring Page Generator",
+      "intro": "Create bubble letter coloring pages for names and custom words.",
+      "intro_paragraphs": [
+        "Create bubble letter coloring pages for names and custom words."
+      ],
+      "body": "Use this tool for classroom vocabulary sheets, birthday names, and custom word art. Bubble letters are optimized for easy coloring with markers or crayons.",
+      "body_paragraphs": [
+        "Use this tool for classroom vocabulary sheets, birthday names, and custom word art. Bubble letters are optimized for easy coloring with markers or crayons."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "bubble letter coloring page for the word AMAZING",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-8.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I generate single words?",
+          "answer": "Yes, single words and short phrases work best for bold bubble layouts."
+        },
+        {
+          "question": "Is this printable at home?",
+          "answer": "Yes, output is optimized for standard home printing sizes."
+        }
+      ],
+      "tags": [
+        "bubble letter coloring page generator",
+        "generators",
+        "word art coloring"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/generators/graffiti-coloring-page-generator",
+      "slug": "generators-graffiti-coloring-page-generator",
+      "title": "Graffiti Coloring Page Generator",
+      "meta_description": "Create graffiti-style coloring page printables with custom words and bold line art.",
+      "h1": "Graffiti Coloring Page Generator",
+      "intro": "Generate graffiti-inspired printable coloring pages.",
+      "intro_paragraphs": [
+        "Generate graffiti-inspired printable coloring pages."
+      ],
+      "body": "Turn words and names into graffiti coloring pages designed for creativity while staying printable and legible. Great for tweens, teens, and art clubs.",
+      "body_paragraphs": [
+        "Turn words and names into graffiti coloring pages designed for creativity while staying printable and legible. Great for tweens, teens, and art clubs."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "graffiti coloring page with the word DREAM BIG",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-9.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I choose words or names?",
+          "answer": "Yes, custom words and names are supported for graffiti-style prompts."
+        },
+        {
+          "question": "Is the output kid-safe?",
+          "answer": "Yes, moderation filters keep content family-safe by default."
+        }
+      ],
+      "tags": [
+        "graffiti coloring page generator",
+        "generators",
+        "street art coloring pages"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/generators/name-coloring-page-generator",
+      "slug": "generators-name-coloring-page-generator",
+      "title": "Name Coloring Page Generator",
+      "meta_description": "Generate printable personalized name coloring pages with custom themes and styles.",
+      "h1": "Name Coloring Page Generator",
+      "intro": "Create personalized name coloring pages for classrooms and parties.",
+      "intro_paragraphs": [
+        "Create personalized name coloring pages for classrooms and parties."
+      ],
+      "body": "Create classroom name sheets, birthday pages, and personalized printables with themed text prompts. Great for kids learning letters and writing.",
+      "body_paragraphs": [
+        "Create classroom name sheets, birthday pages, and personalized printables with themed text prompts. Great for kids learning letters and writing."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "Create a coloring page for the name Emma with stars and flowers",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-6.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I use any name?",
+          "answer": "Yes, generate personalized pages with first names, nicknames, or short phrases."
+        },
+        {
+          "question": "Are these good for classrooms?",
+          "answer": "Yes, teachers use them for name practice and activity stations."
+        }
+      ],
+      "tags": [
+        "name coloring page generator",
+        "generators",
+        "custom name coloring page"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/generators/quote-coloring-page-generator",
+      "slug": "generators-quote-coloring-page-generator",
+      "title": "Quote Coloring Page Generator",
+      "meta_description": "Create printable quote coloring pages with decorative typography and line art.",
+      "h1": "Quote Coloring Page Generator",
+      "intro": "Generate motivational quote coloring pages in seconds.",
+      "intro_paragraphs": [
+        "Generate motivational quote coloring pages in seconds."
+      ],
+      "body": "Turn short quotes into printable coloring sheets with floral, geometric, or seasonal styles. Perfect for affirmations, classroom walls, and journals.",
+      "body_paragraphs": [
+        "Turn short quotes into printable coloring sheets with floral, geometric, or seasonal styles. Perfect for affirmations, classroom walls, and journals."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "create a quote coloring page: Be brave and kind",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-7.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I create classroom quotes?",
+          "answer": "Yes, this generator works well for classroom posters and handouts."
+        },
+        {
+          "question": "What quote length works best?",
+          "answer": "Short to medium quotes usually produce the cleanest layouts."
+        }
+      ],
+      "tags": [
+        "quote coloring page generator",
+        "generators",
+        "affirmation coloring pages"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/graffiti-coloring-page-generator",
+      "slug": "graffiti-coloring-page-generator",
+      "title": "Graffiti Coloring Page Generator",
+      "meta_description": "Create graffiti-style coloring pages with bold outlines and custom text prompts.",
+      "h1": "Graffiti Coloring Page Generator",
+      "intro": "Generate graffiti-inspired printable coloring pages with cleaner line art.",
+      "intro_paragraphs": [
+        "Generate graffiti-inspired printable coloring pages with cleaner line art."
+      ],
+      "body": "Turn words and names into graffiti coloring pages designed for creativity while staying printable and legible. Great for tweens, teens, and art clubs.",
+      "body_paragraphs": [
+        "Turn words and names into graffiti coloring pages designed for creativity while staying printable and legible. Great for tweens, teens, and art clubs."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "graffiti coloring page with the word DREAM BIG",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-9.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I choose words or names?",
+          "answer": "Yes, custom words and names are supported for graffiti-style prompts."
+        },
+        {
+          "question": "Is the output kid-safe?",
+          "answer": "Yes, moderation filters keep content family-safe by default."
+        }
+      ],
+      "tags": [
+        "graffiti coloring page generator",
+        "street art coloring pages",
+        "graffiti name coloring sheet"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/mandala-coloring-page-generator",
+      "slug": "mandala-coloring-page-generator",
+      "title": "Mandala Coloring Page Generator",
+      "meta_description": "Generate printable mandala coloring pages with custom complexity for kids, teens, and adults.",
+      "h1": "Mandala Coloring Page Generator",
+      "intro": "Create custom mandala coloring pages in seconds with adjustable detail.",
+      "intro_paragraphs": [
+        "Create custom mandala coloring pages in seconds with adjustable detail."
+      ],
+      "body": "Generate geometric and floral mandala designs with style prompts for beginner to advanced coloring difficulty. Perfect for mindfulness and classroom calm activities.",
+      "body_paragraphs": [
+        "Generate geometric and floral mandala designs with style prompts for beginner to advanced coloring difficulty. Perfect for mindfulness and classroom calm activities."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "mandala coloring page with floral symmetry, medium complexity",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-2.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I choose complexity?",
+          "answer": "Yes, you can use prompt wording to request easy, medium, or detailed mandalas."
+        },
+        {
+          "question": "Is this suitable for adults too?",
+          "answer": "Yes, many users create mandalas for teens and adults as well as kids."
+        }
+      ],
+      "tags": [
+        "mandala coloring page generator",
+        "printable mandala coloring pages",
+        "geometric coloring sheets"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/midjourney-prompt-generator-for-coloring-pages",
+      "slug": "midjourney-prompt-generator-for-coloring-pages",
+      "title": "Midjourney Prompt Generator for Coloring Pages",
+      "meta_description": "Create Midjourney-ready prompts for cleaner coloring page generation and better line art outputs.",
+      "h1": "Midjourney Prompt Generator for Coloring Pages",
+      "intro": "Generate keyword-rich Midjourney prompts optimized for printable coloring page style.",
+      "intro_paragraphs": [
+        "Generate keyword-rich Midjourney prompts optimized for printable coloring page style."
+      ],
+      "body": "Use this prompt generator to create better Midjourney instructions for black-and-white line art, consistent style, and printable layouts.",
+      "body_paragraphs": [
+        "Use this prompt generator to create better Midjourney instructions for black-and-white line art, consistent style, and printable layouts."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "midjourney prompt for cute jungle animals coloring page, bold outlines",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-11.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Does this generate images directly?",
+          "answer": "This page helps build optimized prompts you can use in image workflows."
+        },
+        {
+          "question": "Can I copy prompts to ColorfulMe?",
+          "answer": "Yes, generated prompt patterns can be used directly in ColorfulMe create mode."
+        }
+      ],
+      "tags": [
+        "midjourney prompt generator",
+        "coloring page prompts",
+        "ai art prompt builder"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/name-coloring-page-generator",
+      "slug": "name-coloring-page-generator",
+      "title": "Name Coloring Page Generator",
+      "meta_description": "Generate personalized name coloring pages with decorative letters and printable outlines.",
+      "h1": "Name Coloring Page Generator",
+      "intro": "Turn any name into a custom coloring page with bold, easy-to-color lettering.",
+      "intro_paragraphs": [
+        "Turn any name into a custom coloring page with bold, easy-to-color lettering."
+      ],
+      "body": "Create classroom name sheets, birthday pages, and personalized printables with themed text prompts. Great for kids learning letters and writing.",
+      "body_paragraphs": [
+        "Create classroom name sheets, birthday pages, and personalized printables with themed text prompts. Great for kids learning letters and writing."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "Create a coloring page for the name Emma with stars and flowers",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-6.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I use any name?",
+          "answer": "Yes, generate personalized pages with first names, nicknames, or short phrases."
+        },
+        {
+          "question": "Are these good for classrooms?",
+          "answer": "Yes, teachers use them for name practice and activity stations."
+        }
+      ],
+      "tags": [
+        "name coloring page generator",
+        "personalized name coloring page",
+        "custom name coloring sheet"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/photo-to-coloring-page-converter",
+      "slug": "photo-to-coloring-page-converter",
+      "title": "Photo to Coloring Page Converter",
+      "meta_description": "Convert photos into printable coloring pages with cleaner outlines and simplified details.",
+      "h1": "Photo to Coloring Page Converter",
+      "intro": "Upload a photo and convert it into kid-friendly coloring line art in seconds.",
+      "intro_paragraphs": [
+        "Upload a photo and convert it into kid-friendly coloring line art in seconds."
+      ],
+      "body": "This photo to coloring page converter removes noise, simplifies detail, and keeps clear contours so kids can color easily. Ideal for portraits, pets, and family pictures.",
+      "body_paragraphs": [
+        "This photo to coloring page converter removes noise, simplifies detail, and keeps clear contours so kids can color easily. Ideal for portraits, pets, and family pictures."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "convert this family picnic photo into a coloring page",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-3.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "What image formats are supported?",
+          "answer": "JPG and PNG uploads are supported in the generator."
+        },
+        {
+          "question": "Do backgrounds get simplified?",
+          "answer": "Yes, the conversion flow reduces clutter and highlights key lines."
+        }
+      ],
+      "tags": [
+        "photo to coloring page converter",
+        "picture to coloring page",
+        "photo to line art"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/photo-to-sketch",
+      "slug": "photo-to-sketch",
+      "title": "Photo to Sketch (Coloring Page)",
+      "meta_description": "Convert photos to sketch-style line art for printable coloring pages.",
+      "h1": "Photo to Sketch Converter",
+      "intro": "Convert uploaded photos into sketch-style coloring outlines.",
+      "intro_paragraphs": [
+        "Convert uploaded photos into sketch-style coloring outlines."
+      ],
+      "body": "This photo to sketch converter creates pencil-like outlines while keeping printable contrast. Use it for portraits, objects, and class art exercises.",
+      "body_paragraphs": [
+        "This photo to sketch converter creates pencil-like outlines while keeping printable contrast. Use it for portraits, objects, and class art exercises."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "convert this photo to a clean pencil sketch for coloring",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-5.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "How is this different from photo mode?",
+          "answer": "Sketch mode emphasizes drawn line texture while preserving shape clarity."
+        },
+        {
+          "question": "Can children color these sketches?",
+          "answer": "Yes, outputs are optimized for large, colorable regions."
+        }
+      ],
+      "tags": [
+        "photo to sketch",
+        "photo sketch converter",
+        "coloring sketch"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/photo-to-sketch-converter",
+      "slug": "photo-to-sketch-converter",
+      "title": "Photo to Sketch Converter (Coloring Style)",
+      "meta_description": "Convert images into sketch-style line drawings optimized for printable coloring pages.",
+      "h1": "Photo to Sketch Converter for Coloring Pages",
+      "intro": "Create sketch-style outlines from photos for coloring, tracing, and activity sheets.",
+      "intro_paragraphs": [
+        "Create sketch-style outlines from photos for coloring, tracing, and activity sheets."
+      ],
+      "body": "This photo to sketch converter creates pencil-like outlines while keeping printable contrast. Use it for portraits, objects, and class art exercises.",
+      "body_paragraphs": [
+        "This photo to sketch converter creates pencil-like outlines while keeping printable contrast. Use it for portraits, objects, and class art exercises."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "convert this photo to a clean pencil sketch for coloring",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-5.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "How is this different from photo mode?",
+          "answer": "Sketch mode emphasizes drawn line texture while preserving shape clarity."
+        },
+        {
+          "question": "Can children color these sketches?",
+          "answer": "Yes, outputs are optimized for large, colorable regions."
+        }
+      ],
+      "tags": [
+        "photo to sketch converter",
+        "pencil sketch converter",
+        "coloring sketch generator"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/princess-coloring-page-generator",
+      "slug": "princess-coloring-page-generator",
+      "title": "Princess Coloring Page Generator",
+      "meta_description": "Create printable princess coloring pages with castles, dresses, and fantasy scenes.",
+      "h1": "Princess Coloring Page Generator",
+      "intro": "Generate custom princess coloring pages with kid-friendly line art.",
+      "intro_paragraphs": [
+        "Generate custom princess coloring pages with kid-friendly line art."
+      ],
+      "body": "Design princess-themed pages for parties, classroom activities, and story-time printables. Add castles, crowns, animals, and magic details in your prompt.",
+      "body_paragraphs": [
+        "Design princess-themed pages for parties, classroom activities, and story-time printables. Add castles, crowns, animals, and magic details in your prompt."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "princess in a castle garden with butterflies, coloring page",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-3.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I generate different princess themes?",
+          "answer": "Yes, you can prompt for modern, fairy-tale, or seasonal princess scenes."
+        },
+        {
+          "question": "Are these good for birthday activities?",
+          "answer": "Yes, princess coloring sheets are popular for party printable packs."
+        }
+      ],
+      "tags": [
+        "princess coloring page generator",
+        "princess printable coloring pages",
+        "fantasy coloring sheets"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/prompt-generators/flux-prompt-generator",
+      "slug": "prompt-generators-flux-prompt-generator",
+      "title": "FLUX Prompt Generator",
+      "meta_description": "Generate FLUX prompts optimized for printable coloring page line-art outputs.",
+      "h1": "FLUX Prompt Generator",
+      "intro": "Build FLUX prompts for cleaner coloring page generation.",
+      "intro_paragraphs": [
+        "Build FLUX prompts for cleaner coloring page generation."
+      ],
+      "body": "Use this generator to produce FLUX-ready prompt structures for family-safe themes, bold outlines, and easy color regions suitable for kids.",
+      "body_paragraphs": [
+        "Use this generator to produce FLUX-ready prompt structures for family-safe themes, bold outlines, and easy color regions suitable for kids."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "flux prompt: cartoon farm scene coloring page, bold black outlines",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-1.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Why use a dedicated FLUX prompt generator?",
+          "answer": "It helps enforce line-art constraints that improve printability."
+        },
+        {
+          "question": "Can I adapt prompts for different ages?",
+          "answer": "Yes, include age target and detail level in your prompt for better results."
+        }
+      ],
+      "tags": [
+        "flux prompt generator",
+        "prompt generators",
+        "coloring page prompts"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/prompt-generators/midjourney-prompt-generator",
+      "slug": "prompt-generators-midjourney-prompt-generator",
+      "title": "Midjourney Prompt Generator",
+      "meta_description": "Create Midjourney prompt templates optimized for printable coloring page generation.",
+      "h1": "Midjourney Prompt Generator",
+      "intro": "Generate Midjourney prompts designed for coloring page line art.",
+      "intro_paragraphs": [
+        "Generate Midjourney prompts designed for coloring page line art."
+      ],
+      "body": "Use this prompt generator to create better Midjourney instructions for black-and-white line art, consistent style, and printable layouts.",
+      "body_paragraphs": [
+        "Use this prompt generator to create better Midjourney instructions for black-and-white line art, consistent style, and printable layouts."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "midjourney prompt for cute jungle animals coloring page, bold outlines",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-11.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Does this generate images directly?",
+          "answer": "This page helps build optimized prompts you can use in image workflows."
+        },
+        {
+          "question": "Can I copy prompts to ColorfulMe?",
+          "answer": "Yes, generated prompt patterns can be used directly in ColorfulMe create mode."
+        }
+      ],
+      "tags": [
+        "midjourney prompt generator",
+        "prompt generators",
+        "coloring page prompts"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/prompt-generators/stable-diffusion-prompt-generator",
+      "slug": "prompt-generators-stable-diffusion-prompt-generator",
+      "title": "Stable Diffusion Prompt Generator",
+      "meta_description": "Build Stable Diffusion prompts for clean printable coloring pages and line art.",
+      "h1": "Stable Diffusion Prompt Generator",
+      "intro": "Generate Stable Diffusion prompts for coloring page workflows.",
+      "intro_paragraphs": [
+        "Generate Stable Diffusion prompts for coloring page workflows."
+      ],
+      "body": "Generate structured prompt templates for Stable Diffusion that emphasize line quality, white backgrounds, and kid-safe printable compositions.",
+      "body_paragraphs": [
+        "Generate structured prompt templates for Stable Diffusion that emphasize line quality, white backgrounds, and kid-safe printable compositions."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "stable diffusion coloring page prompt, simple line art, no shading",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-12.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "What makes a good SD coloring prompt?",
+          "answer": "Prompts that specify clean outlines, no shading, and simple compositions perform best."
+        },
+        {
+          "question": "Can beginners use this?",
+          "answer": "Yes, each prompt seed is designed to be easy to copy and tweak."
+        }
+      ],
+      "tags": [
+        "stable diffusion prompt generator",
+        "prompt generators",
+        "line art prompts"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/quote-coloring-page-generator",
+      "slug": "quote-coloring-page-generator",
+      "title": "Quote Coloring Page Generator",
+      "meta_description": "Create printable quote coloring pages with decorative typography and themed outlines.",
+      "h1": "Quote Coloring Page Generator",
+      "intro": "Generate motivational quote coloring pages for kids, classrooms, and planners.",
+      "intro_paragraphs": [
+        "Generate motivational quote coloring pages for kids, classrooms, and planners."
+      ],
+      "body": "Turn short quotes into printable coloring sheets with floral, geometric, or seasonal styles. Perfect for affirmations, classroom walls, and journals.",
+      "body_paragraphs": [
+        "Turn short quotes into printable coloring sheets with floral, geometric, or seasonal styles. Perfect for affirmations, classroom walls, and journals."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "create a quote coloring page: Be brave and kind",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-7.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I create classroom quotes?",
+          "answer": "Yes, this generator works well for classroom posters and handouts."
+        },
+        {
+          "question": "What quote length works best?",
+          "answer": "Short to medium quotes usually produce the cleanest layouts."
+        }
+      ],
+      "tags": [
+        "quote coloring page generator",
+        "affirmation coloring pages",
+        "printable quote coloring sheets"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/stable-diffusion-prompt-generator-for-coloring-pages",
+      "slug": "stable-diffusion-prompt-generator-for-coloring-pages",
+      "title": "Stable Diffusion Prompt Generator for Coloring Pages",
+      "meta_description": "Build Stable Diffusion prompts optimized for clean black-and-white coloring page generation.",
+      "h1": "Stable Diffusion Prompt Generator for Coloring Pages",
+      "intro": "Create stronger Stable Diffusion prompts for printable coloring page outputs.",
+      "intro_paragraphs": [
+        "Create stronger Stable Diffusion prompts for printable coloring page outputs."
+      ],
+      "body": "Generate structured prompt templates for Stable Diffusion that emphasize line quality, white backgrounds, and kid-safe printable compositions.",
+      "body_paragraphs": [
+        "Generate structured prompt templates for Stable Diffusion that emphasize line quality, white backgrounds, and kid-safe printable compositions."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "stable diffusion coloring page prompt, simple line art, no shading",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-12.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "What makes a good SD coloring prompt?",
+          "answer": "Prompts that specify clean outlines, no shading, and simple compositions perform best."
+        },
+        {
+          "question": "Can beginners use this?",
+          "answer": "Yes, each prompt seed is designed to be easy to copy and tweak."
+        }
+      ],
+      "tags": [
+        "stable diffusion prompt generator",
+        "coloring page prompt templates",
+        "line art ai prompts"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/superhero-coloring-page-generator",
+      "slug": "superhero-coloring-page-generator",
+      "title": "Superhero Coloring Page Generator",
+      "meta_description": "Create superhero coloring pages with action poses, city scenes, and bold printable outlines.",
+      "h1": "Superhero Coloring Page Generator",
+      "intro": "Generate custom superhero coloring pages with dynamic line art and clean composition.",
+      "intro_paragraphs": [
+        "Generate custom superhero coloring pages with dynamic line art and clean composition."
+      ],
+      "body": "Create action-themed printable superhero sheets for kids and tweens. Add powers, costumes, sidekicks, and city backdrops with simple prompt instructions.",
+      "body_paragraphs": [
+        "Create action-themed printable superhero sheets for kids and tweens. Add powers, costumes, sidekicks, and city backdrops with simple prompt instructions."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "superhero team flying over city skyline, coloring page",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-5.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "Can I create original heroes?",
+          "answer": "Yes, prompts can define custom hero names, outfits, and powers."
+        },
+        {
+          "question": "Will the page be easy to print?",
+          "answer": "Yes, output is optimized for high-contrast black-and-white printing."
+        }
+      ],
+      "tags": [
+        "superhero coloring page generator",
+        "action coloring pages",
+        "printable hero coloring sheets"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/tools/ai-coloring-page-generator",
+      "slug": "tools-ai-coloring-page-generator",
+      "title": "AI Coloring Page Generator Tool",
+      "meta_description": "Use the AI coloring page generator tool to create printable coloring pages from prompts in seconds.",
+      "h1": "AI Coloring Page Generator Tool",
+      "intro": "Launch the core generator tool for printable coloring pages.",
+      "intro_paragraphs": [
+        "Launch the core generator tool for printable coloring pages."
+      ],
+      "body": "Use this AI coloring page generator to turn any idea into black-and-white printable art. Pick style, aspect ratio, and difficulty, then export as PNG or PDF.",
+      "body_paragraphs": [
+        "Use this AI coloring page generator to turn any idea into black-and-white printable art. Pick style, aspect ratio, and difficulty, then export as PNG or PDF."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "a happy dinosaur playing soccer in a park",
+      "image_url": "/static/images/colorfulme/v2/gallery-card-1.png",
+      "feature_bullets": [
+        "SEO-focused generator workflow",
+        "Kid-friendly line art quality",
+        "PNG and PDF export ready"
+      ],
+      "faq": [
+        {
+          "question": "How fast does generation take?",
+          "answer": "Most prompts return a printable page in seconds."
+        },
+        {
+          "question": "Can I print the result?",
+          "answer": "Yes, export as PDF or PNG for home or classroom printing."
+        }
+      ],
+      "tags": [
+        "ai coloring page generator tool",
+        "tools",
+        "printable coloring pages"
       ],
       "status": "published",
       "updated_at": "2026-02-06"
@@ -138,41 +1366,241 @@
       "updated_at": "2026-02-06"
     },
     {
-      "entry_type": "page",
-      "route_path": "/blog/how-to-turn-photos-into-coloring-pages",
-      "slug": "how-to-turn-photos-into-coloring-pages",
-      "title": "How To Turn Photos Into Coloring Pages",
-      "meta_description": "Step-by-step guide to convert photos into printable coloring pages.",
-      "h1": "How To Turn Photos Into Coloring Pages",
-      "intro": "Learn how to convert your own photos into clean outlines.",
+      "entry_type": "tool",
+      "route_path": "/prompt-generators/image-prompt-generator",
+      "slug": "prompt-generators-image-prompt-generator",
+      "title": "AI Image Prompt Generator",
+      "meta_description": "Generate AI image prompts optimized for clean, printable coloring page line art.",
+      "h1": "AI Image Prompt Generator",
+      "intro": "Create stronger image prompts that produce cleaner coloring page outputs.",
       "intro_paragraphs": [
-        "Learn how to convert your own photos into clean outlines."
+        "Create stronger image prompts that produce cleaner coloring page outputs."
       ],
-      "body": "Use Photo mode in ColorfulMe to upload any image, automatically simplify edges, and export print-ready PDF pages in minutes.",
+      "body": "Use this tool to generate structured prompts for coloring-page-friendly compositions and clear outlines.",
       "body_paragraphs": [
-        "Use Photo mode in ColorfulMe to upload any image, automatically simplify edges, and export print-ready PDF pages in minutes."
+        "Use this tool to generate structured prompts for coloring-page-friendly compositions and clear outlines."
       ],
-      "primary_cta_label": "Try Photo Mode",
+      "primary_cta_label": "Try This Generator",
       "primary_cta_url": "/create",
-      "secondary_cta_label": "See More Guides",
-      "secondary_cta_url": "/blog",
-      "generation_seed_prompt": "",
-      "image_url": "",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "Generate a high quality image prompt for printable black-and-white coloring pages with clear outlines and minimal shading.",
+      "image_url": "/static/images/colorfulme/hero-samples.svg",
       "feature_bullets": [
-        "Photo-to-outline conversion",
-        "Instant download",
-        "Beginner friendly"
+        "Prompt templates by style",
+        "Cleaner outlines",
+        "Kid-safe defaults"
       ],
       "faq": [
         {
-          "question": "Do I need design skills?",
-          "answer": "No, ColorfulMe handles conversion automatically."
+          "question": "What does this tool do?|It creates structured prompts optimized for coloring page results.",
+          "answer": ""
         }
       ],
       "tags": [
-        "blog",
-        "guide",
-        "photo"
+        "image prompt generator",
+        "prompt generators",
+        "coloring page prompts"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/prompt-generators/drawing-prompt-generator",
+      "slug": "prompt-generators-drawing-prompt-generator",
+      "title": "Drawing Prompt Generator",
+      "meta_description": "Generate creative drawing prompts tuned for coloring pages, classrooms, and printable activities.",
+      "h1": "Drawing Prompt Generator",
+      "intro": "Get ready-to-use drawing prompts for coloring page generation.",
+      "intro_paragraphs": [
+        "Get ready-to-use drawing prompts for coloring page generation."
+      ],
+      "body": "Create themed prompts for kids, classrooms, and family activities with printable-friendly line art direction.",
+      "body_paragraphs": [
+        "Create themed prompts for kids, classrooms, and family activities with printable-friendly line art direction."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "Generate a fun and safe drawing prompt suitable for a printable coloring page with bold clean outlines.",
+      "image_url": "/static/images/colorfulme/hero-samples.svg",
+      "feature_bullets": [
+        "Theme ideas by age",
+        "Printable-friendly scenes",
+        "Fast prompt variants"
+      ],
+      "faq": [
+        {
+          "question": "Who is this for?|Parents, teachers, and creators building coloring activities.",
+          "answer": ""
+        }
+      ],
+      "tags": [
+        "drawing prompt generator",
+        "prompt generators",
+        "coloring ideas"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/prompt-generators/image-to-prompt-generator",
+      "slug": "prompt-generators-image-to-prompt-generator",
+      "title": "Image to Prompt Generator",
+      "meta_description": "Turn an image concept into structured prompts for printable coloring-page generation workflows.",
+      "h1": "Image to Prompt Generator",
+      "intro": "Convert visual ideas into reusable prompts for coloring-page outputs.",
+      "intro_paragraphs": [
+        "Convert visual ideas into reusable prompts for coloring-page outputs."
+      ],
+      "body": "Use this generator to transform image concepts into prompt text that keeps subjects clear and line-art friendly.",
+      "body_paragraphs": [
+        "Use this generator to transform image concepts into prompt text that keeps subjects clear and line-art friendly."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "Transform this visual concept into a concise prompt for black-and-white printable coloring page line art.",
+      "image_url": "/static/images/colorfulme/hero-samples.svg",
+      "feature_bullets": [
+        "Visual concept extraction",
+        "Prompt structure templates",
+        "Line-art optimization"
+      ],
+      "faq": [
+        {
+          "question": "Can this improve consistency?|Yes, it helps standardize prompt structure across similar images.",
+          "answer": ""
+        }
+      ],
+      "tags": [
+        "image to prompt generator",
+        "prompt generators",
+        "line art prompts"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/prompt-generators/recraft-prompt-generator",
+      "slug": "prompt-generators-recraft-prompt-generator",
+      "title": "Recraft Prompt Generator",
+      "meta_description": "Build Recraft-ready prompts for bold, printable coloring page results and clean outlines.",
+      "h1": "Recraft Prompt Generator",
+      "intro": "Generate Recraft prompts tuned for coloring page line art.",
+      "intro_paragraphs": [
+        "Generate Recraft prompts tuned for coloring page line art."
+      ],
+      "body": "Create structured Recraft prompts with subject, composition, and line-work guidance for printable outputs.",
+      "body_paragraphs": [
+        "Create structured Recraft prompts with subject, composition, and line-work guidance for printable outputs."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "Generate a Recraft prompt for a printable black-and-white coloring page with crisp outlines and simple composition.",
+      "image_url": "/static/images/colorfulme/hero-samples.svg",
+      "feature_bullets": [
+        "Recraft-oriented syntax",
+        "Crisp outline guidance",
+        "Low-noise prompt templates"
+      ],
+      "faq": [
+        {
+          "question": "Why Recraft prompts?|They help keep style instructions explicit and consistent.",
+          "answer": ""
+        }
+      ],
+      "tags": [
+        "recraft prompt generator",
+        "prompt generators",
+        "coloring page prompts"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/generators/rainy-day-activities",
+      "slug": "generators-rainy-day-activities",
+      "title": "Rainy Day Activities Generator",
+      "meta_description": "Generate printable rainy day coloring activities for kids, classrooms, and family time.",
+      "h1": "Rainy Day Activities Generator",
+      "intro": "Create indoor-friendly coloring activities for rainy days in seconds.",
+      "intro_paragraphs": [
+        "Create indoor-friendly coloring activities for rainy days in seconds."
+      ],
+      "body": "Generate themed rainy-day activity pages with simple prompts and printable line-art output.",
+      "body_paragraphs": [
+        "Generate themed rainy-day activity pages with simple prompts and printable line-art output."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "Create a kid-safe rainy day activity coloring page prompt with playful indoor scenes and clear outlines.",
+      "image_url": "/static/images/colorfulme/hero-samples.svg",
+      "feature_bullets": [
+        "Indoor activity themes",
+        "Kid-safe ideas",
+        "Printable line art"
+      ],
+      "faq": [
+        {
+          "question": "Can teachers use this?|Yes, it is designed for class-friendly activity sheets.",
+          "answer": ""
+        }
+      ],
+      "tags": [
+        "rainy day activities",
+        "generators",
+        "indoor coloring pages"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "tool",
+      "route_path": "/generators/classroom-activities",
+      "slug": "generators-classroom-activities",
+      "title": "Classroom Activities Generator",
+      "meta_description": "Generate classroom-ready coloring activities with printable templates for teachers and students.",
+      "h1": "Classroom Activities Generator",
+      "intro": "Build classroom coloring activities aligned with age and learning themes.",
+      "intro_paragraphs": [
+        "Build classroom coloring activities aligned with age and learning themes."
+      ],
+      "body": "Create educational coloring activity prompts for centers, homework sheets, and themed lessons.",
+      "body_paragraphs": [
+        "Create educational coloring activity prompts for centers, homework sheets, and themed lessons."
+      ],
+      "primary_cta_label": "Try This Generator",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "Generate a classroom-safe educational coloring page prompt with clear outlines and simple composition.",
+      "image_url": "/static/images/colorfulme/hero-samples.svg",
+      "feature_bullets": [
+        "Teacher-friendly prompts",
+        "Age-based complexity",
+        "Print-ready outputs"
+      ],
+      "faq": [
+        {
+          "question": "Is this suitable for elementary school?|Yes, prompts are designed for classroom use.",
+          "answer": ""
+        }
+      ],
+      "tags": [
+        "classroom activities",
+        "generators",
+        "education coloring pages"
       ],
       "status": "published",
       "updated_at": "2026-02-06"

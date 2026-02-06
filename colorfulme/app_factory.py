@@ -97,8 +97,52 @@ def create_app() -> Flask:
 
     @app.context_processor
     def inject_globals():
+        from colorfulme.services.programmatic_service import ProgrammaticService
+
+        tools = [
+            entry
+            for entry in ProgrammaticService.get_entries_by_type('tool')
+            if entry.get('status') == 'published'
+        ]
+        by_path = {}
+        for entry in tools:
+            route_path = entry.get('route_path')
+            if route_path and route_path not in by_path:
+                by_path[route_path] = entry
+
+        prompt_routes = [
+            '/prompt-generators/midjourney-prompt-generator',
+            '/prompt-generators/flux-prompt-generator',
+            '/prompt-generators/stable-diffusion-prompt-generator',
+            '/prompt-generators/image-prompt-generator',
+            '/prompt-generators/drawing-prompt-generator',
+            '/prompt-generators/image-to-prompt-generator',
+            '/prompt-generators/recraft-prompt-generator',
+        ]
+        core_routes = [
+            '/ai-coloring-page-generator',
+            '/photo-to-coloring-page-converter',
+            '/photo-to-sketch',
+            '/family-photo-coloring-page',
+            '/coloring-book-generator',
+            '/generators/name-coloring-page-generator',
+            '/generators/bible-verse-coloring-page-generator',
+            '/generators/quote-coloring-page-generator',
+            '/generators/bubble-letter-coloring-page-generator',
+            '/generators/graffiti-coloring-page-generator',
+            '/generators/rainy-day-activities',
+            '/generators/classroom-activities',
+        ]
+
+        nav_generators_prompt = [by_path[path] for path in prompt_routes if path in by_path]
+        nav_generators_core = [by_path[path] for path in core_routes if path in by_path]
+        generator_paths = sorted(by_path.keys())
+
         return {
             'app_brand_name': app.config['APP_BRAND_NAME'],
+            'nav_generators_core': nav_generators_core,
+            'nav_generators_prompt': nav_generators_prompt,
+            'nav_generator_paths': generator_paths,
         }
 
     from colorfulme.blueprints.auth import auth_bp

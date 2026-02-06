@@ -16,6 +16,7 @@
       --brand-50: #eff6ff;
       --brand-100: #dbeafe;
       --brand-200: #bfdbfe;
+      --brand-300: #93c5fd;
       --brand-500: #3b82f6;
       --brand-600: #2563eb;
       --ink-900: #0f172a;
@@ -68,6 +69,57 @@
       color: var(--brand-600);
       border-color: #bfdbfe;
     }
+    .section-shell {
+      border: 1px solid rgba(191, 219, 254, 0.85);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(248, 251, 255, 0.88));
+      border-radius: 1.5rem;
+      box-shadow: 0 14px 42px rgba(37, 99, 235, 0.09);
+    }
+    .soft-grid {
+      background-image:
+        linear-gradient(to right, rgba(59, 130, 246, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(59, 130, 246, 0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .elevate {
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+    .elevate:hover {
+      transform: translateY(-3px);
+      border-color: var(--brand-300);
+      box-shadow: 0 18px 38px rgba(30, 64, 175, 0.14);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border: 1px solid rgba(191, 219, 254, 0.9);
+      background: rgba(255, 255, 255, 0.92);
+      color: #1d4ed8;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 0.35rem 0.65rem;
+    }
+    .glow-ring {
+      box-shadow: 0 0 0 1px rgba(191, 219, 254, 0.8), 0 24px 50px rgba(37, 99, 235, 0.14);
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink-900);
+    }
+    .section-copy {
+      color: var(--ink-500);
+    }
+    .rating-stars {
+      letter-spacing: 0.08em;
+      color: #f59e0b;
+      font-weight: 700;
+    }
     [data-modal] { display: none; }
     [data-modal].open { display: flex; }
   </style>
@@ -75,6 +127,7 @@
 </head>
 <body>
   {% set path = request.path %}
+  {% set is_generator_path = path in nav_generator_paths or path.startswith('/generators') or path.startswith('/prompt-generators') %}
   <header class="sticky top-0 z-50 border-b border-slate-200/70 glass">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="h-16 flex items-center justify-between gap-4">
@@ -86,6 +139,39 @@
         <nav class="hidden md:flex items-center gap-2 text-sm">
           <a href="/" class="px-3 py-2 rounded-lg border transition {% if path == '/' %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Home</a>
           <a href="/create" class="px-3 py-2 rounded-lg border transition {% if path.startswith('/create') %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Create</a>
+          <a href="/ai-coloring-page-generator" class="px-3 py-2 rounded-lg border transition {% if path == '/ai-coloring-page-generator' %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">AI Generator</a>
+          <a href="/photo-to-coloring-page-converter" class="px-3 py-2 rounded-lg border transition {% if path == '/photo-to-coloring-page-converter' %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Photo to Coloring</a>
+          <a href="/coloring-book-generator" class="px-3 py-2 rounded-lg border transition {% if path == '/coloring-book-generator' %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Coloring Book</a>
+          <div class="relative group">
+            <a href="/generators" class="px-3 py-2 rounded-lg border transition inline-flex items-center gap-1 {% if is_generator_path %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">
+              More Generators
+              <span class="text-[10px]">▼</span>
+            </a>
+            <div class="absolute left-0 top-full mt-2 w-[680px] p-4 rounded-2xl border border-blue-100 bg-white shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition">
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold">Core Generators</p>
+                  <div class="mt-2 max-h-72 overflow-auto pr-1 space-y-1">
+                    {% for item in nav_generators_core %}
+                    <a href="{{ item.route_path }}" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">{{ item.title }}</a>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div>
+                  <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold">Prompt Generators</p>
+                  <div class="mt-2 space-y-1">
+                    {% for item in nav_generators_prompt %}
+                    <a href="{{ item.route_path }}" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">{{ item.title }}</a>
+                    {% endfor %}
+                  </div>
+                  <div class="mt-3 pt-3 border-t border-slate-100 space-y-1">
+                    <a href="/generators" class="block px-2 py-1.5 rounded-lg bg-blue-50 text-blue-700 font-semibold">View All Generators</a>
+                    <a href="/prompt-generators" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">Prompt Generator Hub</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <a href="/library" class="px-3 py-2 rounded-lg border transition {% if path.startswith('/library') %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Library</a>
           <a href="/pricing" class="px-3 py-2 rounded-lg border transition {% if path.startswith('/pricing') %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Pricing</a>
           <a href="/blog" class="px-3 py-2 rounded-lg border transition {% if path.startswith('/blog') %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Blog</a>
@@ -108,6 +194,24 @@
       <div id="mobile-menu" class="md:hidden hidden pb-4 space-y-2 text-sm">
         <a href="/" class="block px-3 py-2 rounded-lg bg-white/80">Home</a>
         <a href="/create" class="block px-3 py-2 rounded-lg bg-white/80">Create</a>
+        <a href="/ai-coloring-page-generator" class="block px-3 py-2 rounded-lg bg-white/80">AI Generator</a>
+        <a href="/photo-to-coloring-page-converter" class="block px-3 py-2 rounded-lg bg-white/80">Photo to Coloring</a>
+        <a href="/coloring-book-generator" class="block px-3 py-2 rounded-lg bg-white/80">Coloring Book</a>
+        <details class="rounded-lg bg-white/80 border border-slate-200">
+          <summary class="px-3 py-2 cursor-pointer font-medium text-slate-800">More Generators</summary>
+          <div class="px-2 pb-2 space-y-1">
+            <a href="/generators" class="block px-2 py-1.5 rounded-lg bg-blue-50 text-blue-700 font-semibold">View All Generators</a>
+            <a href="/prompt-generators" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">Prompt Generator Hub</a>
+            <p class="px-2 pt-2 text-[11px] uppercase tracking-wide text-slate-500">Core</p>
+            {% for item in nav_generators_core %}
+            <a href="{{ item.route_path }}" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">{{ item.title }}</a>
+            {% endfor %}
+            <p class="px-2 pt-2 text-[11px] uppercase tracking-wide text-slate-500">Prompts</p>
+            {% for item in nav_generators_prompt %}
+            <a href="{{ item.route_path }}" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">{{ item.title }}</a>
+            {% endfor %}
+          </div>
+        </details>
         <a href="/library" class="block px-3 py-2 rounded-lg bg-white/80">Library</a>
         <a href="/pricing" class="block px-3 py-2 rounded-lg bg-white/80">Pricing</a>
         <a href="/blog" class="block px-3 py-2 rounded-lg bg-white/80">Blog</a>

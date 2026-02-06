@@ -12,6 +12,56 @@ from colorfulme.services.programmatic_service import ProgrammaticService
 
 web_bp = Blueprint('web', __name__)
 
+CORE_GENERATOR_ORDER = [
+    '/ai-coloring-page-generator',
+    '/photo-to-coloring-page-converter',
+    '/photo-to-sketch',
+    '/family-photo-coloring-page',
+    '/coloring-book-generator',
+    '/generators/name-coloring-page-generator',
+    '/generators/bible-verse-coloring-page-generator',
+    '/generators/quote-coloring-page-generator',
+    '/generators/bubble-letter-coloring-page-generator',
+    '/generators/graffiti-coloring-page-generator',
+    '/generators/rainy-day-activities',
+    '/generators/classroom-activities',
+]
+
+PROMPT_GENERATOR_ORDER = [
+    '/prompt-generators/midjourney-prompt-generator',
+    '/prompt-generators/flux-prompt-generator',
+    '/prompt-generators/stable-diffusion-prompt-generator',
+    '/prompt-generators/image-prompt-generator',
+    '/prompt-generators/drawing-prompt-generator',
+    '/prompt-generators/image-to-prompt-generator',
+    '/prompt-generators/recraft-prompt-generator',
+]
+
+
+def _published_tools():
+    tools = [
+        entry
+        for entry in ProgrammaticService.get_entries_by_type('tool')
+        if entry.get('status') == 'published'
+    ]
+    deduped = {}
+    for entry in tools:
+        route_path = entry.get('route_path')
+        if route_path and route_path not in deduped:
+            deduped[route_path] = entry
+
+    tools = list(deduped.values())
+    tools.sort(key=lambda entry: (entry.get('title') or '').lower())
+    return tools
+
+
+def _ordered_subset(tools, ordered_paths):
+    by_path = {entry.get('route_path'): entry for entry in tools if entry.get('route_path')}
+    ordered = [by_path[path] for path in ordered_paths if path in by_path]
+    if ordered:
+        return ordered
+    return tools
+
 
 @web_bp.get('/health')
 def health_check():
@@ -37,6 +87,33 @@ def library_page():
         entry for entry in ProgrammaticService.get_entries_by_type('library') if entry.get('status') == 'published'
     ]
     return render_template('library.html', items=items)
+
+
+@web_bp.get('/generators')
+def generators_page():
+    tools = _published_tools()
+    prompt_tools = [
+        tool
+        for tool in tools
+        if str(tool.get('route_path', '')).startswith('/prompt-generators/')
+        or 'prompt-generator' in str(tool.get('route_path', ''))
+    ]
+    core_tools = [tool for tool in tools if tool not in prompt_tools]
+    core_tools = _ordered_subset(core_tools, CORE_GENERATOR_ORDER)
+    prompt_tools = _ordered_subset(prompt_tools, PROMPT_GENERATOR_ORDER)
+    return render_template('generators.html', core_tools=core_tools, prompt_tools=prompt_tools)
+
+
+@web_bp.get('/prompt-generators')
+def prompt_generators_page():
+    prompt_tools = [
+        tool
+        for tool in _published_tools()
+        if str(tool.get('route_path', '')).startswith('/prompt-generators/')
+        or 'prompt-generator' in str(tool.get('route_path', ''))
+    ]
+    prompt_tools = _ordered_subset(prompt_tools, PROMPT_GENERATOR_ORDER)
+    return render_template('prompt_generators.html', prompt_tools=prompt_tools)
 
 
 @web_bp.get('/blog')
