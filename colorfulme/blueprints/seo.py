@@ -25,6 +25,7 @@ def sitemap_xml():
     pages = [
         {'loc': f'{base}/', 'priority': '1.0'},
         {'loc': f'{base}/create', 'priority': '0.95'},
+        {'loc': f'{base}/free-coloring-pages', 'priority': '0.95'},
         {'loc': f'{base}/generators', 'priority': '0.92'},
         {'loc': f'{base}/prompt-generators', 'priority': '0.9'},
         {'loc': f'{base}/library', 'priority': '0.9'},

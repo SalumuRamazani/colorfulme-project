@@ -138,11 +138,42 @@ def create_app() -> Flask:
         nav_generators_core = [by_path[path] for path in core_routes if path in by_path]
         generator_paths = sorted(by_path.keys())
 
+        free_entries = []
+        for entry in ProgrammaticService.get_entries_by_type('page'):
+            if entry.get('status') != 'published':
+                continue
+            route_path = str(entry.get('route_path', ''))
+            if route_path.startswith('/free-coloring-pages/') and route_path.count('/') == 2:
+                free_entries.append(entry)
+
+        free_entries.sort(key=lambda item: (item.get('title') or '').lower())
+        age_routes = [
+            '/free-coloring-pages/for-kids',
+            '/free-coloring-pages/for-teens',
+            '/free-coloring-pages/for-adults',
+            '/free-coloring-pages/for-seniors',
+            '/free-coloring-pages/for-toddlers',
+            '/free-coloring-pages/for-preschoolers',
+            '/free-coloring-pages/for-tweens',
+        ]
+        free_by_path = {
+            entry.get('route_path'): entry
+            for entry in free_entries
+            if entry.get('route_path')
+        }
+        nav_free_ages = [free_by_path[path] for path in age_routes if path in free_by_path]
+        nav_free_featured = [entry for entry in free_entries if entry.get('route_path') not in set(age_routes)][:18]
+
         return {
             'app_brand_name': app.config['APP_BRAND_NAME'],
             'nav_generators_core': nav_generators_core,
             'nav_generators_prompt': nav_generators_prompt,
             'nav_generator_paths': generator_paths,
+            'nav_generators_core_count': len(nav_generators_core),
+            'nav_generators_prompt_count': len(nav_generators_prompt),
+            'nav_free_ages': nav_free_ages,
+            'nav_free_featured': nav_free_featured,
+            'nav_free_categories_count': len(free_entries),
         }
 
     from colorfulme.blueprints.auth import auth_bp

@@ -69,6 +69,104 @@
       color: var(--brand-600);
       border-color: #bfdbfe;
     }
+    .nav-shell {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(191, 219, 254, 0.85);
+      border-radius: 999px;
+      padding: 0.28rem;
+      box-shadow: 0 10px 24px rgba(30, 64, 175, 0.1);
+    }
+    .nav-pill {
+      border-radius: 999px;
+      padding: 0.5rem 0.85rem;
+      font-weight: 600;
+      color: #1e293b;
+      border: 1px solid transparent;
+      transition: all 160ms ease;
+      white-space: nowrap;
+    }
+    .nav-pill:hover {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      color: #1d4ed8;
+    }
+    .nav-pill-active {
+      background: linear-gradient(135deg, #dbeafe, #eff6ff);
+      border-color: #93c5fd;
+      color: #1d4ed8;
+    }
+    .header-action {
+      border-radius: 0.85rem;
+      padding: 0.6rem 1rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .mega-panel {
+      border: 1px solid #cbd5e1;
+      border-radius: 1.8rem;
+      background: #ffffff;
+      box-shadow: 0 28px 52px rgba(15, 23, 42, 0.18);
+    }
+    .menu-section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .menu-item-link {
+      display: block;
+      border-radius: 0.75rem;
+      padding: 0.45rem 0.55rem;
+      color: #334155;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.35;
+    }
+    .menu-item-link:hover {
+      background: #f8fbff;
+      color: #1d4ed8;
+    }
+    .menu-accent-link {
+      color: #ec4899;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+    .menu-accent-link:hover {
+      color: #db2777;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-panel {
+      position: absolute;
+      top: 100%;
+      z-index: 80;
+      width: min(760px, calc(100vw - 2rem));
+      max-height: min(78vh, 680px);
+      overflow: auto;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+    }
+    .dropdown:hover .dropdown-panel,
+    .dropdown:focus-within .dropdown-panel,
+    .dropdown.open .dropdown-panel {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .dropdown-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+    }
     .section-shell {
       border: 1px solid rgba(191, 219, 254, 0.85);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(248, 251, 255, 0.88));
@@ -128,6 +226,7 @@
 <body>
   {% set path = request.path %}
   {% set is_generator_path = path in nav_generator_paths or path.startswith('/generators') or path.startswith('/prompt-generators') %}
+  {% set is_free_coloring_path = path.startswith('/free-coloring-pages') %}
   <header class="sticky top-0 z-50 border-b border-slate-200/70 glass">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="h-16 flex items-center justify-between gap-4">
@@ -136,85 +235,129 @@
           <span class="font-display text-lg font-bold tracking-tight">ColorfulMe</span>
         </a>
 
-        <nav class="hidden md:flex items-center gap-2 text-sm">
-          <a href="/" class="px-3 py-2 rounded-lg border transition {% if path == '/' %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Home</a>
-          <a href="/create" class="px-3 py-2 rounded-lg border transition {% if path.startswith('/create') %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Create</a>
-          <a href="/ai-coloring-page-generator" class="px-3 py-2 rounded-lg border transition {% if path == '/ai-coloring-page-generator' %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">AI Generator</a>
-          <a href="/photo-to-coloring-page-converter" class="px-3 py-2 rounded-lg border transition {% if path == '/photo-to-coloring-page-converter' %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Photo to Coloring</a>
-          <a href="/coloring-book-generator" class="px-3 py-2 rounded-lg border transition {% if path == '/coloring-book-generator' %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Coloring Book</a>
-          <div class="relative group">
-            <a href="/generators" class="px-3 py-2 rounded-lg border transition inline-flex items-center gap-1 {% if is_generator_path %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">
-              More Generators
-              <span class="text-[10px]">▼</span>
+        <nav class="hidden lg:flex items-center gap-2 text-sm nav-shell">
+          <a href="/" class="nav-pill {% if path == '/' %}nav-pill-active{% endif %}">Home</a>
+          <a href="/create" class="nav-pill {% if path.startswith('/create') %}nav-pill-active{% endif %}">Create</a>
+          <div class="dropdown" data-dropdown>
+            <a href="/free-coloring-pages" data-dropdown-trigger class="nav-pill inline-flex items-center gap-1 {% if is_free_coloring_path %}nav-pill-active{% endif %}">
+              Free Coloring Pages
+              <span class="text-[10px]">▾</span>
             </a>
-            <div class="absolute left-0 top-full mt-2 w-[680px] p-4 rounded-2xl border border-blue-100 bg-white shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition">
-              <div class="grid grid-cols-2 gap-4">
+            <div class="dropdown-panel left-0 p-7 mega-panel">
+              <div class="space-y-6">
                 <div>
-                  <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold">Core Generators</p>
-                  <div class="mt-2 max-h-72 overflow-auto pr-1 space-y-1">
-                    {% for item in nav_generators_core %}
-                    <a href="{{ item.route_path }}" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">{{ item.title }}</a>
+                  <p class="menu-section-title">Browse by Age</p>
+                  <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1">
+                    {% for item in nav_free_ages %}
+                    <a href="{{ item.route_path }}" class="menu-item-link text-base">{{ item.title.replace('Free Coloring Pages ', '') }}</a>
                     {% endfor %}
                   </div>
                 </div>
-                <div>
-                  <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold">Prompt Generators</p>
-                  <div class="mt-2 space-y-1">
-                    {% for item in nav_generators_prompt %}
-                    <a href="{{ item.route_path }}" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">{{ item.title }}</a>
+                <div class="border-t border-slate-200 pt-5">
+                  <p class="menu-section-title">Popular Categories</p>
+                  <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-1">
+                    {% for item in nav_free_featured[:12] %}
+                    <a href="{{ item.route_path }}" class="menu-item-link text-base">{{ item.title.replace('Free ', '').replace(' Coloring Pages', '') }}</a>
                     {% endfor %}
                   </div>
-                  <div class="mt-3 pt-3 border-t border-slate-100 space-y-1">
-                    <a href="/generators" class="block px-2 py-1.5 rounded-lg bg-blue-50 text-blue-700 font-semibold">View All Generators</a>
-                    <a href="/prompt-generators" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">Prompt Generator Hub</a>
+                </div>
+                <a href="/free-coloring-pages" class="inline-flex items-center gap-2 menu-accent-link">
+                  View All {{ nav_free_categories_count }} Categories →
+                </a>
+              </div>
+            </div>
+          </div>
+          <a href="/pricing" class="nav-pill {% if path.startswith('/pricing') %}nav-pill-active{% endif %}">Pricing</a>
+          <div class="dropdown" data-dropdown>
+            <a href="/generators" data-dropdown-trigger class="nav-pill inline-flex items-center gap-1 {% if is_generator_path %}nav-pill-active{% endif %}">
+              Generators
+              <span class="text-[10px]">▾</span>
+            </a>
+            <div class="dropdown-panel right-0 p-7 mega-panel">
+              <div class="space-y-6">
+                <div>
+                  <p class="menu-section-title">Coloring Page Generators</p>
+                  <div class="mt-3 dropdown-list">
+                    {% for item in nav_generators_core[:10] %}
+                    <a href="{{ item.route_path }}" class="menu-item-link text-base">{{ item.title.replace(' Coloring Page Generator', '').replace(' Generator', '') }}</a>
+                    {% endfor %}
                   </div>
+                  <a href="/generators" class="mt-3 inline-flex items-center gap-2 menu-accent-link">
+                    View All ({{ nav_generators_core_count }} generators) →
+                  </a>
+                </div>
+                <div class="border-t border-slate-200 pt-5">
+                  <p class="menu-section-title">AI Prompt Generators</p>
+                  <div class="mt-3 dropdown-list">
+                    {% for item in nav_generators_prompt %}
+                    <a href="{{ item.route_path }}" class="menu-item-link text-base">{{ item.title.replace(' Prompt Generator', ' Prompts') }}</a>
+                    {% endfor %}
+                  </div>
+                  <a href="/prompt-generators" class="mt-3 inline-flex items-center gap-2 menu-accent-link">
+                    View All ({{ nav_generators_prompt_count }} generators) →
+                  </a>
                 </div>
               </div>
             </div>
           </div>
-          <a href="/library" class="px-3 py-2 rounded-lg border transition {% if path.startswith('/library') %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Library</a>
-          <a href="/pricing" class="px-3 py-2 rounded-lg border transition {% if path.startswith('/pricing') %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Pricing</a>
-          <a href="/blog" class="px-3 py-2 rounded-lg border transition {% if path.startswith('/blog') %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Blog</a>
+          <a href="/blog" class="nav-pill {% if path.startswith('/blog') %}nav-pill-active{% endif %}">Blog</a>
+          <a href="/library" class="nav-pill {% if path.startswith('/library') %}nav-pill-active{% endif %}">Community</a>
           {% if current_user.is_authenticated %}
-          <a href="/dashboard" class="px-3 py-2 rounded-lg border transition {% if path.startswith('/dashboard') %}nav-link-active{% else %}border-transparent hover:bg-white/70{% endif %}">Dashboard</a>
+          <a href="/dashboard" class="nav-pill {% if path.startswith('/dashboard') %}nav-pill-active{% endif %}">Dashboard</a>
           {% endif %}
         </nav>
 
         <div class="flex items-center gap-2">
           {% if current_user.is_authenticated %}
           <span class="hidden sm:inline text-xs px-3 py-1 rounded-full chip">{{ current_user.email }}</span>
-          <button id="logout-btn" class="px-4 py-2 rounded-lg btn-secondary text-sm font-medium">Logout</button>
+          <button id="logout-btn" class="header-action btn-secondary text-sm font-medium">Logout</button>
           {% else %}
-          <button id="open-auth-btn" class="px-4 py-2 rounded-lg btn-secondary text-sm font-medium">Sign in</button>
-          <a href="/create" class="px-4 py-2 rounded-lg btn-primary text-sm font-semibold transition">Start Creating</a>
+          <button id="open-auth-btn" class="header-action btn-secondary text-sm font-medium">Sign in</button>
+          <a href="/create" class="header-action btn-primary text-sm font-semibold transition">Start Creating</a>
           {% endif %}
-          <button id="mobile-menu-btn" class="md:hidden px-3 py-2 rounded-lg border border-slate-300 bg-white text-slate-700">Menu</button>
+          <button id="mobile-menu-btn" class="lg:hidden px-3 py-2 rounded-lg border border-slate-300 bg-white text-slate-700">Menu</button>
         </div>
       </div>
-      <div id="mobile-menu" class="md:hidden hidden pb-4 space-y-2 text-sm">
+      <div id="mobile-menu" class="lg:hidden hidden pb-4 space-y-2 text-sm">
         <a href="/" class="block px-3 py-2 rounded-lg bg-white/80">Home</a>
         <a href="/create" class="block px-3 py-2 rounded-lg bg-white/80">Create</a>
-        <a href="/ai-coloring-page-generator" class="block px-3 py-2 rounded-lg bg-white/80">AI Generator</a>
-        <a href="/photo-to-coloring-page-converter" class="block px-3 py-2 rounded-lg bg-white/80">Photo to Coloring</a>
-        <a href="/coloring-book-generator" class="block px-3 py-2 rounded-lg bg-white/80">Coloring Book</a>
+        <a href="/free-coloring-pages" class="block px-3 py-2 rounded-lg bg-white/80">Free Coloring Pages</a>
+        <a href="/pricing" class="block px-3 py-2 rounded-lg bg-white/80">Pricing</a>
+        <a href="/blog" class="block px-3 py-2 rounded-lg bg-white/80">Blog</a>
+        <a href="/library" class="block px-3 py-2 rounded-lg bg-white/80">Community</a>
         <details class="rounded-lg bg-white/80 border border-slate-200">
-          <summary class="px-3 py-2 cursor-pointer font-medium text-slate-800">More Generators</summary>
+          <summary class="px-3 py-2 cursor-pointer font-medium text-slate-800">Free Coloring Categories</summary>
           <div class="px-2 pb-2 space-y-1">
+            <a href="/free-coloring-pages" class="block px-2 py-1.5 rounded-lg bg-blue-50 text-blue-700 font-semibold">View All Categories</a>
+            <p class="px-2 pt-2 text-[11px] uppercase tracking-wide text-slate-500">Age groups</p>
+            {% for item in nav_free_ages %}
+            <a href="{{ item.route_path }}" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">{{ item.title.replace('Free Coloring Pages ', '') }}</a>
+            {% endfor %}
+            <p class="px-2 pt-2 text-[11px] uppercase tracking-wide text-slate-500">Popular themes</p>
+            {% for item in nav_free_featured[:10] %}
+            <a href="{{ item.route_path }}" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">{{ item.title.replace('Free ', '').replace(' Coloring Pages', '') }}</a>
+            {% endfor %}
+          </div>
+        </details>
+        <details class="rounded-lg bg-white/80 border border-slate-200">
+          <summary class="px-3 py-2 cursor-pointer font-medium text-slate-800">Generators</summary>
+          <div class="px-2 pb-2 space-y-1">
+            <a href="/ai-coloring-page-generator" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">AI Coloring Page Generator</a>
+            <a href="/photo-to-coloring-page-converter" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">Photo to Coloring Page</a>
+            <a href="/photo-to-sketch" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">Photo to Sketch</a>
+            <a href="/coloring-book-generator" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">Coloring Book Generator</a>
             <a href="/generators" class="block px-2 py-1.5 rounded-lg bg-blue-50 text-blue-700 font-semibold">View All Generators</a>
             <a href="/prompt-generators" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">Prompt Generator Hub</a>
             <p class="px-2 pt-2 text-[11px] uppercase tracking-wide text-slate-500">Core</p>
             {% for item in nav_generators_core %}
-            <a href="{{ item.route_path }}" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">{{ item.title }}</a>
+            <a href="{{ item.route_path }}" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700 text-sm">{{ item.title.replace(' Coloring Page Generator', '').replace(' Generator', '') }}</a>
             {% endfor %}
             <p class="px-2 pt-2 text-[11px] uppercase tracking-wide text-slate-500">Prompts</p>
             {% for item in nav_generators_prompt %}
-            <a href="{{ item.route_path }}" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700">{{ item.title }}</a>
+            <a href="{{ item.route_path }}" class="block px-2 py-1.5 rounded-lg hover:bg-blue-50 text-slate-700 text-sm">{{ item.title.replace(' Prompt Generator', ' Prompts') }}</a>
             {% endfor %}
           </div>
         </details>
-        <a href="/library" class="block px-3 py-2 rounded-lg bg-white/80">Library</a>
-        <a href="/pricing" class="block px-3 py-2 rounded-lg bg-white/80">Pricing</a>
-        <a href="/blog" class="block px-3 py-2 rounded-lg bg-white/80">Blog</a>
         {% if current_user.is_authenticated %}
         <a href="/dashboard" class="block px-3 py-2 rounded-lg bg-white/80">Dashboard</a>
         {% endif %}
@@ -272,6 +415,32 @@
     if (mobileMenuBtn && mobileMenu) {
       mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     }
+
+    const desktopDropdowns = Array.from(document.querySelectorAll('[data-dropdown]'));
+    const closeDesktopDropdowns = () => desktopDropdowns.forEach((node) => node.classList.remove('open'));
+    desktopDropdowns.forEach((dropdown) => {
+      const trigger = dropdown.querySelector('[data-dropdown-trigger]');
+      if (!trigger) return;
+      trigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        const wasOpen = dropdown.classList.contains('open');
+        closeDesktopDropdowns();
+        if (!wasOpen) {
+          dropdown.classList.add('open');
+        }
+      });
+      trigger.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          dropdown.classList.remove('open');
+        }
+      });
+    });
+    document.addEventListener('click', (event) => {
+      if (!desktopDropdowns.some((dropdown) => dropdown.contains(event.target))) {
+        closeDesktopDropdowns();
+      }
+    });
+    window.addEventListener('scroll', closeDesktopDropdowns, { passive: true });
 
     const authModal = document.getElementById('auth-modal');
     const openAuthBtn = document.getElementById('open-auth-btn');

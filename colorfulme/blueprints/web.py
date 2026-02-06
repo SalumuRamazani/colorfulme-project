@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from urllib.parse import unquote
 
 from flask import Blueprint, abort, current_app, jsonify, render_template, request, send_file
 from flask_login import current_user, login_required
@@ -37,6 +38,16 @@ PROMPT_GENERATOR_ORDER = [
     '/prompt-generators/recraft-prompt-generator',
 ]
 
+FREE_COLORING_AGE_ORDER = [
+    '/free-coloring-pages/for-kids',
+    '/free-coloring-pages/for-teens',
+    '/free-coloring-pages/for-adults',
+    '/free-coloring-pages/for-seniors',
+    '/free-coloring-pages/for-toddlers',
+    '/free-coloring-pages/for-preschoolers',
+    '/free-coloring-pages/for-tweens',
+]
+
 
 def _published_tools():
     tools = [
@@ -63,6 +74,37 @@ def _ordered_subset(tools, ordered_paths):
     return tools
 
 
+def _published_free_coloring_categories():
+    entries = []
+    for entry in ProgrammaticService.get_entries_by_type('page'):
+        if entry.get('status') != 'published':
+            continue
+        route_path = str(entry.get('route_path', ''))
+        if not route_path.startswith('/free-coloring-pages/'):
+            continue
+        if route_path.count('/') != 2:
+            continue
+        entries.append(entry)
+
+    entries.sort(key=lambda item: (item.get('title') or '').lower())
+    return entries
+
+
+def _free_coloring_age_entries(entries):
+    by_path = {
+        entry.get('route_path'): entry
+        for entry in entries
+        if entry.get('route_path')
+    }
+    return [by_path[path] for path in FREE_COLORING_AGE_ORDER if path in by_path]
+
+
+def _free_coloring_theme_entries(entries):
+    age_paths = set(FREE_COLORING_AGE_ORDER)
+    theme_entries = [entry for entry in entries if entry.get('route_path') not in age_paths]
+    return theme_entries
+
+
 @web_bp.get('/health')
 def health_check():
     return jsonify({'status': 'ok', 'service': 'colorfulme'})
@@ -87,6 +129,37 @@ def library_page():
         entry for entry in ProgrammaticService.get_entries_by_type('library') if entry.get('status') == 'published'
     ]
     return render_template('library.html', items=items)
+
+
+@web_bp.get('/free-coloring-pages')
+def free_coloring_pages():
+    categories = _published_free_coloring_categories()
+    age_entries = _free_coloring_age_entries(categories)
+    theme_entries = _free_coloring_theme_entries(categories)
+    featured_themes = theme_entries[:30]
+    return render_template(
+        'free_coloring_pages.html',
+        age_entries=age_entries,
+        featured_themes=featured_themes,
+        all_categories=categories,
+    )
+
+
+@web_bp.get('/free-coloring-pages/<path:slug>')
+def free_coloring_category(slug: str):
+    cleaned_slug = unquote(slug).strip('/')
+    route_path = f'/free-coloring-pages/{cleaned_slug}'
+    entry = ProgrammaticService.get_published_index().get(route_path)
+    if not entry:
+        abort(404)
+
+    categories = _published_free_coloring_categories()
+    related = [item for item in categories if item.get('route_path') != route_path][:18]
+    return render_template(
+        'free_coloring_category.html',
+        entry=entry,
+        related_categories=related,
+    )
 
 
 @web_bp.get('/generators')
