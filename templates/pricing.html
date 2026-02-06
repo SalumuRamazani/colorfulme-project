@@ -1,368 +1,57 @@
 {% extends "base.html" %}
 
-{% block title %}Pricing - Remove Watermark | ReceiptMake{% endblock %}
-
-{% block meta %}
-<meta name="description" content="Choose your plan to unlock unlimited watermark-free receipts. Weekly, monthly, or lifetime access options available.">
-{% endblock %}
+{% block title %}Pricing | ColorfulMe{% endblock %}
+{% block description %}Freemium credits plus Starter, Pro, Studio, and Lifetime plans for ColorfulMe.{% endblock %}
 
 {% block content %}
-<script>
-// Track pricing page view
-if (typeof window !== 'undefined' && window.posthog) {
-    posthog.capture('pricing_page_viewed');
-}
-</script>
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+  <div class="text-center max-w-3xl mx-auto">
+    <h1 class="font-display text-4xl md:text-5xl font-bold">Simple Pricing, Built To Scale</h1>
+    <p class="mt-4 text-slate-600 text-lg">Start free with monthly credits, then unlock higher limits and throughput as you grow.</p>
+  </div>
 
-<div class="min-h-screen bg-white py-12 md:py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <!-- Header -->
-        <div class="text-center mb-12 md:mb-16">
-            <h1 class="text-3xl md:text-5xl font-bold text-neutral-900 mb-4">Remove watermark and enjoy unlimited receipts</h1>
-            <p class="text-lg md:text-xl text-neutral-600">Simple, transparent pricing. Cancel anytime.</p>
-        </div>
+  <div class="mt-10 grid md:grid-cols-2 xl:grid-cols-5 gap-5">
+    {% for plan in plans %}
+    <article class="glass rounded-2xl border border-blue-100 p-5 flex flex-col {% if plan.code == 'pro' %}ring-2 ring-blue-300{% endif %}">
+      <p class="text-xs uppercase tracking-wide text-slate-500">{{ plan.interval }}</p>
+      <h2 class="mt-2 font-display text-2xl font-bold text-slate-900">{{ plan.name }}</h2>
+      <p class="mt-2 text-sm text-slate-600">{{ plan.monthly_credits }} credits / cycle</p>
+      <p class="mt-4 font-display text-3xl font-bold text-blue-700">
+        {% if plan.price_cents == 0 %}
+        $0
+        {% else %}
+        ${{ '%.2f'|format(plan.price_cents / 100) }}
+        {% endif %}
+      </p>
 
-        <!-- Pricing Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
-            <!-- Weekly Plan -->
-            <div class="bg-white border border-neutral-200 rounded-xl overflow-hidden">
-                <!-- Badge -->
-                <div class="bg-blue-500 text-white text-center py-2 px-4 font-bold text-sm">
-                    MEGA SALE - 25% OFF
-                </div>
-                
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold text-blue-600 text-center mb-6">Weekly</h3>
-                    
-                    <div class="text-center mb-8">
-                        <div class="flex justify-center items-center gap-3 mb-2">
-                            <span class="text-4xl font-bold text-neutral-900">$4.50</span>
-                            <span class="text-neutral-500 line-through text-lg">$6</span>
-                        </div>
-                        <span class="text-neutral-600">/wk</span>
-                    </div>
-                    
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">No watermarks</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">Unlimited receipt downloads</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">100+ templates to choose from</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">Save your own templates</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">Unlimited customization</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">HD quality downloads (up to 1500px)</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">PDF export format</span>
-                        </li>
-                    </ul>
-                    
-                    <form action="/create-checkout-session" method="POST" x-data="{ loading: false }" @submit="loading = true; window.posthog && posthog.capture('plan_selected', { plan_type: 'weekly', price: '$4.50' })">
-                        <input type="hidden" name="plan_type" value="weekly">
-                        <button type="submit" :disabled="loading" :class="loading ? 'opacity-75 cursor-wait' : ''" class="btn-ripple w-full py-3 px-6 border-2 border-neutral-300 text-neutral-700 font-semibold rounded-lg hover:bg-neutral-50 transition-colors">
-                            <span x-show="!loading">Get started</span>
-                            <span x-show="loading" class="flex items-center justify-center gap-2">
-                                <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                                Processing...
-                            </span>
-                        </button>
-                    </form>
-                </div>
-            </div>
+      <ul class="mt-4 space-y-2 text-sm text-slate-600">
+        <li>PNG + PDF exports</li>
+        <li>Strict family-safe moderation</li>
+        <li>API-ready backend</li>
+      </ul>
 
-            <!-- Monthly Plan -->
-            <div class="bg-white border border-neutral-200 rounded-xl overflow-hidden">
-                <!-- Badge -->
-                <div class="bg-blue-500 text-white text-center py-2 px-4 font-bold text-sm">
-                    MEGA SALE - 25% OFF
-                </div>
-                
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold text-blue-600 text-center mb-6">Monthly</h3>
-                    
-                    <div class="text-center mb-8">
-                        <div class="flex justify-center items-center gap-3 mb-2">
-                            <span class="text-4xl font-bold text-neutral-900">$9</span>
-                            <span class="text-neutral-500 line-through text-lg">$12</span>
-                        </div>
-                        <span class="text-neutral-600">/mo</span>
-                    </div>
-                    
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">No watermarks</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">Unlimited receipt downloads</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">100+ templates to choose from</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">Save your own templates</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">Unlimited customization</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">HD quality downloads (up to 1500px)</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">PDF export format</span>
-                        </li>
-                    </ul>
-                    
-                    <form action="/create-checkout-session" method="POST" x-data="{ loading: false }" @submit="loading = true; window.posthog && posthog.capture('plan_selected', { plan_type: 'monthly', price: '$9' })">
-                        <input type="hidden" name="plan_type" value="monthly">
-                        <button type="submit" :disabled="loading" :class="loading ? 'opacity-75 cursor-wait' : ''" class="btn-ripple w-full py-3 px-6 border-2 border-neutral-300 text-neutral-700 font-semibold rounded-lg hover:bg-neutral-50 transition-colors">
-                            <span x-show="!loading">Get started</span>
-                            <span x-show="loading" class="flex items-center justify-center gap-2">
-                                <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                                Processing...
-                            </span>
-                        </button>
-                    </form>
-                </div>
-            </div>
+      <div class="mt-5">
+        {% if plan.code == 'free' %}
+        <a href="/create" class="block text-center px-4 py-2 rounded-xl btn-secondary font-semibold">Start Free</a>
+        {% else %}
+        <form method="POST" action="/create-checkout-session">
+          <input type="hidden" name="plan_code" value="{{ plan.code }}">
+          <button type="submit" class="w-full px-4 py-2 rounded-xl btn-primary font-semibold">Choose {{ plan.name }}</button>
+        </form>
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
 
-            <!-- Lifetime Plan (Best Value - replaces Yearly) -->
-            <div class="bg-white border-2 border-blue-600 rounded-xl overflow-hidden shadow-xl">
-                <!-- Limited Time Badge -->
-                <div class="bg-amber-500 text-white text-center py-2 px-4 font-bold text-sm">
-                    LIMITED TIME
-                </div>
-                
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold text-blue-600 text-center mb-2">Lifetime</h3>
-                    <p class="text-neutral-500 text-center text-sm mb-4">Pay once, use forever</p>
-                    
-                    <div class="text-center mb-8">
-                        <div class="flex justify-center items-center gap-3 mb-2">
-                            <span class="text-5xl font-bold text-neutral-900">$25</span>
-                            <span class="text-neutral-500 line-through text-xl">$97</span>
-                        </div>
-                        <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">one-time payment</span>
-                    </div>
-                    
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700"><strong>No watermarks</strong> - ever</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700"><strong>Unlimited</strong> receipt downloads</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700"><strong>100+</strong> templates to choose from</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">Save your own templates</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700"><strong>Lifetime</strong> updates included</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">HD quality downloads (up to 1500px)</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                            <span class="text-neutral-700">PDF export format</span>
-                        </li>
-                    </ul>
-                    
-                    <!-- Scarcity element removed -->
-                    
-                    <form action="/create-checkout-session" method="POST" x-data="{ loading: false }" @submit="loading = true; window.posthog && posthog.capture('plan_selected', { plan_type: 'lifetime', price: '$25' })">
-                        <input type="hidden" name="plan_type" value="lifetime">
-                        <button type="submit" :disabled="loading" :class="loading ? 'opacity-75 cursor-wait' : ''" class="btn-ripple w-full py-3 px-6 border-2 border-neutral-300 text-neutral-700 font-semibold rounded-lg hover:bg-neutral-50 transition-colors">
-                            <span x-show="!loading">Get started</span>
-                            <span x-show="loading" class="flex items-center justify-center gap-2">
-                                <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                                Processing...
-                            </span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Reassurance & Terms -->
-        <div class="text-center mt-12 space-y-4">
-            <div class="flex items-center justify-center gap-8 text-sm text-neutral-600">
-                <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                    </svg>
-                    <span>Secure Payment</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                    </svg>
-                    <span>Cancel Anytime</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                    </svg>
-                    <span>Instant Access</span>
-                </div>
-            </div>
-            <div class="text-sm text-neutral-600">
-                By clicking 'Get started', I agree to the <a href="{{ url_for('terms') }}" class="text-blue-600 hover:underline">Terms of Service</a>.
-            </div>
-        </div>
+  <div class="mt-10 glass rounded-2xl border border-blue-100 p-6 text-sm text-slate-600">
+    <h3 class="font-display text-xl font-bold text-slate-900">Credit Costs</h3>
+    <div class="mt-3 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div class="rounded-xl border border-slate-200 bg-white p-3">Text generation: <strong>1</strong></div>
+      <div class="rounded-xl border border-slate-200 bg-white p-3">Photo conversion: <strong>2</strong></div>
+      <div class="rounded-xl border border-slate-200 bg-white p-3">Recolor transform: <strong>1</strong></div>
+      <div class="rounded-xl border border-slate-200 bg-white p-3">PDF export: <strong>0</strong></div>
     </div>
-</div>
-
-<script>
-// If user has a pending receipt from "Remove Watermark" flow and they're browsing pricing,
-// auto-save it to their account (in case they decide not to upgrade now)
-document.addEventListener('DOMContentLoaded', function() {
-    const pendingSaveData = sessionStorage.getItem('pending_template_save');
-    if (!pendingSaveData) {
-        return;
-    }
-    
-    try {
-        const pendingSave = JSON.parse(pendingSaveData);
-        
-        // Only handle remove_watermark intents
-        if (pendingSave.intent !== 'remove_watermark') {
-            return;
-        }
-        
-        // NOTE: Receipt is now stored server-side via /api/store-pending-receipt
-        // No need to populate forms - the backend already has it in the Flask session
-        console.log('Pending receipt detected (already stored server-side)');
-        
-        // Check if user is authenticated - if so, save the receipt silently
-        fetch('/api/user-status')
-            .then(r => r.json())
-            .then(data => {
-                if (data.authenticated && pendingSave.config) {
-                    // User is logged in, save their receipt automatically
-                    console.log('User is authenticated, auto-saving receipt...');
-                    saveReceipt(pendingSave);
-                } else {
-                    console.log('User not authenticated, receipt will save after checkout');
-                }
-            })
-            .catch(err => {
-                console.error('Error checking auth status:', err);
-                // If auth check fails, receipt will still save after checkout
-            });
-    } catch (error) {
-        console.error('Error processing pending receipt on pricing page:', error);
-    }
-});
-
-async function saveReceipt(pendingSave) {
-    try {
-        const response = await fetch('/api/templates', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: pendingSave.name,
-                description: pendingSave.description || '',
-                template_type: 'custom',
-                config_json: pendingSave.config
-            })
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            // Clear the pending save since it's now saved
-            sessionStorage.removeItem('pending_template_save');
-            console.log('Receipt auto-saved to account');
-        }
-    } catch (error) {
-        console.error('Error saving receipt:', error);
-    }
-}
-</script>
-
+  </div>
+</section>
 {% endblock %}

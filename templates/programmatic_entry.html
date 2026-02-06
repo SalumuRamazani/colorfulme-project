@@ -1,73 +1,68 @@
 {% extends "base.html" %}
 
-{% block title %}{{ entry.title }}{% endblock %}
+{% block title %}{{ entry.title }} | ColorfulMe{% endblock %}
 {% block description %}{{ entry.meta_description or entry.intro or entry.title }}{% endblock %}
 
 {% block content %}
-<section class="bg-gradient-to-b from-blue-50 to-white border-b-2 border-gray-900">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <p class="text-xs font-bold uppercase tracking-wider text-gray-600 mb-4">
-            {{ "Tool" if entry.entry_type == "tool" else "Page" }}
-        </p>
-        <h1 class="text-3xl md:text-5xl font-black text-gray-900 leading-tight">{{ entry.h1 }}</h1>
-        {% if entry.intro %}
-        <p class="mt-5 text-lg text-gray-700 max-w-3xl">{{ entry.intro }}</p>
-        {% endif %}
+<section class="border-b border-blue-100">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+    <span class="chip rounded-full px-3 py-1 text-xs font-semibold uppercase">{{ entry.entry_type }}</span>
+    <h1 class="mt-4 font-display text-4xl md:text-5xl font-bold leading-tight">{{ entry.h1 or entry.title }}</h1>
+    {% if entry.intro %}
+    <p class="mt-4 text-lg text-slate-600">{{ entry.intro }}</p>
+    {% endif %}
 
-        <div class="mt-8 flex flex-wrap gap-3">
-            {% if entry.primary_cta_label and entry.primary_cta_url %}
-            <a href="{{ entry.primary_cta_url }}" class="px-6 py-3 bg-[#2563EB] text-white font-bold border-2 border-gray-900 shadow-[3px_3px_0_0_#000000] hover:shadow-[1px_1px_0_0_#000000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
-                {{ entry.primary_cta_label }}
-            </a>
-            {% elif entry.entry_type == "tool" and entry.generator_slug %}
-            <a href="/generate-{{ entry.generator_slug }}-receipt" class="px-6 py-3 bg-[#2563EB] text-white font-bold border-2 border-gray-900 shadow-[3px_3px_0_0_#000000] hover:shadow-[1px_1px_0_0_#000000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
-                Open Tool
-            </a>
-            {% endif %}
-
-            {% if entry.secondary_cta_label and entry.secondary_cta_url %}
-            <a href="{{ entry.secondary_cta_url }}" class="px-6 py-3 bg-white text-gray-900 font-bold border-2 border-gray-900 shadow-[3px_3px_0_0_#000000] hover:shadow-[1px_1px_0_0_#000000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
-                {{ entry.secondary_cta_label }}
-            </a>
-            {% endif %}
-        </div>
+    <div class="mt-6 flex flex-wrap gap-3">
+      {% if entry.primary_cta_label and entry.primary_cta_url %}
+      <a href="{{ entry.primary_cta_url }}" class="px-5 py-3 rounded-xl btn-primary font-semibold">{{ entry.primary_cta_label }}</a>
+      {% endif %}
+      {% if entry.secondary_cta_label and entry.secondary_cta_url %}
+      <a href="{{ entry.secondary_cta_url }}" class="px-5 py-3 rounded-xl btn-secondary font-semibold">{{ entry.secondary_cta_label }}</a>
+      {% endif %}
     </div>
+  </div>
 </section>
 
-<section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    {% if entry.body_paragraphs %}
-    <div class="space-y-5 text-gray-700 leading-relaxed text-lg">
-        {% for paragraph in entry.body_paragraphs %}
-        <p>{{ paragraph }}</p>
-        {% endfor %}
+<section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-8">
+  {% if entry.image_url %}
+  <div class="glass rounded-2xl border border-blue-100 p-3">
+    <div class="aspect-[16/9] overflow-hidden rounded-xl bg-slate-100">
+      <img src="{{ entry.image_url }}" alt="{{ entry.title }}" class="w-full h-full object-cover" loading="lazy">
     </div>
-    {% endif %}
+  </div>
+  {% endif %}
 
-    {% if entry.feature_bullets %}
-    <div class="mt-10 bg-white border-2 border-gray-900 rounded-lg p-6 shadow-[3px_3px_0_0_#000000]">
-        <h2 class="text-2xl font-black text-gray-900 mb-4">Key Features</h2>
-        <ul class="space-y-2 text-gray-700">
-            {% for feature in entry.feature_bullets %}
-            <li class="flex items-start gap-2"><span class="font-black">•</span><span>{{ feature }}</span></li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
+  {% if entry.body_paragraphs %}
+  <div class="space-y-4 text-slate-700 leading-relaxed text-lg">
+    {% for paragraph in entry.body_paragraphs %}
+    <p>{{ paragraph }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
 
-    {% if entry.faq %}
-    <div class="mt-10">
-        <h2 class="text-2xl font-black text-gray-900 mb-5">FAQ</h2>
-        <div class="space-y-4">
-            {% for faq_item in entry.faq %}
-            <div class="bg-white border-2 border-gray-900 rounded-lg p-5 shadow-[3px_3px_0_0_#000000]">
-                <h3 class="font-bold text-gray-900">{{ faq_item.question }}</h3>
-                {% if faq_item.answer %}
-                <p class="mt-2 text-gray-700">{{ faq_item.answer }}</p>
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    {% endif %}
+  {% if entry.feature_bullets %}
+  <div class="glass rounded-2xl border border-blue-100 p-6">
+    <h2 class="font-display text-2xl font-bold">Highlights</h2>
+    <ul class="mt-4 space-y-2 text-slate-700">
+      {% for feature in entry.feature_bullets %}
+      <li>• {{ feature }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if entry.faq %}
+  <div class="space-y-4">
+    <h2 class="font-display text-2xl font-bold">FAQ</h2>
+    {% for item in entry.faq %}
+    <article class="glass rounded-2xl border border-blue-100 p-5">
+      <h3 class="font-semibold text-slate-900">{{ item.question }}</h3>
+      {% if item.answer %}
+      <p class="mt-2 text-slate-600">{{ item.answer }}</p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
 </section>
 {% endblock %}

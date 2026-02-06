@@ -1,93 +1,178 @@
 {
-  "version": 1,
+  "version": 2,
   "source_path": "content/programmatic_content.csv",
-  "generated_at": "2026-02-06T03:39:46.663226+00:00",
+  "generated_at": "2026-02-06T06:53:35.180122+00:00",
   "counts": {
-    "total": 2,
-    "pages": 1,
-    "tools": 1
+    "total": 4,
+    "pages": 2,
+    "tools": 1,
+    "library": 1
   },
   "entries": [
     {
       "entry_type": "page",
-      "route_path": "/walmart-receipt-template-guide",
-      "slug": "walmart-receipt-template-guide",
-      "title": "Walmart Receipt Template Guide",
-      "meta_description": "Learn how to customize and generate professional Walmart-style receipts quickly.",
-      "h1": "Walmart Receipt Template Guide",
-      "intro": "Use this page format for scalable programmatic SEO pages.",
+      "route_path": "/coloring-pages-for-kids",
+      "slug": "coloring-pages-for-kids",
+      "title": "Free Kids Coloring Pages (Printable)",
+      "meta_description": "Generate safe printable kids coloring pages in seconds.",
+      "h1": "Free Kids Coloring Pages",
+      "intro": "Create age-friendly line art with prompts and one-click export.",
       "intro_paragraphs": [
-        "Use this page format for scalable programmatic SEO pages."
+        "Create age-friendly line art with prompts and one-click export."
       ],
-      "body": "Add your store-specific copy, then run the generator to publish at scale.",
+      "body": "ColorfulMe helps parents and teachers generate printable coloring pages from text prompts with strict family-safe moderation. Download PNG and PDF instantly.",
       "body_paragraphs": [
-        "Add your store-specific copy, then run the generator to publish at scale."
+        "ColorfulMe helps parents and teachers generate printable coloring pages from text prompts with strict family-safe moderation. Download PNG and PDF instantly."
       ],
-      "primary_cta_label": "Generate Walmart Receipt",
-      "primary_cta_url": "/generate-walmart-receipt",
-      "secondary_cta_label": "View All Templates",
-      "secondary_cta_url": "/templates",
-      "generator_slug": "",
-      "template_slug": "Walmart-Receipt",
+      "primary_cta_label": "Start Creating",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "Browse Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "",
+      "image_url": "",
       "feature_bullets": [
-        "Single spreadsheet workflow",
-        "Bulk page generation",
-        "Built-in metadata support"
+        "Family-safe moderation",
+        "Printable PNG and PDF",
+        "Fast generation workflow"
       ],
       "faq": [
         {
-          "question": "Can I create 100+ pages from one sheet?",
-          "answer": "Yes. Add rows and rerun the generator."
+          "question": "Is this safe for kids?",
+          "answer": "Yes. Prompts are filtered with strict family-safe moderation."
         },
         {
-          "question": "Does this replace hardcoded routes?",
-          "answer": "Yes, new rows become available through dynamic routing."
+          "question": "Can I print at home?",
+          "answer": "Yes, every page can be downloaded as PDF for printing."
         }
       ],
       "tags": [
-        "programmatic",
-        "seo",
-        "receipt"
+        "kids",
+        "coloring pages",
+        "printable"
       ],
       "status": "published",
       "updated_at": "2026-02-06"
     },
     {
       "entry_type": "tool",
-      "route_path": "/tools/walmart-receipt-generator",
-      "slug": "walmart-receipt-generator",
-      "title": "Walmart Receipt Generator Tool",
-      "meta_description": "Generate Walmart-style receipts online with editable fields and instant PDF export.",
-      "h1": "Walmart Receipt Generator",
-      "intro": "Tool pages can point users to existing receipt generators.",
+      "route_path": "/tools/ai-coloring-page-generator",
+      "slug": "ai-coloring-page-generator",
+      "title": "AI Coloring Page Generator Tool",
+      "meta_description": "Generate black-and-white coloring pages from any prompt.",
+      "h1": "AI Coloring Page Generator",
+      "intro": "Use this tool to convert ideas into clean line art.",
       "intro_paragraphs": [
-        "Tool pages can point users to existing receipt generators."
+        "Use this tool to convert ideas into clean line art."
       ],
-      "body": "Use this entry type to scale tool landing pages from the same sheet.",
+      "body": "Enter your prompt, choose style and aspect ratio, then generate, download, and print in seconds.",
       "body_paragraphs": [
-        "Use this entry type to scale tool landing pages from the same sheet."
+        "Enter your prompt, choose style and aspect ratio, then generate, download, and print in seconds."
       ],
       "primary_cta_label": "Open Generator",
-      "primary_cta_url": "/generate-walmart-receipt",
+      "primary_cta_url": "/create",
       "secondary_cta_label": "See Pricing",
       "secondary_cta_url": "/pricing",
-      "generator_slug": "walmart",
-      "template_slug": "Walmart-Receipt",
+      "generation_seed_prompt": "A friendly dinosaur in a park with balloons",
+      "image_url": "",
       "feature_bullets": [
-        "Tool-specific CTAs",
-        "Reusable dynamic template",
-        "Spreadsheet-controlled publishing"
+        "Prompt-based creation",
+        "Multiple aspect ratios",
+        "Credit-aware generation"
       ],
       "faq": [
         {
-          "question": "How does tool routing work?",
-          "answer": "Set route_path in the sheet and it becomes live after generation."
+          "question": "How many credits does text generation use?",
+          "answer": "Text generation uses 1 credit."
+        },
+        {
+          "question": "Can I use this for classrooms?",
+          "answer": "Yes, it is built for home and classroom use."
         }
       ],
       "tags": [
         "tool",
-        "receipt",
-        "walmart"
+        "ai",
+        "coloring"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "library",
+      "route_path": "/library/cute-space-cat-coloring-page",
+      "slug": "cute-space-cat-coloring-page",
+      "title": "Cute Space Cat Coloring Page",
+      "meta_description": "Printable space-cat coloring sheet generated with ColorfulMe.",
+      "h1": "Cute Space Cat Coloring Page",
+      "intro": "A ready-to-print coloring page for kids who love space and cats.",
+      "intro_paragraphs": [
+        "A ready-to-print coloring page for kids who love space and cats."
+      ],
+      "body": "Download this line-art page as PNG or PDF, or remix it with your own prompts inside ColorfulMe.",
+      "body_paragraphs": [
+        "Download this line-art page as PNG or PDF, or remix it with your own prompts inside ColorfulMe."
+      ],
+      "primary_cta_label": "Create Similar",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "View Library",
+      "secondary_cta_url": "/library",
+      "generation_seed_prompt": "cute cat astronaut floating near stars",
+      "image_url": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131",
+      "feature_bullets": [
+        "Printable quality output",
+        "Optimized line clarity",
+        "Remix in one click"
+      ],
+      "faq": [
+        {
+          "question": "Can I remix this page?",
+          "answer": "Yes, use the Create flow and change the prompt/style."
+        }
+      ],
+      "tags": [
+        "library",
+        "coloring sheet",
+        "cat"
+      ],
+      "status": "published",
+      "updated_at": "2026-02-06"
+    },
+    {
+      "entry_type": "page",
+      "route_path": "/blog/how-to-turn-photos-into-coloring-pages",
+      "slug": "how-to-turn-photos-into-coloring-pages",
+      "title": "How To Turn Photos Into Coloring Pages",
+      "meta_description": "Step-by-step guide to convert photos into printable coloring pages.",
+      "h1": "How To Turn Photos Into Coloring Pages",
+      "intro": "Learn how to convert your own photos into clean outlines.",
+      "intro_paragraphs": [
+        "Learn how to convert your own photos into clean outlines."
+      ],
+      "body": "Use Photo mode in ColorfulMe to upload any image, automatically simplify edges, and export print-ready PDF pages in minutes.",
+      "body_paragraphs": [
+        "Use Photo mode in ColorfulMe to upload any image, automatically simplify edges, and export print-ready PDF pages in minutes."
+      ],
+      "primary_cta_label": "Try Photo Mode",
+      "primary_cta_url": "/create",
+      "secondary_cta_label": "See More Guides",
+      "secondary_cta_url": "/blog",
+      "generation_seed_prompt": "",
+      "image_url": "",
+      "feature_bullets": [
+        "Photo-to-outline conversion",
+        "Instant download",
+        "Beginner friendly"
+      ],
+      "faq": [
+        {
+          "question": "Do I need design skills?",
+          "answer": "No, ColorfulMe handles conversion automatically."
+        }
+      ],
+      "tags": [
+        "blog",
+        "guide",
+        "photo"
       ],
       "status": "published",
       "updated_at": "2026-02-06"
