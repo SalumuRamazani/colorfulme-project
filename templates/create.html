@@ -111,111 +111,179 @@
 
 {% block scripts %}
 <script>
-  const modeButtons = document.querySelectorAll('.mode-btn');
-  const sourceWrap = document.getElementById('source-wrap');
-  const statusEl = document.getElementById('generator-status');
-  const generateBtn = document.getElementById('generate-btn');
-  const resultEmpty = document.getElementById('result-empty');
-  const resultCard = document.getElementById('result-card');
-  const resultImage = document.getElementById('result-image');
-  const downloadPng = document.getElementById('download-png');
-  const downloadPdf = document.getElementById('download-pdf');
-  const resultMeta = document.getElementById('result-meta');
+  (() => {
+    const modeButtons = document.querySelectorAll('.mode-btn');
+    const sourceWrap = document.getElementById('source-wrap');
+    const generatorStatusEl = document.getElementById('generator-status');
+    const generateBtn = document.getElementById('generate-btn');
+    const resultEmpty = document.getElementById('result-empty');
+    const resultCard = document.getElementById('result-card');
+    const resultImage = document.getElementById('result-image');
+    const downloadPng = document.getElementById('download-png');
+    const downloadPdf = document.getElementById('download-pdf');
+    const resultMeta = document.getElementById('result-meta');
+    const authModal = document.getElementById('auth-modal');
 
-  let currentMode = 'text';
-
-  function setMode(mode) {
-    currentMode = mode;
-    modeButtons.forEach((btn) => {
-      const active = btn.dataset.modeBtn === mode;
-      btn.classList.toggle('bg-blue-50', active);
-      btn.classList.toggle('text-blue-700', active);
-      btn.classList.toggle('border-blue-200', active);
-      btn.classList.toggle('bg-white', !active);
-      btn.classList.toggle('text-slate-600', !active);
-      btn.classList.toggle('border-slate-200', !active);
-    });
-    sourceWrap.classList.toggle('hidden', mode === 'text');
-  }
-
-  modeButtons.forEach((btn) => {
-    btn.addEventListener('click', () => setMode(btn.dataset.modeBtn));
-  });
-
-  async function loadBlobAsDataURL(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  }
-
-  async function generate() {
-    const prompt = document.getElementById('prompt').value.trim();
-    const style = document.getElementById('style').value;
-    const aspectRatio = document.getElementById('aspect-ratio').value;
-    const difficulty = document.getElementById('difficulty').value;
-    const qualityProfile = document.getElementById('quality-profile').value;
-
-    const payload = {
-      prompt,
-      style,
-      aspect_ratio: aspectRatio,
-      difficulty,
-      quality_profile: qualityProfile,
-    };
-
-    if (currentMode !== 'text') {
-      const sourceFile = document.getElementById('source-image').files[0];
-      if (sourceFile) {
-        payload.source_image_base64 = await loadBlobAsDataURL(sourceFile);
-      }
+    if (!generateBtn || !generatorStatusEl) {
+      return;
     }
 
-    statusEl.textContent = 'Generating...';
-    generateBtn.disabled = true;
-    generateBtn.classList.add('opacity-70');
+    let currentMode = 'text';
+    let authKnown = false;
+    let isAuthenticated = false;
 
-    try {
-      const response = await fetch(`/api/v1/generations/${currentMode}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+    function openAuthModal() {
+      if (authModal) authModal.classList.add('open');
+    }
+
+    function setMode(mode) {
+      currentMode = mode;
+      modeButtons.forEach((btn) => {
+        const active = btn.dataset.modeBtn === mode;
+        btn.classList.toggle('bg-blue-50', active);
+        btn.classList.toggle('text-blue-700', active);
+        btn.classList.toggle('border-blue-200', active);
+        btn.classList.toggle('bg-white', !active);
+        btn.classList.toggle('text-slate-600', !active);
+        btn.classList.toggle('border-slate-200', !active);
       });
-
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.error || data.job?.error_message || 'Generation failed');
-      }
-
-      if (!data.job || !data.job.asset) {
-        throw new Error('Generation did not return an asset');
-      }
-
-      const asset = data.job.asset;
-      resultImage.src = asset.png_url;
-      downloadPng.href = `/api/v1/assets/${asset.asset_id}/download?format=png`;
-      downloadPdf.href = `/api/v1/assets/${asset.asset_id}/download?format=pdf`;
-      const render = data.render || {};
-      const renderSummary = [render.profile, render.model, render.quality].filter(Boolean).join(' • ');
-      resultMeta.textContent = `Job ${data.job_id} • ${data.status} • Credits used: ${data.credits_used}${renderSummary ? ` • ${renderSummary}` : ''}`;
-
-      resultEmpty.classList.add('hidden');
-      resultCard.classList.remove('hidden');
-      statusEl.textContent = 'Done. Your coloring page is ready.';
-    } catch (error) {
-      statusEl.textContent = error.message;
-      if (error.message.toLowerCase().includes('authentication')) {
-        const modal = document.getElementById('auth-modal');
-        if (modal) modal.classList.add('open');
-      }
-    } finally {
-      generateBtn.disabled = false;
-      generateBtn.classList.remove('opacity-70');
+      sourceWrap.classList.toggle('hidden', mode === 'text');
     }
-  }
 
-  generateBtn.addEventListener('click', generate);
+    modeButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setMode(btn.dataset.modeBtn));
+    });
+
+    async function loadBlobAsDataURL(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function safeJSON(response) {
+      try {
+        return await response.json();
+      } catch (_err) {
+        return null;
+      }
+    }
+
+    async function refreshAuthState() {
+      try {
+        const response = await fetch('/api/v1/me', { headers: { Accept: 'application/json' } });
+        const data = await safeJSON(response);
+        authKnown = true;
+        isAuthenticated = Boolean(data && data.authenticated);
+      } catch (_err) {
+        authKnown = true;
+        isAuthenticated = false;
+      }
+      return isAuthenticated;
+    }
+
+    async function ensureAuthenticated({ openModalOnFail = true } = {}) {
+      if (!authKnown) {
+        await refreshAuthState();
+      }
+      if (isAuthenticated) {
+        return true;
+      }
+      generatorStatusEl.textContent = 'Sign in to generate pages.';
+      if (openModalOnFail) {
+        openAuthModal();
+      }
+      return false;
+    }
+
+    async function generate() {
+      const canGenerate = await ensureAuthenticated({ openModalOnFail: true });
+      if (!canGenerate) {
+        return;
+      }
+
+      const prompt = document.getElementById('prompt').value.trim();
+      const style = document.getElementById('style').value;
+      const aspectRatio = document.getElementById('aspect-ratio').value;
+      const difficulty = document.getElementById('difficulty').value;
+      const qualityProfile = document.getElementById('quality-profile').value;
+
+      const payload = {
+        prompt,
+        style,
+        aspect_ratio: aspectRatio,
+        difficulty,
+        quality_profile: qualityProfile,
+      };
+
+      if (currentMode !== 'text') {
+        const sourceFile = document.getElementById('source-image').files[0];
+        if (sourceFile) {
+          payload.source_image_base64 = await loadBlobAsDataURL(sourceFile);
+        }
+      }
+
+      generatorStatusEl.textContent = 'Generating...';
+      generateBtn.disabled = true;
+      generateBtn.classList.add('opacity-70');
+
+      try {
+        const response = await fetch(`/api/v1/generations/${currentMode}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await safeJSON(response);
+
+        if (response.status === 401) {
+          authKnown = true;
+          isAuthenticated = false;
+          generatorStatusEl.textContent = 'Sign in to generate pages.';
+          openAuthModal();
+          return;
+        }
+
+        if (!response.ok) {
+          const fallback = `Generation failed (HTTP ${response.status})`;
+          throw new Error((data && (data.error || (data.job && data.job.error_message))) || fallback);
+        }
+
+        if (!data || !data.job || !data.job.asset) {
+          throw new Error('Generation did not return an asset');
+        }
+
+        const asset = data.job.asset;
+        resultImage.src = asset.png_url;
+        downloadPng.href = `/api/v1/assets/${asset.asset_id}/download?format=png`;
+        downloadPdf.href = `/api/v1/assets/${asset.asset_id}/download?format=pdf`;
+        const render = data.render || {};
+        const renderSummary = [render.profile, render.model, render.quality].filter(Boolean).join(' • ');
+        resultMeta.textContent = `Job ${data.job_id} • ${data.status} • Credits used: ${data.credits_used}${renderSummary ? ` • ${renderSummary}` : ''}`;
+
+        resultEmpty.classList.add('hidden');
+        resultCard.classList.remove('hidden');
+        generatorStatusEl.textContent = 'Done. Your coloring page is ready.';
+      } catch (error) {
+        const message = (error && error.message) ? error.message : 'Generation failed';
+        generatorStatusEl.textContent = message;
+        if (message.toLowerCase().includes('authentication')) {
+          openAuthModal();
+        }
+      } finally {
+        generateBtn.disabled = false;
+        generateBtn.classList.remove('opacity-70');
+      }
+    }
+
+    generateBtn.addEventListener('click', generate);
+    refreshAuthState().then((authed) => {
+      if (!authed) {
+        generatorStatusEl.textContent = 'Sign in to generate pages.';
+      }
+    });
+  })();
 </script>
 {% endblock %}

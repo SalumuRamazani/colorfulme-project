@@ -445,7 +445,7 @@
     const authModal = document.getElementById('auth-modal');
     const openAuthBtn = document.getElementById('open-auth-btn');
     const closeAuthBtn = document.getElementById('close-auth-btn');
-    const statusEl = document.getElementById('auth-status');
+    const authStatusEl = document.getElementById('auth-status');
 
     if (openAuthBtn && authModal) {
       openAuthBtn.addEventListener('click', () => authModal.classList.add('open'));
@@ -472,13 +472,13 @@
     if (sendCodeBtn) {
       sendCodeBtn.addEventListener('click', async () => {
         const email = document.getElementById('auth-email').value;
-        statusEl.textContent = 'Sending code...';
+        authStatusEl.textContent = 'Sending code...';
         try {
           const { ok, data } = await postJSON('/auth/email/send-code', { email });
           if (!ok) throw new Error(data.error || 'Failed to send code');
-          statusEl.textContent = data.code ? `Code sent. Dev code: ${data.code}` : 'Code sent. Check your inbox.';
+          authStatusEl.textContent = data.code ? `Code sent. Dev code: ${data.code}` : 'Code sent. Check your inbox.';
         } catch (err) {
-          statusEl.textContent = err.message;
+          authStatusEl.textContent = err.message;
         }
       });
     }
@@ -488,14 +488,14 @@
       verifyCodeBtn.addEventListener('click', async () => {
         const email = document.getElementById('auth-email').value;
         const code = document.getElementById('auth-code').value;
-        statusEl.textContent = 'Verifying...';
+        authStatusEl.textContent = 'Verifying...';
         try {
           const { ok, data } = await postJSON('/auth/email/verify-code', { email, code });
           if (!ok) throw new Error(data.error || 'Verification failed');
-          statusEl.textContent = 'Signed in. Reloading...';
+          authStatusEl.textContent = 'Signed in. Reloading...';
           window.location.reload();
         } catch (err) {
-          statusEl.textContent = err.message;
+          authStatusEl.textContent = err.message;
         }
       });
     }
