@@ -27,6 +27,9 @@ def test_text_generation_success(client, login_user):
     data = response.get_json()
     assert data['status'] == 'completed'
     assert data['job']['asset']['asset_id']
+    assert data['render']['profile'] == 'economy'
+    assert data['render']['model']
+    assert data['render']['quality']
 
 
 def test_blocked_prompt_returns_blocked_status(client, login_user):
@@ -42,7 +45,9 @@ def test_blocked_prompt_returns_blocked_status(client, login_user):
         },
     )
     assert response.status_code == 422
-    assert response.get_json()['status'] == 'blocked'
+    payload = response.get_json()
+    assert payload['status'] == 'blocked'
+    assert payload['render']['profile'] == 'economy'
 
 
 def test_photo_generation_success(client, login_user):
@@ -61,3 +66,22 @@ def test_photo_generation_success(client, login_user):
     assert response.status_code == 200
     data = response.get_json()
     assert data['status'] == 'completed'
+    assert data['render']['profile'] == 'economy'
+
+
+def test_explicit_premium_quality_profile(client, login_user):
+    login_user('premium@example.com')
+
+    response = client.post(
+        '/api/v1/generations/text',
+        json={
+            'prompt': 'A castle on clouds',
+            'style': 'storybook',
+            'aspect_ratio': '1:1',
+            'difficulty': 'detailed',
+            'quality_profile': 'premium',
+        },
+    )
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['render']['profile'] == 'premium'

@@ -133,6 +133,7 @@ def _handle_generation(mode: str):
         style=(payload.get('style') or '').strip() or None,
         aspect_ratio=(payload.get('aspect_ratio') or '1:1').strip(),
         difficulty=(payload.get('difficulty') or 'standard').strip(),
+        quality_profile=(payload.get('quality_profile') or 'auto').strip(),
         source_image_bytes=source_image,
     )
 
@@ -148,6 +149,12 @@ def _handle_generation(mode: str):
                 'job_id': result.job.id,
                 'status': result.job.status,
                 'credits_used': result.credits_used,
+                'render': {
+                    'profile': result.render_profile,
+                    'model': result.render_model,
+                    'quality': result.render_quality,
+                    'estimated_cost_usd': result.estimated_cost_usd,
+                },
                 'job': _serialize_job(result.job),
             }
         ),

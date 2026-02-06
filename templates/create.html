@@ -34,7 +34,7 @@
           <p class="mt-1 text-xs text-slate-500">Used in Photo mode and optional in Recolor mode.</p>
         </div>
 
-        <div class="grid sm:grid-cols-3 gap-3">
+        <div class="grid sm:grid-cols-4 gap-3">
           <div>
             <label for="style" class="text-sm font-medium text-slate-700">Style</label>
             <select id="style" class="mt-2 w-full rounded-xl border border-slate-300 px-3 py-2">
@@ -60,6 +60,15 @@
               <option value="easy">Easy</option>
               <option value="standard">Standard</option>
               <option value="detailed">Detailed</option>
+            </select>
+          </div>
+          <div>
+            <label for="quality-profile" class="text-sm font-medium text-slate-700">Quality / Cost</label>
+            <select id="quality-profile" class="mt-2 w-full rounded-xl border border-slate-300 px-3 py-2">
+              <option value="auto">Auto (Best Margin)</option>
+              <option value="economy">Economy</option>
+              <option value="balanced">Balanced</option>
+              <option value="premium">Premium</option>
             </select>
           </div>
         </div>
@@ -92,6 +101,7 @@
           <li>Photo conversion: <strong>2 credits</strong></li>
           <li>Recolor transform: <strong>1 credit</strong></li>
           <li>PDF download: <strong>0 credits</strong></li>
+          <li>Auto profile: <strong>profit-optimized by plan</strong></li>
         </ul>
       </div>
     </div>
@@ -146,12 +156,14 @@
     const style = document.getElementById('style').value;
     const aspectRatio = document.getElementById('aspect-ratio').value;
     const difficulty = document.getElementById('difficulty').value;
+    const qualityProfile = document.getElementById('quality-profile').value;
 
     const payload = {
       prompt,
       style,
       aspect_ratio: aspectRatio,
       difficulty,
+      quality_profile: qualityProfile,
     };
 
     if (currentMode !== 'text') {
@@ -185,7 +197,9 @@
       resultImage.src = asset.png_url;
       downloadPng.href = `/api/v1/assets/${asset.asset_id}/download?format=png`;
       downloadPdf.href = `/api/v1/assets/${asset.asset_id}/download?format=pdf`;
-      resultMeta.textContent = `Job ${data.job_id} • ${data.status} • Credits used: ${data.credits_used}`;
+      const render = data.render || {};
+      const renderSummary = [render.profile, render.model, render.quality].filter(Boolean).join(' • ');
+      resultMeta.textContent = `Job ${data.job_id} • ${data.status} • Credits used: ${data.credits_used}${renderSummary ? ` • ${renderSummary}` : ''}`;
 
       resultEmpty.classList.add('hidden');
       resultCard.classList.remove('hidden');

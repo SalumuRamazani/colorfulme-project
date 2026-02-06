@@ -21,6 +21,15 @@ ColorfulMe is a Flask-based AI coloring page platform that generates printable l
 - OpenAI image generation (with local fallback in development)
 - Tailwind CSS for styling
 
+## Quality + Margin Optimizer
+- `quality_profile` supports `auto`, `economy`, `balanced`, `premium`.
+- `auto` is plan-aware:
+  - `free` / `starter` defaults to `economy` for better margins.
+  - `pro` / `studio` / `lifetime` defaults to `balanced`.
+  - `detailed` jobs on paid plans can auto-upgrade to `premium`.
+- Per-profile model + quality are configurable via env vars (`OPENAI_MODEL_*`, `OPENAI_QUALITY_*`).
+- Generation responses now include selected render settings and estimated per-image model cost when available.
+
 ## Quick Start
 1. Create a virtual environment and install dependencies:
    ```bash
@@ -62,6 +71,15 @@ ColorfulMe is a Flask-based AI coloring page platform that generates printable l
 - `POST /api/v1/developer/keys`
 - `GET /api/v1/developer/keys`
 - `DELETE /api/v1/developer/keys/<key_id>`
+
+### Generation Payload
+- Common request fields:
+  - `prompt`
+  - `style`
+  - `aspect_ratio`
+  - `difficulty`
+  - `quality_profile` (`auto|economy|balanced|premium`)
+  - `source_image_base64` (for photo/recolor)
 
 ## Auth Routes
 - `GET /auth/google/start`
