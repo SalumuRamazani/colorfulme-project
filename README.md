@@ -49,8 +49,24 @@ ColorfulMe is a Flask-based AI coloring page platform that generates printable l
    ```bash
    python3 app.py
    ```
+   For local development with no login required:
+   ```bash
+   LOCAL_DEV_AUTO_LOGIN=true LOCAL_DEV_UNLIMITED_CREDITS=true python3 app.py
+   ```
+   Or use:
+   ```bash
+   ./run_dev.sh
+   ```
 5. Open:
    - `http://127.0.0.1:5003/`
+
+## Local No-Login Dev Mode
+- `LOCAL_DEV_AUTO_LOGIN=true` auto-authenticates a deterministic local user on every request.
+- `LOCAL_DEV_UNLIMITED_CREDITS=true` disables credit debit for that local dev user.
+- Optional identity overrides:
+  - `LOCAL_DEV_AUTO_LOGIN_EMAIL=local-dev@colorfulme.app`
+  - `LOCAL_DEV_AUTO_LOGIN_NAME=Local Dev`
+- Safety guard: local auto-login is rejected unless `DEBUG=true` or `TESTING=true`.
 
 ## Programmatic SEO Workflow
 - Edit `content/programmatic_content.csv`

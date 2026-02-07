@@ -24,6 +24,25 @@ class AuthService:
     def __init__(self):
         self.secret = current_app.config['SECRET_KEY']
 
+    def ensure_local_dev_user(self) -> User:
+        email = self._normalize_email(current_app.config.get('LOCAL_DEV_AUTO_LOGIN_EMAIL') or 'local-dev@colorfulme.app')
+        display_name = (current_app.config.get('LOCAL_DEV_AUTO_LOGIN_NAME') or 'Local Dev').strip()[:120] or 'Local Dev'
+
+        user = User.query.filter_by(email=email).first()
+        if user is None:
+            user = User(email=email, display_name=display_name)
+            db.session.add(user)
+            db.session.flush()
+        elif not user.display_name:
+            user.display_name = display_name
+
+        user.last_login_at = utcnow()
+        db.session.commit()
+
+        ensure_free_subscription(user)
+        ensure_wallet_for_user(user)
+        return user
+
     def send_email_otp(self, email: str, ip_address: str | None = None) -> Optional[str]:
         normalized = self._normalize_email(email)
         if not EMAIL_RE.match(normalized):

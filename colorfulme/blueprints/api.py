@@ -27,38 +27,38 @@ def _bearer_token() -> str | None:
 
 
 def _authenticate(require_user: bool = False):
+    token = _bearer_token()
+    if token:
+        key_hash = hash_token(token)
+        api_key = ApiKey.query.filter_by(key_hash=key_hash, is_active=True).first()
+        if not api_key:
+            return None, None, (jsonify({'error': 'Invalid API key'}), 401)
+
+        user = api_key.user
+        if user is None:
+            return None, None, (jsonify({'error': 'API key has no user'}), 401)
+
+        plan = get_active_plan(user)
+        rpm_limit = api_key.plan_rpm_override or plan.api_rpm
+        window_start = utcnow() - timedelta(minutes=1)
+        request_count = (
+            ApiUsageEvent.query.filter_by(api_key_id=api_key.id)
+            .filter(ApiUsageEvent.created_at >= window_start)
+            .count()
+        )
+        if request_count >= rpm_limit:
+            return None, None, (jsonify({'error': 'Rate limit exceeded'}), 429)
+
+        api_key.last_used_at = utcnow()
+        db.session.commit()
+        return user, api_key, None
+
     if current_user.is_authenticated:
         return current_user, None, None
 
-    token = _bearer_token()
-    if not token:
-        if require_user:
-            return None, None, (jsonify({'error': 'Authentication required'}), 401)
-        return None, None, None
-
-    key_hash = hash_token(token)
-    api_key = ApiKey.query.filter_by(key_hash=key_hash, is_active=True).first()
-    if not api_key:
-        return None, None, (jsonify({'error': 'Invalid API key'}), 401)
-
-    user = api_key.user
-    if user is None:
-        return None, None, (jsonify({'error': 'API key has no user'}), 401)
-
-    plan = get_active_plan(user)
-    rpm_limit = api_key.plan_rpm_override or plan.api_rpm
-    window_start = utcnow() - timedelta(minutes=1)
-    request_count = (
-        ApiUsageEvent.query.filter_by(api_key_id=api_key.id)
-        .filter(ApiUsageEvent.created_at >= window_start)
-        .count()
-    )
-    if request_count >= rpm_limit:
-        return None, None, (jsonify({'error': 'Rate limit exceeded'}), 429)
-
-    api_key.last_used_at = utcnow()
-    db.session.commit()
-    return user, api_key, None
+    if require_user:
+        return None, None, (jsonify({'error': 'Authentication required'}), 401)
+    return None, None, None
 
 
 def _record_usage(*, user, api_key, status_code: int, credits_used: int = 0):

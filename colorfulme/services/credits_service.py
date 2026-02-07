@@ -186,6 +186,13 @@ def debit_credits(user: User, amount: int, reason: str, reference_type: str = 'g
     if amount <= 0:
         return
 
+    local_dev_mode = bool(current_app.config.get('LOCAL_DEV_AUTO_LOGIN'))
+    local_dev_unlimited = bool(current_app.config.get('LOCAL_DEV_UNLIMITED_CREDITS', True))
+    local_dev_email = (current_app.config.get('LOCAL_DEV_AUTO_LOGIN_EMAIL') or '').strip().lower()
+    user_email = (getattr(user, 'email', '') or '').strip().lower()
+    if local_dev_mode and local_dev_unlimited and local_dev_email and user_email == local_dev_email:
+        return
+
     wallet = ensure_wallet_for_user(user)
     _refresh_cycle_if_needed(user, wallet)
 

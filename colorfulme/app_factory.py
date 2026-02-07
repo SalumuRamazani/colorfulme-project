@@ -3,6 +3,7 @@ import os
 from datetime import timedelta
 
 from flask import Flask
+from flask_login import current_user, login_user
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from extensions import db, login_manager
@@ -64,9 +65,15 @@ def create_app() -> Flask:
         GOOGLE_CLIENT_ID=os.getenv('GOOGLE_CLIENT_ID', ''),
         GOOGLE_CLIENT_SECRET=os.getenv('GOOGLE_CLIENT_SECRET', ''),
         GOOGLE_DEV_EMAIL=os.getenv('GOOGLE_DEV_EMAIL', 'demo@colorfulme.app'),
+        LOCAL_DEV_AUTO_LOGIN=_bool_env('LOCAL_DEV_AUTO_LOGIN', False),
+        LOCAL_DEV_AUTO_LOGIN_EMAIL=os.getenv('LOCAL_DEV_AUTO_LOGIN_EMAIL', 'local-dev@colorfulme.app'),
+        LOCAL_DEV_AUTO_LOGIN_NAME=os.getenv('LOCAL_DEV_AUTO_LOGIN_NAME', 'Local Dev'),
+        LOCAL_DEV_UNLIMITED_CREDITS=_bool_env('LOCAL_DEV_UNLIMITED_CREDITS', True),
         RESEND_API_KEY=os.getenv('RESEND_API_KEY', ''),
         RESEND_FROM_EMAIL=os.getenv('RESEND_FROM_EMAIL', ''),
     )
+    if app.config['LOCAL_DEV_AUTO_LOGIN'] and not (app.config['DEBUG'] or app.config['TESTING']):
+        raise RuntimeError('LOCAL_DEV_AUTO_LOGIN requires DEBUG=true or TESTING=true')
 
     # Ensure absolute manifest path for deterministic loading.
     manifest_path = app.config['PROGRAMMATIC_CONTENT_MANIFEST']
@@ -93,6 +100,18 @@ def create_app() -> Flask:
 
     @login_manager.request_loader
     def load_user_from_request(_request):
+        return None
+
+    @app.before_request
+    def auto_login_local_dev_user():
+        if not app.config.get('LOCAL_DEV_AUTO_LOGIN'):
+            return None
+        if current_user.is_authenticated:
+            return None
+        from colorfulme.services.auth_service import AuthService
+
+        user = AuthService().ensure_local_dev_user()
+        login_user(user, remember=False)
         return None
 
     @app.context_processor
