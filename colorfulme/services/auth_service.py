@@ -10,6 +10,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from flask import current_app, session, url_for
+from sqlalchemy.exc import IntegrityError
 
 from extensions import db
 from models import AuthIdentity, EmailOtpCode, User
@@ -30,9 +31,17 @@ class AuthService:
 
         user = User.query.filter_by(email=email).first()
         if user is None:
-            user = User(email=email, display_name=display_name)
-            db.session.add(user)
-            db.session.flush()
+            try:
+                user = User(email=email, display_name=display_name)
+                db.session.add(user)
+                db.session.flush()
+            except IntegrityError:
+                # First-hit parallel requests can race on the same local-dev email.
+                # Recover by loading the row created by the winning request.
+                db.session.rollback()
+                user = User.query.filter_by(email=email).first()
+                if user is None:
+                    raise
         elif not user.display_name:
             user.display_name = display_name
 
