@@ -75,3 +75,8 @@ htmlcov/
 *.tmp
 *.bak
 /tmp/
+
+# Programmatic pipeline runtime reports
+static/data/pipeline_reports/
+static/data/readiness_report.json
+static/data/readiness_report.csv

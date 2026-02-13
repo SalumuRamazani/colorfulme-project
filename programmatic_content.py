@@ -20,12 +20,31 @@ DEFAULT_MANIFEST_PATH = 'static/data/programmatic_content_manifest.json'
 ALLOWED_ENTRY_TYPES = {'page', 'tool', 'library'}
 ALLOWED_STATUSES = {'draft', 'review', 'published'}
 PUBLISHED_STATUSES = {'published'}
+ALLOWED_CONTENT_STATUSES = {'pending', 'generated', 'approved'}
+ALLOWED_IMAGE_STATUSES = {'pending', 'generated', 'approved', 'failed'}
 
 REQUIRED_COLUMNS = {
     'entry_type',
     'route_path',
     'title',
 }
+
+OPTIONAL_PIPELINE_COLUMNS = [
+    'content_status',
+    'image_status',
+    'primary_keyword',
+    'secondary_keywords',
+    'content_brief',
+    'image_style',
+    'image_aspect_ratio',
+    'image_prompt_override',
+    'asset_local_path',
+    'asset_hash',
+    'generation_batch_id',
+    'last_generated_at',
+    'last_reviewed_at',
+    'qa_notes',
+]
 
 
 def _safe_text(value: object) -> str:
@@ -54,6 +73,24 @@ def _normalize_status(raw: str) -> str:
     if not status:
         return 'draft'
     return status
+
+
+def _normalize_content_status(raw: str) -> str:
+    status = _safe_text(raw).lower()
+    if not status:
+        return 'pending'
+    if status in ALLOWED_CONTENT_STATUSES:
+        return status
+    return 'pending'
+
+
+def _normalize_image_status(raw: str) -> str:
+    status = _safe_text(raw).lower()
+    if not status:
+        return 'pending'
+    if status in ALLOWED_IMAGE_STATUSES:
+        return status
+    return 'pending'
 
 
 def _split_pipe(value: str) -> List[str]:
@@ -223,6 +260,20 @@ def build_entries(rows: List[Dict[str, str]]) -> Tuple[List[Dict[str, object]], 
             'faq': _parse_faq(row.get('faq_pairs', '')),
             'tags': _split_csv(row.get('tags', '')),
             'status': status,
+            'content_status': _normalize_content_status(row.get('content_status', '')),
+            'image_status': _normalize_image_status(row.get('image_status', '')),
+            'primary_keyword': _safe_text(row.get('primary_keyword', '')),
+            'secondary_keywords': _split_pipe(row.get('secondary_keywords', '')),
+            'content_brief': _safe_text(row.get('content_brief', '')),
+            'image_style': _safe_text(row.get('image_style', '')),
+            'image_aspect_ratio': _safe_text(row.get('image_aspect_ratio', '')) or '4:5',
+            'image_prompt_override': _safe_text(row.get('image_prompt_override', '')),
+            'asset_local_path': _safe_text(row.get('asset_local_path', '')),
+            'asset_hash': _safe_text(row.get('asset_hash', '')),
+            'generation_batch_id': _safe_text(row.get('generation_batch_id', '')),
+            'last_generated_at': _safe_text(row.get('last_generated_at', '')),
+            'last_reviewed_at': _safe_text(row.get('last_reviewed_at', '')),
+            'qa_notes': _safe_text(row.get('qa_notes', '')),
             'updated_at': _safe_text(row.get('updated_at', '')),
         }
         entries.append(entry)

@@ -70,12 +70,45 @@ ColorfulMe is a Flask-based AI coloring page platform that generates printable l
 
 ## Programmatic SEO Workflow
 - Edit `content/programmatic_content.csv`
-- Generate manifest:
+- Generate manifest only:
   ```bash
   ./scripts/run_programmatic_pipeline.sh
   ```
+- Fill content + hero drawings at scale (review-gated):
+  ```bash
+  python3 scripts/fill_programmatic_content_and_images.py --mode all --batch-id batch-YYYYMMDDHHMM
+  ```
+- Validate readiness:
+  ```bash
+  python3 scripts/validate_programmatic_readiness.py
+  ```
+- One-command fill + validate:
+  ```bash
+  ./scripts/run_programmatic_live_pipeline.sh
+  ```
+- Publish approved review rows only:
+  ```bash
+  python3 scripts/publish_programmatic_batch.py --batch-id batch-YYYYMMDDHHMM
+  ```
 - Only rows with `status=published` are routed live.
 - Registry endpoint: `/programmatic/content`
+
+### Programmatic Pipeline Columns
+Optional operational columns are supported in the spreadsheet and preserved in the manifest:
+- `content_status` (`pending|generated|approved`)
+- `image_status` (`pending|generated|approved|failed`)
+- `primary_keyword`
+- `secondary_keywords` (`|` separated)
+- `content_brief`
+- `image_style`
+- `image_aspect_ratio`
+- `image_prompt_override`
+- `asset_local_path`
+- `asset_hash`
+- `generation_batch_id`
+- `last_generated_at`
+- `last_reviewed_at`
+- `qa_notes`
 
 ## API Endpoints
 - `POST /api/v1/generations/text`
