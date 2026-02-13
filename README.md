@@ -110,6 +110,32 @@ Optional operational columns are supported in the spreadsheet and preserved in t
 - `last_reviewed_at`
 - `qa_notes`
 
+## Readable Programmatic Content
+- Programmatic category and entry pages now render through a presenter view-model to avoid dense text blocks.
+- Content is split into structured sections:
+  - `Overview`
+  - `How To Use This Page`
+  - `Practical Tips`
+- Readability defaults:
+  - Body copy targets at least 3 paragraphs.
+  - Keep paragraph length compact (recommended max around 120 words each).
+  - Preserve family-safe language and practical usage guidance.
+
+### Refresh Readability Copy (Targeted)
+Run a content-only refresh for free coloring pages into a named batch:
+```bash
+python3 scripts/fill_programmatic_content_and_images.py \
+  --mode content \
+  --filter entry_type=page \
+  --batch-id readability-YYYYMMDDHHMM \
+  --force-content
+```
+
+Validate readability and publish readiness:
+```bash
+python3 scripts/validate_programmatic_readiness.py
+```
+
 ## API Endpoints
 - `POST /api/v1/generations/text`
 - `POST /api/v1/generations/photo`

@@ -4,6 +4,7 @@ from datetime import datetime
 
 from flask import Blueprint, Response, render_template, request
 
+from colorfulme.services.programmatic_presenter import build_entry_view_model
 from colorfulme.services.programmatic_service import ProgrammaticService
 
 
@@ -71,4 +72,5 @@ def dynamic_programmatic_entry(dynamic_path: str):
     if not entry:
         return 'Page not found', 404
 
-    return render_template('programmatic_entry.html', entry=entry)
+    entry_vm = build_entry_view_model(entry, page_kind='programmatic')
+    return render_template('programmatic_entry.html', entry=entry, entry_vm=entry_vm)

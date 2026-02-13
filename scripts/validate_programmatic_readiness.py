@@ -133,14 +133,14 @@ def main(argv: List[str] | None = None) -> int:
             body = _safe_text(normalized.get('body'))
             paragraphs = [part for part in body.split('\n\n') if part.strip()]
             body_words = _word_count(body)
-            if body_words < 220 or len(paragraphs) < 2:
+            if body_words < 220 or len(paragraphs) < 3:
                 _add_issue(
                     issues,
                     row=row_no,
                     route_path=route_path,
                     field='body',
                     severity=_severity_for_row(status),
-                    message=f'body should have >=220 words and >=2 paragraphs (got {body_words} words, {len(paragraphs)} paragraphs)',
+                    message=f'body should have >=220 words and >=3 paragraphs (got {body_words} words, {len(paragraphs)} paragraphs)',
                 )
 
             if body_words < 180:
@@ -152,6 +152,22 @@ def main(argv: List[str] | None = None) -> int:
                     severity='warning',
                     message=f'thin content detected (<180 words): {body_words}',
                 )
+
+            max_paragraph_words = 120
+            for paragraph_index, paragraph in enumerate(paragraphs, start=1):
+                paragraph_words = _word_count(paragraph)
+                if paragraph_words > max_paragraph_words:
+                    _add_issue(
+                        issues,
+                        row=row_no,
+                        route_path=route_path,
+                        field='body',
+                        severity='warning',
+                        message=(
+                            f'paragraph {paragraph_index} is dense ({paragraph_words} words); '
+                            f'aim for <= {max_paragraph_words} words'
+                        ),
+                    )
 
             if _requires_detail_blocks(entry_type, route_path):
                 bullets = list(normalized.get('feature_bullets') or [])

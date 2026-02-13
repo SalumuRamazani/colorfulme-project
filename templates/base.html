@@ -213,6 +213,70 @@
     .section-copy {
       color: var(--ink-500);
     }
+    .reading-shell {
+      position: relative;
+    }
+    .reading-card {
+      border: 1px solid rgba(191, 219, 254, 0.85);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 251, 255, 0.9));
+      border-radius: 1.25rem;
+      box-shadow: 0 12px 34px rgba(30, 64, 175, 0.09);
+    }
+    .reading-prose {
+      color: #334155;
+      font-size: 1.05rem;
+      line-height: 1.82;
+      letter-spacing: 0.002em;
+    }
+    .reading-prose p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      max-width: 68ch;
+    }
+    .reading-prose p:last-child {
+      margin-bottom: 0;
+    }
+    .reading-sidebar-card {
+      border: 1px solid rgba(191, 219, 254, 0.85);
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 24px rgba(30, 64, 175, 0.08);
+      padding: 1rem;
+    }
+    .fact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      border: 1px solid #bfdbfe;
+      background: #ffffff;
+      padding: 0.42rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #1e3a8a;
+    }
+    .faq-disclosure {
+      border: 1px solid #dbeafe;
+      border-radius: 0.9rem;
+      background: #ffffff;
+      padding: 0.85rem 0.95rem;
+    }
+    .faq-disclosure summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .faq-disclosure summary::-webkit-details-marker {
+      display: none;
+    }
+    .faq-disclosure p {
+      margin-top: 0.6rem;
+      color: #475569;
+      line-height: 1.75;
+      max-width: 66ch;
+    }
     .rating-stars {
       letter-spacing: 0.08em;
       color: #f59e0b;

@@ -68,12 +68,40 @@ def test_fill_service_is_idempotent_without_force():
     updated_once, changes_once = service.fill_entry(entry, force=False, batch_id='batch-x')
     assert changes_once
     assert _word_count(updated_once['body']) >= 220
+    assert len([part for part in updated_once['body'].split('\n\n') if part.strip()]) >= 3
     assert updated_once['generation_seed_prompt']
     assert updated_once['content_status'] == 'generated'
 
     updated_twice, changes_twice = service.fill_entry(updated_once, force=False, batch_id='batch-x')
     assert changes_twice == []
     assert updated_twice['body'] == updated_once['body']
+
+
+def test_fill_service_rewrites_dense_paragraph_bodies():
+    service = ProgrammaticFillService()
+    dense_paragraph = ' '.join(['dense'] * 170)
+    body = f'{dense_paragraph}\n\nsecond paragraph with enough words to exist\n\nthird paragraph with enough words to exist'
+    entry = {
+        'entry_type': 'page',
+        'route_path': '/free-coloring-pages/sample',
+        'slug': 'sample',
+        'title': 'Sample',
+        'meta_description': 'x' * 130,
+        'intro': ' '.join(['intro'] * 35),
+        'body': body,
+        'feature_bullets': ['a', 'b', 'c'],
+        'faq': [{'question': 'Q?', 'answer': 'A.'}, {'question': 'Q2?', 'answer': 'A2.'}],
+        'status': 'draft',
+        'content_status': 'pending',
+        'image_status': 'pending',
+        'generation_seed_prompt': 'seed',
+    }
+
+    updated, changes = service.fill_entry(entry, force=False, batch_id='batch-y')
+    assert 'body' in changes
+    new_paragraphs = [part for part in updated['body'].split('\n\n') if part.strip()]
+    assert len(new_paragraphs) >= 3
+    assert max(_word_count(part) for part in new_paragraphs) <= 130
 
 
 def test_image_service_generates_and_skips_when_hash_matches(app, tmp_path):

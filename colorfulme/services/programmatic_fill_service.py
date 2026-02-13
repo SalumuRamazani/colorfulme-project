@@ -186,8 +186,11 @@ class ProgrammaticFillService:
         if not value:
             return True
         paragraphs = [part for part in value.split('\n\n') if part.strip()]
-        if len(paragraphs) < 2:
+        if len(paragraphs) < 3:
             return True
+        for paragraph in paragraphs:
+            if self._word_count(paragraph) > 130:
+                return True
         return self._word_count(value) < 220
 
     @staticmethod
@@ -243,27 +246,31 @@ class ProgrammaticFillService:
     def _build_body(self, *, title: str, route_path: str, primary_keyword: str, secondary_keywords: List[str]) -> str:
         secondary = ', '.join(secondary_keywords[:3]) if secondary_keywords else 'printable sheets and prompt ideas'
         paragraph_one = (
-            f"{title} is designed for creators, parents, and teachers who need dependable {primary_keyword} output "
-            f"without extra editing work. Start by choosing a clear subject, add a short style instruction, and keep "
-            f"the request focused on bold outlines and open coloring regions. The generator then produces clean line art "
-            f"that is easy to print, easy to color, and consistent across repeated runs. This page also highlights "
-            f"high-intent topics such as {secondary}, so your library stays useful for both search visitors and returning users. "
-            "For best results, describe one main subject, one scene, and one emotion, then keep the instruction specific "
-            "to printable outlines. This structure improves consistency, reduces unusable outputs, and makes repeat runs "
-            "faster when you refresh large batches."
+            f"{title} helps parents, teachers, and creators produce dependable {primary_keyword} pages with less editing. "
+            "Use one clear subject, one scene, and a family-safe tone so the generated outline stays simple and printable. "
+            "When prompts are focused, the result is cleaner line art with open spaces that are easier for kids to color."
         )
 
         paragraph_two = (
-            f"To scale production, use the same template structure for every route: define a target keyword, add a "
-            f"family-safe seed prompt, generate one hero drawing, and pair it with practical copy that explains who the page "
-            f"is for and how to use it. When the route is ready, export to PNG or PDF and verify that links, previews, "
-            f"and CTAs are all present. For {route_path}, this process keeps quality high while reducing manual work, "
-            f"making each update repeatable for future batches and launch-ready at any volume. During review, confirm the "
-            "hero asset exists, verify CTA links, and ensure the page copy matches search intent before publishing. "
-            "After approval, regenerate the manifest so only reviewed entries move live."
+            f"This page covers popular searches such as {secondary} and gives you a repeatable flow for high-quality results. "
+            "Start with a short style instruction like clean line art, then keep details age-appropriate and easy to print. "
+            "If a preview looks too busy, remove extra objects and regenerate with fewer scene elements."
         )
 
-        return f"{paragraph_one}\n\n{paragraph_two}"
+        paragraph_three = (
+            "After generation, download PNG for digital coloring or PDF for print packs. "
+            "For classroom use, test one page first, then keep the same prompt pattern for the rest of the set. "
+            f"For {route_path}, this approach keeps quality consistent while reducing rewrite time each time you refresh content. "
+            "You can also save successful prompt variations by age group so teams can launch new themed pages faster."
+        )
+
+        paragraph_four = (
+            f"To improve outcomes over time, keep notes on which {primary_keyword} prompts produce the clearest outlines. "
+            "Reuse those winning prompt styles for future pages, and adjust only subject details so each new sheet stays unique "
+            "without losing readability, print quality, or family-safe tone."
+        )
+
+        return f"{paragraph_one}\n\n{paragraph_two}\n\n{paragraph_three}\n\n{paragraph_four}"
 
     @staticmethod
     def _build_seed_prompt(title: str, primary_keyword: str) -> str:

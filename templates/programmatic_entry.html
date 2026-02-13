@@ -1,68 +1,99 @@
 {% extends "base.html" %}
 
 {% block title %}{{ entry.title }} | ColorfulMe{% endblock %}
-{% block description %}{{ entry.meta_description or entry.intro or entry.title }}{% endblock %}
+{% block description %}{{ entry.meta_description or entry_vm.hero_intro or entry.title }}{% endblock %}
 
 {% block content %}
-<section class="border-b border-blue-100">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
-    <span class="chip rounded-full px-3 py-1 text-xs font-semibold uppercase">{{ entry.entry_type }}</span>
-    <h1 class="mt-4 font-display text-4xl md:text-5xl font-bold leading-tight">{{ entry.h1 or entry.title }}</h1>
-    {% if entry.intro %}
-    <p class="mt-4 text-lg text-slate-600">{{ entry.intro }}</p>
-    {% endif %}
+<section class="border-b border-blue-100 bg-[radial-gradient(circle_at_12%_5%,rgba(59,130,246,0.14),transparent_36%),linear-gradient(180deg,#ffffff,#f5f9ff)]">
+  <div class="reading-shell max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+    <div class="flex flex-wrap gap-2">
+      {% for badge in entry_vm.hero_badges %}
+      <span class="fact-pill">{{ badge }}</span>
+      {% endfor %}
+    </div>
 
-    <div class="mt-6 flex flex-wrap gap-3">
-      {% if entry.primary_cta_label and entry.primary_cta_url %}
-      <a href="{{ entry.primary_cta_url }}" class="px-5 py-3 rounded-xl btn-primary font-semibold">{{ entry.primary_cta_label }}</a>
-      {% endif %}
-      {% if entry.secondary_cta_label and entry.secondary_cta_url %}
-      <a href="{{ entry.secondary_cta_url }}" class="px-5 py-3 rounded-xl btn-secondary font-semibold">{{ entry.secondary_cta_label }}</a>
-      {% endif %}
+    <div class="mt-5 grid lg:grid-cols-2 gap-7 items-center">
+      <div>
+        <h1 class="section-title text-4xl md:text-5xl">{{ entry_vm.hero_title }}</h1>
+        <p class="mt-4 section-copy text-lg max-w-3xl">{{ entry_vm.hero_intro }}</p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          {% if entry_vm.primary_cta_label and entry_vm.primary_cta_url %}
+          <a href="{{ entry_vm.primary_cta_url }}" class="px-5 py-3 rounded-xl btn-primary font-semibold">{{ entry_vm.primary_cta_label }}</a>
+          {% endif %}
+          {% if entry_vm.secondary_cta_label and entry_vm.secondary_cta_url %}
+          <a href="{{ entry_vm.secondary_cta_url }}" class="px-5 py-3 rounded-xl btn-secondary font-semibold">{{ entry_vm.secondary_cta_label }}</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="reading-card p-4">
+        {% if entry_vm.hero_image_url %}
+        <div class="aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
+          <img src="{{ entry_vm.hero_image_url }}" alt="{{ entry_vm.hero_title }}" class="w-full h-full object-cover" loading="lazy">
+        </div>
+        {% else %}
+        <div class="aspect-[4/3] rounded-2xl border border-blue-100 bg-gradient-to-b from-blue-50 to-white flex items-center justify-center px-6 text-center text-slate-600">
+          A hero preview appears here when this entry includes an image.
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="mt-7 grid sm:grid-cols-2 xl:grid-cols-4 gap-2.5">
+      {% for fact in entry_vm.quick_facts %}
+      <article class="fact-pill justify-between">
+        <span class="text-slate-500">{{ fact.label }}</span>
+        <span class="text-slate-800">{{ fact.value }}</span>
+      </article>
+      {% endfor %}
     </div>
   </div>
 </section>
 
-<section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-8">
-  {% if entry.image_url %}
-  <div class="glass rounded-2xl border border-blue-100 p-3">
-    <div class="aspect-[16/9] overflow-hidden rounded-xl bg-slate-100">
-      <img src="{{ entry.image_url }}" alt="{{ entry.title }}" class="w-full h-full object-cover" loading="lazy">
-    </div>
-  </div>
-  {% endif %}
-
-  {% if entry.body_paragraphs %}
-  <div class="space-y-4 text-slate-700 leading-relaxed text-lg">
-    {% for paragraph in entry.body_paragraphs %}
-    <p>{{ paragraph }}</p>
-    {% endfor %}
-  </div>
-  {% endif %}
-
-  {% if entry.feature_bullets %}
-  <div class="glass rounded-2xl border border-blue-100 p-6">
-    <h2 class="font-display text-2xl font-bold">Highlights</h2>
-    <ul class="mt-4 space-y-2 text-slate-700">
-      {% for feature in entry.feature_bullets %}
-      <li>• {{ feature }}</li>
+<section class="reading-shell max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+  <div class="grid lg:grid-cols-12 gap-8">
+    <div class="lg:col-span-8 space-y-6">
+      {% for section in entry_vm.content_sections %}
+      <article class="reading-card p-6 md:p-8">
+        <h2 class="section-title text-2xl">{{ section.title }}</h2>
+        <div class="reading-prose mt-4">
+          {% for paragraph in section.paragraphs %}
+          <p>{{ paragraph }}</p>
+          {% endfor %}
+        </div>
+      </article>
       {% endfor %}
-    </ul>
-  </div>
-  {% endif %}
 
-  {% if entry.faq %}
-  <div class="space-y-4">
-    <h2 class="font-display text-2xl font-bold">FAQ</h2>
-    {% for item in entry.faq %}
-    <article class="glass rounded-2xl border border-blue-100 p-5">
-      <h3 class="font-semibold text-slate-900">{{ item.question }}</h3>
-      {% if item.answer %}
-      <p class="mt-2 text-slate-600">{{ item.answer }}</p>
+      {% if entry_vm.faq_items %}
+      <article class="reading-card p-6 md:p-8">
+        <h2 class="section-title text-2xl">FAQ</h2>
+        <div class="mt-4 space-y-3">
+          {% for item in entry_vm.faq_items %}
+          <details class="faq-disclosure" {% if loop.index == 1 %}open{% endif %}>
+            <summary>{{ item.question }}</summary>
+            {% if item.answer %}
+            <p>{{ item.answer }}</p>
+            {% endif %}
+          </details>
+          {% endfor %}
+        </div>
+      </article>
       {% endif %}
-    </article>
-    {% endfor %}
+    </div>
+
+    <aside class="lg:col-span-4 space-y-4 lg:sticky lg:top-24 self-start">
+      <div class="reading-sidebar-card">
+        <h3 class="section-title text-xl">Create Your Version</h3>
+        <p class="mt-2 text-sm text-slate-600">Use this page as a starting point, then generate your own printable version.</p>
+        <a href="{{ entry_vm.primary_cta_url }}" class="mt-4 inline-flex w-full justify-center rounded-xl px-4 py-2.5 btn-primary font-semibold">{{ entry_vm.primary_cta_label }}</a>
+      </div>
+
+      <div class="reading-sidebar-card">
+        <h3 class="section-title text-lg">Need more options?</h3>
+        <a href="/generators" class="mt-3 block rounded-lg px-3 py-2 text-slate-700 hover:text-blue-700 hover:bg-blue-50">Browse all generators</a>
+        <a href="/free-coloring-pages" class="mt-1 block rounded-lg px-3 py-2 text-slate-700 hover:text-blue-700 hover:bg-blue-50">Browse free categories</a>
+      </div>
+    </aside>
   </div>
-  {% endif %}
 </section>
 {% endblock %}

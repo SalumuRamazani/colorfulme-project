@@ -8,6 +8,7 @@ from flask_login import current_user, login_required
 
 from models import ApiKey, GenerationJob
 from colorfulme.services.credits_service import ensure_wallet_for_user, get_active_plan
+from colorfulme.services.programmatic_presenter import build_entry_view_model
 from colorfulme.services.programmatic_service import ProgrammaticService
 
 
@@ -155,9 +156,11 @@ def free_coloring_category(slug: str):
 
     categories = _published_free_coloring_categories()
     related = [item for item in categories if item.get('route_path') != route_path][:18]
+    entry_vm = build_entry_view_model(entry, page_kind='category', related_categories=related)
     return render_template(
         'free_coloring_category.html',
         entry=entry,
+        entry_vm=entry_vm,
         related_categories=related,
     )
 
