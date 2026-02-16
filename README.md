@@ -166,3 +166,110 @@ python3 scripts/validate_programmatic_readiness.py
 ## Notes
 - Old receipt files/assets remain in the repository but are no longer reachable from runtime routes.
 - Legacy DB was archived to `instance/receiptforge.db.bak-20260206`.
+
+<!-- TASKMASTER_EXPORT_START -->
+> 🎯 **Taskmaster Export** - 2026-02-16 10:16:30 UTC
+> 📋 Export: with subtasks • Status filter: none
+> 🔗 Powered by [Task Master](https://task-master.dev?utm_source=github-readme&utm_medium=readme-export&utm_campaign=colorfulme-project&utm_content=task-export-link)
+
+```
+╭─────────────────────────────────────────────────────────╮╭─────────────────────────────────────────────────────────╮
+│                                                         ││                                                         │
+│   Project Dashboard                                     ││   Dependency Status & Next Task                         │
+│   Tasks Progress: ███████░░░░░░░░░░░░░ 33%    ││   Dependency Metrics:                                   │
+│   33%                                                   ││   • Tasks with no dependencies: 0                      │
+│   Done: 4  In Progress: 5  Pending: 3  Blocked: 0     ││   • Tasks ready to work on: 2                          │
+│   Deferred: 0  Cancelled: 0                             ││   • Tasks blocked by dependencies: 6                    │
+│                                                         ││   • Most depended-on task: #3 (4 dependents)           │
+│   Subtasks Progress: █████████████░░░░░░░     ││   • Avg dependencies per task: 1.8                      │
+│   67% 67%                                               ││                                                         │
+│   Completed: 8/12  In Progress: 2  Pending: 2      ││   Next Task to Work On:                                 │
+│   Blocked: 0  Deferred: 0  Cancelled: 0                 ││   ID: 11.1 - Desktop QA matrix     │
+│                                                         ││   Priority: high  Dependencies: None                    │
+│   Priority Breakdown:                                   ││   Complexity: N/A                                       │
+│   • High priority: 9                                   │╰─────────────────────────────────────────────────────────╯
+│   • Medium priority: 3                                 │
+│   • Low priority: 0                                     │
+│                                                         │
+╰─────────────────────────────────────────────────────────╯
+┌───────────┬──────────────────────────────────────┬─────────────────┬──────────────┬───────────────────────┬───────────┐
+│ ID        │ Title                                │ Status          │ Priority     │ Dependencies          │ Complexi… │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 1         │ Global Navigation & Header Polish    │ ✓ done          │ high         │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 1.1       │ └─ Desktop dropdown usability        │ ✓ done          │ -            │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 1.2       │ └─ Mobile menu hierarchy             │ ✓ done          │ -            │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 2         │ Create Flow UX Finish                │ ✓ done          │ high         │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 2.1       │ └─ Generation status messaging       │ ✓ done          │ -            │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 2.2       │ └─ Form validation polish            │ ✓ done          │ -            │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 3         │ Free Category Page Polish            │ ✓ done          │ high         │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 3.1       │ └─ Readability spacing audit         │ ✓ done          │ -            │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 3.2       │ └─ Sidebar behavior                  │ ✓ done          │ -            │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 4         │ Generic Programmatic Entry Polish    │ ✓ done          │ high         │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 4.1       │ └─ Hero-media composition            │ ✓ done          │ -            │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 4.2       │ └─ FAQ disclosure polish             │ ✓ done          │ -            │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 5         │ Image & Asset Consistency Audit      │ ○ pending       │ high         │ 3, 4                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 6         │ Landing Page Visual Consistency Swee │ ► in-progress   │ medium       │ 1                     │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 7         │ Accessibility Hardening              │ ► in-progress   │ high         │ 1, 2, 3, 4, 6         │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 8         │ SEO Metadata & Structured Data Harde │ ► in-progress   │ medium       │ 3, 4, 6               │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 9         │ Performance Pass                     │ ○ pending       │ medium       │ 5, 6                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 10        │ Error, Empty, and Edge-State Coverag │ ► in-progress   │ high         │ 2, 3, 4, 5            │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 11        │ Cross-Device QA & Bug Bash           │ ► in-progress   │ high         │ 7, 8, 9, 10           │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 11.1       │ └─ Desktop QA matrix                 │ ► in-progress   │ -            │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 11.2       │ └─ Mobile QA matrix                  │ ► in-progress   │ -            │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 12        │ Release Readiness & Go-Live Runbook  │ ○ pending       │ high         │ 11                    │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 12.1       │ └─ Go-live checklist                 │ ○ pending       │ -            │ None                  │ N/A       │
+├───────────┼──────────────────────────────────────┼─────────────────┼──────────────┼───────────────────────┼───────────┤
+│ 12.2       │ └─ Post-launch watch                 │ ○ pending       │ -            │ None                  │ N/A       │
+└───────────┴──────────────────────────────────────┴─────────────────┴──────────────┴───────────────────────┴───────────┘
+```
+
+╭────────────────────────────────────────────── ⚡ RECOMMENDED NEXT TASK ⚡ ──────────────────────────────────────────────╮
+│                                                                                                                         │
+│  🔥 Next Task to Work On: #11.1 - Desktop QA matrix                                  │
+│                                                                                                                         │
+│  Priority: high   Status: ► in-progress                                                                                     │
+│  Dependencies: None                                                                                                     │
+│                                                                                                                         │
+│  Description: Run and log desktop checks on primary routes.     │
+│                                                                                                                         │
+│  Start working: task-master set-status --id=11.1 --status=in-progress                                                     │
+│  View details: task-master show 11.1                                                                      │
+│                                                                                                                         │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭──────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                      │
+│   Suggested Next Steps:                                                              │
+│                                                                                      │
+│   1. Run task-master next to see what to work on next                                │
+│   2. Run task-master expand --id=<id> to break down a task into subtasks             │
+│   3. Run task-master set-status --id=<id> --status=done to mark a task as complete   │
+│                                                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────╯
+
+> 📋 **End of Taskmaster Export** - Tasks are synced from your project using the `sync-readme` command.
+<!-- TASKMASTER_EXPORT_END -->
+

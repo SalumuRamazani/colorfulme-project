@@ -2,6 +2,21 @@
 
 {% block title %}Pricing | ColorfulMe{% endblock %}
 {% block description %}Freemium credits plus Starter, Pro, Studio, and Lifetime plans for ColorfulMe.{% endblock %}
+{% block og_title %}Pricing | ColorfulMe{% endblock %}
+{% block twitter_title %}Pricing | ColorfulMe{% endblock %}
+{% block og_description %}Freemium credits plus Starter, Pro, Studio, and Lifetime plans for ColorfulMe.{% endblock %}
+{% block twitter_description %}Freemium credits plus Starter, Pro, Studio, and Lifetime plans for ColorfulMe.{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "ColorfulMe Pricing",
+  "url": "{{ request.base_url }}",
+  "description": "Pricing plans and credit tiers for ColorfulMe."
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">

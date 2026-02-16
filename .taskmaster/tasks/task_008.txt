@@ -1,0 +1,11 @@
+# Task ID: 8
+# Title: SEO Metadata & Structured Data Hardening
+# Status: in-progress
+# Dependencies: 3, 4, 6
+# Priority: medium
+# Description: Close remaining SEO implementation gaps for launch.
+# Details:
+Validate canonical tags, title/description quality, Open Graph/Twitter metadata, sitemap inclusion rules, robots consistency, and JSON-LD for key page types where appropriate.
+
+# Test Strategy:
+

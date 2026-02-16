@@ -1,0 +1,11 @@
+# Task ID: 7
+# Title: Accessibility Hardening
+# Status: in-progress
+# Dependencies: 1, 2, 3, 4, 6
+# Priority: high
+# Description: Make core user journeys keyboard-accessible and screen-reader friendly.
+# Details:
+Audit focus order, visible focus states, aria labels, link/button semantics, heading order, and color contrast. Fix all blocking accessibility issues in nav, create, and programmatic pages.
+
+# Test Strategy:
+

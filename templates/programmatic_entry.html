@@ -2,6 +2,23 @@
 
 {% block title %}{{ entry.title }} | ColorfulMe{% endblock %}
 {% block description %}{{ entry.meta_description or entry_vm.hero_intro or entry.title }}{% endblock %}
+{% block og_title %}{{ entry.title }} | ColorfulMe{% endblock %}
+{% block twitter_title %}{{ entry.title }} | ColorfulMe{% endblock %}
+{% block og_description %}{{ entry.meta_description or entry_vm.hero_intro or entry.title }}{% endblock %}
+{% block twitter_description %}{{ entry.meta_description or entry_vm.hero_intro or entry.title }}{% endblock %}
+{% block og_image %}{{ request.url_root.rstrip('/') }}{{ entry_vm.hero_image_url if entry_vm.hero_image_url else url_for('static', filename='images/colorfulme/v2/hero-card-center.png') }}{% endblock %}
+{% block twitter_image %}{{ request.url_root.rstrip('/') }}{{ entry_vm.hero_image_url if entry_vm.hero_image_url else url_for('static', filename='images/colorfulme/v2/hero-card-center.png') }}{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ entry.title|e }}",
+  "mainEntityOfPage": "{{ request.base_url }}",
+  "description": "{{ (entry.meta_description or entry_vm.hero_intro or entry.title)|e }}"
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="border-b border-blue-100 bg-[radial-gradient(circle_at_12%_5%,rgba(59,130,246,0.14),transparent_36%),linear-gradient(180deg,#ffffff,#f5f9ff)]">

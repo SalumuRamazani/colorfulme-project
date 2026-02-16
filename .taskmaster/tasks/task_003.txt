@@ -1,0 +1,25 @@
+# Task ID: 3
+# Title: Free Category Page Polish
+# Status: done
+# Dependencies: None
+# Priority: high
+# Description: Finish micro-layout details on /free-coloring-pages/<slug> pages.
+# Details:
+Tighten section rhythm, max text width, card spacing, sidebar stickiness, FAQ disclosure polish, and quick-facts readability. Confirm hero image fallback rendering is clean.
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Readability spacing audit [done]
+### Dependencies: None
+### Description: Tune card and text spacing.
+### Details:
+Verify heading margins, paragraph rhythm, and card padding on mobile and desktop breakpoints.
+
+## 2. Sidebar behavior [done]
+### Dependencies: None
+### Description: Ensure sticky sidebar works gracefully.
+### Details:
+Fix edge cases where sidebar overlaps footer or misbehaves on shorter screens.
+

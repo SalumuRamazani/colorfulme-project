@@ -1,0 +1,25 @@
+# Task ID: 12
+# Title: Release Readiness & Go-Live Runbook
+# Status: pending
+# Dependencies: 11
+# Priority: high
+# Description: Prepare launch checklist and post-launch monitoring routine.
+# Details:
+Define pre-launch checks, rollback notes, smoke-test commands, and day-1 monitoring steps. Document owner actions for fast incident response after release.
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Go-live checklist [pending]
+### Dependencies: None
+### Description: Finalize launch gate criteria.
+### Details:
+Document must-pass checks for routes, generation flow, SEO surfaces, and monitoring setup.
+
+## 2. Post-launch watch [pending]
+### Dependencies: None
+### Description: Define first-48h monitoring routine.
+### Details:
+Track errors, generation failures, and UI regressions with clear response steps.
+

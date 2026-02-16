@@ -3,8 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% set root_url = request.url_root.rstrip('/') %}
   <title>{% block title %}ColorfulMe | AI Coloring Page Studio{% endblock %}</title>
   <meta name="description" content="{% block description %}Create printable coloring pages from text and photos with ColorfulMe.{% endblock %}">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta property="og:site_name" content="ColorfulMe">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}ColorfulMe | AI Coloring Page Studio{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Create printable coloring pages from text and photos with ColorfulMe.{% endblock %}">
+  <meta property="og:url" content="{{ request.base_url }}">
+  <meta property="og:image" content="{% block og_image %}{{ root_url }}{{ url_for('static', filename='images/colorfulme/v2/hero-card-center.png') }}{% endblock %}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}ColorfulMe | AI Coloring Page Studio{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}Create printable coloring pages from text and photos with ColorfulMe.{% endblock %}">
+  <meta name="twitter:image" content="{% block twitter_image %}{{ root_url }}{{ url_for('static', filename='images/colorfulme/v2/hero-card-center.png') }}{% endblock %}">
   <link rel="canonical" href="{{ request.base_url }}">
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -277,17 +289,75 @@
       line-height: 1.75;
       max-width: 66ch;
     }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
     .rating-stars {
       letter-spacing: 0.08em;
       color: #f59e0b;
       font-weight: 700;
     }
+    .skip-link {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      transform: translateY(-160%);
+      z-index: 120;
+      border-radius: 0.6rem;
+      background: #0f172a;
+      color: #fff;
+      padding: 0.55rem 0.85rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      transition: transform 140ms ease;
+    }
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+    .loading-shimmer {
+      background: linear-gradient(90deg, rgba(226, 232, 240, 0.8), rgba(241, 245, 249, 0.95), rgba(226, 232, 240, 0.8));
+      background-size: 200% 100%;
+      animation: shimmer 1.2s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    :focus-visible {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+    }
     [data-modal] { display: none; }
     [data-modal].open { display: flex; }
   </style>
   {% block meta_tags %}{% endblock %}
+  {% block structured_data %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ColorfulMe",
+    "url": "{{ root_url }}",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ root_url }}/free-coloring-pages",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  {% endblock %}
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
   {% set path = request.path %}
   {% set is_generator_path = path in nav_generator_paths or path.startswith('/generators') or path.startswith('/prompt-generators') %}
   {% set is_free_coloring_path = path.startswith('/free-coloring-pages') %}
@@ -303,11 +373,11 @@
           <a href="/" class="nav-pill {% if path == '/' %}nav-pill-active{% endif %}">Home</a>
           <a href="/create" class="nav-pill {% if path.startswith('/create') %}nav-pill-active{% endif %}">Create</a>
           <div class="dropdown" data-dropdown>
-            <a href="/free-coloring-pages" data-dropdown-trigger class="nav-pill inline-flex items-center gap-1 {% if is_free_coloring_path %}nav-pill-active{% endif %}">
+            <button type="button" data-dropdown-trigger data-dropdown-panel-id="free-pages-dropdown" aria-expanded="false" aria-haspopup="true" class="nav-pill inline-flex items-center gap-1 {% if is_free_coloring_path %}nav-pill-active{% endif %}">
               Free Coloring Pages
               <span class="text-[10px]">▾</span>
-            </a>
-            <div class="dropdown-panel left-0 p-7 mega-panel">
+            </button>
+            <div id="free-pages-dropdown" class="dropdown-panel left-0 p-7 mega-panel" role="menu" aria-label="Free Coloring Pages menu">
               <div class="space-y-6">
                 <div>
                   <p class="menu-section-title">Browse by Age</p>
@@ -333,11 +403,11 @@
           </div>
           <a href="/pricing" class="nav-pill {% if path.startswith('/pricing') %}nav-pill-active{% endif %}">Pricing</a>
           <div class="dropdown" data-dropdown>
-            <a href="/generators" data-dropdown-trigger class="nav-pill inline-flex items-center gap-1 {% if is_generator_path %}nav-pill-active{% endif %}">
+            <button type="button" data-dropdown-trigger data-dropdown-panel-id="generators-dropdown" aria-expanded="false" aria-haspopup="true" class="nav-pill inline-flex items-center gap-1 {% if is_generator_path %}nav-pill-active{% endif %}">
               Generators
               <span class="text-[10px]">▾</span>
-            </a>
-            <div class="dropdown-panel right-0 p-7 mega-panel">
+            </button>
+            <div id="generators-dropdown" class="dropdown-panel right-0 p-7 mega-panel" role="menu" aria-label="Generators menu">
               <div class="space-y-6">
                 <div>
                   <p class="menu-section-title">Coloring Page Generators</p>
@@ -379,16 +449,24 @@
           <button id="open-auth-btn" class="header-action btn-secondary text-sm font-medium">Sign in</button>
           <a href="/create" class="header-action btn-primary text-sm font-semibold transition">Start Creating</a>
           {% endif %}
-          <button id="mobile-menu-btn" class="lg:hidden px-3 py-2 rounded-lg border border-slate-300 bg-white text-slate-700">Menu</button>
+          <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" class="lg:hidden px-3 py-2 rounded-lg border border-slate-300 bg-white text-slate-700">Menu</button>
         </div>
       </div>
-      <div id="mobile-menu" class="lg:hidden hidden pb-4 space-y-2 text-sm">
-        <a href="/" class="block px-3 py-2 rounded-lg bg-white/80">Home</a>
-        <a href="/create" class="block px-3 py-2 rounded-lg bg-white/80">Create</a>
-        <a href="/free-coloring-pages" class="block px-3 py-2 rounded-lg bg-white/80">Free Coloring Pages</a>
-        <a href="/pricing" class="block px-3 py-2 rounded-lg bg-white/80">Pricing</a>
-        <a href="/blog" class="block px-3 py-2 rounded-lg bg-white/80">Blog</a>
-        <a href="/library" class="block px-3 py-2 rounded-lg bg-white/80">Community</a>
+      <div id="mobile-menu" class="lg:hidden hidden pb-4 space-y-2 text-sm max-h-[75vh] overflow-y-auto" aria-label="Mobile navigation">
+        <div class="rounded-xl border border-blue-100 bg-white/90 p-2 space-y-1">
+          <a href="/" class="block px-3 py-2 rounded-lg {% if path == '/' %}bg-blue-50 text-blue-700 font-semibold{% else %}bg-white/80{% endif %}">Home</a>
+          <a href="/create" class="block px-3 py-2 rounded-lg {% if path.startswith('/create') %}bg-blue-50 text-blue-700 font-semibold{% else %}bg-white/80{% endif %}">Create</a>
+          <a href="/free-coloring-pages" class="block px-3 py-2 rounded-lg {% if is_free_coloring_path %}bg-blue-50 text-blue-700 font-semibold{% else %}bg-white/80{% endif %}">Free Coloring Pages</a>
+          <a href="/generators" class="block px-3 py-2 rounded-lg {% if is_generator_path %}bg-blue-50 text-blue-700 font-semibold{% else %}bg-white/80{% endif %}">Generators</a>
+          <a href="/pricing" class="block px-3 py-2 rounded-lg {% if path.startswith('/pricing') %}bg-blue-50 text-blue-700 font-semibold{% else %}bg-white/80{% endif %}">Pricing</a>
+          <a href="/blog" class="block px-3 py-2 rounded-lg {% if path.startswith('/blog') %}bg-blue-50 text-blue-700 font-semibold{% else %}bg-white/80{% endif %}">Blog</a>
+          <a href="/library" class="block px-3 py-2 rounded-lg {% if path.startswith('/library') %}bg-blue-50 text-blue-700 font-semibold{% else %}bg-white/80{% endif %}">Community</a>
+          {% if current_user.is_authenticated %}
+          <a href="/dashboard" class="block px-3 py-2 rounded-lg {% if path.startswith('/dashboard') %}bg-blue-50 text-blue-700 font-semibold{% else %}bg-white/80{% endif %}">Dashboard</a>
+          {% endif %}
+          <a href="/create" class="block px-3 py-2 rounded-lg btn-primary text-center font-semibold">Start Creating</a>
+        </div>
+
         <details class="rounded-lg bg-white/80 border border-slate-200">
           <summary class="px-3 py-2 cursor-pointer font-medium text-slate-800">Free Coloring Categories</summary>
           <div class="px-2 pb-2 space-y-1">
@@ -403,6 +481,7 @@
             {% endfor %}
           </div>
         </details>
+
         <details class="rounded-lg bg-white/80 border border-slate-200">
           <summary class="px-3 py-2 cursor-pointer font-medium text-slate-800">Generators</summary>
           <div class="px-2 pb-2 space-y-1">
@@ -422,14 +501,11 @@
             {% endfor %}
           </div>
         </details>
-        {% if current_user.is_authenticated %}
-        <a href="/dashboard" class="block px-3 py-2 rounded-lg bg-white/80">Dashboard</a>
-        {% endif %}
       </div>
     </div>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     {% block content %}{% endblock %}
   </main>
 
@@ -440,14 +516,14 @@
     </div>
   </footer>
 
-  <div id="auth-modal" data-modal class="fixed inset-0 z-[70] items-center justify-center p-4 bg-slate-900/50">
-    <div class="w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-2xl p-6">
+  <div id="auth-modal" data-modal aria-hidden="true" class="fixed inset-0 z-[70] items-center justify-center p-4 bg-slate-900/50">
+    <div class="w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-2xl p-6" role="dialog" aria-modal="true" aria-labelledby="auth-title">
       <div class="flex items-start justify-between gap-4">
         <div>
-          <h2 class="font-display text-2xl font-bold text-slate-900">Sign in to ColorfulMe</h2>
+          <h2 id="auth-title" class="font-display text-2xl font-bold text-slate-900">Sign in to ColorfulMe</h2>
           <p class="mt-1 text-sm text-slate-600">Use Google or email code login.</p>
         </div>
-        <button id="close-auth-btn" class="px-2 py-1 rounded border border-slate-300 text-slate-600">✕</button>
+        <button id="close-auth-btn" type="button" aria-label="Close authentication modal" class="px-2 py-1 rounded border border-slate-300 text-slate-600">✕</button>
       </div>
 
       <div class="mt-5 space-y-4">
@@ -477,27 +553,80 @@
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenuBtn && mobileMenu) {
-      mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+      const setMobileMenuState = (open) => {
+        mobileMenu.classList.toggle('hidden', !open);
+        mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobileMenuBtn.textContent = open ? 'Close' : 'Menu';
+      };
+      setMobileMenuState(false);
+      mobileMenuBtn.addEventListener('click', () => {
+        const isOpen = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+        setMobileMenuState(!isOpen);
+      });
+      mobileMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => setMobileMenuState(false));
+      });
+      window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          setMobileMenuState(false);
+        }
+      });
     }
 
     const desktopDropdowns = Array.from(document.querySelectorAll('[data-dropdown]'));
-    const closeDesktopDropdowns = () => desktopDropdowns.forEach((node) => node.classList.remove('open'));
+    const setDropdownState = (dropdown, open) => {
+      dropdown.classList.toggle('open', open);
+      const trigger = dropdown.querySelector('[data-dropdown-trigger]');
+      if (trigger) trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    const closeDesktopDropdowns = () => desktopDropdowns.forEach((node) => setDropdownState(node, false));
     desktopDropdowns.forEach((dropdown) => {
       const trigger = dropdown.querySelector('[data-dropdown-trigger]');
+      const panel = dropdown.querySelector('.dropdown-panel');
       if (!trigger) return;
+      if (panel && trigger.dataset.dropdownPanelId) {
+        trigger.setAttribute('aria-controls', trigger.dataset.dropdownPanelId);
+      }
       trigger.addEventListener('click', (event) => {
         event.preventDefault();
         const wasOpen = dropdown.classList.contains('open');
         closeDesktopDropdowns();
         if (!wasOpen) {
-          dropdown.classList.add('open');
+          setDropdownState(dropdown, true);
         }
       });
       trigger.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          const wasOpen = dropdown.classList.contains('open');
+          closeDesktopDropdowns();
+          if (!wasOpen) setDropdownState(dropdown, true);
+        }
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          setDropdownState(dropdown, true);
+          const firstLink = panel && panel.querySelector('a, button');
+          if (firstLink) firstLink.focus();
+        }
         if (event.key === 'Escape') {
-          dropdown.classList.remove('open');
+          setDropdownState(dropdown, false);
+          trigger.focus();
         }
       });
+      dropdown.addEventListener('mouseenter', () => {
+        if (window.matchMedia('(min-width: 1024px)').matches) setDropdownState(dropdown, true);
+      });
+      dropdown.addEventListener('mouseleave', () => {
+        if (window.matchMedia('(min-width: 1024px)').matches) setDropdownState(dropdown, false);
+      });
+      if (panel) {
+        panel.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            setDropdownState(dropdown, false);
+            trigger.focus();
+          }
+        });
+      }
     });
     document.addEventListener('click', (event) => {
       if (!desktopDropdowns.some((dropdown) => dropdown.contains(event.target))) {
@@ -510,18 +639,36 @@
     const openAuthBtn = document.getElementById('open-auth-btn');
     const closeAuthBtn = document.getElementById('close-auth-btn');
     const authStatusEl = document.getElementById('auth-status');
+    const openAuthModal = () => {
+      if (!authModal) return;
+      authModal.classList.add('open');
+      authModal.setAttribute('aria-hidden', 'false');
+    };
+    const closeAuthModal = () => {
+      if (!authModal) return;
+      authModal.classList.remove('open');
+      authModal.setAttribute('aria-hidden', 'true');
+    };
+    window.openAuthModal = openAuthModal;
+    window.closeAuthModal = closeAuthModal;
 
     if (openAuthBtn && authModal) {
-      openAuthBtn.addEventListener('click', () => authModal.classList.add('open'));
+      openAuthBtn.addEventListener('click', openAuthModal);
     }
     if (closeAuthBtn && authModal) {
-      closeAuthBtn.addEventListener('click', () => authModal.classList.remove('open'));
+      closeAuthBtn.addEventListener('click', closeAuthModal);
     }
     if (authModal) {
       authModal.addEventListener('click', (event) => {
-        if (event.target === authModal) authModal.classList.remove('open');
+        if (event.target === authModal) closeAuthModal();
+      });
+      window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && authModal.classList.contains('open')) {
+          closeAuthModal();
+        }
       });
     }
+    window.addEventListener('open-login-modal', openAuthModal);
 
     async function postJSON(url, payload) {
       const res = await fetch(url, {
@@ -529,7 +676,13 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      return { ok: res.ok, data: await res.json() };
+      let data;
+      try {
+        data = await res.json();
+      } catch (_err) {
+        data = {};
+      }
+      return { ok: res.ok, data };
     }
 
     const sendCodeBtn = document.getElementById('send-code-btn');
@@ -571,6 +724,14 @@
         window.location.href = '/';
       });
     }
+
+    document.querySelectorAll('img').forEach((img) => {
+      img.addEventListener('error', () => {
+        img.classList.add('hidden');
+        const fallback = img.parentElement && img.parentElement.querySelector('[data-image-fallback]');
+        if (fallback) fallback.classList.remove('hidden');
+      });
+    });
   </script>
   {% block scripts %}{% endblock %}
 </body>

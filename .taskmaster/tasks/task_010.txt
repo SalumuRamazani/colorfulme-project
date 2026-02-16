@@ -1,0 +1,11 @@
+# Task ID: 10
+# Title: Error, Empty, and Edge-State Coverage
+# Status: in-progress
+# Dependencies: 2, 3, 4, 5
+# Priority: high
+# Description: Close UI gaps for uncommon but realistic user states.
+# Details:
+Ensure robust handling for missing images, empty related lists, failed generation responses, no-results states, and malformed route data. Provide user-safe fallbacks and helpful copy.
+
+# Test Strategy:
+

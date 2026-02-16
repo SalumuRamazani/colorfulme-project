@@ -1,0 +1,11 @@
+# Task ID: 6
+# Title: Landing Page Visual Consistency Sweep
+# Status: in-progress
+# Dependencies: 1
+# Priority: medium
+# Description: Polish homepage section-to-section consistency for launch quality.
+# Details:
+Normalize spacing scale, typography rhythm, card shadows, button hierarchy, and section separators. Ensure visual language stays blue-first and cohesive from hero to footer.
+
+# Test Strategy:
+

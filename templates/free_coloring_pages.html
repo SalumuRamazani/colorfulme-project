@@ -2,6 +2,21 @@
 
 {% block title %}Free Coloring Pages | ColorfulMe{% endblock %}
 {% block description %}Browse free printable coloring pages by age and theme. Explore hundreds of categories and generate custom pages with ColorfulMe.{% endblock %}
+{% block og_title %}Free Coloring Pages | ColorfulMe{% endblock %}
+{% block twitter_title %}Free Coloring Pages | ColorfulMe{% endblock %}
+{% block og_description %}Browse free printable coloring pages by age and theme. Explore hundreds of categories and generate custom pages with ColorfulMe.{% endblock %}
+{% block twitter_description %}Browse free printable coloring pages by age and theme. Explore hundreds of categories and generate custom pages with ColorfulMe.{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Free Coloring Pages",
+  "url": "{{ request.base_url }}",
+  "description": "Browse free printable coloring page categories by age and theme."
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="border-b border-blue-100 bg-[radial-gradient(circle_at_12%_4%,rgba(59,130,246,0.14),transparent_34%),linear-gradient(180deg,#ffffff,#f4f9ff)]">
@@ -22,11 +37,15 @@
       <div class="section-shell p-6">
         <h2 class="section-title text-2xl">Browse by Age</h2>
         <div class="mt-4 space-y-2">
+          {% if age_entries %}
           {% for item in age_entries %}
           <a href="{{ item.route_path }}" class="block rounded-xl border border-transparent hover:border-blue-200 hover:bg-blue-50 px-3 py-2 text-slate-800 font-semibold">
             {{ item.title.replace('Free Coloring Pages ', '') }}
           </a>
           {% endfor %}
+          {% else %}
+          <p class="text-sm text-slate-500">Age-based categories are being updated. Use the full category list below.</p>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -38,26 +57,190 @@
       </div>
 
       <div class="mt-5 grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        {% if featured_themes %}
         {% for item in featured_themes %}
-        <a href="{{ item.route_path }}" class="rounded-2xl border border-blue-100 bg-white p-4 elevate">
-          <h3 class="font-display text-lg font-bold text-slate-900">{{ item.title }}</h3>
+        <a href="{{ item.route_path }}" class="rounded-2xl border border-blue-100 bg-white p-4 elevate {% if loop.index > 8 %}hidden md:block{% endif %}">
+          <div class="rounded-xl border border-blue-100 bg-slate-50 aspect-[4/3] overflow-hidden">
+            {% if item.image_url %}
+            <img src="{{ item.image_url }}" alt="{{ item.title }}" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            {% else %}
+            <div class="w-full h-full flex flex-col items-center justify-center text-blue-600 text-xs font-semibold gap-2 bg-gradient-to-b from-blue-50 to-white">
+              <div class="h-9 w-9 rounded-lg border border-blue-200 bg-white"></div>
+              <span>Theme preview</span>
+            </div>
+            {% endif %}
+          </div>
+          <h3 class="mt-3 font-display text-lg font-bold text-slate-900 line-clamp-2">{{ item.title }}</h3>
           <p class="mt-1 text-sm text-slate-600 line-clamp-2">{{ item.meta_description or item.intro }}</p>
           <p class="mt-3 text-xs font-semibold text-blue-700">Browse pages →</p>
         </a>
         {% endfor %}
+        {% else %}
+        <div class="sm:col-span-2 xl:col-span-3 rounded-2xl border border-blue-100 bg-white p-6">
+          <p class="text-slate-600">Featured themes are being refreshed. You can still create custom pages instantly.</p>
+          <a href="/create" class="mt-4 inline-flex rounded-xl btn-primary px-4 py-2 font-semibold">Create a Custom Page</a>
+        </div>
+        {% endif %}
       </div>
     </div>
   </div>
 </section>
 
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 md:pb-16">
-  <h2 class="section-title text-2xl md:text-3xl">All Categories</h2>
-  <div class="mt-5 rounded-2xl border border-blue-100 bg-white p-4 md:p-6">
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-2">
-      {% for item in all_categories %}
-      <a href="{{ item.route_path }}" class="py-1.5 text-slate-700 hover:text-blue-700 hover:underline underline-offset-4">{{ item.title }}</a>
-      {% endfor %}
+  <div class="flex items-end justify-between gap-3 flex-wrap">
+    <h2 class="section-title text-2xl md:text-3xl">All Categories</h2>
+    <p id="category-results-label" class="text-sm text-slate-500">{{ all_categories|length }} categories</p>
+  </div>
+
+  <div class="mt-4 grid md:grid-cols-[1fr_auto] gap-3">
+    <label class="block">
+      <span class="sr-only">Search categories</span>
+      <input id="category-search-input" type="search" placeholder="Search categories (animals, bible, kids...)" class="w-full rounded-xl border border-blue-200 bg-white px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-300">
+    </label>
+    <div class="inline-flex rounded-xl border border-blue-200 bg-white p-1 text-sm">
+      <button type="button" class="category-filter-chip rounded-lg px-3 py-2 bg-blue-50 text-blue-700 font-semibold" data-filter="all">All</button>
+      <button type="button" class="category-filter-chip rounded-lg px-3 py-2 text-slate-600 hover:bg-blue-50" data-filter="kids">Kids</button>
+      <button type="button" class="category-filter-chip rounded-lg px-3 py-2 text-slate-600 hover:bg-blue-50" data-filter="teens">Teens</button>
+      <button type="button" class="category-filter-chip rounded-lg px-3 py-2 text-slate-600 hover:bg-blue-50" data-filter="adults">Adults</button>
     </div>
   </div>
+
+  <div class="mt-5 rounded-2xl border border-blue-100 bg-white p-4 md:p-6">
+    <div id="category-list" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-2">
+      {% if all_categories %}
+      {% for item in all_categories %}
+      {% set route_lower = item.route_path|lower %}
+      {% set audience = 'general' %}
+      {% if 'kids' in route_lower or 'toddlers' in route_lower or 'preschoolers' in route_lower %}
+      {% set audience = 'kids' %}
+      {% elif 'teens' in route_lower or 'tweens' in route_lower %}
+      {% set audience = 'teens' %}
+      {% elif 'adults' in route_lower or 'seniors' in route_lower %}
+      {% set audience = 'adults' %}
+      {% endif %}
+      <a
+        href="{{ item.route_path }}"
+        class="category-item py-1.5 text-slate-700 hover:text-blue-700 hover:underline underline-offset-4 {% if loop.index > 48 %}hidden extra-category{% endif %}"
+        data-index="{{ loop.index0 }}"
+        data-title="{{ item.title|lower }}"
+        data-route="{{ item.route_path|lower }}"
+        data-audience="{{ audience }}"
+      >
+        {{ item.title }}
+      </a>
+      {% endfor %}
+      {% else %}
+      <p class="text-sm text-slate-500 sm:col-span-2 lg:col-span-3 xl:col-span-4">No categories are published yet. Use <a href="/create" class="text-blue-700 font-semibold hover:underline">Create</a> to generate pages now.</p>
+      {% endif %}
+    </div>
+
+    <p id="category-no-results" class="hidden mt-4 rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-slate-700">
+      No category matched your filters. Try a broader keyword.
+    </p>
+
+    {% if all_categories|length > 48 %}
+    <div class="mt-5">
+      <button id="toggle-categories-btn" type="button" class="rounded-xl border border-blue-200 bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50">Show more categories</button>
+    </div>
+    {% endif %}
+  </div>
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  (() => {
+    const list = document.getElementById('category-list');
+    const searchInput = document.getElementById('category-search-input');
+    const chips = Array.from(document.querySelectorAll('.category-filter-chip'));
+    const noResults = document.getElementById('category-no-results');
+    const resultsLabel = document.getElementById('category-results-label');
+    const toggleBtn = document.getElementById('toggle-categories-btn');
+    if (!list) return;
+
+    const items = Array.from(list.querySelectorAll('.category-item'));
+    if (!items.length) return;
+
+    const defaultVisible = window.matchMedia('(max-width: 640px)').matches ? 16 : 48;
+    let activeFilter = 'all';
+    let showAll = false;
+
+    const updateFilterChipState = () => {
+      chips.forEach((chip) => {
+        const isActive = chip.dataset.filter === activeFilter;
+        chip.classList.toggle('bg-blue-50', isActive);
+        chip.classList.toggle('text-blue-700', isActive);
+        chip.classList.toggle('font-semibold', isActive);
+        chip.classList.toggle('text-slate-600', !isActive);
+      });
+    };
+
+    const applyFilters = () => {
+      const searchValue = (searchInput && searchInput.value ? searchInput.value : '').trim().toLowerCase();
+      const hasCriteria = Boolean(searchValue) || activeFilter !== 'all';
+
+      let matchCount = 0;
+      items.forEach((item) => {
+        const title = item.dataset.title || '';
+        const route = item.dataset.route || '';
+        const audience = item.dataset.audience || 'general';
+        const textMatch = !searchValue || title.includes(searchValue) || route.includes(searchValue);
+        const filterMatch = activeFilter === 'all' || audience === activeFilter;
+        const isMatch = textMatch && filterMatch;
+
+        if (!isMatch) {
+          item.classList.add('hidden');
+          return;
+        }
+
+        const itemIndex = Number(item.dataset.index || '0');
+        const visibleByDefault = hasCriteria || showAll || itemIndex < defaultVisible;
+        item.classList.toggle('hidden', !visibleByDefault);
+        matchCount += 1;
+      });
+
+      if (resultsLabel) {
+        resultsLabel.textContent = `${matchCount} ${matchCount === 1 ? 'category' : 'categories'} shown`;
+      }
+      if (noResults) {
+        noResults.classList.toggle('hidden', matchCount > 0);
+      }
+
+      if (toggleBtn) {
+        if (hasCriteria || matchCount <= defaultVisible) {
+          toggleBtn.classList.add('hidden');
+          return;
+        }
+        toggleBtn.classList.remove('hidden');
+        toggleBtn.textContent = showAll ? 'Show fewer categories' : `Show ${matchCount - defaultVisible} more categories`;
+      }
+    };
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        showAll = false;
+        applyFilters();
+      });
+    }
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        activeFilter = chip.dataset.filter || 'all';
+        showAll = false;
+        updateFilterChipState();
+        applyFilters();
+      });
+    });
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        showAll = !showAll;
+        applyFilters();
+      });
+    }
+
+    updateFilterChipState();
+    applyFilters();
+  })();
+</script>
 {% endblock %}

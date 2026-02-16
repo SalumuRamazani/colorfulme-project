@@ -1,0 +1,11 @@
+# Task ID: 5
+# Title: Image & Asset Consistency Audit
+# Status: pending
+# Dependencies: 3, 4
+# Priority: high
+# Description: Eliminate remaining visual rough edges caused by missing or inconsistent assets.
+# Details:
+Audit programmatic images, card thumbnails, alt text, and fallback placeholders. Fix stretched/cropped anomalies and ensure consistent aspect-ratio behavior across cards and heroes.
+
+# Test Strategy:
+

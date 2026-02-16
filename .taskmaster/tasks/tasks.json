@@ -1,186 +1,282 @@
 {
   "version": "1.0.0",
-  "project": "ReceiptForge Boilerplate Transformation",
+  "project": "ColorfulMe Launch Polish",
   "tasks": [
     {
-      "id": "1",
-      "title": "Remove Replit Auth Integration",
-      "description": "Remove all Replit authentication dependencies and replace with standalone auth",
-      "status": "pending",
-      "priority": "high",
+      "id": 1,
+      "title": "Global Navigation & Header Polish",
+      "description": "Finalize desktop/mobile nav behaviors and visual consistency across all key pages.",
+      "details": "Polish dropdown interactions, sticky header transitions, active state clarity, mobile drawer spacing, and CTA alignment. Confirm no overlap/clipping at 320px/375px/768px/1280px widths.",
+      "testStrategy": "",
+      "status": "done",
       "dependencies": [],
-      "subtasks": [],
-      "details": "Remove replit_auth.py, update app.py to remove OAuth blueprint, replace auth redirects, remove OAuth model from models.py"
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Desktop dropdown usability",
+          "description": "Fix hover/focus timing and panel positioning.",
+          "details": "Ensure generator and free-coloring dropdowns open reliably without accidental close and preserve keyboard access.",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 1
+        },
+        {
+          "id": 2,
+          "title": "Mobile menu hierarchy",
+          "description": "Improve item grouping and CTA placement.",
+          "details": "Make the mobile menu scannable with clear grouping for Home/Create/Generators/Free pages and keep primary CTA visible.",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 1
+        }
+      ]
     },
     {
-      "id": "2",
-      "title": "Remove Replit Configuration Files",
-      "description": "Remove Replit-specific configuration and documentation files",
-      "status": "pending",
-      "priority": "high",
+      "id": 2,
+      "title": "Create Flow UX Finish",
+      "description": "Refine /create interaction details for clear generation flow and trust signals.",
+      "details": "Improve button states, loading skeletons, status copy, validation hints, and result card transitions. Ensure unauth/local dev states are explicit and no dead-end UI states remain.",
+      "testStrategy": "",
+      "status": "done",
       "dependencies": [],
-      "subtasks": [],
-      "details": "Remove .replit, replit.md, and any Replit-specific environment assumptions"
-    },
-    {
-      "id": "3",
-      "title": "Create Centralized Configuration",
-      "description": "Create config.py with environment-based configuration",
-      "status": "pending",
       "priority": "high",
-      "dependencies": ["1", "2"],
-      "subtasks": [],
-      "details": "Create config.py with Config class containing all environment variables, database config, Stripe config, feature flags"
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Generation status messaging",
+          "description": "Make states explicit from submit to result.",
+          "details": "Standardize pending/success/failure copy and keep result panel stable to prevent layout jumps.",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 2
+        },
+        {
+          "id": 2,
+          "title": "Form validation polish",
+          "description": "Improve inline validation and helper text.",
+          "details": "Clarify prompt requirements, supported formats, and moderation-related user guidance.",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 2
+        }
+      ]
     },
     {
-      "id": "4",
-      "title": "Update Base Template with MakeMyReceipt Design",
-      "description": "Apply MakeMyReceipt design system to base.html navigation and footer",
-      "status": "pending",
-      "priority": "high",
-      "dependencies": ["3"],
-      "subtasks": [],
-      "details": "Update navigation with orange CTAs, 3D shadows, clean footer, consistent spacing. Colors: #FF6B35 orange, gray-900 borders, shadow-[3px_3px_0_0_#000000]"
-    },
-    {
-      "id": "5",
-      "title": "Redesign Homepage (index.html)",
-      "description": "Apply complete MakeMyReceipt design to homepage",
-      "status": "pending",
-      "priority": "high",
-      "dependencies": ["4"],
-      "subtasks": [],
-      "details": "Hero section with dual CTAs, template showcase grid, features section (6 cards), FAQ accordion, final CTA. Use orange primary color, 3D shadows on all buttons/cards"
-    },
-    {
-      "id": "6",
-      "title": "Redesign Templates Listing Page",
-      "description": "Apply MakeMyReceipt design to templates.html",
-      "status": "pending",
-      "priority": "high",
-      "dependencies": ["4"],
-      "subtasks": [],
-      "details": "Responsive grid (2/3/4/5 columns), template cards with receipt previews, hover effects with shadow transitions, orange accents"
-    },
-    {
-      "id": "7",
-      "title": "Redesign Template Detail Pages",
-      "description": "Apply MakeMyReceipt design to template_detail.html",
-      "status": "pending",
-      "priority": "high",
-      "dependencies": ["4"],
-      "subtasks": [],
-      "details": "Breadcrumb navigation, hero section, receipt preview component, features grid, related templates section, orange CTAs throughout"
-    },
-    {
-      "id": "8",
-      "title": "Update Receipt Generator Styling",
-      "description": "Apply design system to generate_advanced_v2.html while preserving functionality",
-      "status": "pending",
-      "priority": "medium",
-      "dependencies": ["4"],
-      "subtasks": [],
-      "details": "Update button styles, color scheme to orange, maintain all form controls and functionality, test PDF generation after changes"
-    },
-    {
-      "id": "9",
-      "title": "Redesign User Dashboard",
-      "description": "Apply MakeMyReceipt design to dashboard.html",
-      "status": "pending",
-      "priority": "medium",
-      "dependencies": ["4"],
-      "subtasks": [],
-      "details": "Update card styling with 3D shadows, orange accents, clean layout, saved templates grid, receipt history"
-    },
-    {
-      "id": "10",
-      "title": "Update Pricing Page",
-      "description": "Apply MakeMyReceipt design to pricing.html",
-      "status": "pending",
-      "priority": "medium",
-      "dependencies": ["4"],
-      "subtasks": [],
-      "details": "Pricing cards with 3D shadows, orange CTAs for subscriptions, feature comparison table, FAQ section"
-    },
-    {
-      "id": "11",
-      "title": "Standardize All Landing Pages",
-      "description": "Apply consistent MakeMyReceipt design to all 18 landing pages",
-      "status": "pending",
-      "priority": "low",
-      "dependencies": ["4"],
-      "subtasks": [],
-      "details": "Update all landing pages (ace, auto_repair, autozone, cardetailing, carental, carwash, computer_repair, convenience_store, courier_service, electrician, moving_company, oilchange, roofing, service, storage, summer_camp, therapy, vet) with: hero, features, use cases, FAQ, CTA"
-    },
-    {
-      "id": "12",
-      "title": "Verify Stripe Integration",
-      "description": "Ensure all Stripe functionality uses environment variables properly",
-      "status": "pending",
-      "priority": "high",
-      "dependencies": ["3"],
-      "subtasks": [],
-      "details": "Verify STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET from env, test checkout flow in test mode, verify subscription management, check webhook endpoints"
-    },
-    {
-      "id": "13",
-      "title": "Update Environment Configuration",
-      "description": "Create comprehensive .env.example file",
-      "status": "pending",
-      "priority": "medium",
-      "dependencies": ["3"],
-      "subtasks": [],
-      "details": "Document all required environment variables: SESSION_SECRET, DATABASE_URL, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, optional configs"
-    },
-    {
-      "id": "14",
-      "title": "Cleanup Unnecessary Files",
-      "description": "Remove attached_assets and unused documentation",
-      "status": "pending",
-      "priority": "low",
+      "id": 3,
+      "title": "Free Category Page Polish",
+      "description": "Finish micro-layout details on /free-coloring-pages/<slug> pages.",
+      "details": "Tighten section rhythm, max text width, card spacing, sidebar stickiness, FAQ disclosure polish, and quick-facts readability. Confirm hero image fallback rendering is clean.",
+      "testStrategy": "",
+      "status": "done",
       "dependencies": [],
-      "subtasks": [],
-      "details": "Remove attached_assets directory (468 files), remove webhook docs if not needed, clean up any other Replit-specific files"
-    },
-    {
-      "id": "15",
-      "title": "Create Comprehensive README",
-      "description": "Write complete documentation for the boilerplate",
-      "status": "pending",
-      "priority": "medium",
-      "dependencies": ["12", "13"],
-      "subtasks": [],
-      "details": "README with: features, quick start, configuration, deployment guides (Railway, Heroku, DigitalOcean), customization instructions, architecture overview"
-    },
-    {
-      "id": "16",
-      "title": "Test Receipt Generation End-to-End",
-      "description": "Verify all receipt functionality works correctly",
-      "status": "pending",
       "priority": "high",
-      "dependencies": ["5", "6", "7", "8"],
-      "subtasks": [],
-      "details": "Test: template selection, form filling, live preview, PDF export, different receipt types, saved templates"
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Readability spacing audit",
+          "description": "Tune card and text spacing.",
+          "details": "Verify heading margins, paragraph rhythm, and card padding on mobile and desktop breakpoints.",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 3
+        },
+        {
+          "id": 2,
+          "title": "Sidebar behavior",
+          "description": "Ensure sticky sidebar works gracefully.",
+          "details": "Fix edge cases where sidebar overlaps footer or misbehaves on shorter screens.",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 3
+        }
+      ]
     },
     {
-      "id": "17",
-      "title": "Test Responsive Design",
-      "description": "Verify design works on all device sizes",
-      "status": "pending",
-      "priority": "medium",
-      "dependencies": ["5", "6", "7", "8", "9", "10"],
-      "subtasks": [],
-      "details": "Test on mobile (375px), tablet (768px), desktop (1920px). Verify grids adjust properly, navigation works, all content accessible"
-    },
-    {
-      "id": "18",
-      "title": "Verify Fresh Installation Works",
-      "description": "Test that boilerplate can be set up from scratch",
-      "status": "pending",
+      "id": 4,
+      "title": "Generic Programmatic Entry Polish",
+      "description": "Finish layout and content hierarchy on dynamic programmatic entry pages.",
+      "details": "Polish hero-media balance, section headings, CTA placement, FAQ disclosure style, and sidebar utility blocks. Ensure long copy remains readable and consistently segmented.",
+      "testStrategy": "",
+      "status": "done",
+      "dependencies": [],
       "priority": "high",
-      "dependencies": ["15"],
-      "subtasks": [],
-      "details": "Clone repo in fresh directory, follow README instructions, verify all steps work, time the setup process (target: under 10 minutes)"
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Hero-media composition",
+          "description": "Balance text and image in dynamic entries.",
+          "details": "Ensure media block scales consistently and does not dominate or collapse content on narrow viewports.",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 4
+        },
+        {
+          "id": 2,
+          "title": "FAQ disclosure polish",
+          "description": "Improve detail/summary clarity and interaction.",
+          "details": "Keep FAQ affordances obvious and accessible with consistent open/closed visual states.",
+          "status": "done",
+          "dependencies": [],
+          "parentTaskId": 4
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Image & Asset Consistency Audit",
+      "description": "Eliminate remaining visual rough edges caused by missing or inconsistent assets.",
+      "details": "Audit programmatic images, card thumbnails, alt text, and fallback placeholders. Fix stretched/cropped anomalies and ensure consistent aspect-ratio behavior across cards and heroes.",
+      "testStrategy": "",
+      "status": "pending",
+      "dependencies": [
+        3,
+        4
+      ],
+      "priority": "high",
+      "subtasks": []
+    },
+    {
+      "id": 6,
+      "title": "Landing Page Visual Consistency Sweep",
+      "description": "Polish homepage section-to-section consistency for launch quality.",
+      "details": "Normalize spacing scale, typography rhythm, card shadows, button hierarchy, and section separators. Ensure visual language stays blue-first and cohesive from hero to footer.",
+      "testStrategy": "",
+      "status": "in-progress",
+      "dependencies": [
+        1
+      ],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 7,
+      "title": "Accessibility Hardening",
+      "description": "Make core user journeys keyboard-accessible and screen-reader friendly.",
+      "details": "Audit focus order, visible focus states, aria labels, link/button semantics, heading order, and color contrast. Fix all blocking accessibility issues in nav, create, and programmatic pages.",
+      "testStrategy": "",
+      "status": "in-progress",
+      "dependencies": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "priority": "high",
+      "subtasks": []
+    },
+    {
+      "id": 8,
+      "title": "SEO Metadata & Structured Data Hardening",
+      "description": "Close remaining SEO implementation gaps for launch.",
+      "details": "Validate canonical tags, title/description quality, Open Graph/Twitter metadata, sitemap inclusion rules, robots consistency, and JSON-LD for key page types where appropriate.",
+      "testStrategy": "",
+      "status": "in-progress",
+      "dependencies": [
+        3,
+        4,
+        6
+      ],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 9,
+      "title": "Performance Pass",
+      "description": "Optimize front-end rendering performance for mobile-first experience.",
+      "details": "Reduce unnecessary payload, verify lazy loading, optimize image delivery behavior, and smooth above-the-fold render path. Keep visual fidelity while improving responsiveness.",
+      "testStrategy": "",
+      "status": "pending",
+      "dependencies": [
+        5,
+        6
+      ],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 10,
+      "title": "Error, Empty, and Edge-State Coverage",
+      "description": "Close UI gaps for uncommon but realistic user states.",
+      "details": "Ensure robust handling for missing images, empty related lists, failed generation responses, no-results states, and malformed route data. Provide user-safe fallbacks and helpful copy.",
+      "testStrategy": "",
+      "status": "in-progress",
+      "dependencies": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "priority": "high",
+      "subtasks": []
+    },
+    {
+      "id": 11,
+      "title": "Cross-Device QA & Bug Bash",
+      "description": "Run a final multi-page QA sweep and resolve last-mile UI defects.",
+      "details": "Execute desktop/mobile checks across home, create, free categories, generators, pricing, and key programmatic routes. Track and resolve clipping, spacing, interaction, and copy regressions.",
+      "testStrategy": "",
+      "status": "in-progress",
+      "dependencies": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Desktop QA matrix",
+          "description": "Run and log desktop checks on primary routes.",
+          "details": "Capture and fix interaction, spacing, and visual regressions in Chromium-based desktop testing.",
+          "status": "in-progress",
+          "dependencies": [],
+          "parentTaskId": 11
+        },
+        {
+          "id": 2,
+          "title": "Mobile QA matrix",
+          "description": "Run and log mobile checks on primary routes.",
+          "details": "Validate layout integrity at 375px and 390px widths and patch clipping/overflow issues.",
+          "status": "in-progress",
+          "dependencies": [],
+          "parentTaskId": 11
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Release Readiness & Go-Live Runbook",
+      "description": "Prepare launch checklist and post-launch monitoring routine.",
+      "details": "Define pre-launch checks, rollback notes, smoke-test commands, and day-1 monitoring steps. Document owner actions for fast incident response after release.",
+      "testStrategy": "",
+      "status": "pending",
+      "dependencies": [
+        11
+      ],
+      "priority": "high",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Go-live checklist",
+          "description": "Finalize launch gate criteria.",
+          "details": "Document must-pass checks for routes, generation flow, SEO surfaces, and monitoring setup.",
+          "status": "pending",
+          "dependencies": [],
+          "parentTaskId": 12
+        },
+        {
+          "id": 2,
+          "title": "Post-launch watch",
+          "description": "Define first-48h monitoring routine.",
+          "details": "Track errors, generation failures, and UI regressions with clear response steps.",
+          "status": "pending",
+          "dependencies": [],
+          "parentTaskId": 12
+        }
+      ]
     }
   ]
 }

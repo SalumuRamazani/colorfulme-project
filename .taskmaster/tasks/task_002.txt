@@ -1,0 +1,25 @@
+# Task ID: 2
+# Title: Create Flow UX Finish
+# Status: done
+# Dependencies: None
+# Priority: high
+# Description: Refine /create interaction details for clear generation flow and trust signals.
+# Details:
+Improve button states, loading skeletons, status copy, validation hints, and result card transitions. Ensure unauth/local dev states are explicit and no dead-end UI states remain.
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Generation status messaging [done]
+### Dependencies: None
+### Description: Make states explicit from submit to result.
+### Details:
+Standardize pending/success/failure copy and keep result panel stable to prevent layout jumps.
+
+## 2. Form validation polish [done]
+### Dependencies: None
+### Description: Improve inline validation and helper text.
+### Details:
+Clarify prompt requirements, supported formats, and moderation-related user guidance.
+

@@ -1,0 +1,25 @@
+# Task ID: 4
+# Title: Generic Programmatic Entry Polish
+# Status: done
+# Dependencies: None
+# Priority: high
+# Description: Finish layout and content hierarchy on dynamic programmatic entry pages.
+# Details:
+Polish hero-media balance, section headings, CTA placement, FAQ disclosure style, and sidebar utility blocks. Ensure long copy remains readable and consistently segmented.
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Hero-media composition [done]
+### Dependencies: None
+### Description: Balance text and image in dynamic entries.
+### Details:
+Ensure media block scales consistently and does not dominate or collapse content on narrow viewports.
+
+## 2. FAQ disclosure polish [done]
+### Dependencies: None
+### Description: Improve detail/summary clarity and interaction.
+### Details:
+Keep FAQ affordances obvious and accessible with consistent open/closed visual states.
+

@@ -2,6 +2,27 @@
 
 {% block title %}Create Coloring Pages | ColorfulMe{% endblock %}
 {% block description %}Generate printable coloring pages from prompts and photos with ColorfulMe.{% endblock %}
+{% block og_title %}Create Coloring Pages | ColorfulMe{% endblock %}
+{% block twitter_title %}Create Coloring Pages | ColorfulMe{% endblock %}
+{% block og_description %}Generate printable coloring pages from prompts and photos with ColorfulMe.{% endblock %}
+{% block twitter_description %}Generate printable coloring pages from prompts and photos with ColorfulMe.{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ColorfulMe Create",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Web",
+  "url": "{{ request.base_url }}",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
@@ -24,14 +45,17 @@
 
         <div>
           <label for="prompt" class="text-sm font-medium text-slate-700">Prompt</label>
-          <textarea id="prompt" rows="4" class="mt-2 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Example: A friendly dragon flying over a mountain village with clouds"></textarea>
-          <p class="mt-1 text-xs text-slate-500">Family-safe prompts only. Unsafe prompts are blocked.</p>
+          <textarea id="prompt" rows="4" maxlength="800" class="mt-2 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder="Example: A friendly dragon flying over a mountain village with clouds" aria-describedby="prompt-help prompt-counter"></textarea>
+          <div class="mt-1 flex items-center justify-between gap-2">
+            <p id="prompt-help" class="text-xs text-slate-500">Family-safe prompts only. Unsafe prompts are blocked.</p>
+            <p id="prompt-counter" class="text-xs text-slate-500">0 / 800</p>
+          </div>
         </div>
 
         <div id="source-wrap" class="hidden">
           <label for="source-image" class="text-sm font-medium text-slate-700">Source Image</label>
           <input id="source-image" type="file" accept="image/png,image/jpeg,image/webp" class="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm">
-          <p class="mt-1 text-xs text-slate-500">Used in Photo mode and optional in Recolor mode.</p>
+          <p class="mt-1 text-xs text-slate-500">Used in Photo mode and optional in Recolor mode. Max file size: 10MB.</p>
         </div>
 
         <div class="grid sm:grid-cols-4 gap-3">
@@ -73,18 +97,22 @@
           </div>
         </div>
 
-        <button id="generate-btn" class="w-full px-4 py-3 rounded-xl btn-primary font-semibold text-base transition">Generate Coloring Page</button>
-        <p id="generator-status" class="text-sm text-slate-600 min-h-[1.25rem]"></p>
+        <button id="generate-btn" type="button" class="w-full px-4 py-3 rounded-xl btn-primary font-semibold text-base transition">Generate Coloring Page</button>
+        <p id="generator-status" class="text-sm text-slate-600 min-h-[1.25rem]" aria-live="polite"></p>
       </div>
     </div>
 
     <div class="space-y-6">
       <div class="glass rounded-3xl border border-blue-100 p-6">
         <h2 class="font-display text-xl font-bold">Result</h2>
+        <div id="result-loading" class="hidden mt-4 rounded-2xl border border-blue-100 bg-white p-4">
+          <div class="loading-shimmer h-52 rounded-xl"></div>
+          <p class="mt-3 text-sm text-slate-500">Generating your page...</p>
+        </div>
         <div id="result-empty" class="mt-4 rounded-2xl border border-dashed border-blue-300 bg-white/70 text-slate-500 text-sm p-8 text-center">Your generated page will appear here.</div>
         <div id="result-card" class="hidden mt-4">
           <div class="rounded-2xl border border-blue-100 bg-white p-3">
-            <img id="result-image" alt="Generated coloring page" class="w-full rounded-xl bg-white object-contain max-h-[520px]">
+            <img id="result-image" alt="Generated coloring page" class="w-full rounded-xl bg-white object-contain max-h-[520px]" loading="lazy" decoding="async">
           </div>
           <div class="mt-4 grid grid-cols-2 gap-3">
             <a id="download-png" href="#" class="px-4 py-2 rounded-xl btn-secondary text-center font-medium">Download PNG</a>
@@ -118,10 +146,12 @@
     const generateBtn = document.getElementById('generate-btn');
     const resultEmpty = document.getElementById('result-empty');
     const resultCard = document.getElementById('result-card');
+    const resultLoading = document.getElementById('result-loading');
     const resultImage = document.getElementById('result-image');
     const downloadPng = document.getElementById('download-png');
     const downloadPdf = document.getElementById('download-pdf');
     const resultMeta = document.getElementById('result-meta');
+    const promptCounter = document.getElementById('prompt-counter');
     const authModal = document.getElementById('auth-modal');
 
     if (!generateBtn || !generatorStatusEl) {
@@ -133,7 +163,11 @@
     let isAuthenticated = false;
 
     function openAuthModal() {
-      if (authModal) authModal.classList.add('open');
+      if (window.openAuthModal) {
+        window.openAuthModal();
+      } else if (authModal) {
+        authModal.classList.add('open');
+      }
     }
 
     function setMode(mode) {
@@ -218,16 +252,36 @@
         quality_profile: qualityProfile,
       };
 
+      if ((currentMode === 'text' || currentMode === 'recolor') && !prompt) {
+        generatorStatusEl.textContent = 'Please enter a prompt before generating.';
+        return;
+      }
+
       if (currentMode !== 'text') {
         const sourceFile = document.getElementById('source-image').files[0];
+        if (currentMode === 'photo' && !sourceFile) {
+          generatorStatusEl.textContent = 'Please upload a source image for Photo mode.';
+          return;
+        }
         if (sourceFile) {
+          if (sourceFile.size > 10 * 1024 * 1024) {
+            generatorStatusEl.textContent = 'Source image is too large. Please use a file under 10MB.';
+            return;
+          }
           payload.source_image_base64 = await loadBlobAsDataURL(sourceFile);
         }
       }
 
       generatorStatusEl.textContent = 'Generating...';
+      generatorStatusEl.classList.remove('text-red-600', 'text-emerald-600');
+      generatorStatusEl.classList.add('text-slate-600');
       generateBtn.disabled = true;
       generateBtn.classList.add('opacity-70');
+      const originalBtnText = generateBtn.textContent;
+      generateBtn.textContent = 'Generating...';
+      resultEmpty.classList.add('hidden');
+      resultCard.classList.add('hidden');
+      if (resultLoading) resultLoading.classList.remove('hidden');
 
       try {
         const response = await fetch(`/api/v1/generations/${currentMode}`, {
@@ -266,19 +320,38 @@
         resultEmpty.classList.add('hidden');
         resultCard.classList.remove('hidden');
         generatorStatusEl.textContent = 'Done. Your coloring page is ready.';
+        generatorStatusEl.classList.remove('text-slate-600');
+        generatorStatusEl.classList.remove('text-red-600');
+        generatorStatusEl.classList.add('text-emerald-600');
       } catch (error) {
         const message = (error && error.message) ? error.message : 'Generation failed';
         generatorStatusEl.textContent = message;
+        generatorStatusEl.classList.remove('text-slate-600');
+        generatorStatusEl.classList.remove('text-emerald-600');
+        generatorStatusEl.classList.add('text-red-600');
+        resultEmpty.classList.remove('hidden');
+        resultCard.classList.add('hidden');
         if (message.toLowerCase().includes('authentication')) {
           openAuthModal();
         }
       } finally {
         generateBtn.disabled = false;
         generateBtn.classList.remove('opacity-70');
+        generateBtn.textContent = originalBtnText;
+        if (resultLoading) resultLoading.classList.add('hidden');
       }
     }
 
     generateBtn.addEventListener('click', generate);
+    const promptEl = document.getElementById('prompt');
+    if (promptEl && promptCounter) {
+      const updatePromptCounter = () => {
+        const length = (promptEl.value || '').length;
+        promptCounter.textContent = `${length} / 800`;
+      };
+      promptEl.addEventListener('input', updatePromptCounter);
+      updatePromptCounter();
+    }
     refreshAuthState().then((authed) => {
       if (!authed) {
         generatorStatusEl.textContent = 'Sign in to generate pages.';

@@ -1,0 +1,25 @@
+# Task ID: 11
+# Title: Cross-Device QA & Bug Bash
+# Status: in-progress
+# Dependencies: 7, 8, 9, 10
+# Priority: high
+# Description: Run a final multi-page QA sweep and resolve last-mile UI defects.
+# Details:
+Execute desktop/mobile checks across home, create, free categories, generators, pricing, and key programmatic routes. Track and resolve clipping, spacing, interaction, and copy regressions.
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Desktop QA matrix [in-progress]
+### Dependencies: None
+### Description: Run and log desktop checks on primary routes.
+### Details:
+Capture and fix interaction, spacing, and visual regressions in Chromium-based desktop testing.
+
+## 2. Mobile QA matrix [in-progress]
+### Dependencies: None
+### Description: Run and log mobile checks on primary routes.
+### Details:
+Validate layout integrity at 375px and 390px widths and patch clipping/overflow issues.
+

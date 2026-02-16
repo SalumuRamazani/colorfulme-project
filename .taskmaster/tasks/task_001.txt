@@ -1,0 +1,25 @@
+# Task ID: 1
+# Title: Global Navigation & Header Polish
+# Status: done
+# Dependencies: None
+# Priority: high
+# Description: Finalize desktop/mobile nav behaviors and visual consistency across all key pages.
+# Details:
+Polish dropdown interactions, sticky header transitions, active state clarity, mobile drawer spacing, and CTA alignment. Confirm no overlap/clipping at 320px/375px/768px/1280px widths.
+
+# Test Strategy:
+
+
+# Subtasks:
+## 1. Desktop dropdown usability [done]
+### Dependencies: None
+### Description: Fix hover/focus timing and panel positioning.
+### Details:
+Ensure generator and free-coloring dropdowns open reliably without accidental close and preserve keyboard access.
+
+## 2. Mobile menu hierarchy [done]
+### Dependencies: None
+### Description: Improve item grouping and CTA placement.
+### Details:
+Make the mobile menu scannable with clear grouping for Home/Create/Generators/Free pages and keep primary CTA visible.
+
